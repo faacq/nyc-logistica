@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New York — Analisi logistica del giro</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --card:#fff; --ink:#22303c; --muted:#6b7a88; --line:#e7ddcd;
+    --accent:#1f3b73; --accent2:#e0912f; --g5:#3f9d5a; --red:#d1495b; --amber:#e0912f;
+    --shadow:0 6px 22px rgba(30,40,60,.10); --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--ink); padding-bottom:98px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:660px; margin:0 auto; padding:0 18px}
+  h1,h2,h3{line-height:1.2; margin:.2em 0}
+  h2{font-size:1.4rem; margin-top:1.6em}
+  h3{font-size:1.02rem}
+  p{margin:.5em 0}
+  small{color:var(--muted)} .muted{color:var(--muted)}
+
+  .hero{background:linear-gradient(160deg,#1f3b73 0%,#16294f 100%); color:#fff; padding:34px 0 26px; text-align:center}
+  .hero .flag{font-size:2.3rem}
+  .hero h1{font-size:1.5rem; margin:.15em 0}
+  .hero .sub{opacity:.95; font-size:.95rem}
+  .hero .ver{display:inline-block; margin-top:11px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.55); color:#fff; font-size:.78rem; font-weight:800; padding:4px 13px; border-radius:999px}
+
+  .changelog{background:#fff; border:1px solid var(--line); border-left:5px solid var(--g5); border-radius:12px; padding:12px 15px; margin:14px 0; font-size:.88rem}
+  .changelog h3{margin:0 0 5px; font-size:.98rem}
+  .changelog .cd{color:var(--muted); font-size:.8rem; font-weight:700}
+  .changelog ul{margin:.3em 0 0; padding-left:1.2em}
+  .changelog li{margin:.18em 0}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:15px 17px; margin:13px 0}
+
+  .princ{display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px dashed var(--line); font-size:.9rem}
+  .princ:last-child{border-bottom:none}
+  .princ .ic{font-size:1.2rem; flex:0 0 auto}
+
+  /* editable rows (slot sizes + day times) */
+  .er{display:flex; align-items:center; gap:9px; padding:8px 0; border-bottom:1px dashed var(--line); font-size:.89rem; flex-wrap:wrap}
+  .er:last-child{border-bottom:none}
+  .er .ic{font-size:1.05rem; flex:0 0 auto}
+  .er .nm{flex:1; min-width:130px}
+  .er .nm small{display:block; color:var(--muted)}
+  .er .sugg{font-weight:800; color:var(--accent); white-space:nowrap; background:#eef4fb; border:1px solid #cfe0f2; border-radius:8px; padding:3px 9px; font-size:.84rem}
+  .er .sugg.changed{background:#fff7ec; border-color:var(--accent2); color:#b46f1a; text-decoration:line-through; opacity:.6}
+  .er .newv{display:none; font-weight:800; color:#b46f1a; font-size:.84rem}
+  .er.edited .newv{display:inline}
+  .eb{border:1.5px solid var(--line); background:#fff; color:var(--accent); border-radius:999px; padding:4px 10px; font-size:.78rem; font-weight:700; cursor:pointer; white-space:nowrap}
+  .eb:hover{border-color:var(--accent)}
+  .erow{display:none; width:100%; gap:7px; align-items:center; margin-top:6px; flex-wrap:wrap}
+  .er.editing .erow{display:flex}
+  .erow input{border:1.5px solid var(--accent2); border-radius:9px; padding:7px 9px; font-family:inherit; font-size:.9rem; width:92px; background:#fff; color:var(--ink)}
+  .erow .u{font-size:.82rem; color:var(--muted)}
+
+  .recalc{background:linear-gradient(135deg,#fff7ec,#fff); border:1px dashed var(--accent2); border-radius:12px; padding:11px 14px; margin:12px 0; font-size:.88rem}
+  .recalc b{color:#b46f1a}
+
+  /* research box */
+  .res{background:linear-gradient(135deg,#eef4fb,#fff); border:1px solid #cfe0f2; border-left:5px solid var(--accent); border-radius:12px; padding:13px 15px; margin:12px 0; font-size:.89rem}
+  .res h3{margin-top:0; color:var(--accent)}
+  .res ul{margin:.4em 0; padding-left:1.15em}
+  .res li{margin:.3em 0}
+  .src{font-size:.78rem; color:var(--muted); margin-top:8px; border-top:1px dashed var(--line); padding-top:7px}
+
+  /* bookings */
+  .book{background:linear-gradient(135deg,#fdf1f3,#fff); border:2px solid var(--red); border-radius:14px; padding:14px 16px; margin:13px 0}
+  .book h3{margin-top:0; color:#b23a5b}
+  .bkitem{background:#fff; border:1px solid #f3d3da; border-radius:11px; padding:11px 13px; margin:9px 0; font-size:.89rem}
+  .bkitem .bt{font-weight:800}
+  .bkitem .bw{color:#4a5a68; margin:.35em 0}
+  .bkrow{display:flex; gap:7px; flex-wrap:wrap; align-items:center; margin-top:8px}
+  .bkrow input{border:1.5px solid var(--line); border-radius:9px; padding:7px 9px; font-family:inherit; font-size:.87rem; background:#fff; color:var(--ink); width:130px}
+
+  /* day card + score */
+  .day{border:1px solid var(--line); border-radius:14px; padding:13px 14px; margin:13px 0; background:#fff; box-shadow:var(--shadow)}
+  .day .dh{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:2px}
+  .day .dd{font-weight:800; font-size:1rem}
+  .day .dsub{font-size:.84rem; color:var(--muted); width:100%; margin-top:-2px}
+
+  .score{margin:11px 0 4px}
+  .scoretop{display:flex; align-items:baseline; gap:7px; font-size:.85rem; margin-bottom:4px}
+  .scoretop .pct{font-weight:800; font-size:1.15rem}
+  .scoretop .lbl{font-weight:700}
+  .track{position:relative; height:16px; background:#f0ece3; border-radius:999px; overflow:hidden; border:1px solid var(--line)}
+  .fill{position:absolute; left:0; top:0; bottom:0; border-radius:999px}
+  .limitlbl{font-size:.72rem; color:var(--muted); text-align:right; margin-top:2px}
+  .ok .fill{background:linear-gradient(90deg,#5cb874,#3f9d5a)}
+  .warn .fill{background:linear-gradient(90deg,#f0b657,#e0912f)}
+  .bad .fill{background:linear-gradient(90deg,#e2707f,#d1495b)}
+  .verd{display:inline-block; font-size:.7rem; font-weight:800; padding:3px 10px; border-radius:999px; color:#fff}
+  .verd.ok{background:var(--g5)} .verd.warn{background:var(--amber)} .verd.bad{background:var(--red)}
+
+  .prob{background:#fdf1f3; border:1px solid #f3d3da; border-left:5px solid var(--red); border-radius:11px; padding:11px 13px; margin:10px 0; font-size:.89rem}
+  .prob h4{margin:0 0 5px; font-size:.94rem; color:#b23a5b}
+  .prob ul{margin:.3em 0; padding-left:1.15em} .prob li{margin:.25em 0}
+  .sol{background:#f0f9f2; border:1px solid #bfe6cb; border-left:5px solid var(--g5); border-radius:11px; padding:11px 13px; margin:10px 0; font-size:.89rem}
+  .sol h4{margin:0 0 5px; font-size:.94rem; color:#2f7a46}
+  .sol .res2{margin-top:7px; font-weight:700; color:#2f7a46}
+
+  /* approval buttons */
+  .appr{display:flex; flex-direction:column; gap:7px; margin-top:10px}
+  .ab{border:1.5px solid var(--line); background:#fff; border-radius:11px; padding:10px 13px; font-size:.88rem; font-weight:700; cursor:pointer; text-align:left; color:var(--ink); font-family:inherit}
+  .ab small{display:block; font-weight:600; color:var(--muted); margin-top:2px}
+  .ab.yes.sel{background:#f0f9f2; border-color:var(--g5); color:#2f7a46}
+  .ab.again.sel{background:#eef4fb; border-color:var(--accent); color:var(--accent)}
+  .ab.edit.sel{background:#fff7ec; border-color:var(--accent2); color:#b46f1a}
+
+  /* taxi / metro */
+  .taxi{background:#fffdf6; border:1px solid var(--line); border-left:5px solid #c9a227; border-radius:11px; padding:11px 13px; margin:10px 0; font-size:.87rem}
+  .taxi h4{margin:0 0 6px; font-size:.92rem; color:#8a6d12}
+  .tleg{padding:7px 0; border-bottom:1px dashed var(--line)}
+  .tleg:last-child{border-bottom:none}
+  .tleg .tr{font-weight:700}
+  .tleg .td{color:var(--muted); font-size:.84rem}
+  .tleg .tc{font-weight:800; color:#8a6d12}
+  .tleg .tm{display:block; margin-top:4px; background:#eef4fb; border:1px solid #cfe0f2; border-radius:8px; padding:6px 9px; font-size:.84rem; color:#2b3a4a}
+
+  /* stop list / edit mode */
+  .editbtn{margin-left:auto; border:1.5px solid var(--accent); background:#fff; color:var(--accent); border-radius:999px; padding:5px 12px; font-size:.8rem; font-weight:700; cursor:pointer; white-space:nowrap}
+  .day.editing .editbtn{background:var(--accent); color:#fff}
+  .seq{position:relative; margin-top:10px; padding-left:15px}
+  .seq::before{content:""; position:absolute; left:4px; top:9px; bottom:9px; width:2px; background:var(--line); border-radius:2px}
+  .it{position:relative; display:flex; gap:8px; align-items:baseline; background:#fff; border:1px solid transparent; border-radius:9px; padding:6px 9px; margin:4px 0; font-size:.87rem; transition:all .12s}
+  .it::before{content:""; position:absolute; left:-11.5px; top:12px; width:8px; height:8px; border-radius:50%; background:#cbb892; border:2px solid #fff}
+  .it.opt::before{background:var(--accent2)}
+  .it .nm{flex:1}
+  .it .sl{flex:0 0 auto; font-size:.75rem; font-weight:800; color:var(--muted); white-space:nowrap}
+  .it .fx{display:inline-block; background:#eef4fb; color:var(--accent); font-size:.64rem; font-weight:800; padding:1px 6px; border-radius:999px; margin-left:5px}
+  .it .fx.todo{background:#fdecc8; color:#8a5a12}
+  .day.editing .it{cursor:pointer; border-color:var(--line)}
+  .day.editing .it:hover{border-color:var(--red)}
+  .it.off{background:#fbe9ec; border-color:var(--red)!important; color:#b23a5b; text-decoration:line-through; opacity:.85}
+  .edithint{display:none; font-size:.8rem; color:#b23a5b; margin:9px 0 0; font-weight:600}
+  .day.editing .edithint{display:block}
+  .recov{display:none; margin-top:9px; background:#fff7ec; border:1px dashed var(--accent2); border-radius:10px; padding:9px 11px; font-size:.85rem}
+  .day.editing .recov{display:block}
+  .recov b{color:#b46f1a}
+  .recov.done{background:#f0f9f2; border-color:var(--g5)}
+  .recov.done b{color:#2f7a46}
+  .daycomment{display:none; width:100%; margin-top:9px; border:1.5px solid var(--accent2); border-radius:10px; padding:9px; font-family:inherit; font-size:.88rem; min-height:52px; resize:vertical; background:#fff; color:var(--ink)}
+  .day.editing .daycomment, .day.wantedit .daycomment{display:block}
+  .day.wantedit{border-color:var(--accent2); border-width:2px}
+
+  /* proposals */
+  .prop{background:#fff; border:1px solid var(--line); border-radius:13px; padding:13px 15px; margin:11px 0; box-shadow:var(--shadow)}
+  .prop .pt{font-weight:800; font-size:.98rem}
+  .prop .pid{display:inline-block; background:var(--accent); color:#fff; font-size:.7rem; font-weight:800; padding:2px 9px; border-radius:999px; margin-right:6px}
+  .prop .why{font-size:.87rem; color:#4a5a68; margin:.45em 0}
+  .prop .gain{font-size:.85rem; font-weight:700; color:#2f7a46; margin:.3em 0 .1em}
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:9px}
+  .chip{border:1.5px solid var(--line); background:#fff; color:var(--ink); padding:9px 15px; border-radius:999px; font-size:.9rem; cursor:pointer; transition:all .15s; user-select:none}
+  .chip:hover{border-color:var(--accent)}
+  .chip.sel{background:var(--accent); border-color:var(--accent); color:#fff}
+  .chip.no.sel{background:var(--red); border-color:var(--red)}
+  .chip.maybe.sel{background:var(--amber); border-color:var(--amber)}
+
+  .airport{background:linear-gradient(135deg,#eef4fb,#fff); border:2px solid var(--accent); border-radius:14px; padding:15px 16px; margin:13px 0}
+  .airport h3{margin-top:0; color:var(--accent)}
+  .airport .row{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:9px}
+  .airport input{border:1.5px solid var(--accent); border-radius:10px; padding:9px 11px; font-family:inherit; font-size:.95rem; width:120px; background:#fff; color:var(--ink); font-weight:700}
+  .airport .lock{background:#fff7ec; border:1px dashed var(--accent2); border-radius:10px; padding:9px 11px; margin-top:10px; font-size:.85rem}
+
+  textarea.free{width:100%; border:1.5px solid var(--line); border-radius:12px; padding:11px; font-family:inherit; font-size:.94rem; background:#fff; color:var(--ink); resize:vertical; min-height:60px}
+  .note{background:linear-gradient(135deg,#fff7ec,#fff); border:1px solid var(--line); border-left:5px solid var(--accent2); border-radius:12px; padding:12px 15px; margin:13px 0; font-size:.9rem}
+  .note b{color:#b46f1a}
+  .proc{display:flex; gap:11px; align-items:flex-start; padding:6px 0; font-size:.9rem}
+  .proc .pn{flex:0 0 auto; width:23px; height:23px; border-radius:50%; background:var(--line); color:#5a5a5a; font-weight:800; font-size:.8rem; display:flex; align-items:center; justify-content:center}
+  .proc.now .pn{background:var(--accent2); color:#fff}
+  .youare{display:inline-block; background:var(--accent2); color:#fff; font-size:.68rem; font-weight:800; padding:2px 8px; border-radius:999px; margin-left:5px}
+
+  .summ{display:flex; flex-direction:column; gap:7px; margin-top:4px}
+  .srow{display:flex; align-items:center; gap:9px; font-size:.87rem; text-decoration:none; color:inherit}
+  .srow .sd{flex:0 0 74px; font-weight:700}
+  .srow .st{flex:1; position:relative; height:11px; background:#f0ece3; border-radius:999px; overflow:hidden; border:1px solid var(--line)}
+  .srow .sf{position:absolute; left:0; top:0; bottom:0; border-radius:999px}
+  .srow .sp{flex:0 0 42px; text-align:right; font-weight:800; font-size:.82rem}
+
+  .bar{position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); box-shadow:0 -6px 20px rgba(30,40,60,.10); padding:10px 14px; z-index:50}
+  .bar .in{max-width:660px; margin:0 auto; display:flex; align-items:center; gap:12px}
+  .bar .status{flex:1; font-size:.84rem}
+  .send{background:#25D366; color:#fff; border:none; border-radius:12px; padding:12px 16px; font-weight:800; font-size:.95rem; cursor:pointer; white-space:nowrap}
+  .send:active{transform:translateY(1px)}
+  .footer{text-align:center; padding:22px 0 6px; font-size:.82rem; color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="flag">🗽🧮</div>
+    <h1>Analisi logistica del giro</h1>
+    <div class="sub">Ho preso l'itinerario che hai approvato e l'ho messo alla prova con gli orari veri. Ecco cosa regge e cosa no — e tutto è modificabile da te.</div>
+    <div class="ver">📌 versione v2 &middot; 28 lug 2026</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- CHANGELOG -->
+  <div class="changelog">
+    <h3>🆕 Novità di questa versione <span class="cd">(v2 &middot; 28 lug 2026)</span></h3>
+    <ul>
+      <li>✏️ <b>Ogni blocco di tempo è modificabile</b>: se pensi che al MoMA servano 3 ore o che un negozio si sbrighi in 15 minuti, cambialo tu.</li>
+      <li>🕗 <b>Orari di uscita e rientro modificabili</b>, giorno per giorno: quelli evidenziati sono quelli su cui ho fatto il calcolo.</li>
+      <li>✅ <b>Ogni soluzione ha 3 pulsanti</b>: approva · chiedimi un'altra proposta · sblocca l'itinerario e modificalo tu (con spazio per spiegare).</li>
+      <li>🚕 <b>Costi dei taxi</b>: per ogni tratta ti dico percorso, distanza e stima di spesa (siamo in 8 = 2 auto), con l'alternativa in metro quando è semplice e centrale.</li>
+      <li>📋 <b>Le prenotazioni ancora aperte</b> sono ora in evidenza in cima.</li>
+      <li>🛫 <b>Serve la tua conferma sull'orario di partenza per l'aeroporto</b> (e su quale aeroporto): senza quello l'ultimo giorno resta appeso.</li>
+    </ul>
+    <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
+  </div>
+
+  <!-- ============ PRENOTAZIONI APERTE (in evidenza) ============ -->
+  <div class="book">
+    <h3>📋 Ancora da prenotare — sono le uniche due cose che bloccano</h3>
+    <p style="margin-top:0; font-size:.89rem">Ad agosto gli slot vanno via in fretta: <b>più aspettiamo, meno scelta abbiamo</b>. Quando le hai fatte, scrivi qui giorno e ora e aggiorno l'itinerario.</p>
+
+    <div class="bkitem" data-bk="Top of the Rock">
+      <div class="bt">🏙️ Top of the Rock — martedì mattina (incluso nel pass Go City)</div>
+      <div class="bw"><b>Prendi il primo slot disponibile della mattina.</b> Non è un dettaglio: se lo slot è a metà mattina, <b>il martedì non ci sta più</b> — o salta il Vessel, o si arriva tardi in aeroporto. Con lo slot delle 9:00 il conto torna con mezz'ora di margine.</div>
+      <div class="bkrow">
+        <input class="bkday" type="text" placeholder="giorno (es. mar 18)">
+        <input class="bktime" type="text" placeholder="ora (es. 09:00)">
+      </div>
+    </div>
+
+    <div class="bkitem" data-bk="Guggenheim">
+      <div class="bt">🖼️ Guggenheim — sabato, ingresso a offerta libera</div>
+      <div class="bw">Attenzione: l'offerta libera del sabato è <b>16:00-18:00 con ultimo ingresso ~17:30</b>. Se è così, <b>lo slot delle 18:00 non esiste</b>: prenota verso le <b>16:00</b> — e come effetto collaterale <b>si chiude il buco di 2 ore</b> del sabato pomeriggio.</div>
+      <div class="bkrow">
+        <input class="bkday" type="text" placeholder="giorno (es. sab 15)">
+        <input class="bktime" type="text" placeholder="ora (es. 16:00)">
+      </div>
+    </div>
+  </div>
+
+  <!-- WHERE WE ARE -->
+  <h2>🔄 A che punto siamo</h2>
+  <div class="card">
+    <div class="proc"><span class="pn">1</span><div>Bozza dell'itinerario &amp; questionari. ✅</div></div>
+    <div class="proc"><span class="pn">2</span><div>Le tue decisioni integrate (Top of the Rock, Guggenheim, 230 Fifth, St. Patrick's...). ✅</div></div>
+    <div class="proc now"><span class="pn">3</span><div><b>Dettaglio collegamenti e verifica dei tempi.</b> <span class="youare">👈 siamo qui</span></div></div>
+    <div class="proc"><span class="pn">4</span><div>Itinerario definitivo (v2.2) con dentro le correzioni che approvi.</div></div>
+    <div class="proc"><span class="pn">5</span><div>Guida personalizzata + lista prenotazioni.</div></div>
+    <p class="muted" style="margin:11px 0 0">Gli altri (MariaPaola, Tony, Barbara) possono mandare i loro suggerimenti quando vogliono: <b>li integro mano a mano</b>, non stiamo fermi ad aspettare.</p>
+  </div>
+
+  <!-- ===================== FONDAMENTA ===================== -->
+  <h2>🧱 Su cosa si basa questa analisi</h2>
+  <p class="muted" style="margin-top:0">Prima dei numeri, le regole del gioco. <b>Se una ti sembra sbagliata, cambiala</b>: rifaccio i conti su quello che dici tu.</p>
+
+  <h3 style="margin-top:1.1em">1 · Si ragiona a <b>slot</b>, non al minuto</h3>
+  <div class="card">
+    <p style="margin-top:0">Nessuno può dire "alle 14:07 siamo davanti al Met". Quello che si può fare è dare a <b>ogni tipo di attività un blocco di tempo realistico</b> e vedere se la somma sta dentro la giornata. Questi sono i blocchi che ho usato — <b>tocca ✏️ per cambiarne uno</b>:</p>
+    <div id="slotlist"></div>
+    <div class="recalc" style="margin-bottom:0">
+      ⚙️ <b>Se cambi anche un solo blocco, il calcolo va rifatto</b> — e cambiano i punteggi di tutte le giornate che contengono quel tipo di attività. Manda le modifiche con il pulsante verde in fondo: <b>rigiro il calcolo e ti mando la versione aggiornata</b> con i nuovi punteggi.
+    </div>
+  </div>
+
+  <h3>2 · Gli spostamenti contano quanto le visite</h3>
+  <div class="card">
+    <div class="princ"><span class="ic">🚶</span><div><b>A piedi:</b> calcolato sulla distanza reale +40% (a New York non si cammina in linea d'aria: si gira l'isolato).</div></div>
+    <div class="princ"><span class="ic">🚌</span><div><b>Big Bus:</b> attesa alla fermata + salita + tratta. Non è un teletrasporto: vedi sotto perché è meno flessibile di quanto sembra.</div></div>
+    <div class="princ"><span class="ic">🚕</span><div><b>Taxi/Uber:</b> <b>siamo in 8 → 2 auto ad ogni tratta</b>, ~8 minuti solo per trovarle e partire insieme. <b>Costi stimati giornata per giornata qui sotto.</b></div></div>
+    <div class="princ"><span class="ic">👥</span><div><b>+5 minuti ad ogni spostamento</b> perché siamo <b>in 8</b>: chi va in bagno, chi finisce il gelato, chi torna indietro per una foto. Su 10 tappe è <b>quasi un'ora</b>.</div></div>
+    <div class="princ"><span class="ic">🔥</span><div><b>Caldo:</b> tra le <b>12:00 e le 16:00</b> le tappe all'aperto sono segnalate come "da evitare". Ad agosto è il vincolo n.1.</div></div>
+  </div>
+
+  <h3>3 · La ricerca sul <b>Big Bus</b> (fatta il 27 luglio sui dati ufficiali)</h3>
+  <div class="res">
+    <h3>🚌 Cosa dice la ricerca — e perché cambia il giro</h3>
+    <ul>
+      <li><b>Ci sono solo 2 linee</b> nel biglietto da 2 giorni: <b>Downtown/rossa</b> e <b>Uptown/blu</b>.</li>
+      <li>🚫 <b>Nessuna linea per Brooklyn.</b> Il "Brooklyn Immersive Tour" è un prodotto separato ed è <b>sospeso dal 21 luglio al 31 agosto 2026</b> — esattamente le nostre date. <b>A Dumbo non ci si arriva in bus:</b> il ponte si attraversa <b>a piedi</b> (che poi è la cosa bella) e si torna in taxi o metro.</li>
+      <li>⏰ <b>Orari veri:</b> rossa <b>9:00 → 16:30</b>, ogni <b>30 min</b>, giro completo ~90 min. Blu <b>10:00 → 16:00</b>, ogni <b>60 min</b> (!), giro completo ~75 min.</li>
+      <li>➡️ <b>Gli anelli sono a senso unico.</b> Se salti una fermata devi rifare quasi tutto il giro: <b>l'ordine conta</b>. Per questo domenica SoHo/Ghostbusters vengono <b>prima</b> del ponte.</li>
+      <li>📍 <b>Due nostre tappe non sono servite:</b> <b>Bloomingdale's</b> (59ª &amp; Lexington) e la <b>funivia di Roosevelt Island</b> (59ª &amp; 2ª). La blu non passa su Lexington/2ª: lì a piedi o in taxi.</li>
+      <li>⚠️ <b>Sabato 15 agosto</b> c'è <b>Summer Streets</b> (strade chiuse su Lafayette/Park Ave, 7-15): rischio deviazioni nella zona bassa. Sabato noi siamo a Uptown, quindi ci tocca poco — ma domenica conviene ricontrollare l'app la mattina.</li>
+    </ul>
+    <div class="src">Fonte: ricerca approfondita del 27 lug 2026 sulle pagine ufficiali Big Bus New York (route, fermate, orari, avvisi di servizio) + NYC DOT per Summer Streets.</div>
+  </div>
+
+  <h3>4 · Le cose che <b>non si possono spostare</b></h3>
+  <div class="card">
+    <div class="princ"><span class="ic">🔒</span><div><b>Summit venerdì 19:00</b> — prenotato e pagato. È il vincolo più rigido: tutto il venerdì gira intorno a questo.</div></div>
+    <div class="princ"><span class="ic">✈️</span><div><b>Volo martedì 22:00</b> — vedi in fondo: <b>mi serve la tua conferma sull'orario di uscita dall'hotel</b>.</div></div>
+    <div class="princ"><span class="ic">🎟️</span><div><b>Big Bus = 2 giorni consecutivi</b> (sabato + domenica). Non si può spezzare.</div></div>
+    <div class="princ"><span class="ic">🛬</span><div><b>Giovedì si comincia alle 19:00</b> (arrivo in hotel). È una serata, non una giornata.</div></div>
+  </div>
+
+  <h3>5 · Come si legge il <b>punteggio di carico</b> (e come cambiarlo)</h3>
+  <div class="card">
+    <p style="margin-top:0">Ogni giornata ha una <b>capienza</b>: dall'ora in cui si esce all'ora in cui si vuole essere rientrati. Il punteggio dice <b>quanta di quella capienza serve</b> per fare tutto quello che c'è in programma:</p>
+    <div class="princ"><span class="ic">🟢</span><div><b>fino a 90%</b> — la giornata regge, c'è respiro per imprevisti e soste.</div></div>
+    <div class="princ"><span class="ic">🟡</span><div><b>90-100%</b> — piena ma fattibile: nessun margine, si va a orario.</div></div>
+    <div class="princ"><span class="ic">🔴</span><div><b>oltre 100%</b> — <b>non ci sta</b>: qualcosa salterà comunque, ma sul posto, di corsa e litigando. Meglio deciderlo adesso.</div></div>
+
+    <p style="margin-top:1em"><b>Gli orari qui sotto sono quelli che ho usato per il calcolo</b> (evidenziati in blu). Sono una proposta, non un vincolo: <b>tocca ✏️ e cambiali</b>.</p>
+    <div id="timelist"></div>
+    <div class="recalc" style="margin-bottom:0">
+      ⚙️ <b>Anche qui: ogni orario che cambi fa rigirare il calcolo.</b> Uscire 45 minuti prima o rientrare un'ora più tardi può <b>da solo</b> far rientrare una giornata che oggi sfora — senza togliere niente.
+    </div>
+  </div>
+
+  <!-- ===================== QUADRO ===================== -->
+  <h2>🚦 Il quadro dei 6 giorni</h2>
+  <div class="card">
+    <div class="summ" id="summary"></div>
+    <p class="muted" style="margin:12px 0 0">Due giornate su sei sforano di oltre 3 ore. Una (la domenica) è <b>mezza vuota</b>. Il grosso della soluzione sta tutto qui.</p>
+  </div>
+
+  <!-- ===================== GIORNI ===================== -->
+  <h2>📅 Giorno per giorno</h2>
+  <p class="muted" style="margin-top:0">Per ogni giornata: quanto è carica, cosa non torna, cosa propongo — e <b>tre pulsanti</b> per dirmi se va bene, se vuoi un'altra proposta, o se preferisci mettere mano tu.</p>
+
+  <div id="days"></div>
+
+  <!-- ===================== PROPOSTE ===================== -->
+  <h2>✅ Le 3 proposte di fondo</h2>
+  <p class="muted" style="margin-top:0">Sono le stesse che trovi nelle giornate qui sopra, riassunte. Se dici sì, <b>non si toglie niente dal programma</b>: si sposta e si accorpa.</p>
+
+  <div class="prop" data-prop="P1" data-label="P1 - Venerdi compattato">
+    <div class="pt"><span class="pid">P1</span>Venerdì compattato</div>
+    <div class="why">I 4 negozi della 5th Avenue diventano <b>una tappa sola</b> (sono tutti sulla stessa strada, tra la 45ª e la 52ª) · <b>un solo pranzo</b>: Shaver Hall (il Raising Cane's di Cocò lo prendiamo al volo un altro giorno, è a 200 m dall'hotel) · <b>230 Fifth accorpato</b> a Shaver Hall nel pomeriggio, così si scende a sud una volta sola invece di due.</div>
+    <div class="gain">➜ Il Summit delle 19:00 si salva. Senza, arriveremmo alle 22:23.</div>
+    <div class="chips" data-group="P1">
+      <div class="chip yes" data-val="SI">👍 Va bene</div>
+      <div class="chip no" data-val="NO">👎 No</div>
+      <div class="chip maybe" data-val="NE PARLIAMO">🤔 Ne parliamo</div>
+    </div>
+  </div>
+
+  <div class="prop" data-prop="P2" data-label="P2 - Blocco West Side da lunedi a domenica">
+    <div class="pt"><span class="pid">P2</span>Il blocco West Side passa da lunedì a <b>domenica sera</b></div>
+    <div class="why"><b>Chelsea Market → High Line → Little Island al tramonto</b>: oggi sono appiccicati in coda al lunedì, che è già pieno. Domenica invece finiamo presto: da Dumbo si torna <b>direttamente al Meatpacking</b> e si chiude con il tramonto a Little Island + cena lì.</div>
+    <div class="gain">➜ Domenica passa da 82% a 98%, lunedì scende da <b>126% a 100%</b>. Senza perdere nulla.</div>
+    <div class="chips" data-group="P2">
+      <div class="chip yes" data-val="SI">👍 Va bene</div>
+      <div class="chip no" data-val="NO">👎 No</div>
+      <div class="chip maybe" data-val="NE PARLIAMO">🤔 Ne parliamo</div>
+    </div>
+  </div>
+
+  <div class="prop" data-prop="P3" data-label="P3 - Un solo pranzo al giorno">
+    <div class="pt"><span class="pid">P3</span>Un solo pranzo al giorno</div>
+    <div class="why">In due giornate ce ne sono <b>due</b>: venerdì (Raising Cane's <i>e</i> Shaver Hall) e lunedì (Eataly <i>e</i> Katz's). Non è questione di appetito: sono <b>due soste da un'ora</b> nella stessa giornata. Lunedì vale <b>Katz's</b> (il pastrami di Tony); l'Eataly resta come alternativa <i>dentro</i> l'Oculus.</div>
+    <div class="gain">➜ Circa 2 ore e mezza recuperate sulle due giornate.</div>
+    <div class="chips" data-group="P3">
+      <div class="chip yes" data-val="SI">👍 Va bene</div>
+      <div class="chip no" data-val="NO">👎 No</div>
+      <div class="chip maybe" data-val="NE PARLIAMO">🤔 Ne parliamo</div>
+    </div>
+  </div>
+
+  <!-- ===================== VERIFICA 230 FIFTH ===================== -->
+  <h2>🔎 Una cosa da verificare</h2>
+  <div class="prop" data-prop="V1" data-label="V1 - 230 Fifth minori">
+    <div class="pt"><span class="pid">V1</span>230 Fifth accetta i ragazzi?</div>
+    <div class="why">Il rooftop ha una policy <b>21+ dalla sera</b>. Di giorno i minori sono ammessi, ma <b>siamo in 4 sotto i 18</b>: va confermato prima, altrimenti la tappa salta quando siamo lì sotto.</div>
+    <div class="chips" data-group="V1">
+      <div class="chip yes" data-val="VERIFICO IO">📞 Verifico io</div>
+      <div class="chip maybe" data-val="VERIFICA TU">👉 Verifica tu</div>
+      <div class="chip no" data-val="LASCIAMO PERDERE">✖ Lasciamo perdere</div>
+    </div>
+  </div>
+
+  <!-- ===================== AEROPORTO ===================== -->
+  <h2>🛫 L'ultima cosa (ma è quella che blocca tutto)</h2>
+  <div class="airport">
+    <h3>A che ora usciamo dall'hotel per l'aeroporto?</h3>
+    <p style="margin-top:0; font-size:.9rem">Il volo è alle <b>22:00 di martedì 18</b>. Io ho calcolato il martedì mettendo <b>uscita dall'hotel alle 17:30</b> — ma è una mia stima, e cambia tutta l'ultima giornata. <b>Dimmi tu l'orario giusto</b> e da lì blocco l'itinerario.</p>
+    <div class="row">
+      <label style="font-size:.88rem; font-weight:700">Usciamo alle</label>
+      <input id="apTime" type="text" value="17:30">
+      <label style="font-size:.88rem; font-weight:700">Aeroporto</label>
+      <input id="apName" type="text" placeholder="JFK / EWR / LGA">
+    </div>
+    <p style="font-size:.88rem; margin-top:11px"><b>Perché mi serve anche l'aeroporto:</b> cambia sia il tempo che il costo. Da Times Square, con 8 persone e i bagagli:</p>
+    <div class="taxi" style="margin-top:6px">
+      <div class="tleg"><span class="tr">🚕 JFK</span> <span class="td">— ~26 km, 50-75 min secondo il traffico. Tariffa fissa taxi ~$70 + pedaggi e mancia ≈ <b>$90 a macchina</b>.</span> <span class="tc">2 auto ≈ $180</span></div>
+      <div class="tleg"><span class="tr">🚕 EWR (Newark)</span> <span class="td">— ~29 km, 45-80 min. A tassametro + supplementi ≈ <b>$110-130 a macchina</b>.</span> <span class="tc">2 auto ≈ $220-260</span></div>
+      <div class="tleg"><span class="tr">🚕 LGA</span> <span class="td">— ~14 km, 30-55 min. ≈ <b>$50-70 a macchina</b>.</span> <span class="tc">2 auto ≈ $100-140</span></div>
+      <div class="tleg"><span class="tm">💡 <b>Con 8 persone + valigie conviene un van/minibus prenotato</b> (spesso costa meno di 2 taxi e vi prende in hotel a un orario fisso). Se mi dici aeroporto e orario, ti trovo l'opzione.</span></div>
+    </div>
+    <div class="lock">🔒 <b>Perché insisto:</b> l'orario che mi dai <b>lo metto agli atti</b> e l'itinerario dell'ultimo giorno viene bloccato su quello. Così non ci ritroviamo il 18 agosto a discutere se c'era tempo per il Vessel.</div>
+  </div>
+
+  <!-- ===================== FREE ===================== -->
+  <h2>💬 Altro da dirmi?</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">Qualsiasi cosa: se un blocco di tempo ti sembra sbagliato, se vuoi girare l'ordine di una giornata, se c'è qualcosa che non ho capito.</p>
+    <textarea class="free" id="openText" placeholder="Spazio libero..."></textarea>
+  </div>
+
+  <div class="footer">
+    Analisi logistica · la compagnia · New York 13–18 ago 2026<br>
+    Il feedback arriva su WhatsApp 💚
+  </div>
+</div>
+
+<div class="bar">
+  <div class="in">
+    <div class="status" id="statusLine">Le giornate rosse sono venerdì e lunedì 👆</div>
+    <button class="send" id="sendBtn">📲 Invia su WhatsApp</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATI — dal motore di feasibility (compute.py).
+   m = quanto si accorcia la giornata togliendo quella tappa
+   (sosta + deviazione), arrotondato a blocchi di 5 minuti.
+   ============================================================ */
+
+var SLOTS = [
+  {k:'foto',    i:'📸', n:'Foto / tappa veloce',      ex:'Ghostbusters HQ, Sanctum, Dumbo', v:25},
+  {k:'giro',    i:'🚶', n:'Giro di quartiere',        ex:'SoHo, Chinatown, St. Marks',      v:40},
+  {k:'negozio', i:'🛍️', n:'Un negozio',                ex:'Lego, NBA, Nike, Sephora',        v:35},
+  {k:'veloce',  i:'🍕', n:'Pasto veloce',             ex:"Joe's Pizza, Raising Cane's",     v:40},
+  {k:'pasto',   i:'🍽️', n:'Pranzo o cena seduti',      ex:'Katz\'s, cena la sera',           v:75},
+  {k:'museo',   i:'🖼️', n:'Museo',                     ex:'MoMA, Guggenheim',                v:105},
+  {k:'deck',    i:'🏙️', n:'Terrazza panoramica',       ex:'Summit, Top of the Rock',         v:80},
+  {k:'attivita',i:'🚲', n:'Attività',                  ex:'bici, traghetto, funivia',        v:75}
+];
+
+var DAYS = [
+  {
+    id:'g1', name:'Giorno 1 · Gio 13', zone:'Midtown — arrivo', sub:'Si comincia alle 19:00, in hotel. È una serata, non una giornata.',
+    pct:102, verd:'warn', vlabel:'piena ma ok', out:'19:00', back:'23:00',
+    stops:[
+      {n:'Times Square di notte', i:'🌃', s:'foto ~40 min', m:50},
+      {n:"Ellen's Stardust (cena di benvenuto)", i:'🎤', s:'cena+spettacolo ~1h30', m:115},
+      {n:'Midtown Comics', i:'🧩', s:'negozio ~30 min', m:55, opt:true},
+      {n:'Gelato', i:'🍦', s:'~25 min', m:40, opt:true}
+    ],
+    probs:['<b>Midtown Comics chiude alle 22:00</b> e con la cena da Ellen\'s (dove si fa spesso mezz\'ora di fila) ci arriveremmo dopo.'],
+    sol:'Fumetti <b>prima</b> di cena, o spostati a un altro giorno: sono a 5 minuti dall\'hotel, ci si passa davanti in continuazione.',
+    solres:'Nessun altro problema: la serata di arrivo è tarata bene.',
+    taxi:[], metro:'Tutto a piedi: siamo dentro Times Square.'
+  },
+  {
+    id:'g2', name:'Giorno 2 · Ven 14', zone:'Midtown + Summit', sub:'La giornata con il vincolo più rigido: Summit prenotato alle 19:00.',
+    pct:130, verd:'bad', vlabel:'NON CI STA', out:'09:00', back:'21:30',
+    stops:[
+      {n:'Grand Central', i:'🚉', s:'foto ~40 min', m:65},
+      {n:'Bryant Park', i:'🌳', s:'giro ~35 min', m:55},
+      {n:'5th Avenue (passeggiata)', i:'🛍️', s:'~40 min', m:45},
+      {n:"St. Patrick's Cathedral", i:'⛪', s:'~30 min', m:40},
+      {n:'Lego Store', i:'🧸', s:'negozio ~35 min', m:45, opt:true},
+      {n:'230 Fifth rooftop', i:'🍸', s:'~1h + 2 taxi', m:95, opt:true},
+      {n:'NBA Store', i:'🏀', s:'negozio ~35 min', m:40, opt:true},
+      {n:'NikeTown', i:'👟', s:'negozio ~30 min', m:45, opt:true},
+      {n:'Sephora', i:'💄', s:'negozio ~30 min', m:40, opt:true},
+      {n:"Raising Cane's", i:'🍗', s:'pasto veloce ~45 min', m:65, opt:true},
+      {n:'Shaver Hall (food hall)', i:'🍽️', s:'pranzo ~1h', m:85, opt:true},
+      {n:'MoMA', i:'🖼️', s:'museo ~1h45', m:145},
+      {n:'SUMMIT', i:'🌇', s:'terrazza ~1h30', m:105, fixed:'19:00 · prenotato'},
+      {n:'Cena + gelato', i:'🍦', s:'~1h15', m:85}
+    ],
+    need:230,
+    probs:[
+      '<b>Il Summit delle 19:00 non lo prendiamo.</b> Con questa sequenza ci arriviamo alle <b>22:23</b>: tre ore e mezza dopo. Non è "stretto", è saltato — ed è l\'unica cosa già pagata.',
+      '<b>230 Fifth è fuori zona:</b> sta sulla <b>27ª</b>, mentre il resto della giornata è tra la 42ª e la 57ª. Andare e tornare = <b>due taxi</b> e circa <b>1h30</b> negli spostamenti.',
+      '<b>Due pranzi</b> nello stesso giorno: Raising Cane\'s e Shaver Hall.',
+      '<b>Lo shopping è spezzato in 4 tappe</b> (Lego, NBA, Nike, Sephora) che sono <b>tutte sulla 5th Avenue</b> a pochi isolati: ogni tappa separata costa spostamento + i 5 minuti per ricompattare gli 8.'
+    ],
+    sol:'<b>Proposta P1.</b> Shopping della 5th in <b>una tappa sola</b> · <b>un solo pranzo</b> (Shaver Hall) · <b>230 Fifth accorpato</b> a Shaver Hall nel pomeriggio, un solo "scendere a sud" · <b>MoMA nelle ore calde</b> (13:45-15:30), che è esattamente il suo mestiere.',
+    solres:'Risultato: fuori alle 9:00, <b>Summit alle 19:00 preso con 28 minuti di margine</b>, rientro verso le 22:00. Nessuna tappa persa.',
+    taxi:[
+      {r:'230 Fifth (27ª &amp; 5th) → Summit (42ª &amp; Vanderbilt)', d:'~1,6 km · 10-15 min nel traffico', c:'≈ $13-16 a macchina → <b>$26-32 in due</b>',
+       m:'🚇 <b>Alternativa facile:</b> metro <b>6</b> da 28 St a Grand Central, 4 minuti, una fermata sola. $2,90 a testa = <b>$23 in 8</b>. Zona centralissima e affollata: nessun problema.'}
+    ]
+  },
+  {
+    id:'g3', name:'Giorno 3 · Sab 15', zone:'Central Park & Uptown — 🚌 Bus giorno 1', sub:'La linea blu del Big Bus passa ogni 60 minuti e l\'ultima è alle 16:00.',
+    pct:96, verd:'warn', vlabel:'regge, ma c\'è un buco', out:'08:45', back:'21:30',
+    stops:[
+      {n:'Bici a Central Park', i:'🚲', s:'attività ~1h20', m:95},
+      {n:"Pausa AC + Bloomingdale's", i:'❄️', s:'~1h10', m:75, opt:true},
+      {n:'Funivia Roosevelt Island (a/r)', i:'🚡', s:'~45 min', m:60, opt:true},
+      {n:'Met steps (Gossip Girl) + Museum Mile', i:'🎬', s:'foto ~45 min', m:60},
+      {n:'Marc Jacobs + Alo', i:'🛍️', s:'negozi ~40 min', m:70, opt:true},
+      {n:'Guggenheim', i:'🖼️', s:'museo ~1h15', m:110, opt:true, todo:'DA PRENOTARE'},
+      {n:'Cena + gelato (Upper East Side)', i:'🍽️', s:'~1h20', m:100}
+    ],
+    probs:[
+      '<b>Buco di oltre 2 ore.</b> Le tappe finiscono verso le <b>15:15</b>, ma il Guggenheim è alle <b>18:00</b>: in mezzo restano <b>due ore e un quarto</b> da riempire, ad agosto, nell\'ora più calda.',
+      '<b>Bloomingdale\'s e la funivia non sono serviti dal bus</b> (la blu non passa su Lexington e sulla 2ª): vanno fatti a piedi/taxi, quindi <b>uno di fila all\'altro</b>.',
+      '<b>La blu passa ogni ora</b> e l\'ultima è alle 16:00: va usata come <b>un unico giro panoramico</b> a metà giornata, non come navetta a chiamata.'
+    ],
+    sol:'Se il Guggenheim si prenota verso le <b>16:00</b> (vedi le prenotazioni in cima), <b>il buco si chiude da solo</b> e la giornata fila liscia. Bloomingdale\'s + funivia in fila, entrambi intorno alla 59ª, nella fascia calda (al chiuso o all\'ombra).',
+    solres:'Con il Guggenheim alle 16:00 la giornata scende a ~88%: regge con margine.',
+    taxi:[], metro:'Nessun taxi previsto: bici, bus blu e brevi tratte a piedi intorno alla 59ª e alla Museum Mile.'
+  },
+  {
+    id:'g4', name:'Giorno 4 · Dom 16', zone:'Downtown & Brooklyn — 🚌 Bus giorno 2', sub:'L\'unica giornata con spazio libero. Ed è la chiave per sistemare il lunedì.',
+    pct:82, verd:'ok', vlabel:'regge con margine', out:'09:00', back:'21:30',
+    stops:[
+      {n:'Ghostbusters HQ (Tribeca)', i:'🎬', s:'foto ~25 min', m:15},
+      {n:'SoHo / Tribeca', i:'🏬', s:'giro ~40 min', m:50},
+      {n:'Shopping SoHo', i:'🛍️', s:'~1h', m:70, opt:true},
+      {n:'Ponte di Brooklyn a piedi', i:'☀️', s:'attraversata ~55 min', m:65},
+      {n:'Dumbo + Manhattan Bridge', i:'📷', s:'foto ~40 min', m:65},
+      {n:'Foto al molo (Brooklyn Bridge Park)', i:'📸', s:'~30 min', m:55, opt:true},
+      {n:'Time Out Market Dumbo', i:'🍽️', s:'pranzo ~1h15', m:90},
+      {n:'Rientro Midtown + cena', i:'🌃', s:'taxi + cena ~1h20', m:120}
+    ],
+    probs:[
+      '<b>Non è un problema, è un\'occasione:</b> questa giornata finisce alle 19:20 e ha <b>più di 2 ore libere</b>. Nel frattempo il lunedì ne ha 3 di troppo.',
+      'Da tenere presente: <b>a Dumbo non arriva il bus</b> (linea Brooklyn sospesa fino al 31 agosto) → ponte <b>a piedi</b> e ritorno in taxi o metro. E l\'anello rosso è a senso unico: per questo <b>SoHo viene prima del ponte</b>.'
+    ],
+    sol:'<b>Proposta P2:</b> la domenica si prende il blocco <b>Chelsea Market → High Line → Little Island al tramonto</b>, che oggi soffoca il lunedì. Da Dumbo si va in taxi direttamente al Meatpacking (invece che a Midtown) e si cena lì dopo il tramonto.',
+    solres:'La domenica sale a ~98% (piena ma fattibile) e il lunedì torna respirabile.',
+    taxi:[
+      {r:'Dumbo → Midtown (rientro, versione attuale)', d:'~8,6 km · 30-45 min', c:'≈ $32-42 a macchina → <b>$65-85 in due</b>',
+       m:'🚇 <b>Alternativa molto semplice:</b> metro <b>A o C</b> da High St–Brooklyn Bridge fino a 42 St–Port Authority: <b>diretta, ~25 minuti</b>, ci lascia a 3 isolati dall\'hotel. $2,90 a testa = <b>$23 in 8</b>. È una linea centrale e trafficata anche la sera.'},
+      {r:'Se approvi P2: Dumbo → Chelsea Market', d:'~6,3 km · 25-40 min', c:'≈ $26-34 a macchina → <b>$52-68 in due</b>',
+       m:'🚇 In metro servirebbe un cambio (F da York St + 10 min a piedi): con 8 persone e la stanchezza del ponte, <b>qui il taxi ha senso</b>.'},
+      {r:'Se approvi P2: Little Island → hotel (dopo cena)', d:'~4,1 km · 20-30 min', c:'≈ $19-25 a macchina → <b>$38-50 in due</b>',
+       m:'🚇 <b>Alternativa facile:</b> metro <b>A/C/E</b> da 14 St–8 Av a 42 St, <b>diretta, ~10 minuti</b>. $23 in 8.'}
+    ]
+  },
+  {
+    id:'g5', name:'Giorno 5 · Lun 17', zone:'FiDi & Porto → Village → West Side', sub:'Sulla carta è una giornata. In realtà sono tre quartieri in fila.',
+    pct:126, verd:'bad', vlabel:'NON CI STA', out:'08:30', back:'21:30',
+    stops:[
+      {n:'Traghetto Staten Island (a/r)', i:'⛴️', s:'~1h15', m:75},
+      {n:'Wall St / Charging Bull', i:'🏛️', s:'foto ~40 min', m:45},
+      {n:'9/11 Memorial', i:'🕊️', s:'~50 min', m:60},
+      {n:'Oculus', i:'🕊️', s:'~30 min', m:40},
+      {n:'Eataly (pranzo, WTC)', i:'🍝', s:'pranzo ~1h10', m:80, opt:true},
+      {n:'Chinatown / Little Italy', i:'🥟', s:'giro ~45 min', m:50, opt:true},
+      {n:"Katz's pastrami (LES)", i:'🥪', s:'pranzo ~1h', m:70},
+      {n:'East Village (St. Marks)', i:'🎸', s:'giro ~40 min', m:55, opt:true},
+      {n:'Sanctum Sanctorum', i:'🎬', s:'foto ~20 min', m:30},
+      {n:"Joe's Pizza", i:'🍕', s:'pasto veloce ~35 min', m:45},
+      {n:'Sex and the City (Magnolia + scalinata)', i:'🎬', s:'foto ~35 min', m:45},
+      {n:'Chelsea Market', i:'🏬', s:'~1h', m:65},
+      {n:'High Line', i:'🌿', s:'passeggiata ~45 min', m:75},
+      {n:'Little Island (tramonto)', i:'🌇', s:'~45 min', m:75}
+    ],
+    need:206,
+    probs:[
+      '<b>Finirebbe all\'una di notte.</b> Sono <b>14 tappe</b> in tre zone diverse, con <b>5 ore e mezza passate a spostarsi</b>: più di un terzo della giornata solo per andare da una cosa all\'altra.',
+      '<b>Ancora due pranzi:</b> Eataly al WTC e Katz\'s al Lower East Side.',
+      '<b>Zigzag geografico:</b> Katz\'s (est) → St. Marks (est) → Sanctum Sanctorum (ovest): si attraversa la città e si torna indietro.',
+      '<b>Il blocco West Side</b> (Chelsea Market + High Line + Little Island) <b>è mezza giornata a sé</b>, appiccicata in coda a una giornata già piena.'
+    ],
+    sol:'<b>Proposte P2 + P3.</b> Il blocco West Side passa a <b>domenica sera</b> (dove c\'è posto) e resta <b>un solo pranzo</b> (Katz\'s; l\'Eataly come alternativa dentro l\'Oculus). Il lunedì diventa: <b>FiDi la mattina, Village il pomeriggio e la sera</b>, con la cena in West Village — dove siamo già, senza tornare in hotel e riuscire.',
+    solres:'Risultato: fuori alle 8:15, rientro verso le <b>21:15</b>. E ci rientra pure St. Marks, che è a due isolati da Katz\'s.',
+    warn:'⚠️ Attenzione: <b>togliendo tutto quello che è "opzionale" si recuperano 3 ore su 3 e mezza</b> che ne servono. Il lunedì <b>non si aggiusta togliendo dettagli</b>: o si sposta il blocco West Side, o si rinuncia a un pezzo grosso.',
+    taxi:[
+      {r:'Hotel → traghetto Staten Island (mattina)', d:'~9,5 km · 30-45 min nel traffico del mattino', c:'≈ $33-43 a macchina → <b>$66-86 in due</b>',
+       m:'🚇 <b>Qui la metro conviene davvero:</b> linea <b>1</b> da Times Sq–42 St fino a <b>South Ferry</b>, <b>diretta, senza cambi, ~20 minuti</b> — cioè <b>più veloce del taxi</b> nel traffico del mattino. $2,90 a testa = <b>$23 in 8</b>, contro ~$75. È la tratta dove si risparmia di più di tutto il viaggio.'},
+      {r:'Katz\'s → Sanctum Sanctorum (se si taglia il giro a piedi)', d:'~1,5 km · 10-15 min', c:'≈ $13-16 a macchina → <b>$26-32 in due</b>',
+       m:'🚇 metro <b>F</b> da Delancey/Essex a W 4 St, ~10 min. Oppure 20 minuti a piedi, che nel pomeriggio caldo però pesano.'},
+      {r:'Little Island / Meatpacking → hotel (sera)', d:'~4,4 km · 20-30 min', c:'≈ $19-26 a macchina → <b>$38-52 in due</b>',
+       m:'🚇 <b>Alternativa facile:</b> <b>A/C/E</b> da 14 St–8 Av a 42 St, diretta, ~10 minuti. $23 in 8.'}
+    ]
+  },
+  {
+    id:'g6', name:'Giorno 6 · Mar 18', zone:'Midtown / West Side — partenza', sub:'Mezza giornata: l\'orario di uscita per l\'aeroporto lo decidi tu (vedi in fondo).',
+    pct:93, verd:'warn', vlabel:'ok, ma dipende da una cosa', out:'08:30', back:'17:00',
+    stops:[
+      {n:'Top of the Rock', i:'🏙️', s:'terrazza ~1h20', m:105, todo:'DA PRENOTARE'},
+      {n:'Vessel + Hudson Yards', i:'🌀', s:'~50 min', m:105},
+      {n:"All'Antico Vinaio", i:'🥪', s:'pasto veloce ~45 min', m:55, opt:true},
+      {n:"Junior's (cheesecake)", i:'🍰', s:'~35 min', m:45, opt:true},
+      {n:'Ultimi acquisti 5th Ave', i:'🛍️', s:'~1h', m:90, opt:true},
+      {n:'Rientro hotel + bagagli', i:'🧳', s:'~45 min', m:65}
+    ],
+    probs:[
+      '<b>Funziona solo se Top of the Rock è alle 9:00.</b> Il conto torna con 30 minuti di margine, ma solo partendo presto. Se lo slot fosse a metà mattina, <b>il martedì salta</b>: o si perde il Vessel, o si arriva tardi in aeroporto.',
+      '<b>Non ho il tuo orario di uscita per l\'aeroporto.</b> Ho messo 17:30 come stima: se in realtà si esce alle 16:30, questa giornata perde un\'ora e va rifatta.',
+      'Piccolo doppione: <b>All\'Antico Vinaio e Junior\'s</b> sono due soste cibo vicine tra loro.'
+    ],
+    sol:'Quando prenoti il Top of the Rock, prendi <b>il primo slot della mattina</b>. Per il cibo: schiacciata <b>o</b> cheesecake (o la cheesecake da portare via — Junior\'s è dentro Times Square). E <b>confermami l\'orario di uscita</b> nella sezione qui sotto.',
+    solres:'Con Top of the Rock alle 9:00 e uscita alle 17:30: bagagli pronti per le 16:30, tutto a piedi vicino all\'hotel.',
+    taxi:[
+      {r:'Hotel → aeroporto (l\'unica tratta lunga)', d:'dipende da quale aeroporto — vedi la sezione 🛫 in fondo', c:'da <b>$100</b> (LGA) a <b>$260</b> (Newark) per 2 auto',
+       m:'💡 Con 8 persone e i bagagli, <b>un van prenotato costa spesso meno di 2 taxi</b> e vi prende in hotel a orario fisso. Dimmi aeroporto e orario e te lo trovo.'}
+    ]
+  }
+];
+
+/* ---------- slot editabili ---------- */
+var slotOverride = {};
+var sl = document.getElementById('slotlist');
+SLOTS.forEach(function(s){
+  var d = document.createElement('div');
+  d.className = 'er'; d.setAttribute('data-slot', s.k);
+  d.innerHTML =
+    '<span class="ic">' + s.i + '</span>' +
+    '<span class="nm">' + s.n + '<small>' + s.ex + '</small></span>' +
+    '<span class="sugg">' + hm(s.v) + '</span>' +
+    '<span class="newv"></span>' +
+    '<button class="eb" type="button">✏️</button>' +
+    '<span class="erow"><span class="u">nuovo valore:</span>' +
+    '<input type="number" min="5" step="5" value="' + s.v + '"><span class="u">minuti</span></span>';
+  sl.appendChild(d);
+});
+
+/* ---------- orari uscita/rientro editabili ---------- */
+var timeOverride = {};
+var tl = document.getElementById('timelist');
+DAYS.forEach(function(d){
+  var r = document.createElement('div');
+  r.className = 'er'; r.setAttribute('data-day', d.id); r.setAttribute('data-dayname', d.name);
+  r.innerHTML =
+    '<span class="ic">📅</span>' +
+    '<span class="nm">' + d.name + '<small>' + d.zone + '</small></span>' +
+    '<span class="sugg">' + d.out + ' → ' + d.back + '</span>' +
+    '<span class="newv"></span>' +
+    '<button class="eb" type="button">✏️</button>' +
+    '<span class="erow"><span class="u">esci alle</span><input type="text" class="tout" value="' + d.out + '">' +
+    '<span class="u">rientro entro</span><input type="text" class="tback" value="' + d.back + '"></span>';
+  tl.appendChild(r);
+});
+
+/* ---------- riepilogo ---------- */
+var COL = { ok:'linear-gradient(90deg,#5cb874,#3f9d5a)', warn:'linear-gradient(90deg,#f0b657,#e0912f)', bad:'linear-gradient(90deg,#e2707f,#d1495b)' };
+var sum = document.getElementById('summary');
+DAYS.forEach(function(d){
+  var a = document.createElement('a');
+  a.className = 'srow'; a.href = '#' + d.id;
+  a.innerHTML = '<span class="sd">' + d.name.split('·')[1].trim() + '</span>' +
+    '<span class="st"><span class="sf" style="width:' + Math.min(d.pct,100) + '%; background:' + COL[d.verd] + '"></span></span>' +
+    '<span class="sp" style="color:' + tint(d.verd) + '">' + d.pct + '%</span>';
+  sum.appendChild(a);
+});
+
+/* ---------- giorni ---------- */
+var wrapDays = document.getElementById('days');
+DAYS.forEach(function(d){
+  var el = document.createElement('div');
+  el.className = 'day'; el.id = d.id;
+  el.setAttribute('data-dayname', d.name + ' (' + d.zone + ')');
+
+  var h = '<div class="dh"><span class="dd">' + d.name + '</span>' +
+          '<span class="verd ' + d.verd + '">' + d.vlabel + '</span>' +
+          '<button class="editbtn" type="button">✏️ Modifica</button></div>' +
+          '<div class="dsub">' + d.zone + ' — ' + d.sub + '</div>';
+
+  h += '<div class="score ' + d.verd + '">' +
+       '<div class="scoretop"><span class="pct" style="color:' + tint(d.verd) + '">' + d.pct + '%</span>' +
+       '<span class="lbl">carico della giornata</span></div>' +
+       '<div class="track"><span class="fill" style="width:' + Math.min(d.pct,100) + '%"></span></div>' +
+       '<div class="limitlbl">calcolato su: esci ' + d.out + ' · rientro entro ' + d.back + '</div></div>';
+
+  h += '<div class="prob"><h4>' + (d.verd==='ok' ? '🔎 Cosa ho trovato' : '⚠️ Cosa non torna') + '</h4><ul>';
+  d.probs.forEach(function(p){ h += '<li>' + p + '</li>'; });
+  h += '</ul></div>';
+
+  h += '<div class="sol"><h4>💡 Cosa propongo</h4><div>' + d.sol + '</div>' +
+       '<div class="res2">' + d.solres + '</div>' +
+       '<div class="appr">' +
+       '<button class="ab yes" type="button" data-val="APPROVATA">✅ Va bene, applica questa soluzione</button>' +
+       '<button class="ab again" type="button" data-val="RIFAI PROPOSTA">🔄 Non mi convince — proponimene un\'altra<small>ti mando una soluzione diversa per questa giornata</small></button>' +
+       '<button class="ab edit" type="button" data-val="SBLOCCA EDIT">✏️ Non approvo — sblocco io l\'itinerario<small>togli le tappe che vuoi e spiegami sotto il perché</small></button>' +
+       '</div></div>';
+
+  if(d.warn){ h += '<div class="note">' + d.warn + '</div>'; }
+
+  if(d.taxi && d.taxi.length){
+    h += '<div class="taxi"><h4>🚕 Tratte in taxi di questa giornata — quanto costano</h4>';
+    d.taxi.forEach(function(t){
+      h += '<div class="tleg"><div class="tr">' + t.r + '</div>' +
+           '<div class="td">' + t.d + '</div>' +
+           '<div class="tc">' + t.c + '</div>' +
+           (t.m ? '<span class="tm">' + t.m + '</span>' : '') + '</div>';
+    });
+    h += '<div class="tleg"><span class="td">Stime indicative su tariffe taxi NYC (base + a miglio + supplementi + mancia). Uber/Lyft costano uguale o di più negli orari di punta. <b>Siamo in 8 → sempre 2 auto.</b></span></div>';
+    h += '</div>';
+  } else if(d.metro){
+    h += '<div class="taxi"><h4>🚕 Taxi in questa giornata</h4><div class="tleg"><span class="td">' + d.metro + '</span></div></div>';
+  }
+
+  h += '<div class="seq">';
+  d.stops.forEach(function(s){
+    h += '<div class="it' + (s.opt?' opt':'') + '" data-name="' + s.n + '" data-min="' + s.m + '">' +
+         '<span class="nm">' + s.i + ' ' + s.n +
+         (s.fixed ? '<span class="fx">🔒 ' + s.fixed + '</span>' : '') +
+         (s.todo ? '<span class="fx todo">📋 ' + s.todo + '</span>' : '') + '</span>' +
+         '<span class="sl">' + s.s + '</span></div>';
+  });
+  h += '</div>';
+
+  h += '<div class="edithint">👆 Tocca un\'attività per toglierla — ti dico subito quanto recuperi</div>';
+  h += '<div class="recov" data-need="' + (d.need||0) + '">' + recovText(0, d.need||0) + '</div>';
+  h += '<textarea class="daycomment" placeholder="💬 Spiegami cosa cambieresti in questa giornata e perché..."></textarea>';
+
+  el.innerHTML = h;
+  wrapDays.appendChild(el);
+});
+
+function tint(v){ return v==='bad' ? '#d1495b' : (v==='warn' ? '#b46f1a' : '#2f7a46'); }
+function hm(m){
+  m = Math.round(m/5)*5;
+  var h = Math.floor(m/60), r = m%60;
+  if(h && r) return h + 'h' + (r<10?'0':'') + r;
+  if(h) return h + 'h';
+  return r + ' min';
+}
+function recovText(got, need){
+  if(!need) return got ? ('Recuperi <b>' + hm(got) + '</b> di margine in più su questa giornata.')
+                       : 'Questa giornata ci sta già. Se togli qualcosa, guadagni margine.';
+  if(got >= need) return '✅ <b>Fatto:</b> hai recuperato <b>' + hm(got) + '</b> — la giornata adesso ci sta (ne servivano ' + hm(need) + ').';
+  return 'Recuperati <b>' + hm(got) + '</b> su <b>' + hm(need) + '</b> che ne servono per far tornare la giornata.';
+}
+
+/* ---------- editing righe (slot + orari) ---------- */
+document.querySelectorAll('.er .eb').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var row = btn.closest('.er');
+    var on = row.classList.toggle('editing');
+    btn.textContent = on ? '✓' : '✏️';
+    if(!on) commitRow(row);
+  });
+});
+document.querySelectorAll('.er input').forEach(function(inp){
+  inp.addEventListener('change', function(){ commitRow(inp.closest('.er')); });
+});
+function commitRow(row){
+  var k = row.getAttribute('data-slot');
+  if(k){
+    var v = parseInt(row.querySelector('input').value, 10);
+    var base = 0;
+    SLOTS.forEach(function(s){ if(s.k===k) base = s.v; });
+    if(v && v !== base){
+      slotOverride[k] = v;
+      row.classList.add('edited');
+      row.querySelector('.sugg').classList.add('changed');
+      row.querySelector('.newv').textContent = '→ ' + hm(v);
+    } else {
+      delete slotOverride[k];
+      row.classList.remove('edited');
+      row.querySelector('.sugg').classList.remove('changed');
+      row.querySelector('.newv').textContent = '';
+    }
+  } else {
+    var id = row.getAttribute('data-day');
+    var o = row.querySelector('.tout').value.trim();
+    var b = row.querySelector('.tback').value.trim();
+    var day = null;
+    DAYS.forEach(function(d){ if(d.id===id) day = d; });
+    if(day && (o !== day.out || b !== day.back)){
+      timeOverride[id] = { name: day.name, out:o, back:b };
+      row.classList.add('edited');
+      row.querySelector('.sugg').classList.add('changed');
+      row.querySelector('.newv').textContent = '→ ' + o + ' / ' + b;
+    } else {
+      delete timeOverride[id];
+      row.classList.remove('edited');
+      row.querySelector('.sugg').classList.remove('changed');
+      row.querySelector('.newv').textContent = '';
+    }
+  }
+  updateStatus();
+}
+
+/* ---------- edit mode giornata ---------- */
+document.querySelectorAll('.editbtn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var day = btn.closest('.day');
+    var on = day.classList.toggle('editing');
+    btn.textContent = on ? '✓ Fine' : '✏️ Modifica';
+  });
+});
+document.querySelectorAll('.it').forEach(function(el){
+  el.addEventListener('click', function(){
+    var day = el.closest('.day');
+    if(!day || !day.classList.contains('editing')) return;
+    el.classList.toggle('off');
+    var got = 0;
+    day.querySelectorAll('.it.off').forEach(function(x){ got += parseInt(x.getAttribute('data-min'),10)||0; });
+    var box = day.querySelector('.recov');
+    var need = parseInt(box.getAttribute('data-need'),10)||0;
+    box.innerHTML = recovText(got, need);
+    box.classList.toggle('done', need>0 && got>=need);
+  });
+});
+
+/* ---------- pulsanti approva / rifai / sblocca ---------- */
+var dayDecision = {};
+document.querySelectorAll('.appr').forEach(function(group){
+  group.querySelectorAll('.ab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var day = btn.closest('.day');
+      var already = btn.classList.contains('sel');
+      group.querySelectorAll('.ab').forEach(function(x){ x.classList.remove('sel'); });
+      var val = already ? '' : btn.getAttribute('data-val');
+      dayDecision[day.id] = val ? { name: day.getAttribute('data-dayname'), val: val } : null;
+      if(!already) btn.classList.add('sel');
+      var unlock = (val === 'SBLOCCA EDIT');
+      day.classList.toggle('wantedit', unlock);
+      if(unlock){
+        day.classList.add('editing');
+        day.querySelector('.editbtn').textContent = '✓ Fine';
+        var c = day.querySelector('.daycomment');
+        c.setAttribute('placeholder', '💬 Spiegami cosa togli e perché — così capisco la priorità e ricalcolo');
+        c.focus();
+      }
+      updateStatus();
+    });
+  });
+});
+
+/* ---------- chips ---------- */
+var sel = {};
+document.querySelectorAll('.chips[data-group]').forEach(function(group){
+  var g = group.getAttribute('data-group');
+  group.querySelectorAll('.chip').forEach(function(el){
+    el.addEventListener('click', function(){
+      var already = el.classList.contains('sel');
+      group.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('sel'); });
+      sel[g] = already ? '' : el.getAttribute('data-val');
+      if(!already) el.classList.add('sel');
+      updateStatus();
+    });
+  });
+});
+
+function updateStatus(){
+  var n = 0;
+  Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) n++; });
+  var edits = Object.keys(slotOverride).length + Object.keys(timeOverride).length;
+  var t = [];
+  if(n) t.push(n + ' giornate decise');
+  if(edits) t.push(edits + ' modifiche ai tempi');
+  document.getElementById('statusLine').textContent =
+    t.length ? (t.join(' · ') + ' — invia quando vuoi') : 'Le giornate rosse sono venerdì e lunedì 👆';
+}
+
+/* ---------- messaggio WhatsApp ---------- */
+function buildMessage(){
+  var L = [];
+  L.push('🗽 NEW YORK — Analisi logistica: risposta di Fabrizio');
+
+  /* aeroporto: sempre incluso, e' il dato che blocca l'itinerario */
+  var apT = document.getElementById('apTime').value.trim();
+  var apN = document.getElementById('apName').value.trim();
+  L.push('');
+  L.push('🛫 PARTENZA AEROPORTO (mar 18, volo 22:00):');
+  L.push('   - usciamo dall\'hotel alle: ' + (apT || '(non indicato)'));
+  L.push('   - aeroporto: ' + (apN || '(non indicato)'));
+
+  /* prenotazioni */
+  var bk = [];
+  document.querySelectorAll('.bkitem').forEach(function(b){
+    var label = b.getAttribute('data-bk');
+    var d = b.querySelector('.bkday').value.trim();
+    var h = b.querySelector('.bktime').value.trim();
+    if(d || h) bk.push('   - ' + label + ': ' + [d,h].filter(Boolean).join(' '));
+  });
+  if(bk.length){ L.push(''); L.push('📋 PRENOTATO:'); bk.forEach(function(x){ L.push(x); }); }
+
+  /* decisioni per giornata */
+  var dd = [];
+  DAYS.forEach(function(d){
+    var x = dayDecision[d.id];
+    if(x) dd.push('   - ' + x.name + ': ' + x.val);
+  });
+  if(dd.length){ L.push(''); L.push('✅ SOLUZIONI PER GIORNATA:'); dd.forEach(function(x){ L.push(x); }); }
+
+  /* proposte di fondo */
+  var pp = [];
+  [['P1','Venerdi compattato'],['P2','West Side da lunedi a domenica'],['P3','Un solo pranzo al giorno']]
+    .forEach(function(p){ if(sel[p[0]]) pp.push('   - ' + p[0] + ' ' + p[1] + ': ' + sel[p[0]]); });
+  if(sel['V1']) pp.push('   - V1 230 Fifth (minori): ' + sel['V1']);
+  if(pp.length){ L.push(''); L.push('🗳️ PROPOSTE DI FONDO:'); pp.forEach(function(x){ L.push(x); }); }
+
+  /* slot ridefiniti */
+  var so = [];
+  SLOTS.forEach(function(s){
+    if(slotOverride[s.k] !== undefined)
+      so.push('   - ' + s.n + ': da ' + hm(s.v) + ' a ' + hm(slotOverride[s.k]));
+  });
+  if(so.length){ L.push(''); L.push('⏱ BLOCCHI DI TEMPO CAMBIATI (rifare il calcolo):'); so.forEach(function(x){ L.push(x); }); }
+
+  /* orari cambiati */
+  var to = [];
+  DAYS.forEach(function(d){
+    var t = timeOverride[d.id];
+    if(t) to.push('   - ' + t.name + ': esce ' + t.out + ', rientro entro ' + t.back + ' (era ' + d.out + ' / ' + d.back + ')');
+  });
+  if(to.length){ L.push(''); L.push('🕗 ORARI CAMBIATI (rifare il calcolo):'); to.forEach(function(x){ L.push(x); }); }
+
+  /* modifiche alle giornate */
+  var any = false;
+  document.querySelectorAll('.day').forEach(function(day){
+    var dn = day.getAttribute('data-dayname');
+    var removed = [].slice.call(day.querySelectorAll('.it.off')).map(function(x){ return x.getAttribute('data-name'); });
+    var c = day.querySelector('.daycomment');
+    var comment = c ? c.value.trim() : '';
+    if(removed.length || comment){
+      if(!any){ L.push(''); L.push('✏️ MODIFICHE ALL\'ITINERARIO:'); any = true; }
+      L.push('');
+      L.push('📅 ' + dn + ':');
+      if(removed.length){
+        var got = 0;
+        day.querySelectorAll('.it.off').forEach(function(x){ got += parseInt(x.getAttribute('data-min'),10)||0; });
+        L.push('   ✖ togli: ' + removed.join(', '));
+        L.push('   ⏱ recupera circa ' + hm(got));
+      }
+      if(comment) L.push('   💬 ' + comment);
+    }
+  });
+
+  var open = document.getElementById('openText').value.trim();
+  if(open){ L.push(''); L.push('💬 ALTRO: ' + open); }
+  L.push('');
+  L.push('[Fabrizio · analisi-logistica v2]');
+  return L.join('\n');
+}
+
+document.getElementById('sendBtn').addEventListener('click', function(){
+  window.open('https://wa.me/?text=' + encodeURIComponent(buildMessage()), '_blank');
+});
+updateStatus();
+</script>
+</body>
+</html>
