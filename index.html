@@ -212,7 +212,7 @@
     <div class="flag">🗽🧮</div>
     <h1>Rifatti i conti sui tuoi numeri</h1>
     <div class="sub">Ho preso le tue risposte, le ho messe dentro il calcolo e ho rifatto tutti e sei i giorni. Il risultato ribalta metà di quello che ti avevo detto.</div>
-    <div class="ver">📌 versione v3 &middot; 28 lug 2026</div>
+    <div class="ver">📌 versione v3.1 &middot; 28 lug 2026</div>
   </div>
 </header>
 
@@ -220,13 +220,14 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Novità di questa versione <span class="cd">(v3 &middot; 28 lug 2026)</span></h3>
+    <h3>🆕 Novità di questa versione <span class="cd">(v3.1 &middot; 28 lug 2026)</span></h3>
     <ul>
       <li>✅ <b>Applicato tutto quello che hai risposto</b> — i blocchi di tempo, il no allo spostamento del West Side, il sì al pranzo unico, il pranzo del venerdì, il Guggenheim, l'orario per JFK.</li>
       <li>🔄 <b>Tutti e 6 i giorni ricalcolati</b> da zero con i tuoi numeri.</li>
       <li>🟢 <b>Avevi ragione sul lunedì:</b> con i tuoi blocchi si aggiusta quasi da solo. Lo spostamento che ti proponevo <b>non serve più</b>.</li>
       <li>🌇 <b>Ma è saltato fuori un problema che prima non si vedeva:</b> il lunedì <b>perdevamo il tramonto</b> a Little Island di un'ora e mezza.</li>
       <li>🔴 <b>Il venerdì è l'unico ancora rotto</b> — e le tue scelte, da sole, non bastano a raddrizzarlo. Ti chiedo una cosa sola.</li>
+      <li>🏷️ <b>Ogni risposta porta l'etichetta della pagina che l'ha prodotta</b> (versione, data, e quale piano stava mostrando): serve a non confondere un suggerimento scritto su una pagina vecchia con una richiesta nuova.</li>
       <li>📋 <b>Una prenotazione in meno:</b> il Guggenheim non si prenota più. Resta solo il Top of the Rock.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
@@ -1068,6 +1069,32 @@ function updateStatus(){
     t.length ? (t.join(' · ') + ' — invia quando vuoi') : '4 nodi da sciogliere 👆';
 }
 
+/* ============================================================
+   TAG DI ORIGINE — lega ogni risposta alla pagina ESATTA che l'ha
+   prodotta, e al piano che quella pagina stava mostrando.
+   Serve perche' piu' pagine restano vive insieme: senza questo, una
+   risposta scritta su una pagina vecchia sembra una richiesta nuova.
+   ⚠️ Da aggiornare a OGNI pubblicazione, insieme al badge di versione.
+   ============================================================ */
+var FORM = {
+  id:    'analisi-logistica',
+  ver:   'v3.1',
+  built: '2026-07-28',
+  plan:  'ricalcolo D37/D38/D39 (blocchi di tempo di Fabrizio)',
+  stale: ''                      /* valorizzare quando la pagina resta indietro */
+};
+
+function formTag(){
+  var d = new Date(), p = function(n){ return (n<10?'0':'') + n; };
+  var L = ['', '———',
+    '📋 form: ' + FORM.id + ' ' + FORM.ver + ' · pubblicata ' + FORM.built,
+    '🗺️ piano mostrato: ' + FORM.plan,
+    '🕘 inviato: ' + p(d.getDate()) + '/' + p(d.getMonth()+1) + '/' + d.getFullYear() +
+      ' ' + p(d.getHours()) + ':' + p(d.getMinutes())];
+  if(FORM.stale) L.push('⚠️ ' + FORM.stale);
+  return L;
+}
+
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
@@ -1138,8 +1165,7 @@ function buildMessage(){
 
   var open = document.getElementById('openText').value.trim();
   if(open){ L.push(''); L.push('💬 ALTRO: ' + open); }
-  L.push('');
-  L.push('[Fabrizio · analisi-logistica v3]');
+  formTag().forEach(function(x){ L.push(x); });
   return L.join('\n');
 }
 
