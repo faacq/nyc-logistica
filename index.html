@@ -212,7 +212,7 @@
     <div class="flag">🗽🧮</div>
     <h1>Ci siamo</h1>
     <div class="sub">Sei giornate su sei approvate e tutte ci stanno. Mi resta <b>una scelta</b> da farti fare — dove si pranza sabato — e <b>una prenotazione</b>.</div>
-    <div class="ver">📌 versione v5.1 &middot; 29 lug 2026</div>
+    <div class="ver">📌 versione v5.2 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -220,13 +220,14 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Novità di questa versione <span class="cd">(v5.1 &middot; 29 lug 2026)</span></h3>
+    <h3>🆕 Novità di questa versione <span class="cd">(v5.2 &middot; 29 lug 2026)</span></h3>
     <ul>
       <li>🕯️ <b>9/11 Memorial portato a 45 minuti</b>, come hai chiesto — <b>senza perdere il tramonto</b> a Little Island. Sotto ti spiego come.</li>
       <li>🍸 <b>230 Fifth eliminato.</b> Sparisce anche la verifica sui minori: non c'è più niente da controllare.</li>
       <li>😴 <b>Il venerdì parte alle 10:00</b> invece che alle 8:45, e finisce alla stessa ora: un'ora di sonno in più gratis.</li>
       <li>🌉 <b>Sabato</b>: aggiunta <b>Bethesda Terrace</b> e ricalibrata la funivia di Roosevelt (2 ore erano troppe per una corsa di 5 minuti).</li>
       <li>✅ <b>Tutte e sei le giornate sono approvate e ci stanno.</b></li>
+      <li>🌇 <b>Lunedì: si parte alle 8:00 e a Little Island ci si sta 45 minuti.</b> Con la versione di prima si arrivava 8 minuti prima del tramonto e si ripartiva 7 minuti dopo — cioè non lo si guardava. Adesso il tramonto cade dentro la sosta, e <b>la giornata finisce alla stessa ora di prima</b>: costa solo mezz'ora di sveglia.</li>
       <li>🌭 <b>Nathan's aggiunto al martedì</b> — l'avevi chiesto il 24 luglio e non era mai finito in nessuna giornata. Venti minuti, sulla strada del rientro.</li>
       <li>❓ <b>Resta una scelta</b>: dove si pranza sabato. E una prenotazione: il Top of the Rock.</li>
     </ul>
@@ -639,7 +640,7 @@ var DAYS = [
   "zone": "FiDi → Village → West Side",
   "pct": 93,
   "verd": "warn",
-  "out": "08:30",
+  "out": "08:00",
   "back": "21:30",
   "end": "20:34",
   "stops": [
@@ -706,8 +707,8 @@ var DAYS = [
    {
     "n": "Little Island (tramonto)",
     "i": "📸",
-    "s": "foto ~15 min",
-    "m": 43
+    "s": "foto ~45 min",
+    "m": 73
    },
    {
     "n": "Rientro hotel",
@@ -1052,7 +1053,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v5.1',
+  ver:   'v5.2',
   built: '2026-07-29',
   plan:  'piano completo D43 - tutte e 6 le giornate approvate',
   stale: ''                      /* valorizzare quando la pagina resta indietro */
