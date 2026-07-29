@@ -209,10 +209,10 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="flag">🗽✅</div>
-    <h1>È tutto in piedi</h1>
-    <div class="sub">Sei giornate su sei approvate, tutto prenotato, e <b>l'itinerario definitivo è scritto</b>. Mi restano <b>due domande</b> e una cosa che non ho capito.</div>
-    <div class="ver">📌 versione v6 &middot; 29 lug 2026</div>
+    <div class="flag">🗽🧮</div>
+    <h1>Ci siamo</h1>
+    <div class="sub">Sei giornate su sei approvate e tutte ci stanno. Restano <b>due scelte</b> che tocca a te fare: il tramonto del lunedi e dove si pranza sabato.</div>
+    <div class="ver">📌 versione v5.3 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -220,128 +220,60 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Novità di questa versione <span class="cd">(v6 &middot; 29 lug 2026)</span></h3>
+    <h3>🆕 Novità di questa versione <span class="cd">(v5.3 &middot; 29 lug 2026)</span></h3>
     <ul>
-      <li>😴 <b>Lunedì: hai scelto la A.</b> Si parte alle 8:00 e a Little Island si sta 45 minuti — il tramonto adesso cade <b>dentro</b> la sosta, con <b>38 minuti</b> di margine invece di otto. E la giornata finisce alla stessa ora di prima.</li>
-      <li>🏙️ <b>Top of the Rock prenotato: martedì alle 9:30.</b> Era l'ultima prenotazione aperta. <b>Non ce ne sono più.</b></li>
-      <li>🍬 <b>Sabato: pranzo veloce + Dylan's Candy Bar</b>, come hai detto.</li>
-      <li>📖 <b>L'itinerario definitivo è scritto.</b> Sotto ti spiego cos'è e cosa arriva dopo.</li>
-      <li>❓ <b>Una cosa non l'ho capita e non l'ho indovinata</b>: l'Antico Vinaio del sabato. È la prima domanda qui sotto.</li>
-      <li>🍽️ <b>Una cosa l'ho trovata io</b> rifacendo i conti: lunedì si mangia tre volte in quattro ore e poi più niente. Seconda domanda.</li>
-      <li>📱 <b>Domanda nuova:</b> come vuoi la guida da avere in mano durante il viaggio.</li>
+      <li>🕯️ <b>9/11 Memorial portato a 45 minuti</b>, come hai chiesto — <b>senza perdere il tramonto</b> a Little Island. Sotto ti spiego come.</li>
+      <li>🍸 <b>230 Fifth eliminato.</b> Sparisce anche la verifica sui minori: non c'è più niente da controllare.</li>
+      <li>😴 <b>Il venerdì parte alle 10:00</b> invece che alle 8:45, e finisce alla stessa ora: un'ora di sonno in più gratis.</li>
+      <li>🌉 <b>Sabato</b>: aggiunta <b>Bethesda Terrace</b> e ricalibrata la funivia di Roosevelt (2 ore erano troppe per una corsa di 5 minuti).</li>
+      <li>✅ <b>Tutte e sei le giornate sono approvate e ci stanno.</b></li>
+      <li>🌇 <b>Sul lunedì ho un dubbio e te lo giro:</b> al tramonto di Little Island si arriva con <b>8 minuti</b> di margine. Su una giornata di dodici tappe non è un margine. Ti ho preparato <b>quattro strade</b> in fondo — <b>scegli tu</b>, perché ognuna costa qualcosa.</li>
+      <li>🌭 <b>Nathan's aggiunto al martedì</b> — l'avevi chiesto il 24 luglio e non era mai finito in nessuna giornata. Venti minuti, sulla strada del rientro.</li>
+      <li>❓ <b>Resta una scelta</b>: dove si pranza sabato. E una prenotazione: il Top of the Rock.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
 
-  <!-- ============ LE DOMANDE — PRIMA DI TUTTO ============ -->
-  <h2>❓ Le cose che mi servono da te</h2>
-  <p class="muted" style="margin-top:0">Sono tre, e <b>nessuna blocca il viaggio</b>: il giro sta in piedi comunque. Ma su queste tre <b>non voglio indovinare</b>.</p>
-
-  <div class="knot" data-prop="Q1" data-label="Q1 - Antico Vinaio del sabato">
-    <div class="kt"><span class="kid">1</span>L'Antico Vinaio del sabato: non l'ho capita</div>
-    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
-      Mi hai scritto: <i>«Pranzo del sabato, dopo Central Park Antico Vinaio»</i>. Due cose non tornano, e invece di tirare a indovinare te le dico:<br><br>
-      • <b>All'Antico Vinaio è già il pranzo del martedì</b>, l'ultimo giorno, vicino all'hotel.<br>
-      • <b>Le sedi che trovo sono a Midtown e al Village</b> — nessuna vicino a Central Park, e il sabato a pranzo siamo dalle parti della 59ª.<br><br>
-      Quindi nei dati il sabato ha per ora <b>un «pranzo veloce» senza nome</b>. Dimmi tu quale delle tre.
-    </div>
-    <div class="chips" data-group="Q1">
-      <div class="chip yes" data-val="SI, ANCHE SABATO (sposto io la logistica)">🥪 Sì, lo voglio anche sabato</div>
-      <div class="chip maybe" data-val="NO, RESTA SOLO MARTEDI">🗓️ No, resta solo il martedì</div>
-      <div class="chip no" data-val="SCEGLI TU IL POSTO">🤷 Scegli tu un posto lì in zona</div>
-    </div>
-  </div>
-
-  <div class="knot" data-prop="Q2" data-label="Q2 - la cena del lunedi">
-    <div class="kt"><span class="kid">2</span>Lunedì si mangia tre volte, e poi più niente</div>
-    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
-      Questa l'ho trovata io rifacendo i conti, e non me l'aveva segnalata nessuno. Il lunedì, come è adesso:<br><br>
-      🥩 <b>Katz's</b> 13:06 &nbsp;→&nbsp; 🍕 <b>Joe's Pizza</b> 15:04 &nbsp;→&nbsp; 🍽️ <b>Chelsea Market</b> 16:34<br><br>
-      Tre soste da mangiare <b>in tre ore e mezza</b>, e poi il nulla: High Line, Little Island per il tramonto, e <b>si rientra alle 20:34 senza aver più mangiato dalle 17:34</b>. Con quattro ragazzi, quella è la sera in cui qualcuno ha fame alle nove.<br><br>
-      Il Chelsea Market alle 16:34 <b>non è una cena, è una merenda</b> — chiamiamola col suo nome. Tre strade:<br><br>
-      <b>🌙 A - Merenda al Chelsea Market, cena vera dopo il tramonto</b><br>Si rientra verso Midtown e si cena vicino all'hotel dopo Little Island. Costo: si mangia tardi, verso le 21.<br><br>
-      <b>✂️ B - Via Joe's Pizza dal lunedì</b><br>Si toglie la fetta (35 minuti) e il Chelsea Market slitta più tardi, diventando una cena vera. <b>Costo: Joe's è il must-do di Giulio.</b><br><br>
-      <b>👍 C - Va bene così</b><br>Si mangia tanto nel pomeriggio, e la sera basta un gelato.
-    </div>
-    <div class="chips" data-group="Q2">
-      <div class="chip yes" data-val="A - CENA VERA DOPO IL TRAMONTO">🌙 A - Cena dopo Little Island</div>
-      <div class="chip maybe" data-val="B - VIA JOE'S PIZZA">✂️ B - Via Joe's Pizza</div>
-      <div class="chip no" data-val="C - VA BENE COSI">👍 C - Va bene così</div>
-    </div>
-  </div>
-
-  <div class="knot" data-prop="Q3" data-label="Q3 - come vuoi la guida">
-    <div class="kt"><span class="kid">3</span>Come la vuoi, la guida in viaggio?</div>
-    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
-      Adesso tocca a me scrivere <b>la cosa che vi portate dietro</b>: giorno per giorno, ora per ora, con gli indirizzi. Prima di farla, dimmi in che forma la vuoi — cambia parecchio come la costruisco.<br><br>
-      <b>📄 PDF</b> — si scarica, si legge senza rete, si stampa. Ma è fermo: se cambia qualcosa, ne mando un altro.<br><br>
-      <b>🌐 Pagina web</b> — sempre aggiornata, si apre col link. Ma serve la rete (o il salvataggio offline del telefono).<br><br>
-      <b>🗺️ Mappe di Google</b> — le tappe già dentro come liste salvate, una per giornata: si aprono nel navigatore anche senza rete. È il pezzo più utile <i>sul posto</i>, e si aggiunge agli altri due.
-    </div>
-    <div class="chips" data-group="Q3">
-      <div class="chip yes" data-val="PDF">📄 PDF</div>
-      <div class="chip maybe" data-val="PAGINA WEB">🌐 Pagina web</div>
-      <div class="chip maybe" data-val="MAPPE GOOGLE">🗺️ Mappe di Google</div>
-      <div class="chip no" data-val="TUTTE E TRE">✨ Tutte e tre</div>
-    </div>
-  </div>
-
-  <!-- ============ COSA HO FATTO ============ -->
-  <h2>✅ Cosa ho fatto con le tue ultime risposte</h2>
-  <p class="muted" style="margin-top:0">Quelle di stamattina. Tutte applicate, e il calcolo rifatto da zero su tutte e sei le giornate.</p>
+  <!-- ============ COSA HO FATTO CON LE TUE RISPOSTE ============ -->
+  <h2>✅ Cosa ho fatto con le tue risposte</h2>
+  <p class="muted" style="margin-top:0">Le tre di stamattina.</p>
   <div class="applied">
     <h3>Applicato</h3>
-    <div class="arow"><span class="ai">😴</span><span class="an"><b>Lunedì: opzione A</b><small>Sveglia alle 8:00, Little Island 45 minuti. Ci si arriva alle <b>19:17</b>, il tramonto è alle <b>19:55</b>, si riparte alle <b>20:02</b>: <b>il tramonto cade dentro la sosta</b>, non ai bordi. Rientro <b>20:34</b>, esattamente come prima.</small></span></div>
-    <div class="arow"><span class="ai">🏙️</span><span class="an"><b>Top of the Rock: martedì 9:30</b><small>Da ipotesi a <b>vincolo vero</b>, come il Summit. La giornata chiude alle <b>16:11</b>, con <b>1h19</b> di margine prima di uscire per JFK. Nessuna prenotazione più aperta.</small></span></div>
-    <div class="arow"><span class="ai">🍬</span><span class="an"><b>Sabato: pranzo veloce + Dylan's</b><small>Niente Serendipity, niente code. Dylan's entra alle <b>12:58</b>, subito dopo la pausa fresca. Il sabato chiude alle <b>19:41</b>, con quasi due ore di margine.</small></span></div>
-    <div class="arow"><span class="ai">🌇</span><span class="an"><b>Il tramonto adesso lo controlla il computer</b><small>Ho insegnato al calcolo cos'è un tramonto: se una modifica futura ci fa arrivare tardi a Little Island, <b>lo dice da solo</b> invece di lasciarcelo scoprire lì.</small></span></div>
+    <div class="arow"><span class="ai">🕯️</span><span class="an"><b>9/11 Memorial: 45 minuti</b><small>Avevi ragione tu, quindici erano pochi. <b>E il tramonto a Little Island non si è perso</b> — spiegato nella giornata di lunedì.</small></span></div>
+    <div class="arow"><span class="ai">🍸</span><span class="an"><b>230 Fifth: lasciato perdere</b><small>Fuori dal venerdì. Sparisce anche la verifica sui minori, che era l'ultima cosa in sospeso.</small></span></div>
+    <div class="arow"><span class="ai">📅</span><span class="an"><b>Sabato approvato</b><small>Aggiunta <b>Bethesda Terrace</b>. Per il pranzo ti chiedo di scegliere in fondo.</small></span></div>
+    <div class="arow"><span class="ai">😴</span><span class="an"><b>Venerdì: si parte alle 10:00</b><small>Non l'avevi chiesto, ma togliendo il 230 Fifth restavano due ore di attesa prima del Summit. Meglio dormire.</small></span></div>
   </div>
 
   <!-- ============ DOVE SIAMO ============ -->
   <h2>🎯 Dove siamo arrivati</h2>
   <div class="flip">
-    <h3>La logistica è chiusa</h3>
-    <p style="margin-top:0">Quattro giri fa c'erano <b>due giornate che finivano all'una di notte</b>, il <b>Summit</b> già pagato si perdeva di un'ora e mezza, e il <b>tramonto</b> a Little Island si mancava di un'ora e mezza. Adesso: <b>nessuna giornata sfora</b>, il Summit si prende alle 19:00 in punto, il tramonto si guarda da seduti, il ponte di Brooklyn non si attraversa più nell'ora peggiore, e ogni giorno ha un pranzo e una cena a un'ora sensata — <b>tranne il lunedì, ed è la domanda 2 qui sopra</b>.</p>
-    <p style="margin-bottom:0"><b>E l'itinerario definitivo è scritto.</b></p>
+    <h3>Sei giornate su sei, tutte in piedi</h3>
+    <p style="margin-top:0">Tre giri fa ce n'erano <b>due che finivano all'una di notte</b>, il <b>Summit</b> già pagato si perdeva di un'ora e mezza, e il <b>tramonto</b> a Little Island si mancava di un'ora e mezza. Adesso: nessuna giornata sfora, il Summit si prende alle 19:00 in punto, il tramonto alle 19:47, il ponte di Brooklyn non si attraversa più nell'ora più calda, e ogni giorno ha un pranzo e una cena a un'ora sensata.</p>
+    <p style="margin-bottom:0"><b>Manca una scelta e una prenotazione.</b> Poi scrivo l'itinerario definitivo.</p>
   </div>
 
-  <div class="card">
-    <h3 style="margin-top:0">📖 Cos'è l'itinerario definitivo, e cosa arriva dopo</h3>
-    <p style="margin-top:.4em">Ho fatto una scelta e te la dico, perché cambia cosa ti arriva in mano.</p>
-    <p><b>L'itinerario</b> racconta il <b>perché</b>: perché ogni giornata sta in un quartiere, com'è costruito il ritmo contro il caldo, perché quella tappa è lì e non altrove, e <b>cosa c'è dentro per ciascuno degli otto</b> — uno per uno, col suo nome.</p>
-    <p><b>Gli orari non stanno lì dentro.</b> Stanno nel calcolo, e da lì nasce <b>la guida che vi portate in viaggio</b>: giorno per giorno, ora per ora, con gli indirizzi. Sono due cose separate <b>apposta</b>: negli ultimi cinque giri di correzioni <b>hai cambiato solo orari, mai il racconto</b>. Tenendoli separati, un tuo ripensamento sposta un numero e la guida si rifà da sola — invece di riscrivere venti pagine e sbagliarne una.</p>
-    <p style="margin-bottom:0">👉 <b>La guida è il prossimo pezzo</b>, ed è la <b>domanda 3</b> qui sopra: dimmi in che forma la vuoi.</p>
-  </div>
-
-  <!-- ============ TUTTO PRENOTATO ============ -->
-  <div class="sol" style="margin:13px 0">
-    <h4>📋 Prenotazioni: non ne resta nessuna aperta</h4>
-    <div style="font-size:.89rem">
-      🔒 <b>Summit One Vanderbilt</b> — ven 14, ore 19:00 · pagato<br>
-      🔒 <b>Top of the Rock</b> — mar 18, ore 9:30 · nel pass Go City<br>
-      🔒 <b>MoMA</b> — ven 14 · comprato a parte, ragazzi gratis<br>
-      🔒 <b>Bici a Central Park</b> — sab 15 mattina · nel pass Go City<br>
-      🚌 <b>Big Bus 2 giorni</b> — sab + dom · nel pass Go City
+  <!-- ============ PRENOTAZIONI ============ -->
+  <div class="book">
+    <h3>📋 È rimasta una sola prenotazione</h3>
+    <p style="margin-top:0; font-size:.89rem">Il Guggenheim è uscito dalla lista (lo vediamo da fuori). Resta questa.</p>
+    <div class="bkitem" data-bk="Top of the Rock">
+      <div class="bt">🏙️ Top of the Rock — martedì mattina (incluso nel pass Go City)</div>
+      <div class="bw">🟢 <b>Ancora meglio di ieri:</b> togliendo Junior's il martedì ha <b>2 ore e 23 di margine</b>. Lo slot <b>non ha più nessun vincolo di orario</b>: va bene qualunque ora della mattina. Ad agosto però vanno via in fretta — prendilo quando puoi e scrivimi giorno e ora.</div>
+      <div class="bkrow">
+        <input class="bkday" type="text" placeholder="giorno (es. mar 18)">
+        <input class="bktime" type="text" placeholder="ora (es. 09:30)">
+      </div>
     </div>
-    <div class="res2">➜ Non devi prenotare più niente. L'unica cosa che verifico io è qui sotto.</div>
   </div>
 
-  <!-- ============ COSE CHE VERIFICO IO ============ -->
-  <h2>🔎 Tre cose che verifico io prima di partire</h2>
-  <p class="muted" style="margin-top:0">Non ti chiedono niente. Te le scrivo perché <b>sono le cose che potrebbero cambiare da qui ad agosto</b>, e voglio che sia chiaro che le sto guardando.</p>
-  <div class="card">
-    <div class="princ"><span class="ic">🚲</span><div><b>Il noleggio bici del pass chiede un orario?</b><br><small class="muted">Il Go City dice solo «incluso». Se invece vuole uno slot prenotato, il sabato mattina va fissato. Lo verifico e ti dico.</small></div></div>
-    <div class="princ"><span class="ic">🚌</span><div><b>Il giro di Brooklyn del Big Bus è sospeso fino al 31 agosto</b><br><small class="muted">Per questo a Dumbo ci andiamo <b>a piedi sul ponte</b> e torniamo in taxi. Ricontrollo a ridosso: se lo riattivano, la domenica si semplifica.</small></div></div>
-    <div class="princ"><span class="ic">🌇</span><div><b>L'ora esatta del tramonto</b><br><small class="muted">Ho usato <b>19:55</b> per il 17 agosto. È il numero attorno a cui gira tutto il lunedì: lo riverifico sotto data, e se si sposta il calcolo lo sa già.</small></div></div>
-  </div>
-
-  <!-- ============ AEROPORTO ============ -->
+  <!-- ============ AEROPORTO: AGLI ATTI ============ -->
   <div class="locked">
-    🔒 <b>Partenza agli atti:</b> martedì 18, <b>si esce dall'hotel alle 17:30</b> per <b>JFK</b> (volo 22:00). L'ultimo giorno è calcolato su questo, e chiude alle 16:11 — <b>un'ora e venti di margine</b>.
-    <div style="margin-top:8px">🚐 <b>Una cosa che non mi hai ancora detto:</b> con 8 persone e i bagagli servono <b>2 taxi</b> (~$180, e devono partire insieme). Un <b>van prenotato</b> costa meno e parte una volta sola. Te lo cerco?</div>
-    <div class="chips" data-group="VAN" style="margin-top:9px">
-      <div class="chip yes" data-val="CERCAMI IL VAN">🚐 Sì, cercamelo</div>
-      <div class="chip no" data-val="NO, FACCIAMO 2 TAXI">🚕 No, facciamo 2 taxi</div>
+    🔒 <b>Partenza messa agli atti:</b> martedì 18, <b>si esce dall'hotel alle 17:30</b> per <b>JFK</b> (volo 22:00). L'ultimo giorno è calcolato su questo. Con 8 persone e i bagagli conviene un <b>van prenotato</b> invece di 2 taxi (~$180 di taxi, e devono partire insieme): se confermi l'orario te lo cerco.
+    <div class="chips" data-group="AP" style="margin-top:9px">
+      <div class="chip yes" data-val="CONFERMO 17:30 JFK">✅ Confermo</div>
+      <div class="chip maybe" data-val="CAMBIA ORARIO">✏️ Cambia orario</div>
+      <div class="chip no" data-val="CERCAMI IL VAN">🚐 Cercami il van</div>
     </div>
   </div>
 
@@ -350,52 +282,98 @@
   <div class="card">
     <div class="proc"><span class="pn">1</span><div>Bozza dell'itinerario &amp; questionari. ✅</div></div>
     <div class="proc"><span class="pn">2</span><div>Le tue decisioni integrate. ✅</div></div>
-    <div class="proc"><span class="pn">3</span><div>Verifica dei tempi — primo giro. ✅</div></div>
-    <div class="proc"><span class="pn">4</span><div>Secondo, terzo e quarto giro sui tuoi numeri. ✅</div></div>
-    <div class="proc"><span class="pn">5</span><div>Itinerario definitivo. ✅ <b>scritto</b></div></div>
-    <div class="proc now"><span class="pn">6</span><div><b>La guida da portare in viaggio</b> + i giochi per i ragazzi. <span class="youare">👈 siamo qui</span></div></div>
-    <p class="muted" style="margin:11px 0 0">Le tre domande qui sopra <b>non bloccano</b> la guida: la scrivo comunque, e le tue risposte ci entrano quando arrivano.</p>
+    <div class="proc"><span class="pn">3</span><div>Verifica dei tempi — <b>primo giro</b>. ✅</div></div>
+    <div class="proc now"><span class="pn">4</span><div><b>Secondo giro, sui tuoi numeri.</b> <span class="youare">👈 siamo qui</span></div></div>
+    <div class="proc"><span class="pn">5</span><div>Itinerario definitivo (v2.2).</div></div>
+    <div class="proc"><span class="pn">6</span><div>Guida personalizzata + lista prenotazioni.</div></div>
+    <p class="muted" style="margin:11px 0 0">Restano <b>quattro nodi</b> da sciogliere, tutti in fondo a questa pagina. Sciolti quelli, si scrive l'itinerario definitivo.</p>
+  </div>
+
+  <!-- ============ BLOCCHI ============ -->
+  <h2>⏱️ I blocchi di tempo — adesso sono i tuoi</h2>
+  <div class="card">
+    <p style="margin-top:0">Questi sono i valori con cui ho rifatto il calcolo. <b>Quelli che hai cambiato tu sono già dentro.</b> Se ne vuoi ritoccare ancora uno, tocca ✏️.</p>
+    <div id="slotlist"></div>
+    <div class="recalc" style="margin-bottom:0">
+      ⚙️ <b>Ogni blocco che cambi fa rigirare tutto il calcolo</b> e sposta i punteggi di ogni giornata che contiene quel tipo di attività. Mandamelo e ti rimando la versione aggiornata.
+    </div>
   </div>
 
   <!-- ============ IL QUADRO ============ -->
-  <h2>🚦 Il quadro dei 6 giorni</h2>
+  <h2>🚦 Il quadro dei 6 giorni, adesso</h2>
   <div class="card">
     <div class="summ" id="summary"></div>
-    <p class="muted" style="margin:12px 0 0"><b>Nessuna giornata è rossa.</b> Il venerdì è al 100% solo perché il Summit alle 19:00 più due ore di terrazza più la cena <b>non stanno</b> in una giornata che finisce alle 21:30 — per quello il traguardo del venerdì è alle <b>22:30</b>. Non è un difetto: è aritmetica.</p>
+    <p class="muted" style="margin:12px 0 0"><b>Nessuna giornata è più rossa.</b> Il venerdì è al 100% solo perché il Summit alle 19:00 più due ore di terrazza più la cena <b>non stanno</b> in una giornata che finisce alle 21:30 — quindi per il venerdì ho spostato il traguardo alle <b>22:30</b>. Non è un difetto da correggere: è aritmetica.</p>
   </div>
 
   <!-- ============ GIORNI ============ -->
   <h2>📅 Giorno per giorno</h2>
-  <p class="muted" style="margin-top:0">Ogni giornata con <b>le sue tappe vere</b>, nell'ordine e con gli orari veri — <b>presi dal calcolo, non riscritti a mano</b>. Sono tutte approvate da te: qui sotto ci sono solo per controllo. <b>Se una non ti torna più</b>, tocca ✏️ e dimmi cosa cambieresti.</p>
+  <p class="muted" style="margin-top:0">Ogni giornata con <b>le sue tappe vere</b>, nell'ordine e con gli orari veri. Per ognuna: cosa ho trovato, cosa propongo, e i tre pulsanti.</p>
 
   <div id="days"></div>
 
-  <!-- ============ BLOCCHI ============ -->
-  <h2>⏱️ I blocchi di tempo — sono i tuoi</h2>
-  <div class="card">
-    <p style="margin-top:0">Questi sono i valori con cui è fatto il calcolo, <b>quelli che hai scelto tu</b>. Li lascio qui perché se uno ti sembra ancora sbagliato, si cambia — tocca ✏️.</p>
-    <div id="slotlist"></div>
-    <div class="recalc" style="margin-bottom:0">
-      ⚙️ <b>Ogni blocco che cambi fa rigirare tutto il calcolo</b> e sposta gli orari di ogni giornata che contiene quel tipo di attività. Mandamelo e ti rimando la versione aggiornata.
+  <!-- ============ I NODI ============ -->
+  <h2>🌇 Il lunedi: come vuoi risolvere il tramonto?</h2>
+  <p class="muted" style="margin-top:0">Te lo chiedo invece di deciderlo io, perche' <b>ognuna di queste costa qualcosa</b> - a te, alla serata o a Barbara. Non e' una scelta tecnica.</p>
+
+  <div class="knot" data-prop="M1" data-label="M1 - margine sul tramonto del lunedi">
+    <div class="kt"><span class="kid">!</span>Si arriva a Little Island con 8 minuti di margine</div>
+    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
+      Arrivo <b>19:47</b>, tramonto <b>19:55</b>. Tecnicamente ci siamo. Ma dopo dodici tappe e dodici ore, in otto, <b>otto minuti se li mangia una coda</b>. E con quindici minuti di sosta si arriva otto minuti prima e si riparte sette dopo: il tramonto lo si vede, ma non lo si guarda.<br><br>
+      <b>😴 A - Sveglia mezz'ora prima (8:00)</b><br>Si arriva alle <b>19:17</b>, quaranta minuti di margine, e ci si sta <b>45 minuti</b>. <b>La giornata finisce alla stessa ora di adesso (20:34).</b> Costo: mezz'ora di sonno a tutti.<br><br>
+      <b>🌙 B - Stessa sveglia, si torna piu' tardi</b><br>Sosta a 45 minuti senza anticipare: si rientra alle <b>21:04</b> invece che alle 20:34. Ma si arriva sempre a ridosso, quindi <b>il rischio resta</b>.<br><br>
+      <b>✂️ C - Stessa sveglia, si toglie una tappa</b><br>Via <b>Sex and the City</b> (Magnolia + la scalinata di Carrie): si arriva alle <b>19:25</b> con mezz'ora di margine e si rientra alle 20:41. <b>Costo: e' la tappa di Barbara.</b><br><br>
+      <b>👍 D - Va bene cosi'</b><br>Otto minuti bastano, si rischia.
+    </div>
+    <div class="chips" data-group="M1">
+      <div class="chip yes" data-val="A - SVEGLIA ALLE 8:00">😴 A - Sveglia alle 8:00</div>
+      <div class="chip maybe" data-val="B - RIENTRO ALLE 21:04">🌙 B - Rientro piu' tardi</div>
+      <div class="chip maybe" data-val="C - VIA SEX AND THE CITY">✂️ C - Via Sex and the City</div>
+      <div class="chip no" data-val="D - VA BENE COSI">👍 D - Va bene cosi'</div>
+    </div>
+  </div>
+
+  <h2>🍽️ L'ultima scelta: dove si pranza sabato</h2>
+  <p class="muted" style="margin-top:0">È l'unica casella rimasta vuota in tutto il giro.</p>
+
+  <div class="knot" data-prop="L1" data-label="L1 - pranzo del sabato">
+    <div class="kt"><span class="kid">1</span>Il pranzo del sabato, dopo le bici</div>
+    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
+      <b>🍨 Serendipity 3</b> (225 E 60th, accanto a Bloomingdale's) — iconico, la <i>frozen hot chocolate</i> è una calamita per i ragazzi, e fanno anche piatti salati. <b>⚠️ Il rischio sono le code:</b> in otto può voler dire aspettare parecchio, e va verificato se prenotano per un gruppo.<br><br>
+      <b>🥪 Pranzo veloce lì vicino</b> — aria condizionata, zero attesa, si riparte subito. Meno memorabile, ma nessun rischio in piedi al sole con quattro ragazzi affamati.
+    </div>
+    <div class="chips" data-group="L1">
+      <div class="chip yes" data-val="SERENDIPITY 3">🍨 Serendipity 3</div>
+      <div class="chip maybe" data-val="PRANZO VELOCE">🥪 Veloce, senza code</div>
+      <div class="chip no" data-val="DECIDI TU">🤷 Decidi tu</div>
+    </div>
+  </div>
+
+  <div class="knot" data-prop="L2" data-label="L2 - Dylan's Candy Bar">
+    <div class="kt"><span class="kid">2</span>Ci aggiungo Dylan's Candy Bar?</div>
+    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">Tre piani di caramelle sulla 3ª & 60th, ingresso gratis, accanto a Bloomingdale's. Ci sta comodamente nella giornata. <b>Ma se scegli Serendipity è troppo zucchero in un'ora sola:</b> o l'uno o l'altro.</div>
+    <div class="chips" data-group="L2">
+      <div class="chip yes" data-val="SI">🍬 Sì, aggiungilo</div>
+      <div class="chip no" data-val="NO">🙅 No, basta così</div>
     </div>
   </div>
 
   <!-- ===================== FREE ===================== -->
   <h2>💬 Altro da dirmi?</h2>
   <div class="card">
-    <p class="muted" style="margin-top:0">Qualsiasi cosa: una tappa che manca, un ordine da girare, una cosa che ti sei ricordato adesso. Anche una richiesta di uno degli altri sette.</p>
+    <p class="muted" style="margin-top:0">Qualsiasi cosa: un blocco che ti sembra ancora sbagliato, un ordine da girare, una tappa che manca.</p>
     <textarea class="free" id="openText" placeholder="Spazio libero..."></textarea>
   </div>
 
   <div class="footer">
-    Analisi logistica v6 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v3 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
 
 <div class="bar">
   <div class="in">
-    <div class="status" id="statusLine">3 domande da rispondere 👆</div>
+    <div class="status" id="statusLine">2 scelte da fare 👆</div>
     <button class="send" id="sendBtn">📲 Invia su WhatsApp</button>
   </div>
 </div>
@@ -428,7 +406,7 @@ var DAYS = [
  {
   "id": "g1",
   "name": "Giorno 1 · Gio 13",
-  "zone": "Midtown - arrivo",
+  "zone": "Midtown — arrivo",
   "pct": 89,
   "verd": "ok",
   "out": "19:00",
@@ -535,11 +513,11 @@ var DAYS = [
   "id": "g3",
   "name": "Giorno 3 · Sab 15",
   "zone": "Central Park & Uptown",
-  "pct": 86,
+  "pct": 87,
   "verd": "ok",
   "out": "08:45",
   "back": "21:30",
-  "end": "19:41",
+  "end": "19:49",
   "stops": [
    {
     "n": "Bici a Central Park (noleggio 59th)",
@@ -558,21 +536,14 @@ var DAYS = [
     "n": "Pausa AC + shopping (Bloomingdale's / Apple UES)",
     "i": "🛍️",
     "s": "negozio ~20 min",
-    "m": 27,
-    "opt": true
-   },
-   {
-    "n": "Dylan's Candy Bar (3rd Ave & 60th)",
-    "i": "🛍️",
-    "s": "negozio ~20 min",
     "m": 28,
     "opt": true
    },
    {
-    "n": "Pranzo veloce (zona 59th)",
+    "n": "Pranzo (zona 59th / Bloomingdale's)",
     "i": "🍽️",
-    "s": "pasto ~40 min",
-    "m": 48
+    "s": "pasto ~1h15",
+    "m": 82
    },
    {
     "n": "Met steps (Gossip Girl) + Museum Mile",
@@ -689,7 +660,7 @@ var DAYS = [
   "zone": "FiDi → Village → West Side",
   "pct": 93,
   "verd": "warn",
-  "out": "08:00",
+  "out": "08:30",
   "back": "21:30",
   "end": "20:34",
   "stops": [
@@ -756,8 +727,8 @@ var DAYS = [
    {
     "n": "Little Island (tramonto)",
     "i": "📸",
-    "s": "foto ~45 min",
-    "m": 73
+    "s": "foto ~15 min",
+    "m": 43
    },
    {
     "n": "Rientro hotel",
@@ -770,19 +741,19 @@ var DAYS = [
  {
   "id": "g6",
   "name": "Giorno 6 · Mar 18",
-  "zone": "Midtown / West Side + partenza",
-  "pct": 85,
+  "zone": "Midtown / West Side — partenza",
+  "pct": 80,
   "verd": "ok",
   "out": "08:30",
   "back": "17:30",
-  "end": "16:11",
+  "end": "15:41",
   "stops": [
    {
     "n": "Top of the Rock (mattina)",
     "i": "🏙️",
     "s": "terrazza ~2h",
     "m": 144,
-    "fixed": "09:30"
+    "todo": "DA PRENOTARE"
    },
    {
     "n": "Vessel + Hudson Yards",
@@ -813,7 +784,7 @@ var DAYS = [
    {
     "n": "Rientro hotel + bagagli",
     "i": "🚶",
-    "s": "rientro",
+    "s": "giro ~45 min",
     "m": 56
    }
   ]
@@ -823,41 +794,43 @@ var DAYS = [
 /* prosa per giornata (scritta a mano, i numeri vengono dal motore) */
 var TEXT = {
   g1: {
-    sub: "Serata di arrivo. Approvata, invariata.",
-    probs: ["Si rientra alle <b>22:33</b>, col fuso a favore: nessuno andrà a letto presto comunque."],
-    sol: "✅ Chiusa. Niente da decidere.",
-    solres: "➜ 19:00 → 22:33."
+    sub:'Serata di arrivo. Approvata.',
+    probs:['Si rientra alle <b>22:33</b>, col fuso a favore.'],
+    sol:'✅ Chiusa. Niente da decidere.',
+    solres:'➜ A posto.'
   },
   g2: {
-    sub: "Il Summit. Si parte comodi alle 10:00.",
-    probs: ["Il <b>230 Fifth</b> è fuori, come hai detto — e con lui è sparita anche la verifica sui minori."],
-    sol: "La partenza è alle <b>10:00</b> invece che alle 8:45, e la giornata finisce <b>alla stessa ora</b>: è il Summit ad ancorarla, quindi partire prima avrebbe solo aggiunto attesa. Un'ora di sonno in più che non costa niente.",
-    solres: "➜ 10:00 → 22:27. Summit alle 19:00 in punto."
+    sub:'Il Summit. Adesso si parte anche un\'ora dopo.',
+    probs:['Hai tolto il <b>230 Fifth</b>: giusto, e ha risolto anche la verifica sui minori — non c\'è più niente da controllare.',
+           'Però toglierlo lasciava <b>due ore di attesa morta</b> prima del Summit: il Summit è alle 19:00 e non si sposta, quindi il tempo liberato diventava tempo perso in piedi.'],
+    sol:'Ho spostato la <b>partenza dalle 08:45 alle 10:00</b>. La giornata finisce <b>alla stessa ora di prima</b> (22:27), perché è il Summit ad ancorarla: è un\'ora di sonno in più che non costa niente.',
+    solres:'➜ 10:00 → 22:27. Summit alle 19:00 in punto.'
   },
   g3: {
-    sub: "Pranzo veloce e Dylan's, come hai scelto.",
-    probs: ["Il pranzo è <b>l'unica casella ancora senza nome</b> in tutto il giro — è la domanda 1 in cima."],
-    sol: "Niente Serendipity, niente code: <b>pranzo veloce</b> in zona 59ª e <b>Dylan's Candy Bar</b> subito prima, nella pausa fresca. Restano dentro Bethesda Terrace e la funivia di Roosevelt.",
-    solres: "➜ 08:45 → 19:41, con <b>1h49</b> di margine."
+    sub:'Approvata. Mi avevi chiesto di proporre pranzo e attività — ecco.',
+    probs:['Il blocco del pranzo era lì ma <b>senza un nome</b>: era quello che mancava davvero.'],
+    sol:'Aggiunto <b>Bethesda Terrace + Bow Bridge</b> (gratis: è il punto più fotografato di Central Park, e in bici ci passiamo senza fermarci). E ho <b>ricalibrato la funivia di Roosevelt da 2 ore a 45 minuti</b> — la corsa dura cinque minuti per tratta, due ore erano una sovrastima grossa. Per il pranzo ti chiedo di scegliere qui sotto.',
+    solres:'➜ 08:45 → 19:49, con più di un\'ora e mezza di margine.'
   },
   g4: {
-    sub: "Approvata, invariata.",
-    probs: ["Ponte alle 15:22, fuori dall'ora peggiore. Dumbo nella luce buona, cena coi ponti davanti."],
-    sol: "✅ Chiusa.",
-    solres: "➜ 10:30 → 20:10, con 1h20 di margine."
+    sub:'Approvata, invariata.',
+    probs:['Ponte alle 15:22, fuori dall\'ora peggiore. Dumbo nella luce buona.'],
+    sol:'✅ Chiusa.',
+    solres:'➜ 10:30 → 20:10.'
   },
   g5: {
-    sub: "Il tramonto adesso è preso bene. Ma c'è una cosa sui pasti.",
-    probs: ["Hai scelto la <b>A</b>: sveglia alle 8:00 e Little Island 45 minuti."],
-    sol: "Ci si arriva alle <b>19:17</b>, il tramonto è alle <b>19:55</b>, si riparte alle <b>20:02</b>. Il tramonto <b>cade dentro la sosta</b> con 38 minuti di margine, invece di sfiorarla per otto. E la giornata finisce alle 20:34, <b>alla stessa ora di prima</b>.",
-    solres: "➜ 08:00 → 20:34. Tramonto guardato da seduti.",
-    warn: "🍽️ <b>Ma rifacendo i conti ne ho trovata un'altra, e non è tua: è mia.</b> Katz's alle 13:06, Joe's Pizza alle 15:04, Chelsea Market alle 16:34 — <b>tre soste da mangiare in tre ore e mezza</b>, e poi più niente fino al rientro alle 20:34. Quel Chelsea Market <b>non è una cena, è una merenda</b>. È la <b>domanda 2</b> in cima alla pagina."
+    sub:'La giornata che il tuo 9/11 a 45 minuti ha rimesso in discussione.',
+    probs:['Avevo scritto che alzare quella durata avrebbe fatto saltare il tramonto. È successo esattamente: <b>si arrivava a Little Island alle 20:17</b>, con il tramonto alle 19:55.'],
+    sol:"<b>Non ho tolto niente.</b> Ho corretto una stima sbagliata nell'altra direzione: il <b>traghetto di Staten Island</b> non dura due ore ma <b>un'ora e mezza</b> (cinquanta minuti di navigazione più le attese). I trenta minuti recuperati sono esattamente quelli che il Memorial portava via.",
+    solres:"➜ 9/11 Memorial 45 minuti E tramonto a Little Island. Tutti e due.",
+    warn:"⚠️ <b>Ma resta un problema, e la decisione è tua.</b> Si arriva a Little Island alle <b>19:47</b> e il tramonto è alle <b>19:55</b>: <b>otto minuti</b>. Su una giornata di dodici tappe e dodici ore, in otto persone, otto minuti se li mangia una coda da Katz's o un taxi che tarda. Non è un margine, è un arrotondamento.<br><br>Ci sono <b>quattro strade</b> e <b>ognuna costa qualcosa a qualcuno</b>, quindi non le scelgo io: le trovi in fondo alla pagina."
   },
   g6: {
-    sub: "Ultimo giorno. Top of the Rock alle 9:30, prenotato.",
-    probs: ["Con lo slot delle 9:30 la giornata chiude alle <b>16:11</b>: <b>1h19</b> di margine prima di uscire per JFK, comodo anche coi bagagli."],
-    sol: "Dentro c'è tutto: Top of the Rock, Vessel, l'Antico Vinaio a pranzo, gli ultimi acquisti, e <b>Nathan's</b> — che avevi chiesto il 24 luglio e che fino a ieri non era finito in nessuna giornata.",
-    solres: "➜ 08:30 → 16:11, si esce alle 17:30."
+    sub:"Ultimo giorno. Approvato — e qui rientra Nathan's.",
+    probs:["Chiude con <b>quasi due ore di margine</b> prima di uscire per JFK.",
+           "🌭 <b>Nathan's l'avevi chiesto il 24 luglio</b> e non era mai finito in nessuna giornata: me ne sono accorto rileggendo. Messo qui, fra gli ultimi acquisti e il rientro — venti minuti, non un pasto."],
+    sol:'✅ Chiusa. Resta solo da <b>prenotare il Top of the Rock</b>, e va bene qualunque ora della mattina.',
+    solres:'➜ Rientro 15:07, si esce alle 17:30.'
   }
 };
 </script>
@@ -948,8 +921,9 @@ DAYS.forEach(function(d){
   h += '<div class="sol"><h4>💡 Cosa propongo</h4><div>' + (T.sol || '') + '</div>' +
        '<div class="res2">' + (T.solres || '') + '</div>' +
        '<div class="appr">' +
-       '<button class="ab again" type="button" data-val="RIFAI PROPOSTA">🔄 Ho cambiato idea — rifammela<small>ti mando una soluzione diversa per questa giornata</small></button>' +
-       '<button class="ab edit" type="button" data-val="SBLOCCA EDIT">✏️ Sblocco io e tolgo qualcosa<small>tocca le tappe da togliere e spiegami sotto il perché</small></button>' +
+       '<button class="ab yes" type="button" data-val="APPROVATA">✅ Va bene così</button>' +
+       '<button class="ab again" type="button" data-val="RIFAI PROPOSTA">🔄 Non mi convince — proponimene un\'altra<small>ti mando una soluzione diversa per questa giornata</small></button>' +
+       '<button class="ab edit" type="button" data-val="SBLOCCA EDIT">✏️ Sblocco io e modifico<small>togli le tappe che vuoi e spiegami sotto il perché</small></button>' +
        '</div></div>';
 
   if(T.warn){ h += '<div class="note">' + T.warn + '</div>'; }
@@ -971,6 +945,15 @@ DAYS.forEach(function(d){
   el.innerHTML = h;
   wrapDays.appendChild(el);
 });
+
+/* il sabato parte già sbloccato: e' quello che ha chiesto */
+(function(){
+  var sab = document.getElementById('g3');
+  if(sab){
+    sab.classList.add('editing');
+    sab.querySelector('.editbtn').textContent = '✓ Fine';
+  }
+})();
 
 /* ---------- editing righe ---------- */
 document.querySelectorAll('.er .eb').forEach(function(btn){
@@ -1071,16 +1054,14 @@ document.querySelectorAll('.chips[data-group]').forEach(function(group){
 function updateStatus(){
   var n = 0;
   Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) n++; });
-  var asked = ['Q1','Q2','Q3'];
-  var answered = asked.filter(function(k){ return sel[k]; }).length;
+  var knots = ['M1','L1','L2'].filter(function(k){ return sel[k]; }).length;
   var edits = Object.keys(slotOverride).length;
   var t = [];
-  if(answered) t.push(answered + ' risposte su ' + asked.length);
-  if(sel['VAN']) t.push('van deciso');
-  if(n) t.push(n + ' giornate da rivedere');
+  if(knots) t.push(knots + ' nodi sciolti');
+  if(n) t.push(n + ' giornate decise');
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
-    t.length ? (t.join(' · ') + ' — invia quando vuoi') : '3 domande da rispondere 👆';
+    t.length ? (t.join(' · ') + ' — invia quando vuoi') : '2 scelte da fare 👆';
 }
 
 /* ============================================================
@@ -1092,9 +1073,9 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v6',
+  ver:   'v5.3',
   built: '2026-07-29',
-  plan:  'itinerario v2.2 + D47 - logistica chiusa, 6/6 approvate, tutto prenotato',
+  plan:  'piano completo D43 - tutte e 6 le giornate approvate',
   stale: ''                      /* valorizzare quando la pagina resta indietro */
 };
 
@@ -1112,22 +1093,31 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v6: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v3: risposta di Fabrizio');
 
-  var q = [];
-  if(sel['Q1']) q.push("   - Antico Vinaio del sabato: " + sel['Q1']);
-  if(sel['Q2']) q.push("   - Cena del lunedi: " + sel['Q2']);
-  if(sel['Q3']) q.push("   - Come vuole la guida: " + sel['Q3']);
-  if(q.length){ L.push(''); L.push('❓ LE TRE DOMANDE:'); q.forEach(function(x){ L.push(x); }); }
+  if(sel['AP']){ L.push(''); L.push('🛫 PARTENZA (mar 18, JFK, volo 22:00): ' + sel['AP']); }
 
-  if(sel['VAN']){ L.push(''); L.push('🚐 VAN PER JFK (mar 18, uscita 17:30): ' + sel['VAN']); }
+  var bk = [];
+  document.querySelectorAll('.bkitem').forEach(function(b){
+    var label = b.getAttribute('data-bk');
+    var d = b.querySelector('.bkday').value.trim();
+    var h = b.querySelector('.bktime').value.trim();
+    if(d || h) bk.push('   - ' + label + ': ' + [d,h].filter(Boolean).join(' '));
+  });
+  if(bk.length){ L.push(''); L.push('📋 PRENOTATO:'); bk.forEach(function(x){ L.push(x); }); }
+
+  var kn = [];
+  if(sel['M1']) kn.push('   - Lunedi, margine sul tramonto: ' + sel['M1']);
+  if(sel['L1']) kn.push('   - Pranzo del sabato: ' + sel['L1']);
+  if(sel['L2']) kn.push("   - Dylan's Candy Bar: " + sel['L2']);
+  if(kn.length){ L.push(''); L.push('🎯 SCELTE:'); kn.forEach(function(x){ L.push(x); }); }
 
   var dd = [];
   DAYS.forEach(function(d){
     var x = dayDecision[d.id];
     if(x) dd.push('   - ' + x.name + ': ' + x.val);
   });
-  if(dd.length){ L.push(''); L.push('🔄 GIORNATE DA RIVEDERE (erano approvate):'); dd.forEach(function(x){ L.push(x); }); }
+  if(dd.length){ L.push(''); L.push('✅ SOLUZIONI PER GIORNATA:'); dd.forEach(function(x){ L.push(x); }); }
 
   var so = [];
   SLOTS.forEach(function(s){
@@ -1143,7 +1133,7 @@ function buildMessage(){
     var c = day.querySelector('.daycomment');
     var comment = c ? c.value.trim() : '';
     if(removed.length || comment){
-      if(!any){ L.push(''); L.push("✏️ MODIFICHE ALL'ITINERARIO:"); any = true; }
+      if(!any){ L.push(''); L.push('✏️ MODIFICHE ALL\'ITINERARIO:'); any = true; }
       L.push('');
       L.push('📅 ' + dn + ':');
       if(removed.length){
