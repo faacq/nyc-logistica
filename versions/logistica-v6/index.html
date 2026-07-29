@@ -130,10 +130,6 @@
   .it.opt::before{background:var(--accent2)}
   .it .nm{flex:1}
   .it .sl{flex:0 0 auto; font-size:.75rem; font-weight:800; color:var(--muted); white-space:nowrap}
-  .it .mv{display:inline-block; font-size:.68rem; font-weight:800; padding:2px 7px; border-radius:999px; margin-right:6px; white-space:nowrap}
-  .it .mv.walk{background:#f1f0ec; color:#5c6873; border:1px solid #e0dad0}
-  .it .mv.bus{background:#e8f1fb; color:#1f3b73; border:1px solid #cfe0f2}
-  .it .mv.taxi{background:#fff6e2; color:#8a6d12; border:1px solid #f0dfae}
   .it .fx{display:inline-block; background:#eef4fb; color:var(--accent); font-size:.64rem; font-weight:800; padding:1px 6px; border-radius:999px; margin-left:5px}
   .it .fx.todo{background:#fdecc8; color:#8a5a12}
   .day.editing .it{cursor:pointer; border-color:var(--line)}
@@ -216,7 +212,7 @@
     <div class="flag">🗽✅</div>
     <h1>È tutto in piedi</h1>
     <div class="sub">Sei giornate su sei approvate, tutto prenotato, e <b>l'itinerario definitivo è scritto</b>. Mi restano <b>due domande</b> e una cosa che non ho capito.</div>
-    <div class="ver">📌 versione v6.1 &middot; 29 lug 2026</div>
+    <div class="ver">📌 versione v6 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -224,7 +220,7 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Novità di questa versione <span class="cd">(v6.1 &middot; 29 lug 2026)</span></h3>
+    <h3>🆕 Novità di questa versione <span class="cd">(v6 &middot; 29 lug 2026)</span></h3>
     <ul>
       <li>😴 <b>Lunedì: hai scelto la A.</b> Si parte alle 8:00 e a Little Island si sta 45 minuti — il tramonto adesso cade <b>dentro</b> la sosta, con <b>38 minuti</b> di margine invece di otto. E la giornata finisce alla stessa ora di prima.</li>
       <li>🏙️ <b>Top of the Rock prenotato: martedì alle 9:30.</b> Era l'ultima prenotazione aperta. <b>Non ce ne sono più.</b></li>
@@ -233,7 +229,6 @@
       <li>❓ <b>Una cosa non l'ho capita e non l'ho indovinata</b>: l'Antico Vinaio del sabato. È la prima domanda qui sotto.</li>
       <li>🍽️ <b>Una cosa l'ho trovata io</b> rifacendo i conti: lunedì si mangia tre volte in quattro ore e poi più niente. Seconda domanda.</li>
       <li>📱 <b>Domanda nuova:</b> come vuoi la guida da avere in mano durante il viaggio.</li>
-      <li>🚌 <b>Adesso si vede il mezzo</b> su ogni tappa — 🚶 a piedi · 🚌 Big Bus · 🚕 taxi/Uber — <b>me l'hai chiesto tu</b>, e mettendolo è saltato fuori un dato che non avevo: il Big Bus lo usiamo <b>3 volte in tutto il viaggio</b>. Ne parlo prima delle giornate.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
@@ -369,22 +364,6 @@
     <p class="muted" style="margin:12px 0 0"><b>Nessuna giornata è rossa.</b> Il venerdì è al 100% solo perché il Summit alle 19:00 più due ore di terrazza più la cena <b>non stanno</b> in una giornata che finisce alle 21:30 — per quello il traguardo del venerdì è alle <b>22:30</b>. Non è un difetto: è aritmetica.</p>
   </div>
 
-  <!-- ============ COME CI SI MUOVE ============ -->
-  <h2>🚌 Come ci si sposta — e una cosa sul Big Bus</h2>
-  <div class="card">
-    <p style="margin-top:0">Me l'hai chiesto e avevi ragione: <b>il mezzo non si vedeva da nessuna parte</b>. Adesso <b>ogni tappa dice come ci si arriva</b>, con quanto dura la tratta:</p>
-    <div class="princ"><span class="ic">🚶</span><div><span style="background:#f1f0ec;color:#5c6873;border:1px solid #e0dad0;border-radius:999px;padding:1px 7px;font-size:.72rem;font-weight:800">🚶 a piedi</span> &nbsp;È il caso normale: l'itinerario è fatto per zone proprio perché dentro una zona ci si cammina.</div></div>
-    <div class="princ"><span class="ic">🚌</span><div><span style="background:#e8f1fb;color:#1f3b73;border:1px solid #cfe0f2;border-radius:999px;padding:1px 7px;font-size:.72rem;font-weight:800">🚌 Big Bus</span> &nbsp;Solo sabato e domenica: il pass copre due giorni consecutivi.</div></div>
-    <div class="princ"><span class="ic">🚕</span><div><span style="background:#fff6e2;color:#8a6d12;border:1px solid #f0dfae;border-radius:999px;padding:1px 7px;font-size:.72rem;font-weight:800">🚕 taxi/Uber</span> &nbsp;Ricorda che <b>in 8 sono sempre 2 macchine</b>, che devono partire insieme.</div></div>
-  </div>
-
-  <div class="note">
-    <b>🚌 E adesso che si vede, salta fuori una cosa.</b> Su <b>51 spostamenti</b> di tutto il viaggio:
-    <b>42 a piedi</b>, <b>6 in taxi</b> e <b>3 col Big Bus</b> — uno il sabato (per salire al Met) e due la domenica (Ghostbusters e il ponte).<br><br>
-    Il pass da <b>due giorni</b> è comprato, quindi non si spreca niente: quei tre passaggi da soli valgono i taxi che avremmo preso. <b>Ma il Big Bus non è solo un modo per spostarsi: è anche il giro panoramico in sé</b>, col piano di sopra scoperto — e questo il calcolo non lo sa vedere, perché per lui un bus è solo una tratta fra due tappe.<br><br>
-    <b>Se ai ragazzi va di farsi un pezzo di anello tanto per vedere la città dall'alto</b>, sabato e domenica c'è margine (il sabato chiude con quasi due ore d'avanzo). Dimmelo nel testo libero in fondo e lo incastro.
-  </div>
-
   <!-- ============ GIORNI ============ -->
   <h2>📅 Giorno per giorno</h2>
   <p class="muted" style="margin-top:0">Ogni giornata con <b>le sue tappe vere</b>, nell'ordine e con gli orari veri — <b>presi dal calcolo, non riscritti a mano</b>. Sono tutte approvate da te: qui sotto ci sono solo per controllo. <b>Se una non ti torna più</b>, tocca ✏️ e dimmi cosa cambieresti.</p>
@@ -409,7 +388,7 @@
   </div>
 
   <div class="footer">
-    Analisi logistica v6.1 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v6 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -455,32 +434,24 @@ var DAYS = [
   "out": "19:00",
   "back": "23:00",
   "end": "22:33",
-  "bus": 0,
-  "taxi": 0,
   "stops": [
    {
     "n": "Times Square di notte",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 26,
-    "mv": "walk",
-    "lg": 9
+    "m": 26
    },
    {
     "n": "Ellen's Stardust Diner (cena di benvenuto)",
     "i": "✨",
     "s": "esperienza ~1h30",
-    "m": 115,
-    "mv": "walk",
-    "lg": 16
+    "m": 115
    },
    {
     "n": "Midtown Comics",
     "i": "🛍️",
     "s": "negozio ~20 min",
     "m": 44,
-    "mv": "walk",
-    "lg": 22,
     "opt": true
    },
    {
@@ -488,8 +459,6 @@ var DAYS = [
     "i": "🍽️",
     "s": "pasto ~25 min",
     "m": 41,
-    "mv": "walk",
-    "lg": 16,
     "opt": true
    }
   ]
@@ -503,64 +472,48 @@ var DAYS = [
   "out": "10:00",
   "back": "22:30",
   "end": "22:27",
-  "bus": 0,
-  "taxi": 1,
   "stops": [
    {
     "n": "Grand Central",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 38,
-    "mv": "walk",
-    "lg": 23
+    "m": 38
    },
    {
     "n": "Bryant Park",
     "i": "🚶",
     "s": "giro ~1h",
-    "m": 78,
-    "mv": "walk",
-    "lg": 17
+    "m": 78
    },
    {
     "n": "5th Avenue (passeggiata 42nd-57th)",
     "i": "🚶",
     "s": "giro ~1h",
-    "m": 67,
-    "mv": "walk",
-    "lg": 18
+    "m": 67
    },
    {
     "n": "St. Patrick's Cathedral",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 30,
-    "mv": "walk",
-    "lg": 11
+    "m": 30
    },
    {
     "n": "Raising Cane's (Times Sq) - PRANZO",
     "i": "🍽️",
     "s": "pasto ~45 min",
-    "m": 71,
-    "mv": "walk",
-    "lg": 24
+    "m": 71
    },
    {
     "n": "MoMA",
     "i": "🖼️",
     "s": "museo ~2h",
-    "m": 128,
-    "mv": "taxi",
-    "lg": 17
+    "m": 128
    },
    {
     "n": "Shopping 5th Ave (Lego + NBA + Nike + Sephora)",
     "i": "🛍️",
     "s": "negozio ~1h",
     "m": 67,
-    "mv": "walk",
-    "lg": 12,
     "opt": true
    },
    {
@@ -568,17 +521,13 @@ var DAYS = [
     "i": "🏙️",
     "s": "terrazza ~2h",
     "m": 136,
-    "mv": "walk",
-    "lg": 20,
     "fixed": "19:00"
    },
    {
     "n": "Cena + gelato (Midtown)",
     "i": "🍽️",
     "s": "pasto ~1h15",
-    "m": 87,
-    "mv": "walk",
-    "lg": 12
+    "m": 87
    }
   ]
  },
@@ -591,24 +540,18 @@ var DAYS = [
   "out": "08:45",
   "back": "21:30",
   "end": "19:41",
-  "bus": 1,
-  "taxi": 2,
   "stops": [
    {
     "n": "Bici a Central Park (noleggio 59th)",
     "i": "🚲",
     "s": "attivita ~2h",
-    "m": 128,
-    "mv": "walk",
-    "lg": 30
+    "m": 128
    },
    {
     "n": "Bethesda Terrace + Bow Bridge",
     "i": "📸",
     "s": "foto ~20 min",
     "m": 55,
-    "mv": "walk",
-    "lg": 23,
     "opt": true
    },
    {
@@ -616,8 +559,6 @@ var DAYS = [
     "i": "🛍️",
     "s": "negozio ~20 min",
     "m": 27,
-    "mv": "walk",
-    "lg": 32,
     "opt": true
    },
    {
@@ -625,33 +566,25 @@ var DAYS = [
     "i": "🛍️",
     "s": "negozio ~20 min",
     "m": 28,
-    "mv": "walk",
-    "lg": 8,
     "opt": true
    },
    {
     "n": "Pranzo veloce (zona 59th)",
     "i": "🍽️",
     "s": "pasto ~40 min",
-    "m": 48,
-    "mv": "walk",
-    "lg": 8
+    "m": 48
    },
    {
     "n": "Met steps (Gossip Girl) + Museum Mile",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 9,
-    "mv": "bus",
-    "lg": 29
+    "m": 9
    },
    {
     "n": "Guggenheim (solo esterno)",
     "i": "📸",
     "s": "foto ~15 min",
     "m": 41,
-    "mv": "walk",
-    "lg": 17,
     "opt": true
    },
    {
@@ -659,8 +592,6 @@ var DAYS = [
     "i": "🛍️",
     "s": "negozio ~20 min",
     "m": 28,
-    "mv": "walk",
-    "lg": 27,
     "opt": true
    },
    {
@@ -668,25 +599,19 @@ var DAYS = [
     "i": "🚲",
     "s": "attivita ~45 min",
     "m": 73,
-    "mv": "walk",
-    "lg": 33,
     "opt": true
    },
    {
     "n": "Eataly Flatiron (200 5th Ave) - CENA",
     "i": "🍽️",
     "s": "pasto ~1h20",
-    "m": 108,
-    "mv": "taxi",
-    "lg": 27
+    "m": 108
    },
    {
     "n": "Rientro hotel",
     "i": "🚶",
     "s": "rientro",
-    "m": 27,
-    "mv": "taxi",
-    "lg": 22
+    "m": 27
    }
   ]
  },
@@ -699,82 +624,62 @@ var DAYS = [
   "out": "10:30",
   "back": "21:30",
   "end": "20:10",
-  "bus": 2,
-  "taxi": 1,
   "stops": [
    {
     "n": "Ghostbusters HQ (14 N Moore, Tribeca)",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 1,
-    "mv": "bus",
-    "lg": 44
+    "m": 1
    },
    {
     "n": "SoHo / Tribeca (passeggiata)",
     "i": "🚶",
     "s": "giro ~1h",
-    "m": 69,
-    "mv": "walk",
-    "lg": 23
+    "m": 69
    },
    {
     "n": "Shopping SoHo (Marc Jacobs, Alo, sneakers)",
     "i": "🛍️",
     "s": "negozio ~20 min",
     "m": 27,
-    "mv": "walk",
-    "lg": 9,
     "opt": true
    },
    {
     "n": "Chinatown / Little Italy - PRANZO",
     "i": "🍽️",
     "s": "pasto ~1h15",
-    "m": 95,
-    "mv": "walk",
-    "lg": 24
+    "m": 95
    },
    {
     "n": "Ponte di Brooklyn a piedi (da City Hall)",
     "i": "🚶",
     "s": "giro ~1h",
-    "m": 84,
-    "mv": "bus",
-    "lg": 22
+    "m": 84
    },
    {
     "n": "Dumbo (Washington St + Manhattan Bridge)",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 38,
-    "mv": "walk",
-    "lg": 38
+    "m": 38
    },
    {
     "n": "Foto al molo (Brooklyn Bridge Park, Pier 1)",
     "i": "📸",
     "s": "foto ~15 min",
     "m": 40,
-    "mv": "walk",
-    "lg": 18,
     "opt": true
    },
    {
     "n": "Time Out Market Dumbo - CENA",
     "i": "🍽️",
     "s": "pasto ~1h20",
-    "m": 95,
-    "mv": "walk",
-    "lg": 16
+    "m": 95
    },
    {
     "n": "Rientro hotel",
     "i": "🚶",
     "s": "rientro",
-    "m": 47,
-    "mv": "taxi",
-    "lg": 42
+    "m": 47
    }
   ]
  },
@@ -787,104 +692,78 @@ var DAYS = [
   "out": "08:00",
   "back": "21:30",
   "end": "20:34",
-  "bus": 0,
-  "taxi": 2,
   "stops": [
    {
     "n": "Traghetto Staten Island (a/r, passa la Statua)",
     "i": "🚲",
     "s": "attivita ~1h30",
-    "m": 25,
-    "mv": "taxi",
-    "lg": 45
+    "m": 25
    },
    {
     "n": "Wall St / Charging Bull",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 22,
-    "mv": "walk",
-    "lg": 16
+    "m": 22
    },
    {
     "n": "9/11 Memorial",
     "i": "📸",
     "s": "foto ~45 min",
-    "m": 54,
-    "mv": "walk",
-    "lg": 19
+    "m": 54
    },
    {
     "n": "Oculus",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 22,
-    "mv": "walk",
-    "lg": 11
+    "m": 22
    },
    {
     "n": "Katz's Delicatessen (LES)",
     "i": "🍽️",
     "s": "pasto ~1h",
-    "m": 90,
-    "mv": "walk",
-    "lg": 50
+    "m": 90
    },
    {
     "n": "Sanctum Sanctorum (177A Bleecker)",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 22,
-    "mv": "walk",
-    "lg": 27
+    "m": 22
    },
    {
     "n": "Joe's Pizza (Carmine St)",
     "i": "🍽️",
     "s": "pasto ~35 min",
-    "m": 43,
-    "mv": "walk",
-    "lg": 17
+    "m": 43
    },
    {
     "n": "Sex and the City (Magnolia + scalinata di Carrie)",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 23,
-    "mv": "walk",
-    "lg": 16
+    "m": 23
    },
    {
     "n": "Chelsea Market - CENA",
     "i": "🍽️",
     "s": "pasto ~1h",
-    "m": 67,
-    "mv": "walk",
-    "lg": 23
+    "m": 67
    },
    {
     "n": "High Line",
     "i": "🚶",
     "s": "giro ~1h",
-    "m": 89,
-    "mv": "walk",
-    "lg": 19
+    "m": 89
    },
    {
     "n": "Little Island (tramonto)",
     "i": "📸",
     "s": "foto ~45 min",
-    "m": 73,
-    "mv": "walk",
-    "lg": 24
+    "m": 73
    },
    {
     "n": "Rientro hotel",
     "i": "🚶",
     "s": "rientro",
-    "m": 32,
-    "mv": "taxi",
-    "lg": 27
+    "m": 32
    }
   ]
  },
@@ -897,41 +776,31 @@ var DAYS = [
   "out": "08:30",
   "back": "17:30",
   "end": "16:11",
-  "bus": 0,
-  "taxi": 0,
   "stops": [
    {
     "n": "Top of the Rock (mattina)",
     "i": "🏙️",
     "s": "terrazza ~2h",
     "m": 144,
-    "mv": "walk",
-    "lg": 16,
     "fixed": "09:30"
    },
    {
     "n": "Vessel + Hudson Yards",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 70,
-    "mv": "walk",
-    "lg": 45
+    "m": 70
    },
    {
     "n": "All'Antico Vinaio (schiacciata) - PRANZO",
     "i": "🍽️",
     "s": "pasto ~45 min",
-    "m": 54,
-    "mv": "walk",
-    "lg": 32
+    "m": 54
    },
    {
     "n": "Ultimi acquisti 5th Ave + souvenir",
     "i": "🛍️",
     "s": "negozio ~20 min",
     "m": 54,
-    "mv": "walk",
-    "lg": 25,
     "opt": true
    },
    {
@@ -939,17 +808,13 @@ var DAYS = [
     "i": "🍽️",
     "s": "pasto ~20 min",
     "m": 34,
-    "mv": "walk",
-    "lg": 22,
     "opt": true
    },
    {
     "n": "Rientro hotel + bagagli",
     "i": "🚶",
     "s": "rientro",
-    "m": 56,
-    "mv": "walk",
-    "lg": 11
+    "m": 56
    }
   ]
  }
@@ -1014,18 +879,6 @@ function recovText(got, need){
   return 'Recuperati <b>' + hm(got) + '</b> su <b>' + hm(need) + '</b> che ne servono per far tornare la giornata.';
 }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-/* come ci si arriva. Il mezzo era nei dati fin dall'inizio ma non arrivava
-   in pagina: il Big Bus e' comprato e non si vedeva quando lo si usa. */
-var MOVE = {
-  walk: { e:'🚶', t:'a piedi' },
-  bus:  { e:'🚌', t:'Big Bus' },
-  taxi: { e:'🚕', t:'taxi/Uber' }
-};
-function moveTag(s){
-  var m = MOVE[s.mv] || MOVE.walk;
-  return '<span class="mv ' + s.mv + '">' + m.e + ' ' + m.t + (s.lg ? ' ' + s.lg + "'" : '') + '</span>';
-}
 
 /* ---------- righe editabili generiche (slot + singole tappe) ---------- */
 var slotOverride = {};
@@ -1107,7 +960,7 @@ DAYS.forEach(function(d){
          '<span class="nm">' + s.i + ' ' + esc(s.n) +
          (s.fixed ? '<span class="fx">🔒 ' + s.fixed + '</span>' : '') +
          (s.todo ? '<span class="fx todo">📋 ' + s.todo + '</span>' : '') + '</span>' +
-         '<span class="sl">' + moveTag(s) + s.s + '</span></div>';
+         '<span class="sl">' + s.s + '</span></div>';
   });
   h += '</div>';
 
@@ -1239,7 +1092,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v6.1',
+  ver:   'v6',
   built: '2026-07-29',
   plan:  'itinerario v2.2 + D47 - logistica chiusa, 6/6 approvate, tutto prenotato',
   stale: ''                      /* valorizzare quando la pagina resta indietro */
@@ -1259,7 +1112,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v6.1: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v6: risposta di Fabrizio');
 
   var q = [];
   if(sel['Q1']) q.push("   - Antico Vinaio del sabato: " + sel['Q1']);
