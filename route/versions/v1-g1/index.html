@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Come si gira - Giorno 1 · Gio 13</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{--bg:#fbf7f0;--card:#fff;--ink:#22303c;--muted:#6b7a88;--line:#e7ddcd;
+        --accent:#1f3b73;--accent2:#e0912f;--g5:#3f9d5a;--red:#d1495b;
+        --radius:16px;--shadow:0 6px 22px rgba(30,40,60,.10)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55;
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:660px;margin:0 auto;padding:0 14px 60px}
+  header.hero{background:linear-gradient(160deg,#1f3b73,#2d5296);color:#fff;padding:18px 0 16px}
+  header .wrap{padding-bottom:0}
+  h1{margin:.1em 0 .15em;font-size:1.32rem;letter-spacing:-.2px}
+  .sub{font-size:.92rem;opacity:.93}
+  .ver{margin-top:9px;display:inline-block;background:rgba(255,255,255,.16);
+       border-radius:999px;padding:3px 11px;font-size:.74rem;font-weight:700}
+  /* --- mappa appiccicata in alto: e' il punto di tutta la pagina --- */
+  .mapwrap{position:sticky;top:0;z-index:400;background:var(--bg);padding:8px 0 6px;
+           box-shadow:0 6px 14px -8px rgba(30,40,60,.35)}
+  #map{height:44vh;min-height:240px;border-radius:13px;border:1px solid var(--line);
+       box-shadow:var(--shadow)}
+  .maphint{font-size:.74rem;color:var(--muted);text-align:center;margin:5px 2px 0}
+  .legend{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:5px;font-size:.72rem;color:var(--muted)}
+  .legend i{display:inline-block;width:15px;height:3px;border-radius:2px;vertical-align:middle;margin-right:4px}
+  .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
+             padding:11px 13px;margin:13px 0;font-size:.87rem}
+  .changelog h3{margin:0 0 6px;font-size:.93rem}
+  /* --- gli step --- */
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+        padding:12px 14px;margin:11px 0;box-shadow:var(--shadow);
+        transition:border-color .2s,box-shadow .2s}
+  .step.on{border-color:var(--accent);box-shadow:0 0 0 2px rgba(31,59,115,.14),var(--shadow)}
+  .step .hd{display:flex;align-items:baseline;gap:8px}
+  .num{flex:none;width:25px;height:25px;border-radius:50%;background:var(--accent);color:#fff;
+       font-size:.79rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .step.on .num{background:var(--accent2)}
+  .nm{font-weight:800;font-size:1rem;flex:1}
+  .tm{font-size:.78rem;color:var(--muted);font-weight:700;white-space:nowrap}
+  .dw{margin-top:5px;font-size:.83rem;color:var(--muted)}
+  .dw b{color:var(--ink)}
+  .opt{display:inline-block;background:#f1f0ec;color:#5c6873;border-radius:999px;
+       padding:0 7px;font-size:.68rem;font-weight:800;margin-left:5px}
+  .nt{margin-top:7px;font-size:.83rem;color:#4a5a68}
+  /* --- come ci si arriva: la TRATTA, che e' cio' che mancava --- */
+  .leg{display:flex;gap:9px;align-items:flex-start;margin:2px 0 2px 11px;
+       padding:7px 0 7px 15px;border-left:3px dotted #cbc4b8;font-size:.85rem;color:#4a5a68}
+  .leg .lg{flex:none;font-size:1.05rem}
+  .bus{margin:9px 0;border:2px solid var(--accent);border-radius:13px;overflow:hidden;background:#fff}
+  .bus .bh{background:var(--accent);color:#fff;padding:7px 12px;font-weight:800;font-size:.87rem}
+  .bus .bb{padding:10px 12px;font-size:.86rem}
+  .stopbox{background:#eef4fb;border:1px dashed #b9cde6;border-radius:9px;padding:8px 10px;margin:6px 0}
+  .stopbox .k{font-size:.7rem;font-weight:800;letter-spacing:.5px;color:var(--accent)}
+  .stopbox .v{font-weight:800;font-size:.95rem}
+  .stopbox .w{font-size:.79rem;color:var(--muted)}
+  .ride{margin:7px 0;padding-left:12px;border-left:3px solid var(--accent2);color:#4a5a68}
+  .warnbox{background:#fffdf6;border:1px dashed var(--accent2);border-radius:10px;
+           padding:8px 11px;margin-top:8px;font-size:.81rem;color:#8a6d12}
+  .footer{text-align:center;color:var(--muted);font-size:.78rem;margin:26px 0 0}
+  .leaflet-container{font:inherit}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <h1>Come si gira il gio 13</h1>
+  <div class="sub">Arrivo / Midtown (sera) — si esce alle <b>19:00</b>, si rientra verso le <b>21:49</b>. Qui sotto il giro, pezzo per pezzo.</div>
+  <div class="ver">🧭 percorso v1 &middot; 30 lug 2026</div>
+</div></header>
+
+<div class="mapwrap"><div class="wrap" style="padding-bottom:0">
+  <div id="map"></div>
+  <div class="legend">
+    <span><i style="background:#5c6873"></i>a piedi</span>
+    <span><i style="background:#1f3b73"></i>Big Bus</span>
+    <span><i style="background:#e0912f"></i>taxi</span>
+    <span><i style="background:#8a4fbf"></i>metro</span>
+  </div>
+  <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
+</div></div>
+
+<div class="wrap">
+  <div class="changelog">
+    <h3>🧭 A cosa serve questa pagina</h3>
+    Non e' l'itinerario: quello lo conosci. <b>E' il filo che unisce le tappe</b> — dove si cammina,
+    quanto dura, dove si sale sul bus, cosa si vede dal bus e dove si scende.
+    <b>Non devi rispondere niente</b>: si legge e basta. Se qualcosa non torna, dimmelo e lo cambio.
+  </div>
+
+  <div id="steps"></div>
+
+  <div class="footer">Giorno 1 · Gio 13 · la compagnia · New York 13-18 ago 2026<br>Percorso generato dai dati del giro — 3 tappe</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var STEPS = [{"n": "Times Square di notte", "i": "📸", "arr": "19:09", "dep": "19:24", "dwell": 15, "mode": "walk", "leg": 9, "brk": null, "km": 0.16, "opt": false, "lat": 40.758, "lon": -73.9855, "note": "sogno n.1 di Giulio - primo colpo d'occhio", "transit": null, "segs": [{"kind": "walk", "line": [[40.758322, -73.984432], [40.758257, -73.984278], [40.757579, -73.982703], [40.757448, -73.982391], [40.75739, -73.982254], [40.757454, -73.982207], [40.757963, -73.981836], [40.758016, -73.981798], [40.758075, -73.981936], [40.758314, -73.982503], [40.759175, -73.984509], [40.759223, -73.984619], [40.759148, -73.984676], [40.758668, -73.985027], [40.758597, -73.98508], [40.758524, -73.985132], [40.758367, -73.985244], [40.758036, -73.985482], [40.758002, -73.985506]], "label": ""}]}, {"n": "Ellen's Stardust Diner (cena di benvenuto)", "i": "✨", "arr": "19:40", "dep": "21:10", "dwell": 90, "mode": "walk", "leg": 16, "brk": null, "km": 0.66, "opt": false, "lat": 40.762, "lon": -73.9836, "note": "camerieri che cantano; ATTESA TIPICA 30-60' in agosto - non prenotabile", "transit": null, "segs": [{"kind": "walk", "line": [[40.758002, -73.985506], [40.757963, -73.985534], [40.758011, -73.985649], [40.758025, -73.985684], [40.758046, -73.985732], [40.758253, -73.986227], [40.758462, -73.986728], [40.759106, -73.988259], [40.75916, -73.988386], [40.759223, -73.98834], [40.759508, -73.988132], [40.759731, -73.987969], [40.759787, -73.987929], [40.759851, -73.987881], [40.76011, -73.987691], [40.760361, -73.987511], [40.760409, -73.987475], [40.760473, -73.987429], [40.760981, -73.987058], [40.761037, -73.987018], [40.761105, -73.986968], [40.761301, -73.986834], [40.761612, -73.986604], [40.761668, -73.986566], [40.761723, -73.986525], [40.762232, -73.986147], [40.762294, -73.986101], [40.762355, -73.986057], [40.762769, -73.985755], [40.762865, -73.985685], [40.762916, -73.985648], [40.762978, -73.985604], [40.763086, -73.985527], [40.763173, -73.985466], [40.763495, -73.985238], [40.763515, -73.985223], [40.763557, -73.985194], [40.763498, -73.985055], [40.762775, -73.983336], [40.762738, -73.983261], [40.76269, -73.983161], [40.762658, -73.983094], [40.762643, -73.983063], [40.762413, -73.982514], [40.762405, -73.982494], [40.762348, -73.982347], [40.762315, -73.982372], [40.76229, -73.98239], [40.76179, -73.982755], [40.761719, -73.982807], [40.761777, -73.982944], [40.761881, -73.983192], [40.762017, -73.983514], [40.762041, -73.98357]], "label": ""}]}, {"n": "Gelato (rientro hotel)", "i": "🍽️", "arr": "21:24", "dep": "21:49", "dwell": 25, "mode": "walk", "leg": 14, "brk": null, "km": 0.55, "opt": true, "lat": 40.7585, "lon": -73.9843, "note": "", "transit": null, "segs": [{"kind": "walk", "line": [[40.762041, -73.98357], [40.762086, -73.983678], [40.762014, -73.983724], [40.761778, -73.983881], [40.761508, -73.984061], [40.76145, -73.984098], [40.76142, -73.984023], [40.761382, -73.983932], [40.761278, -73.983687], [40.761179, -73.983449], [40.761156, -73.983395], [40.761095, -73.98325], [40.761036, -73.983293], [40.760793, -73.983467], [40.760527, -73.983663], [40.760463, -73.983706], [40.760408, -73.983748], [40.759903, -73.984127], [40.759841, -73.984174], [40.759782, -73.984217], [40.75927, -73.984585], [40.759223, -73.984619], [40.759148, -73.984676], [40.758668, -73.985027], [40.758597, -73.98508], [40.758524, -73.985132], [40.758367, -73.985244], [40.758036, -73.985482], [40.757963, -73.985534], [40.758011, -73.985649], [40.758025, -73.985684], [40.758046, -73.985732], [40.758253, -73.986227], [40.758462, -73.986728], [40.759106, -73.988259], [40.75916, -73.988386], [40.759223, -73.98834], [40.759508, -73.988132], [40.759731, -73.987969], [40.759787, -73.987929], [40.759732, -73.987797], [40.759572, -73.987421], [40.759501, -73.987252], [40.759197, -73.986516], [40.758886, -73.98577], [40.758767, -73.985492], [40.758743, -73.985435], [40.75864, -73.985185], [40.758597, -73.98508], [40.75855, -73.984967], [40.758322, -73.984432]], "label": ""}]}];
+
+var COL = {walk:'#5c6873', bus:'#1f3b73', taxi:'#e0912f', metro:'#8a4fbf'};
+
+var map = L.map('map', {zoomControl:true, scrollWheelZoom:false});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+  {maxZoom:19, attribution:'&copy; OpenStreetMap, &copy; CARTO'}).addTo(map);
+/* su telefono lo scorrimento con un dito deve passare alla pagina, non alla mappa */
+if (L.Browser.mobile) map.dragging.disable();
+
+var all = [], lines = [];
+STEPS.forEach(function(s, i){
+  s.segs.forEach(function(g){
+    var dashed = (g.kind === 'metro' || g.kind === 'bus');
+    var ln = L.polyline(g.line, {
+      color: COL[g.kind] || COL.walk, weight: 4, opacity: .28,
+      dashArray: g.kind === 'metro' ? '5,7' : null
+    }).addTo(map);
+    ln._step = i; ln._kind = g.kind;
+    lines.push(ln);
+    g.line.forEach(function(p){ all.push(p); });
+  });
+  var m = L.circleMarker([s.lat, s.lon], {
+    radius:7, color:'#fff', weight:2, fillColor:'#1f3b73', fillOpacity:1
+  }).addTo(map);
+  m.bindTooltip(String(i+1) + '. ' + s.n, {direction:'top'});
+  s._marker = m;
+  all.push([s.lat, s.lon]);
+});
+map.fitBounds(L.latLngBounds(all), {padding:[26,26]});
+
+function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+var MV = {walk:['\uD83D\uDEB6','a piedi'], bus:['\uD83D\uDE8C','Big Bus'],
+          taxi:['\uD83D\uDE95','taxi'], metro:['\uD83D\uDE87','metro']};
+
+var box = document.getElementById('steps');
+STEPS.forEach(function(s, i){
+  var h = '';
+
+  if(s.transit){
+    var t = s.transit;
+    h += '<div class="bus"><div class="bh">\uD83D\uDE8C ' + esc(t.line) + '</div><div class="bb">';
+    h += '<div class="stopbox"><div class="k">SALI QUI</div>' +
+         '<div class="v">fermata ' + t.board.n + ' &middot; ' + esc(t.board.stop) + '</div>' +
+         '<div class="w">' + esc(t.board.where) + '</div></div>';
+    if(s.brk){
+      h += '<div class="ride">\u23F3 <b>' + s.brk.wait + " minuti di attesa</b> alla fermata" +
+           (s.brk.wait >= 25 ? " (questa linea passa di rado)" : "") + '</div>';
+      h += '<div class="ride">\u2193 <b>' + s.brk.ride + " minuti di corsa</b><br>" + esc(t.sees) + '</div>';
+    } else {
+      h += '<div class="ride">\u2193 <b>' + s.leg + " minuti</b><br>" + esc(t.sees) + '</div>';
+    }
+    if(t.via && t.via.length){
+      h += '<div class="ride" style="border-left-color:#cbc4b8">\uD83D\uDCCD passa da: ' +
+           t.via.map(function(v){ return esc(v.stop); }).join(' \u2192 ') + '</div>';
+    }
+    h += '<div class="stopbox" style="background:#f2f9f4;border-color:#b9dcc4">' +
+         '<div class="k" style="color:#2f7a46">SCENDI QUI</div>' +
+         '<div class="v">fermata ' + t.alight.n + ' &middot; ' + esc(t.alight.stop) + '</div>' +
+         '<div class="w">' + esc(t.alight.where) + '</div></div>';
+    if(t.then) h += '<div class="ride" style="border-left-color:#5c6873">\uD83D\uDEB6 ' + esc(t.then) + '</div>';
+    if(t.wait_note) h += '<div class="warnbox">\u23F1 ' + esc(t.wait_note) + '</div>';
+    h += '<div class="warnbox" style="border-style:dotted">\uD83D\uDDFA\uFE0F Il tracciato blu sulla mappa e' + "'" +
+         ' <b>indicativo</b>: segue le fermate vere dell' + "'" + 'anello, ma il percorso esatto del Big Bus non e' + "'" +
+         ' pubblico. <b>I nomi e i numeri delle fermate invece sono verificati.</b></div>';
+    h += '</div></div>';
+  } else if(s.leg){
+    var mv = MV[s.mode] || MV.walk;
+    h += '<div class="leg"><span class="lg">' + mv[0] + '</span><span><b>' + s.leg +
+         ' minuti ' + mv[1] + '</b>' + (s.km ? ' &middot; ' + s.km.toFixed(1) + ' km' : '') + '</span></div>';
+  }
+
+  h += '<div class="step" id="s' + i + '"><div class="hd">' +
+       '<span class="num">' + (i+1) + '</span>' +
+       '<span class="nm">' + s.i + ' ' + esc(s.n) + (s.opt ? '<span class="opt">se c\u2019e\u2019 tempo</span>' : '') + '</span>' +
+       '<span class="tm">' + s.arr + '</span></div>';
+  h += '<div class="dw">ci si sta <b>' + s.dwell + ' minuti</b> &middot; si riparte alle <b>' + s.dep + '</b></div>';
+  if(s.note) h += '<div class="nt">' + esc(s.note.split(' | ')[0]) + '</div>';
+  h += '</div>';
+
+  box.insertAdjacentHTML('beforeend', h);
+});
+
+/* lo step attivo accende il suo pezzo di strada - e' tutto qui il trucco */
+var cards = [].slice.call(document.querySelectorAll('.step'));
+var active = -1;
+function activate(i){
+  if(i === active) return;
+  active = i;
+  cards.forEach(function(c, k){ c.classList.toggle('on', k === i); });
+  lines.forEach(function(ln){
+    var on = ln._step === i;
+    ln.setStyle({opacity: on ? .95 : .18, weight: on ? 6 : 4});
+    if(on) ln.bringToFront();
+  });
+  STEPS.forEach(function(s, k){
+    s._marker.setStyle({fillColor: k === i ? '#e0912f' : '#1f3b73', radius: k === i ? 9 : 7});
+  });
+  var pts = [];
+  STEPS[i].segs.forEach(function(g){ g.line.forEach(function(p){ pts.push(p); }); });
+  pts.push([STEPS[i].lat, STEPS[i].lon]);
+  map.flyToBounds(L.latLngBounds(pts), {padding:[36,36], maxZoom:16, duration:.6});
+}
+
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting) activate(cards.indexOf(e.target));
+  });
+}, {rootMargin: '-48% 0px -48% 0px'});
+cards.forEach(function(c){ io.observe(c); });
+cards.forEach(function(c, i){ c.addEventListener('click', function(){ activate(i); }); });
+</script>
+</body>
+</html>
