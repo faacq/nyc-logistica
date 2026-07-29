@@ -136,7 +136,6 @@
   .it .mv.walk{background:#f1f0ec; color:#5c6873; border:1px solid #e0dad0}
   .it .mv.bus{background:#e8f1fb; color:#1f3b73; border:1px solid #cfe0f2}
   .it .mv.taxi{background:#fff6e2; color:#8a6d12; border:1px solid #f0dfae}
-  .mv.metro{background:#efeaf8; color:#4b3a86; border:1px solid #d9cff0}
   .it .fx{display:inline-block; background:#eef4fb; color:var(--accent); font-size:.64rem; font-weight:800; padding:1px 6px; border-radius:999px; margin-left:5px}
   .it .fx.todo{background:#fdecc8; color:#8a5a12}
   .day.editing .it{cursor:pointer; border-color:var(--line)}
@@ -217,9 +216,9 @@
 <header class="hero">
   <div class="wrap">
     <div class="flag">🗽🔒</div>
-    <h1>Metro verificata, giro applicato</h1>
-    <div class="sub">Le tue due scelte sono <b>dentro</b>, e la ricerca sulla metro è tornata: <b>le tratte esistono e sono più veloci</b> del previsto. Una domanda sola.</div>
-    <div class="ver">📌 versione v9 &middot; 29 lug 2026</div>
+    <h1>Il Big Bus, come usarlo di più</h1>
+    <div class="sub">Ho lavorato sul Big Bus — <b>quattro strade, coi numeri</b>. E ho trovato un mio errore sulla metro che va corretto. <b>Due cose da scegliere.</b></div>
+    <div class="ver">📌 versione v8.2 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -227,76 +226,187 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(v9 &middot; 29 lug 2026 — rispetto alla v8.2)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(v8.2 &middot; 29 lug 2026)</span></h3>
     <ul>
-      <li>✅ <b>Le tue due scelte sono applicate</b>: il <b>giro panoramico</b> verso il Met e la <b>metro</b> sui due trasferimenti lunghi. Sotto trovi cosa hanno cambiato, minuto per minuto.</li>
-      <li>🔎 <b>La ricerca sulla metro è tornata, e sono buone notizie</b>: le due tratte <b>esistono davvero</b> (J e linea 7, nessun cambio) e sono <b>più veloci</b> delle mie stime — 21 e 17 minuti invece di 27.</li>
-      <li>😴 <b>Il tempo risparmiato è finito sulla sveglia</b>, non sull'arrivo: lunedì si parte alle <b>8:25</b> invece che alle 8:00. Venticinque minuti di sonno in più, e il tramonto resta dov'era.</li>
-      <li>🎫 <b>Quattro cose sui biglietti</b> che è meglio sapere prima: la MetroCard non si compra più, serve <b>una tessera a testa</b>, i ragazzi pagano intero, e non serve nessun abbonamento.</li>
-      <li>❌ <b>Ti avevo scritto $2,90 a corsa: la tariffa vera è $3.</b> Corretto.</li>
-      <li>❓ <b>Una domanda nuova, l'ultima</b>: i due rientri della sera — taxi come adesso, o metro?</li>
+      <li>🚀 <b>Hai detto «vai avanti adesso»: vado.</b> Non aspetto MariaPaola, Tony e Barbara — la loro pagina resta aperta e i commenti li integro man mano che arrivano.</li>
+      <li>🚌 <b>«Usiamo di più il Big Bus»: ci ho lavorato, ed è tutta la novità di questa versione.</b> Due vincoli non si aggirano, poi ci sono <b>quattro strade vere, coi numeri</b>. Con una consigliata.</li>
+      <li>💡 <b>La tua idea del giro panoramico ha risolto il problema</b> — il mio primo tentativo era sbagliato, e te lo racconto: sotto trovi perché.</li>
+      <li>✅ <b>Sparita la domanda sull'aspettare</b>: hai risposto, non te la richiedo.</li>
+      <li>🚇 <b>Ho sbagliato io su una cosa e te la dico:</b> avevi detto di <i>limitare</i> la metro, e io l'ho applicata come <i>mai</i> — su 51 spostamenti, quelli in metro sono <b>zero</b>.</li>
+      <li>🚶 <b>Ho contato i chilometri a piedi</b>, e sono due cose diverse: quelli che <i>sono</i> il viaggio (il ponte, la High Line, SoHo) e <b>44 km di soli trasferimenti</b> — 15 ore di cammino che nessuno si ricorderà. Ti mostro i <b>tre punti</b> dove la metro cambierebbe la giornata.</li>
+      <li>🔒 Le sei giornate restano <b>bloccate</b> e il resto della pagina è invariato.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
 
   <!-- ============ COSA HO FATTO ============ -->
-  <h2>✅ Le tue due scelte sono applicate</h2>
+  <h2>✅ Cosa ho fatto con la tua risposta</h2>
   <div class="applied">
-    <h3>Fatto</h3>
-    <div class="arow"><span class="ai">🚌</span><span class="an"><b>Big Bus: il giro lungo verso il Met</b><small><b>55 minuti</b> di città dal piano di sopra — Midtown, Times Square, Rockefeller, su per la 5th Avenue — e si scende al Met, dove stavamo andando comunque. Il <b>sabato</b> passa da 19:41 a <b>20:43</b>, e <b>la cena da Eataly si sposta dalle 17:55 alle 18:57</b>: a un'ora da cena.</small></span></div>
-    <div class="arow"><span class="ai">🚇</span><span class="an"><b>Metro: sui due trasferimenti che pesavano</b><small>Lunedì <b>Oculus → Katz's</b> e martedì <b>Top of the Rock → Vessel</b>: erano 3,2 km e 2,9 km a piedi in pieno sole. <b>Il martedì chiude alle 15:48</b>, con 1h42 di margine prima di JFK.</small></span></div>
-    <div class="arow"><span class="ai">😴</span><span class="an"><b>E il lunedì ti restituisce la sveglia</b><small>Il tempo risparmiato <b>non l'ho speso arrivando prima</b>: l'ho messo sul sonno. Si parte alle <b>8:25</b> invece che alle 8:00 — <b>25 minuti in più a letto</b> per tutti — e Little Island resta <b>19:18-20:03</b>, col tramonto delle 19:55 dentro la sosta esattamente come l'avevi approvato.</small></span></div>
+    <h3>Applicato</h3>
+    <div class="arow"><span class="ai">🚀</span><span class="an"><b>«Vai avanti adesso»</b><small>Non aspetto gli altri tre. La loro pagina <b>resta online</b> e i commenti li integro man mano; se però arrivasse una richiesta grossa su una giornata già chiusa, <b>non la applico di mia iniziativa</b> — te la giro con quello che costa, e decidi tu.</small></span></div>
+    <div class="arow"><span class="ai">🚌</span><span class="an"><b>«Usiamo di più il Big Bus»</b><small>È il cuore di questa pagina, qui sotto: due vincoli che non si aggirano, <b>quattro strade coi numeri</b>, una consigliata.</small></span></div>
+    <div class="arow"><span class="ai">🚐</span><span class="an"><b>Il van per JFK: sto cercando</b><small>Martedì 18, ritiro in hotel alle 17:30, 8 persone più bagagli. Ti riporto due o tre opzioni col prezzo. Piano B, sempre valido: 2 taxi.</small></span></div>
   </div>
 
-  <div class="note">
-    <b>🌇 Una cosa che vale la pena sapere, perché è successa tre volte.</b> Ogni volta che la giornata di lunedì si accorcia, <b>il tramonto rischia di scappare dall'altra parte</b>: si arriverebbe a Little Island troppo <i>presto</i> e si ripartirebbe prima che il sole scenda. Il calcolo se ne accorge da solo e me lo dice — e per questo i minuti risparmiati finiscono sulla sveglia invece che sull'arrivo. <b>«Si finisce prima» non è sempre un miglioramento.</b>
+  <!-- ============ DA FARE TU ============ -->
+  <div class="book" style="border-color:var(--accent); background:linear-gradient(135deg,#eef4fb,#fff)">
+    <h3 style="color:var(--accent)">📤 Una cosa da fare tu: gira il giro agli altri tre</h3>
+    <p style="margin-top:0; font-size:.9rem">La pagina per <b>MariaPaola, Tony e Barbara</b> è pronta e online. Mostra <b>l'itinerario e basta</b> — niente storia di come ci siamo arrivati, niente decisioni, niente conti: solo le sei giornate, quanto sono piene, a che ora si esce e si rientra, e come ci si sposta. In fondo hanno lo spazio per dire la loro.</p>
+    <div class="bkitem" style="border-color:#cfe0f2">
+      <div class="bt">🔗 <a href="https://faacq.github.io/nyc-itinerary-survey/" target="_blank" rel="noopener">faacq.github.io/nyc-itinerary-survey</a></div>
+      <div class="bw">Messaggio già pronto, se ti va di copiarlo:<br><br>
+      <i>«Ragazzi, ecco il giro di New York giorno per giorno. Dateci un'occhiata con calma: se qualcosa non vi convince o volete aggiungere qualcosa, in fondo alla pagina c'è lo spazio per scriverlo. Meglio adesso che lì. 🗽»</i></div>
+    </div>
+    <p style="margin-bottom:0; font-size:.88rem">⚠️ <b>Il loro feedback torna a me</b>, non a te: la pagina manda tutto su WhatsApp da sola.</p>
   </div>
 
-  <h2>🔎 La metro: adesso è verificata, non stimata</h2>
-  <p class="muted" style="margin-top:0">Ti avevo detto che le due tratte erano <b>stime</b>. Ho fatto fare la ricerca con le fonti ufficiali, e il risultato è buono: <b>esistono entrambe e sono più veloci di quanto avevo calcolato</b>.</p>
+  <!-- ============ LA DOMANDA ============ -->
+  <h2>🚌 «Usiamo di più il Big Bus» — ci ho lavorato</h2>
+  <p class="muted" style="margin-top:0">Ho provato a farlo sul serio, con i conti. <b>Due vincoli non si aggirano</b>, poi ci sono quattro strade vere.</p>
+
+  <div class="res">
+    <h3>Prima, i due muri contro cui si sbatte</h3>
+    <ul>
+      <li>🎫 <b>Il pass vale 2 giorni consecutivi</b>, e sono <b>sabato e domenica</b>. Lunedì e martedì il Big Bus <b>non lo abbiamo</b>: non è una scelta dell'itinerario, è il biglietto.</li>
+      <li>🕓 <b>Le linee chiudono presto</b>: la blu fa l'ultimo giro alle <b>16:00</b>, la rossa alle <b>16:30</b>. Quindi tutti gli spostamenti della sera — la cena da Eataly, il rientro da Dumbo — <b>non possono diventare bus</b>, comunque la si giri.</li>
+    </ul>
+    <div class="src">Dati verificati nella ricerca del 27 luglio, non stimati.</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📊 Dove siamo adesso</h3>
+    <p style="margin:.4em 0">Su <b>51 spostamenti</b> di tutto il viaggio, il Big Bus ne fa <b>3</b>: <b>95 minuti</b> passati sopra, tutti fra sabato e domenica. Il resto è a piedi (42) e in taxi (6).</p>
+    <p style="margin-bottom:0" class="muted">Non è poco per un pass usato come <i>trasporto</i>. È poco se lo consideriamo anche un'<b>attrazione</b> — che è come lo vendono, e credo sia quello che intendi.</p>
+  </div>
 
   <div class="sol">
-    <h4>✅ Le due tratte, verificate</h4>
-    <div style="font-size:.89rem">
-      🚇 <b>Lunedì — Oculus → Katz's: linea J diretta</b>, da <b>Fulton St</b> a <b>Delancey St-Essex St</b>. Sette minuti di treno, <b>21 minuti porta a porta</b>. A piedi erano cinquanta.<br><br>
-      🚇 <b>Martedì — Top of the Rock → Vessel: linea 7</b>, da <b>5 Av</b> a <b>34 St-Hudson Yards</b>. Cinque minuti di treno, <b>17 porta a porta</b>. A piedi erano quarantacinque.<br><br>
-      <b>Nessun cambio</b> in nessuna delle due: si sale e si scende, e basta.
+    <h4>💡 L'idea che sblocca tutto — ed è la tua</h4>
+    <div style="font-size:.9rem">
+      Il primo tentativo l'ho sbagliato: avevo <b>aggiunto</b> un giro panoramico dove capitava. Risultato, costava molto più della sua durata, perché bisognava anche <b>andare a prenderlo e tornare indietro</b>: la domenica la giornata finiva a <b>mezzanotte e un quarto</b>.<br><br>
+      La tua idea gira il problema: <b>il giro panoramico non è una deviazione, è il trasferimento — fatto per la via lunga.</b> Si raggiunge la fermata giusta (a piedi o in metro), si sale, si guarda la città, e <b>si scende dove l'itinerario continua comunque</b>. Così il costo non è tutto il giro: è solo la differenza rispetto al tragitto che avremmo fatto lo stesso.<br><br>
+      <b>E sulla linea blu funziona benissimo</b>, perché l'anello gira così: <i>Columbus Circle → Carnegie Hall → Times Square → Rockefeller → <b>il Met</b></i>. Cioè la "via lunga" attraversa <b>Midtown e tutta la 5th Avenue</b> e ci scarica <b>esattamente al Met</b>, dove il sabato dobbiamo andare.
     </div>
-    <div class="res2">➜ Le mie stime erano pessimiste di 6 e 10 minuti. Ho messo i numeri veri nel calcolo.</div>
+  </div>
+
+  <h3 style="margin-top:1.5em">Le quattro strade, coi numeri</h3>
+  <p class="muted" style="margin-top:0">Il sabato oggi finisce alle <b>19:41</b> e ha <b>1h49</b> di margine: è la giornata che può permetterselo.</p>
+
+  <div class="knot" data-prop="BUS" data-label="BUS - come usare di piu il Big Bus">
+    <div class="kt"><span class="kid">A</span>Il giro lungo verso il Met &nbsp;<span class="verd ok">consigliata</span></div>
+    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
+      Dopo pranzo si sale sul bus lì in zona e invece del salto diretto si fa <b>tutto l'anello</b>: Midtown, Times Square, Rockefeller, su per la 5th Avenue — <b>55 minuti di città dal piano di sopra</b> — e si scende al Met, che è dove stavamo andando.<br>
+      ➜ <b>Il sabato finisce alle 20:43</b> invece che alle 19:41, con <b>47 minuti</b> di margine. <b>Nessuna tappa tolta.</b><br>
+      ➜ <b>Effetto collaterale buono:</b> la cena da Eataly si sposta dalle 17:55 alle <b>18:57</b>. Oggi cenavamo alle sei meno cinque.
+    </div>
+
+    <div class="kt" style="margin-top:14px"><span class="kid">B</span>L'anello blu completo, al posto della funivia</div>
+    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
+      Il giro intero della linea blu, <b>75 minuti</b>, prendendo il posto della funivia di Roosevelt Island.<br>
+      ➜ Il sabato finisce alle <b>20:17</b>, margine 73'. Più bus di tutte le altre.<br>
+      ➜ ⚠️ <b>Ma toglie la funivia</b>, che è la tappa "fuori dai soliti itinerari" che aveva chiesto <b>MariaPaola</b>. Se scegli questa, lo sa da te.
+    </div>
+
+    <div class="kt" style="margin-top:14px"><span class="kid">C</span>Domenica: restare su più a lungo</div>
+    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
+      La domenica mattina siamo <b>già</b> sul bus per 44 minuti (dall'hotel giù verso SoHo): è di fatto un giro panoramico che nessuno aveva chiamato così. Si può <b>restare a bordo più a lungo</b>, scendere più giù e risalire a piedi verso Ghostbusters.<br>
+      ➜ Aggiunge <b>15-20 minuti</b> di bus, costa poco, ma <b>è la meno spettacolare</b>: quel tratto l'abbiamo già visto salendo.
+    </div>
+
+    <div class="kt" style="margin-top:14px"><span class="kid">D</span>Spostare i due giorni di pass a domenica + lunedì</div>
+    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
+      La più grossa, e la dico perché sarebbe scorretto tacerla. <b>Il lunedì è territorio della linea rossa</b>: Wall Street, Trinity, il World Trade Center, Chelsea — quattro fermate che sono esattamente le nostre tappe, e l'anello scende dal centro e <b>risale lungo il West Side</b>, che è la direzione del lunedì.<br>
+      ➜ ⚠️ <b>Ma il pass è di 2 giorni consecutivi</b>: prendere il lunedì vuol dire <b>rinunciare al sabato</b>, e il sabato ha bisogno del bus per salire al Met (senza, diventa un taxi che paghiamo). In più il lunedì parte alle 8:00, quando il bus non è ancora in servizio.<br>
+      ➜ Costa un cambio grosso a una giornata già chiusa. <b>Non la consiglio, ma è tua la scelta.</b>
+    </div>
+
+    <div class="chips" data-group="BUS" style="margin-top:12px">
+      <div class="chip yes" data-val="A - GIRO LUNGO VERSO IL MET">🚌 A — Il giro lungo</div>
+      <div class="chip maybe" data-val="B - ANELLO COMPLETO AL POSTO DELLA FUNIVIA">🔁 B — Anello completo</div>
+      <div class="chip maybe" data-val="C - DOMENICA PIU LUNGA">🌉 C — Domenica più lunga</div>
+      <div class="chip maybe" data-val="D - SPOSTARE IL PASS A DOM+LUN">📅 D — Pass dom+lun</div>
+      <div class="chip no" data-val="NESSUNA - VA BENE COSI">👍 Nessuna, va bene così</div>
+    </div>
+    <p class="muted" style="margin:10px 0 0; font-size:.85rem">Si possono anche sommare (A e C stanno insieme senza problemi): se ne vuoi più di una, scrivimelo nel testo libero in fondo.</p>
+  </div>
+
+  <div class="recalc">
+    ⚙️ <b>Una nota onesta sui numeri.</b> Le durate dei giri sono <b>stime dalla ricerca</b>, non orari ufficiali al minuto: il traffico di agosto le può spostare di un quarto d'ora. Le uso per capire <b>se una cosa ci sta</b>, non per prometterti l'ora esatta. E qualunque scelta fai, <b>rigiro tutto il calcolo</b> e ti rimando i numeri veri.
+  </div>
+
+  <h2>🚇 La metro: «limitare» era diventato «mai», ed è colpa mia</h2>
+
+  <div class="prob">
+    <h4>🔎 Una cosa da correggere, prima di chiederti qualsiasi cosa</h4>
+    <p style="margin:.3em 0">Il 24 luglio avevi detto: <i>«limitare la metro, meglio taxi/Uber»</i>. <b>Limitare vuol dire usarla poco. Non vuol dire non usarla mai.</b></p>
+    <p style="margin:.3em 0">Ho controllato i dati: su <b>51 spostamenti di tutto il viaggio, quelli in metro sono ZERO</b>. Nel tradurre la tua frase in itinerario l'ho resa <b>più rigida di come l'avevi detta</b> — e da lì in poi ogni pezzo del giro è nato su quella versione più rigida.</p>
+    <p style="margin:.3em 0 0"><b>Il conto di quell'errore si vede meglio guardando quanto camminiamo.</b></p>
+  </div>
+
+  <h3 style="margin-top:1.5em">🚶 Quanto si cammina davvero</h3>
+  <p class="muted" style="margin-top:0">Non te lo dico per spaventarti — <b>camminare a New York è il tour</b>. Te lo dico perché i chilometri sono di due tipi diversi, e uno dei due è solo fatica.</p>
+
+  <div class="card">
+    <div class="er" style="border-bottom:1px dashed var(--line)">
+      <span class="ic">🗽</span>
+      <span class="nm"><b>Camminare che È il viaggio</b><small>il Ponte di Brooklyn · la High Line · SoHo e Tribeca · Bryant Park · la 5th Avenue</small></span>
+      <span class="sugg" style="background:#f0f9f2; border-color:#bfe6cb; color:#2f7a46">si tiene</span>
+    </div>
+    <div class="er">
+      <span class="ic">😮‍💨</span>
+      <span class="nm"><b>Camminare per andare da A a B</b><small>nessuno se lo ricorderà: è solo tempo e sudore</small></span>
+      <span class="sugg" style="background:#fdf1f3; border-color:#f3d3da; color:#b23a5b">43,9 km</span>
+    </div>
+    <p style="margin:.8em 0 0"><b>Quarantaquattro chilometri di soli trasferimenti</b>, cioè circa <b>15 ore</b> di cammino e sull'ordine dei <b>60.000 passi</b> — <b>in più</b> rispetto alle camminate belle. Giorno per giorno: giovedì 2,6 km · venerdì 6,0 · sabato 9,2 · domenica 6,4 · <b>lunedì 11,4</b> · martedì 8,2.</p>
+  </div>
+
+  <div class="sol">
+    <h4>🎯 Tre trasferimenti dove la metro cambierebbe la giornata</h4>
+    <div style="font-size:.89rem">
+      <b>1. Lunedì, dall'Oculus da Katz's — 3,2 km a piedi, 50 minuti, alle 12:16.</b><br>
+      È il trasferimento più lungo del viaggio e cade <b>nell'ora peggiore</b>, in mezzo al niente: non si attraversa nulla che valga la pena. In metro sono <b>~15 minuti</b>. <b>Si guadagna più di mezz'ora e si salta il pezzo peggiore della giornata più lunga.</b><br><br>
+      <b>2. Martedì, dal Top of the Rock al Vessel — 2,9 km, 45 minuti, alle 11:30.</b><br>
+      Ultimo giorno, valigie da fare, e sono tre quarti d'ora di marcia sotto il sole. In metro <b>~15 minuti</b>.<br><br>
+      <b>3. Sabato, il giro attorno alla 59ª</b> (Bloomingdale's, funivia, Marc Jacobs): <b>5,3 km spezzettati</b> in tratte da mezz'ora l'una, tutte fuori dalla rete del bus.<br><br>
+      <b>Solo i primi due valgono circa un'ora e un quarto</b> — che è esattamente il tempo che il giro panoramico in Big Bus si mangerebbe il sabato.
+    </div>
   </div>
 
   <div class="res">
-    <h3>🎫 Biglietti: quattro cose da sapere prima di partire</h3>
+    <h3>🔓 E poi c'è quello che oggi non si vede</h3>
+    <p style="margin-top:0">Hai fatto la domanda giusta: <b>la metro non cambia solo come facciamo i salti che già facciamo. Cambia quali salti erano pensabili.</b></p>
     <ul>
-      <li><b>La MetroCard non si compra più</b> — da gennaio 2026. Si paga in <b>contactless (OMNY)</b>: carta, telefono, orologio, oppure una <b>tessera OMNY</b> che si compra alle macchinette in stazione.</li>
-      <li>⚠️ <b>Serve una tessera a testa.</b> Una sola carta può far passare fino a quattro persone, <b>ma al primo utilizzo non si può passare indietro</b> — e i passaggi di gruppo non contano per lo sconto settimanale. Con quattro ragazzi che magari il telefono non ce l'hanno, la cosa semplice è <b>comprare le tessere il primo giorno</b>, alla macchinetta della stazione sotto casa.</li>
-      <li><b>I ragazzi pagano intero.</b> Il gratis esiste solo <b>sotto i 44 pollici di altezza</b> (~112 cm), non per età: i nostri pagano tutti. <b>$3 a corsa a testa</b> — per otto sono <b>$24 a tratta</b>.</li>
-      <li><b>Non serve nessun abbonamento.</b> Lo sconto scatta dalla <b>tredicesima corsa</b> in sette giorni: noi ne faremo molte meno, quindi conviene pagare corsa per corsa. <i>(Ti avevo scritto $2,90: la tariffa vera è <b>$3</b>. Corretto.)</i></li>
+      <li><b>Le tappe scartate non sono in nessuna lista.</b> Quando una cosa costa troppo raggiungerla, non viene bocciata: <b>non viene proprio proposta</b>. Non so dirti quali sono, perché sono le opzioni che non ho mai messo sul tavolo.</li>
+      <li><b>«Una zona al giorno» è figlia del vincolo.</b> In 8, attraversare la città sono 2 taxi e mezz'ora di traffico. In metro sono 20 minuti. La regola resta buona <b>per il caldo</b>, ma smette di essere obbligata <b>per la logistica</b>.</li>
+      <li><b>Sblocca il Big Bus</b>, che è da dove siamo partiti: due fermate di metro per andare a prendere l'anello nel punto giusto vuol dire scegliere <b>da dove salire</b>.</li>
+      <li>🎡 <b>E la metro di New York è essa stessa una cosa da vedere</b> — le stazioni, i musicisti, la folla. Per quattro ragazzi che non l'hanno mai presa, <b>una corsa è un pezzo di viaggio</b>, non un trasferimento.</li>
     </ul>
-    <div class="src">Ricerca del 29 lug 2026 su fonti ufficiali MTA/OMNY, con l'elenco esplicito di ciò che non è stato possibile verificare.</div>
+    <div class="src">👉 Se apri la porta, <b>rifaccio una passata su cosa era stato escluso perché scomodo da raggiungere</b> e ti porto la lista. Ha senso <b>solo se la porta è aperta</b>.</div>
   </div>
 
-  <h2>❓ L'unica domanda nuova: i rientri della sera</h2>
-  <p class="muted" style="margin-top:0">La ricerca dice che <b>funzionano tutti e due</b>. Ma non è una questione di minuti, ed è per questo che la giro a te.</p>
+  <div class="card">
+    <h3 style="margin-top:0">⚖️ I contro, detti onestamente — e una correzione che devo farmi</h3>
+    <div class="princ"><span class="ic">🥵</span><div><b>Il caldo: avevo semplificato.</b> È vero che <b>la banchina</b> ad agosto è rovente. Ma <b>i vagoni sono con l'aria condizionata</b>, e la banchina la si prende per pochi minuti. Messa contro <b>50 minuti di marcia in pieno sole a mezzogiorno</b>, la metro è la scelta <b>più fresca</b>, non la più calda. Dirti solo «le banchine sono roventi» era un mezzo argomento.</div></div>
+    <div class="princ"><span class="ic">👥</span><div><b>Stare insieme in otto</b>, e questo resta vero. Vagone pieno, quattro ragazzi, porte che si chiudono: è la situazione in cui il gruppo si spezza. Si gestisce (si sale tutti dalla stessa porta, ci si dà la fermata prima di partire), ma è attenzione in più.</div></div>
+    <div class="princ"><span class="ic">💰</span><div><b>I soldi non sono il punto.</b> Le 6 tratte in taxi valgono <b>$140-200</b> in tutto; in metro sarebbero ~$23 a tratta per otto. Si risparmiano <b>decine di dollari, non centinaia</b>: sarebbe disonesto vendertela come una questione di prezzo. <b>Il guadagno vero è tempo e fatica.</b></div></div>
+  </div>
 
-  <div class="knot" data-prop="SERA" data-label="SERA - rientri serali in metro o taxi">
-    <div class="kt"><span class="kid">?</span>Domenica da Dumbo e lunedì da Little Island</div>
+  <div class="knot" data-prop="METRO" data-label="METRO - quanto usarla">
+    <div class="kt"><span class="kid">?</span>Quanto la usiamo, allora?</div>
     <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
-      <b>🌉 Domenica, da Dumbo verso l'hotel</b> (~19:20, dopo cena). Oggi: <b>2 taxi, ~$36</b>. In metro: <b>A o C diretta</b> da <b>High St</b> — otto minuti a piedi dal Time Out — fino a <b>42 St/Port Authority</b>, <b>18 minuti</b>, nessun cambio.<br><br>
-      <b>🌇 Lunedì, da Little Island</b> (~20:05, dopo il tramonto). Oggi: <b>2 taxi, ~$20</b>. In metro: <b>E</b> da <b>14 St/8 Av</b>, la fermata che indica Little Island stessa: <b>~16 minuti</b> in tutto. La ricerca la definisce <b>«la più facile delle due»</b>.<br><br>
-      ⚠️ <b>Perché non decido io.</b> Non è tempo — è come vi sentite a fine giornata, con quattro ragazzi stanchi. <b>MariaPaola e Peppe avevano scritto che li preoccupa la sicurezza</b>, e la ricerca è esplicita: <i>decidete in base ai nervi, non solo ai minuti</i>. Il taxi a fine serata è una scelta difendibilissima.<br><br>
-      ⛴️ <i>Il traghetto da Dumbo l'ho controllato ed è da escludere: porta a East 34th Street, non a Times Square, e poi bisogna attraversare comunque.</i>
+      <b>🎯 A — «Limitare» sul serio: poca, e sui trasferimenti che pesano</b> <span class="verd ok">è quello che avevi detto</span><br>
+      La uso <b>sui due o tre trasferimenti lunghi qui sopra</b>, per raggiungere il Big Bus nel punto giusto, e per i rientri lunghi della sera. Le camminate belle restano tutte. <b>Ogni volta te lo dico prima</b>, non la infilo di nascosto.<br><br>
+      <b>🔍 B — Come A, e rifaccio la ricerca</b><br>
+      Come sopra, <b>più</b> una passata su <b>cosa era stato escluso perché scomodo da raggiungere</b>: ti porto la lista, e decidi se qualcosa merita. Rischio dichiarato: potrebbe non uscirne niente, e sono ore del mio tempo, non del vostro.<br><br>
+      <b>🚫 C — No, davvero zero metro</b><br>
+      Se l'intenzione era proprio quella, resta tutto com'è: si cammina di più, si spende un po' di più, non si scende mai sotto terra. Legittimo — dimmelo e chiudo la questione.
     </div>
-    <div class="chips" data-group="SERA">
-      <div class="chip yes" data-val="TUTTI E DUE IN METRO">🚇 Tutti e due in metro</div>
-      <div class="chip maybe" data-val="SOLO LUNEDI (Little Island) IN METRO">🌇 Solo il lunedì</div>
-      <div class="chip no" data-val="NESSUNO - RESTA IL TAXI">🚕 Nessuno, resta il taxi</div>
+    <div class="chips" data-group="METRO">
+      <div class="chip yes" data-val="A - POCA, SUI TRASFERIMENTI CHE PESANO">🎯 A — Poca, dove pesa</div>
+      <div class="chip maybe" data-val="B - COME A + RICERCA SU COSA ERA ESCLUSO">🔍 B — A + rifai la ricerca</div>
+      <div class="chip no" data-val="C - ZERO METRO">🚫 C — Davvero zero</div>
     </div>
   </div>
 
-  <div class="note">
-    ⚠️ <b>Una cosa che ho trovato nella ricerca e che tengo d'occhio.</b> Dal <b>17 al 21 agosto</b> la linea <b>1</b> non circola fra 14 St e South Ferry. <b>Non tocca il nostro percorso</b> — noi usiamo la J e la 7 — ma toglie l'alternativa più ovvia in caso di problemi proprio nella zona del lunedì. Fa parte delle cose che <b>ricontrollo pochi giorni prima di partire</b>, insieme agli orari del Big Bus e all'ora esatta del tramonto.
-  </div>
 
   <!-- ============ COSA SUCCEDE ADESSO ============ -->
   <h2>🔒 Come si chiude, da qui alla guida</h2>
@@ -387,14 +497,14 @@
   </div>
 
   <div class="footer">
-    Analisi logistica v9 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v8.2 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
 
 <div class="bar">
   <div class="in">
-    <div class="status" id="statusLine">Una domanda sola 👆</div>
+    <div class="status" id="statusLine">2 cose da scegliere 👆</div>
     <button class="send" id="sendBtn">📲 Invia su WhatsApp</button>
   </div>
 </div>
@@ -564,11 +674,11 @@ var DAYS = [
   "id": "g3",
   "name": "Giorno 3 · Sab 15",
   "zone": "Central Park & Uptown",
-  "pct": 94,
-  "verd": "warn",
+  "pct": 86,
+  "verd": "ok",
   "out": "08:45",
   "back": "21:30",
-  "end": "20:43",
+  "end": "19:41",
   "bus": 1,
   "taxi": 2,
   "stops": [
@@ -616,20 +726,12 @@ var DAYS = [
     "lg": 8
    },
    {
-    "n": "Big Bus: giro panoramico verso il Met (Midtown + 5th Ave)",
-    "i": "🚲",
-    "s": "attivita ~55 min",
-    "m": 48,
-    "mv": "bus",
-    "lg": 29
-   },
-   {
     "n": "Met steps (Gossip Girl) + Museum Mile",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 22,
-    "mv": "walk",
-    "lg": 7
+    "m": 9,
+    "mv": "bus",
+    "lg": 29
    },
    {
     "n": "Guggenheim (solo esterno)",
@@ -770,9 +872,9 @@ var DAYS = [
   "zone": "FiDi → Village → West Side",
   "pct": 93,
   "verd": "warn",
-  "out": "08:25",
+  "out": "08:00",
   "back": "21:30",
-  "end": "20:35",
+  "end": "20:34",
   "bus": 0,
   "taxi": 2,
   "stops": [
@@ -804,7 +906,7 @@ var DAYS = [
     "n": "Oculus",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 26,
+    "m": 22,
     "mv": "walk",
     "lg": 11
    },
@@ -812,9 +914,9 @@ var DAYS = [
     "n": "Katz's Delicatessen (LES)",
     "i": "🍽️",
     "s": "pasto ~1h",
-    "m": 66,
-    "mv": "metro",
-    "lg": 26
+    "m": 90,
+    "mv": "walk",
+    "lg": 50
    },
    {
     "n": "Sanctum Sanctorum (177A Bleecker)",
@@ -878,11 +980,11 @@ var DAYS = [
   "id": "g6",
   "name": "Giorno 6 · Mar 18",
   "zone": "Midtown / West Side + partenza",
-  "pct": 81,
+  "pct": 85,
   "verd": "ok",
   "out": "08:30",
   "back": "17:30",
-  "end": "15:48",
+  "end": "16:11",
   "bus": 0,
   "taxi": 0,
   "stops": [
@@ -890,7 +992,7 @@ var DAYS = [
     "n": "Top of the Rock (mattina)",
     "i": "🏙️",
     "s": "terrazza ~2h",
-    "m": 136,
+    "m": 144,
     "mv": "walk",
     "lg": 16,
     "fixed": "09:30"
@@ -899,9 +1001,9 @@ var DAYS = [
     "n": "Vessel + Hudson Yards",
     "i": "📸",
     "s": "foto ~15 min",
-    "m": 47,
-    "mv": "metro",
-    "lg": 22
+    "m": 70,
+    "mv": "walk",
+    "lg": 45
    },
    {
     "n": "All'Antico Vinaio (schiacciata) - PRANZO",
@@ -1006,8 +1108,7 @@ function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
 var MOVE = {
   walk: { e:'🚶', t:'a piedi' },
   bus:  { e:'🚌', t:'Big Bus' },
-  taxi: { e:'🚕', t:'taxi/Uber' },
-  metro:{ e:'🚇', t:'metro' }
+  taxi: { e:'🚕', t:'taxi/Uber' }
 };
 function moveTag(s){
   var m = MOVE[s.mv] || MOVE.walk;
@@ -1208,11 +1309,12 @@ function updateStatus(){
   Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) rev++; });
   var edits = Object.keys(slotOverride).length;
   var t = [];
-  if(sel['SERA']) t.push('rientri ✓');
+  if(sel['BUS']) t.push('Big Bus ✓');
+  if(sel['METRO']) t.push('metro ✓');
   if(rev) t.push(rev + (rev === 1 ? ' giornata da riaprire' : ' giornate da riaprire'));
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
-    t.length ? (t.join(' · ') + ' — invia quando vuoi') : 'Una domanda sola 👆';
+    t.length ? (t.join(' · ') + ' — invia quando vuoi') : '2 cose da scegliere 👆';
 }
 
 /* ============================================================
@@ -1224,9 +1326,9 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v9',
+  ver:   'v8.2',
   built: '2026-07-29',
-  plan:  'itinerario v2.2 + D55 - metro verificata, giro panoramico applicato',
+  plan:  'itinerario v2.2 + D51 - risposte applicate, lock-in avviato',
   stale: ''
 };
 
@@ -1244,9 +1346,10 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v9: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v8.2: risposta di Fabrizio');
 
-  if(sel['SERA']){ L.push(''); L.push('🌙 RIENTRI SERALI: ' + sel['SERA']); }
+  if(sel['BUS']){ L.push(''); L.push('🚌 BIG BUS, strada scelta: ' + sel['BUS']); }
+  if(sel['METRO']){ L.push(''); L.push('🚇 METRO: ' + sel['METRO']); }
 
   /* Le giornate sono gia' bloccate: non si chiede di riconfermarle.
      Nel messaggio finiscono SOLO quelle che vuole riaprire. */
