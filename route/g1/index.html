@@ -31,6 +31,11 @@
   .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
              padding:11px 13px;margin:13px 0;font-size:.87rem}
   .changelog h3{margin:0 0 6px;font-size:.93rem}
+  /* --- chiave di lettura --- */
+  .pr{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid #f2ede3}
+  .pr:first-of-type{border-top:none}
+  .pr .pi{flex:none;width:24px;text-align:center;font-size:1.05rem;line-height:1.4}
+  .pr small{color:#4a5a68}
   /* --- partenza --- */
   .startcard{background:#22303c;color:#fff;border-radius:var(--radius);padding:12px 14px;
              margin:11px 0;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;
@@ -58,7 +63,9 @@
   .step.on{box-shadow:0 0 0 3px rgba(31,59,115,.16),var(--shadow)}
   .step .hd{display:flex;align-items:baseline;gap:8px}
   .num{flex:none;width:26px;height:26px;border-radius:50%;color:#fff;font-size:.8rem;
-       font-weight:800;display:flex;align-items:center;justify-content:center}
+       font-weight:800;display:flex;align-items:center;justify-content:center;
+       cursor:pointer;box-shadow:0 0 0 0 rgba(31,59,115,.5);transition:box-shadow .18s}
+  .num:hover{box-shadow:0 0 0 4px rgba(31,59,115,.18)}
   .nm{font-weight:800;font-size:1rem;flex:1}
   .tm{font-size:.78rem;color:var(--muted);font-weight:700;white-space:nowrap}
   .dw{margin-top:5px;font-size:.83rem;color:var(--muted)}
@@ -140,7 +147,7 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il gio 13</h1>
   <div class="sub">Arrivo / Midtown (sera) — si esce alle <b>19:00</b>, si rientra verso le <b>21:49</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v6 &middot; 30 lug 2026</div>
+  <div class="ver">🧭 percorso v7 &middot; 30 lug 2026</div>
 </div></header>
 
 <div class="mapwrap"><div class="wrap" style="padding-bottom:0">
@@ -157,8 +164,7 @@
       <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="14,5,2,5"/></svg>taxi
     </span>
     <span>▸ senso di marcia</span>
-    <span>🚏 <b>fermate del bus</b>: piene = si sale/scende · vuote = il bus ferma ma noi restiamo su</span>
-    <span>⚠️ la linea è <b>l'ipotesi del percorso</b> — su ogni tappa c'è il link al <b>percorso vero su Google Maps</b></span>
+    <span>🚏 fermate del bus</span>
   </div>
   <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
 </div></div>
@@ -169,6 +175,42 @@
     Non e' l'itinerario: quello lo conosci. <b>E' il filo che unisce le tappe</b> — dove si cammina,
     in che direzione, quanto dura, dove si sale sul bus, cosa si vede dal bus e dove si scende.
     <b>Non devi rispondere niente</b>: si legge e basta. Se qualcosa non torna, dimmelo e lo cambio.
+  </div>
+
+  <!-- ============ CHIAVE DI LETTURA ============ -->
+  <div class="card">
+    <h3 style="margin:0 0 4px">📖 Come si legge</h3>
+    <p class="muted" style="margin:0 0 10px;font-size:.85rem">Sette cose, e poi la pagina si legge da sola.</p>
+
+    <div class="pr"><span class="pi">🎨</span><div><b>Il colore dice QUALE tratta è</b><br>
+      <small>La prima è blu, la seconda arancione, e così via. <b>Lo stesso colore torna sulla scheda</b> —
+      quindi la linea che vedi sulla mappa e il riquadro che stai leggendo sono la stessa cosa.</small></div></div>
+
+    <div class="pr"><span class="pi">〰️</span><div><b>La forma della linea dice COME ci si muove</b><br>
+      <small>Linea <b>piena</b> = a piedi &middot; <b>tratteggiata</b> = Big Bus &middot;
+      <b>tratto-punto</b> = taxi &middot; <b>punteggiata</b> = metro.</small></div></div>
+
+    <div class="pr"><span class="pi">➤</span><div><b>Le frecce dicono il senso di marcia</b><br>
+      <small>Sono del colore della tratta e puntano dove si va: non serve dedurlo dai numeri.</small></div></div>
+
+    <div class="pr"><span class="pi">📏</span><div><b>Una linea dritta NON è un errore</b><br>
+      <small>Vuol dire <b>«grosso modo di qui»</b>. Dove il percorso calcolato non era attendibile — faceva
+      girare il blocco per fare cento metri — ho preferito la linea dritta, che è onesta.
+      <b>A guidarti sul posto ci pensa Google Maps: il link è su ogni tappa.</b></small></div></div>
+
+    <div class="pr"><span class="pi">①</span><div><b>Se clicchi un numero, ti porta sulla mappa</b><br>
+      <small>Tocca il <b>numero</b> di una tappa e la mappa si sposta su quel pezzo di strada, col pallino
+      che si ingrandisce. Funziona anche al contrario: <b>tocca un pallino sulla mappa e torni alla sua
+      scheda</b>. La bandierina 🏁 è la partenza, e risponde come le altre.</small></div></div>
+
+    <div class="pr"><span class="pi">🚏</span><div><b>I quadratini sono le fermate del bus</b><br>
+      <small><b>Pieni</b>, con scritto SALI o SCENDI = lì si sale e si scende. <b>Vuoti e numerati</b> = il bus
+      ferma, ma noi restiamo seduti. Da vicino compare il nome; e nella scheda del bus c'è
+      <b>l'elenco scritto</b>, dove toccando una fermata la mappa ci va sopra.</small></div></div>
+
+    <div class="pr"><span class="pi">⏰</span><div><b>Gli orari del bus sono quelli che il piano si aspetta</b><br>
+      <small>Big Bus dichiara <b>solo ogni quanto passa</b>, non l'ora di ogni fermata. Quindi servono a
+      sapere <b>quando essere lì</b>, non a scendere al minuto.</small></div></div>
   </div>
 
   <div id="steps"></div>
@@ -375,7 +417,7 @@ STEPS.forEach(function(s, i){
   }
 
   h += '<div class="step" id="s' + i + '" style="border-left-color:' + s.col + '"><div class="hd">' +
-       '<span class="num" style="background:' + s.col + '">' + (i+1) + '</span>' +
+       '<span class="num" data-goto="' + i + '" title="portami sulla mappa" style="background:' + s.col + '">' + (i+1) + '</span>' +
        '<span class="nm">' + s.i + ' ' + esc(s.n) + (s.opt ? '<span class="opt">se c\u2019e\u2019 tempo</span>' : '') + '</span>' +
        '<span class="tm">' + s.arr + '</span></div>';
   h += '<div class="dw">ci si sta <b>' + s.dwell + ' minuti</b> &middot; si riparte alle <b>' + s.dep + '</b></div>';
@@ -477,6 +519,16 @@ STEPS.forEach(function(s, i){
 if(startMarker && startCard){
   startMarker.on('click', function(){ goTo(-1, startCard); });
 }
+
+/* tocchi il NUMERO di una tappa -> la mappa ci va sopra. E' scritto nella chiave
+   di lettura, quindi deve funzionare esattamente cosi'. */
+document.querySelectorAll('.num[data-goto]').forEach(function(b){
+  b.addEventListener('click', function(ev){
+    ev.stopPropagation();
+    activate(parseInt(b.getAttribute('data-goto'), 10));
+    document.getElementById('map').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
 
 /* tocchi una fermata nell'elenco -> la mappa ci va sopra e la fermata si apre */
 document.querySelectorAll('.sl-chip').forEach(function(b){

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Come si gira - Giorno 4 · Dom 16</title>
+<title>Come si gira - Giorno 1 · Gio 13</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root{--bg:#fbf7f0;--card:#fff;--ink:#22303c;--muted:#6b7a88;--line:#e7ddcd;
@@ -31,11 +31,6 @@
   .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
              padding:11px 13px;margin:13px 0;font-size:.87rem}
   .changelog h3{margin:0 0 6px;font-size:.93rem}
-  /* --- chiave di lettura --- */
-  .pr{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid #f2ede3}
-  .pr:first-of-type{border-top:none}
-  .pr .pi{flex:none;width:24px;text-align:center;font-size:1.05rem;line-height:1.4}
-  .pr small{color:#4a5a68}
   /* --- partenza --- */
   .startcard{background:#22303c;color:#fff;border-radius:var(--radius);padding:12px 14px;
              margin:11px 0;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;
@@ -63,9 +58,7 @@
   .step.on{box-shadow:0 0 0 3px rgba(31,59,115,.16),var(--shadow)}
   .step .hd{display:flex;align-items:baseline;gap:8px}
   .num{flex:none;width:26px;height:26px;border-radius:50%;color:#fff;font-size:.8rem;
-       font-weight:800;display:flex;align-items:center;justify-content:center;
-       cursor:pointer;box-shadow:0 0 0 0 rgba(31,59,115,.5);transition:box-shadow .18s}
-  .num:hover{box-shadow:0 0 0 4px rgba(31,59,115,.18)}
+       font-weight:800;display:flex;align-items:center;justify-content:center}
   .nm{font-weight:800;font-size:1rem;flex:1}
   .tm{font-size:.78rem;color:var(--muted);font-weight:700;white-space:nowrap}
   .dw{margin-top:5px;font-size:.83rem;color:var(--muted)}
@@ -145,9 +138,9 @@
 <body>
 
 <header class="hero"><div class="wrap">
-  <h1>Come si gira il dom 16</h1>
-  <div class="sub">Downtown & Brooklyn (Big Bus g.2, linea ROSSA) — si esce alle <b>10:30</b>, si rientra verso le <b>20:22</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v7 &middot; 30 lug 2026</div>
+  <h1>Come si gira il gio 13</h1>
+  <div class="sub">Arrivo / Midtown (sera) — si esce alle <b>19:00</b>, si rientra verso le <b>21:49</b>. Qui sotto il giro, pezzo per pezzo.</div>
+  <div class="ver">🧭 percorso v6 &middot; 30 lug 2026</div>
 </div></header>
 
 <div class="mapwrap"><div class="wrap" style="padding-bottom:0">
@@ -164,7 +157,8 @@
       <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="14,5,2,5"/></svg>taxi
     </span>
     <span>▸ senso di marcia</span>
-    <span>🚏 fermate del bus</span>
+    <span>🚏 <b>fermate del bus</b>: piene = si sale/scende · vuote = il bus ferma ma noi restiamo su</span>
+    <span>⚠️ la linea è <b>l'ipotesi del percorso</b> — su ogni tappa c'è il link al <b>percorso vero su Google Maps</b></span>
   </div>
   <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
 </div></div>
@@ -177,51 +171,15 @@
     <b>Non devi rispondere niente</b>: si legge e basta. Se qualcosa non torna, dimmelo e lo cambio.
   </div>
 
-  <!-- ============ CHIAVE DI LETTURA ============ -->
-  <div class="card">
-    <h3 style="margin:0 0 4px">📖 Come si legge</h3>
-    <p class="muted" style="margin:0 0 10px;font-size:.85rem">Sette cose, e poi la pagina si legge da sola.</p>
-
-    <div class="pr"><span class="pi">🎨</span><div><b>Il colore dice QUALE tratta è</b><br>
-      <small>La prima è blu, la seconda arancione, e così via. <b>Lo stesso colore torna sulla scheda</b> —
-      quindi la linea che vedi sulla mappa e il riquadro che stai leggendo sono la stessa cosa.</small></div></div>
-
-    <div class="pr"><span class="pi">〰️</span><div><b>La forma della linea dice COME ci si muove</b><br>
-      <small>Linea <b>piena</b> = a piedi &middot; <b>tratteggiata</b> = Big Bus &middot;
-      <b>tratto-punto</b> = taxi &middot; <b>punteggiata</b> = metro.</small></div></div>
-
-    <div class="pr"><span class="pi">➤</span><div><b>Le frecce dicono il senso di marcia</b><br>
-      <small>Sono del colore della tratta e puntano dove si va: non serve dedurlo dai numeri.</small></div></div>
-
-    <div class="pr"><span class="pi">📏</span><div><b>Una linea dritta NON è un errore</b><br>
-      <small>Vuol dire <b>«grosso modo di qui»</b>. Dove il percorso calcolato non era attendibile — faceva
-      girare il blocco per fare cento metri — ho preferito la linea dritta, che è onesta.
-      <b>A guidarti sul posto ci pensa Google Maps: il link è su ogni tappa.</b></small></div></div>
-
-    <div class="pr"><span class="pi">①</span><div><b>Se clicchi un numero, ti porta sulla mappa</b><br>
-      <small>Tocca il <b>numero</b> di una tappa e la mappa si sposta su quel pezzo di strada, col pallino
-      che si ingrandisce. Funziona anche al contrario: <b>tocca un pallino sulla mappa e torni alla sua
-      scheda</b>. La bandierina 🏁 è la partenza, e risponde come le altre.</small></div></div>
-
-    <div class="pr"><span class="pi">🚏</span><div><b>I quadratini sono le fermate del bus</b><br>
-      <small><b>Pieni</b>, con scritto SALI o SCENDI = lì si sale e si scende. <b>Vuoti e numerati</b> = il bus
-      ferma, ma noi restiamo seduti. Da vicino compare il nome; e nella scheda del bus c'è
-      <b>l'elenco scritto</b>, dove toccando una fermata la mappa ci va sopra.</small></div></div>
-
-    <div class="pr"><span class="pi">⏰</span><div><b>Gli orari del bus sono quelli che il piano si aspetta</b><br>
-      <small>Big Bus dichiara <b>solo ogni quanto passa</b>, non l'ora di ogni fermata. Quindi servono a
-      sapere <b>quando essere lì</b>, non a scendere al minuto.</small></div></div>
-  </div>
-
   <div id="steps"></div>
 
-  <div class="footer">Giorno 4 · Dom 16 · la compagnia · New York 13-18 ago 2026<br>Percorso generato dai dati del giro — 9 tappe</div>
+  <div class="footer">Giorno 1 · Gio 13 · la compagnia · New York 13-18 ago 2026<br>Percorso generato dai dati del giro — 3 tappe</div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-var STEPS = [{"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.75960,-73.98530&destination=40.72460,-73.99770&travelmode=transit", "n": "Ghostbusters HQ (14 N Moore, Tribeca)", "i": "📸", "arr": "11:20", "dep": "11:35", "dwell": 15, "mode": "bus", "leg": 50, "brk": {"wait": 15, "ride": 26, "board": 9}, "km": 6.61, "opt": false, "lat": 40.7196, "lon": -74.0067, "note": "must-do di Fabrizio; Red da M&M's World -> scendi SoHo (Broadway/Spring) + 15' a piedi", "col": "#2a78d6", "clock": {"leave": "10:30", "at_stop": "10:39", "catch": "10:54", "off": "11:20", "walk_after": true, "every": 30}, "transit": {"line": "Big Bus - linea ROSSA (Downtown)", "board": {"stop": "M&M's World", "n": 1, "where": "7th Ave / 48th St", "lat": 40.7596, "lon": -73.9853}, "alight": {"stop": "SoHo", "n": 5, "where": "Broadway / Spring St", "lat": 40.7246, "lon": -73.9977}, "via": [{"stop": "Times Square", "n": 2, "lat": 40.758, "lon": -73.9855}, {"stop": "Empire State", "n": 3, "lat": 40.7484, "lon": -73.9857}, {"stop": "Flatiron", "n": 4, "lat": 40.7411, "lon": -73.9897}], "sees": "si scende tutta Midtown e poi Broadway: Times Square, l'Empire State sulla 32a, il Flatiron sulla 23a, e si entra a SoHo", "then": "dalla fermata ~15' a piedi verso ovest fino a N Moore St, nel cuore di Tribeca", "coords_checked": false}, "segs": [{"kind": "walk", "line": [[40.7585, -73.9843], [40.7596, -73.9853]], "label": "a piedi fino alla fermata"}, {"kind": "bus", "line": [[40.7596, -73.9853], [40.758, -73.9855], [40.7484, -73.9857], [40.7411, -73.9897], [40.7246, -73.9977]], "label": "Big Bus - linea ROSSA (Downtown)"}, {"kind": "walk", "line": [[40.724523, -73.997542], [40.72428, -73.997747], [40.724235, -73.997785], [40.724199, -73.997816], [40.723973, -73.998007], [40.723068, -73.998772], [40.723021, -73.998812], [40.72298, -73.998846], [40.722735, -73.999054], [40.721905, -73.999765], [40.721857, -73.999807], [40.721794, -73.999862], [40.721842, -73.999953], [40.721856, -73.999981], [40.72214, -74.000553], [40.722167, -74.000608], [40.722195, -74.000665], [40.722221, -74.000718], [40.722515, -74.001316], [40.722535, -74.001357], [40.722566, -74.00142], [40.722595, -74.001477], [40.722884, -74.002065], [40.722907, -74.002112], [40.72294, -74.002179], [40.722965, -74.00223], [40.723263, -74.002835], [40.723284, -74.00288], [40.723293, -74.002902], [40.723303, -74.002932], [40.723311, -74.002961], [40.723317, -74.002995], [40.723322, -74.003023], [40.723335, -74.003102], [40.723435, -74.003701], [40.723445, -74.003751], [40.723458, -74.003842], [40.723471, -74.003911], [40.723593, -74.004585], [40.723605, -74.00465], [40.723631, -74.004796], [40.723643, -74.004866], [40.723656, -74.004936], [40.72366, -74.00499], [40.723755, -74.005909], [40.723761, -74.005967], [40.723791, -74.006113], [40.723761, -74.006117], [40.723702, -74.006127], [40.72319, -74.006206], [40.723132, -74.006215], [40.723079, -74.006223], [40.722986, -74.006238], [40.7227, -74.006297], [40.722569, -74.006317], [40.72243, -74.006334], [40.722356, -74.006344], [40.722313, -74.00635], [40.72192, -74.006411], [40.721874, -74.006422], [40.721808, -74.006442], [40.721727, -74.006467], [40.721692, -74.006476], [40.721667, -74.006481], [40.721117, -74.006579], [40.720617, -74.006662], [40.720509, -74.00668], [40.720453, -74.006692], [40.720372, -74.006707], [40.71985, -74.006801], [40.719785, -74.006815], [40.719715, -74.006831], [40.719616, -74.00685]], "label": "dalla fermata ~15' a piedi verso ovest fino a N Moore St, nel cuore di Tribeca"}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.71960,-74.00670&destination=40.72450,-73.99900&travelmode=walking", "n": "SoHo / Tribeca (passeggiata)", "i": "🚶", "arr": "11:58", "dep": "12:58", "dwell": 60, "mode": "walk", "leg": 23, "brk": null, "km": 1.19, "opt": false, "lat": 40.7245, "lon": -73.999, "note": "", "col": "#eb6834", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.7196, -74.0067], [40.7245, -73.999]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.72450,-73.99900&destination=40.72370,-73.99850&travelmode=walking", "n": "Shopping SoHo (Marc Jacobs, Alo, sneakers)", "i": "🛍️", "arr": "13:07", "dep": "13:27", "dwell": 20, "mode": "walk", "leg": 9, "brk": null, "km": 0.14, "opt": true, "lat": 40.7237, "lon": -73.9985, "note": "", "col": "#1baf7a", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.7245, -73.999], [40.7237, -73.9985]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.72370,-73.99850&destination=40.71580,-73.99700&travelmode=walking", "n": "Chinatown / Little Italy - PRANZO", "i": "🍽️", "arr": "13:51", "dep": "15:06", "dwell": 75, "mode": "walk", "leg": 24, "brk": null, "km": 1.24, "opt": false, "lat": 40.7158, "lon": -73.997, "note": "D37 - e' il PRANZO della domenica (P3: uno solo): passeggiata + tavola a Little Italy. SPOSTATA QUI dal lunedi: sta tra SoHo e City Hall, sulla strada del ponte. Cosi' il lunedi arriva a Little Island per il tramonto e la domenica si riempie", "col": "#eda100", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.72361, -73.998314], [40.723068, -73.998772], [40.723021, -73.998812], [40.722982, -73.998722], [40.722696, -73.99804], [40.722669, -73.997975], [40.722647, -73.997925], [40.722383, -73.997312], [40.722355, -73.997246], [40.722299, -73.997119], [40.722257, -73.997016], [40.721979, -73.996332], [40.721952, -73.996266], [40.72193, -73.99621], [40.721652, -73.99553], [40.721624, -73.99546], [40.721574, -73.995481], [40.720984, -73.995715], [40.720896, -73.99575], [40.720815, -73.995781], [40.720251, -73.995999], [40.72018, -73.996027], [40.720115, -73.996052], [40.719125, -73.996446], [40.719062, -73.996472], [40.71899, -73.996503], [40.718691, -73.996632], [40.718417, -73.996771], [40.718133, -73.996936], [40.717924, -73.997073], [40.717917, -73.997078], [40.717878, -73.997103], [40.717826, -73.997134], [40.717822, -73.997138], [40.71755, -73.99731], [40.716928, -73.997704], [40.716831, -73.997766], [40.716717, -73.997834], [40.715683, -73.99846], [40.71563, -73.998493], [40.715614, -73.998444], [40.715577, -73.99834], [40.715401, -73.99783], [40.715384, -73.997783], [40.715361, -73.997716], [40.715415, -73.997684], [40.71593, -73.997368]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.71800,-73.99900&destination=40.71270,-74.00430&travelmode=transit", "n": "Ponte di Brooklyn a piedi (da City Hall)", "i": "🚶", "arr": "15:34", "dep": "16:34", "dwell": 60, "mode": "bus", "leg": 28, "brk": {"wait": 15, "ride": 4, "board": 9}, "km": 0.99, "opt": false, "lat": 40.7127, "lon": -74.0043, "note": "sogno di MariaPaola e Peppe; Red fermata 7 Brooklyn Bridge; attraversata ~40-55'", "col": "#e87ba4", "clock": {"leave": "15:06", "at_stop": "15:15", "catch": "15:30", "off": "15:34", "walk_after": false, "every": 30}, "transit": {"line": "Big Bus - linea ROSSA (Downtown)", "board": {"stop": "Chinatown", "n": 6, "where": "Lafayette St", "lat": 40.718, "lon": -73.999}, "alight": {"stop": "Brooklyn Bridge", "n": 7, "where": "Park Row / City Hall", "lat": 40.7127, "lon": -74.0043}, "sees": "una sola fermata, il salto corto da Little Italy all'imbocco del ponte - si passa davanti al Municipio", "then": "l'imbocco pedonale del ponte parte proprio da li': da qui si cammina, il bus non arriva a Dumbo", "coords_checked": false}, "segs": [{"kind": "walk", "line": [[40.7158, -73.997], [40.718, -73.999]], "label": "a piedi fino alla fermata"}, {"kind": "bus", "line": [[40.718, -73.999], [40.7127, -74.0043]], "label": "Big Bus - linea ROSSA (Downtown)"}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.71270,-74.00430&destination=40.70330,-73.98940&travelmode=walking", "n": "Dumbo (Washington St + Manhattan Bridge)", "i": "📸", "arr": "17:11", "dep": "17:26", "dwell": 15, "mode": "walk", "leg": 38, "brk": null, "km": 2.29, "opt": false, "lat": 40.7033, "lon": -73.9894, "note": "la vista iconica", "col": "#008300", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.7127, -74.0043], [40.7033, -73.9894]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.70330,-73.98940&destination=40.70240,-73.99620&travelmode=walking", "n": "Foto al molo (Brooklyn Bridge Park, Pier 1)", "i": "📸", "arr": "17:44", "dep": "17:59", "dwell": 15, "mode": "walk", "leg": 18, "brk": null, "km": 0.81, "opt": true, "lat": 40.7024, "lon": -73.9962, "note": "foto di Tony", "col": "#4a3aa7", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.703195, -73.989406], [40.703198, -73.989501], [40.703201, -73.98958], [40.703204, -73.989669], [40.703242, -73.990595], [40.703247, -73.990666], [40.70325, -73.990741], [40.703276, -73.991247], [40.703293, -73.991816], [40.70332, -73.99256], [40.703335, -73.993062], [40.703338, -73.993162], [40.703353, -73.993646], [40.70336, -73.993841], [40.703358, -73.993884], [40.70335, -73.993923], [40.703337, -73.993955], [40.703321, -73.993974], [40.703178, -73.994125], [40.703064, -73.994242], [40.703054, -73.99425], [40.703004, -73.994296], [40.702959, -73.994335], [40.702911, -73.99437], [40.702948, -73.994467], [40.702966, -73.994531], [40.702979, -73.99459], [40.702984, -73.99463], [40.702984, -73.994667], [40.702978, -73.9947], [40.702966, -73.994725], [40.702952, -73.994744], [40.702928, -73.994763], [40.702879, -73.994783], [40.702826, -73.994814], [40.702814, -73.994822], [40.702491, -73.995018], [40.702454, -73.99504], [40.702168, -73.995208], [40.702065, -73.995272]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.70240,-73.99620&destination=40.70360,-73.99060&travelmode=walking", "n": "Time Out Market Dumbo - CENA", "i": "🍽️", "arr": "18:15", "dep": "19:35", "dwell": 80, "mode": "walk", "leg": 16, "brk": null, "km": 0.69, "opt": false, "lat": 40.7036, "lon": -73.9906, "note": "D37 - diventa la CENA (vista ponti al tramonto), non il pranzo: cosi' i pasti stanno agli orari giusti", "col": "#e34948", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.702065, -73.995272], [40.702168, -73.995208], [40.702454, -73.99504], [40.702491, -73.995018], [40.702814, -73.994822], [40.702826, -73.994814], [40.702879, -73.994783], [40.702898, -73.994757], [40.70291, -73.99473], [40.702915, -73.994698], [40.702911, -73.994657], [40.7029, -73.994614], [40.702875, -73.994543], [40.702829, -73.994421], [40.702784, -73.994304], [40.70274, -73.994185], [40.702652, -73.993931], [40.702619, -73.993838], [40.702565, -73.993683], [40.702512, -73.993539], [40.702473, -73.993436], [40.702461, -73.993405], [40.702451, -73.993382], [40.702415, -73.993299], [40.702434, -73.993285], [40.702454, -73.993264], [40.702472, -73.993236], [40.702491, -73.993196], [40.702521, -73.993088], [40.702551, -73.992972], [40.702577, -73.992853], [40.702595, -73.992745], [40.702601, -73.992699], [40.702603, -73.992683], [40.702606, -73.992645], [40.702606, -73.992637], [40.702607, -73.992581], [40.702605, -73.992507], [40.702598, -73.99223], [40.702589, -73.991927], [40.702577, -73.991613], [40.702575, -73.991542], [40.702561, -73.990791], [40.702561, -73.990771], [40.702559, -73.990704], [40.702624, -73.990701], [40.702835, -73.990689], [40.703197, -73.990668], [40.703247, -73.990666], [40.703303, -73.990663], [40.703601, -73.990647]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.70360,-73.99060&destination=40.75850,-73.98430&travelmode=driving", "n": "Rientro hotel", "i": "🚶", "arr": "20:17", "dep": "20:22", "dwell": 5, "mode": "taxi", "leg": 42, "brk": null, "km": 8.58, "opt": false, "lat": 40.7585, "lon": -73.9843, "note": "8 pax = 2 auto; niente bus da Dumbo. Si cena a Dumbo, non a Midtown", "col": "#2a78d6", "clock": null, "transit": null, "segs": [{"kind": "taxi", "line": [[40.7036, -73.9906], [40.7585, -73.9843]], "label": ""}]}];
-var START = {"name": "Hotel Kimpton (Times Sq)", "lat": 40.7585, "lon": -73.9843, "time": "10:30"};
+var STEPS = [{"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.75850,-73.98430&destination=40.75800,-73.98550&travelmode=walking", "n": "Times Square di notte", "i": "📸", "arr": "19:09", "dep": "19:24", "dwell": 15, "mode": "walk", "leg": 9, "brk": null, "km": 0.16, "opt": false, "lat": 40.758, "lon": -73.9855, "note": "sogno n.1 di Giulio - primo colpo d'occhio", "col": "#2a78d6", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.7585, -73.9843], [40.758, -73.9855]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.75800,-73.98550&destination=40.76200,-73.98360&travelmode=walking", "n": "Ellen's Stardust Diner (cena di benvenuto)", "i": "✨", "arr": "19:40", "dep": "21:10", "dwell": 90, "mode": "walk", "leg": 16, "brk": null, "km": 0.66, "opt": false, "lat": 40.762, "lon": -73.9836, "note": "camerieri che cantano; ATTESA TIPICA 30-60' in agosto - non prenotabile", "col": "#eb6834", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.758, -73.9855], [40.762, -73.9836]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.76200,-73.98360&destination=40.75850,-73.98430&travelmode=walking", "n": "Gelato (rientro hotel)", "i": "🍽️", "arr": "21:24", "dep": "21:49", "dwell": 25, "mode": "walk", "leg": 14, "brk": null, "km": 0.55, "opt": true, "lat": 40.7585, "lon": -73.9843, "note": "", "col": "#1baf7a", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.762, -73.9836], [40.7585, -73.9843]], "label": ""}]}];
+var START = {"name": "Hotel Kimpton (Times Sq)", "lat": 40.7585, "lon": -73.9843, "time": "19:00"};
 
 /* La FORMA della linea dice come ci si muove; il COLORE dice quale tratta e'.
    Due domande diverse, due canali diversi - in v1 erano schiacciati su uno solo. */
@@ -417,7 +375,7 @@ STEPS.forEach(function(s, i){
   }
 
   h += '<div class="step" id="s' + i + '" style="border-left-color:' + s.col + '"><div class="hd">' +
-       '<span class="num" data-goto="' + i + '" title="portami sulla mappa" style="background:' + s.col + '">' + (i+1) + '</span>' +
+       '<span class="num" style="background:' + s.col + '">' + (i+1) + '</span>' +
        '<span class="nm">' + s.i + ' ' + esc(s.n) + (s.opt ? '<span class="opt">se c\u2019e\u2019 tempo</span>' : '') + '</span>' +
        '<span class="tm">' + s.arr + '</span></div>';
   h += '<div class="dw">ci si sta <b>' + s.dwell + ' minuti</b> &middot; si riparte alle <b>' + s.dep + '</b></div>';
@@ -519,16 +477,6 @@ STEPS.forEach(function(s, i){
 if(startMarker && startCard){
   startMarker.on('click', function(){ goTo(-1, startCard); });
 }
-
-/* tocchi il NUMERO di una tappa -> la mappa ci va sopra. E' scritto nella chiave
-   di lettura, quindi deve funzionare esattamente cosi'. */
-document.querySelectorAll('.num[data-goto]').forEach(function(b){
-  b.addEventListener('click', function(ev){
-    ev.stopPropagation();
-    activate(parseInt(b.getAttribute('data-goto'), 10));
-    document.getElementById('map').scrollIntoView({behavior:'smooth', block:'start'});
-  });
-});
 
 /* tocchi una fermata nell'elenco -> la mappa ci va sopra e la fermata si apre */
 document.querySelectorAll('.sl-chip').forEach(function(b){
