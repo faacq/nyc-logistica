@@ -217,9 +217,9 @@
 <header class="hero">
   <div class="wrap">
     <div class="flag">🗽🔒</div>
-    <h1>Ho fatto attaccare il piano</h1>
-    <div class="sub">Prima di scrivere la guida ho fatto cercare i difetti del giro a un altro sistema. <b>Ne ha trovati sei, e sono tutti veri.</b> Cinque li ho già sistemati; <b>uno tocca a te</b>.</div>
-    <div class="ver">📌 versione v10.2 &middot; 29 lug 2026</div>
+    <h1>Devo correggere il sabato</h1>
+    <div class="sub">Ho fatto revisionare il piano da un altro sistema, e <b>i numeri che ti avevo dato sul giro in Big Bus erano sbagliati</b>. Ti rimetto la scelta davanti, coi numeri veri: <b>due strade</b>.</div>
+    <div class="ver">📌 versione v10.1 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -227,13 +227,13 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(v10.2 &middot; 29 lug 2026 — rispetto alla v9, l'ultima che hai visto)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(v10.1 &middot; 29 lug 2026 — rispetto alla v9, l'ultima che hai visto)</span></h3>
     <ul>
-      <li>🔍 <b>Il piano è stato passato al setaccio da un revisore esterno</b>, con l'istruzione di cercare dove si rompe. <b>Sei difetti trovati, tutti veri</b> — verificati uno per uno sui dati prima di crederci.</li>
-      <li>🧹 <b>Cinque erano errori di fatto e li ho già chiusi io</b>: l'attesa del bus era calcolata male su tutte le giornate, Midtown Comics il giovedì è chiuso, e due miei documenti erano rimasti indietro rispetto ai dati.</li>
-      <li>⚠️ <b>Il sesto riguarda te</b>: il giro panoramico in Big Bus te l'avevo proposto con <b>numeri ottimisti</b>, e tu hai scelto su quelli. Qui trovi i numeri veri e la scelta rimessa davanti.</li>
-      <li>🎯 <b>Con una buona notizia</b>: spostando il pranzo a Columbus Circle il problema si ridimensiona quasi del tutto, <b>senza togliere niente a nessuno</b>.</li>
-      <li>🥵 <b>E una cosa che la revisione ha fatto emergere e che nessuno aveva nominato</b>: quella corsa <b>non può stare fuori dalle ore calde</b>, e il piano di sopra è scoperto.</li>
+      <li>🔍 <b>Prima di scrivere la guida ho fatto revisionare tutto il piano da un altro sistema</b>, con l'istruzione di cercare dove si rompe. Ha trovato <b>sei cose, tutte vere</b>.</li>
+      <li>⚠️ <b>La più grossa mi riguarda</b>: il giro panoramico in Big Bus te l'avevo proposto con <b>numeri ottimisti</b>. <b>Hai scelto su quelli.</b> Qui sotto trovi i numeri veri e la scelta rimessa davanti.</li>
+      <li>🎯 <b>Ma c'è anche una buona notizia</b>: spostando il pranzo a Columbus Circle il problema si ridimensiona quasi del tutto, <b>senza togliere niente a nessuno</b>.</li>
+      <li>🥵 <b>E una cosa che nessuno aveva ancora detto</b>: il piano di sopra del bus è scoperto, e quella corsa <b>non può stare fuori dalle ore calde</b>. Cinquanta minuti al sole.</li>
+      <li>🧹 <b>Cinque cose le ho già sistemate io</b> — l'attesa del bus, l'orario di Midtown Comics (il giovedì è chiuso), e due punti dove i miei documenti erano rimasti indietro.</li>
       <li>🎟️ <b>Una cosa da fare tu</b> prima di partire: riscattare i pass Go City nell'app.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
@@ -296,7 +296,7 @@
     <b>Per questo la domanda vera non è più quella che ti avevo fatto.</b> Non è quanto margine vuoi: è se vale la pena.
   </div>
 
-  <h2>🌉 Il difetto che tocca a te: il sabato</h2>
+  <h2>🌉 Il sabato: due strade</h2>
 
   <div class="knot" data-prop="SAB" data-label="SAB - il giro panoramico, dopo le correzioni">
     <div class="kt"><span class="kid">A</span>Si fa il giro, col pranzo spostato a Columbus Circle</div>
@@ -430,7 +430,7 @@
   </div>
 
   <div class="footer">
-    Analisi logistica v10.2 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v10.1 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1267,9 +1267,9 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v10.2',
+  ver:   'v10.1',
   built: '2026-07-29',
-  plan:  'itinerario v2.2 + D57 - risultati della adversarial review',
+  plan:  'itinerario v2.2 + D57 - dopo adversarial review, numeri del sabato corretti',
   stale: ''
 };
 
@@ -1287,7 +1287,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v10.2: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v10.1: risposta di Fabrizio');
 
   if(sel['SAB']){ L.push(''); L.push('🌉 SABATO, strada scelta: ' + sel['SAB']); }
 
