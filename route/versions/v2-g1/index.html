@@ -71,16 +71,6 @@
   .stopbox .v{font-weight:800;font-size:.95rem}
   .stopbox .w{font-size:.79rem;color:var(--muted)}
   .ride{margin:7px 0;padding-left:12px;border-left:3px solid var(--accent2);color:#4a5a68}
-  /* --- gli orari del bus: la domanda vera e' "a che ora devo essere li'" --- */
-  .clock{background:#f7f9fc;border:1px solid #dbe5f2;border-radius:10px;padding:9px 11px;margin:2px 0 9px}
-  .clock .cr{display:flex;gap:10px;align-items:flex-start;padding:3px 0;font-size:.84rem;color:#4a5a68}
-  .clock .ct{flex:none;width:47px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink)}
-  .clock .cr.big{background:#fff;border:1px solid var(--accent);border-radius:8px;
-                 padding:7px 9px;margin:4px 0;color:var(--ink)}
-  .clock .cr.big .ct{font-size:1.12rem;color:var(--accent)}
-  .clock small{color:var(--muted)}
-  .cnote{margin-top:7px;font-size:.76rem;color:#8a6d12;background:#fffdf6;
-         border:1px dashed var(--accent2);border-radius:8px;padding:6px 9px}
   .warnbox{background:#fffdf6;border:1px dashed var(--accent2);border-radius:10px;
            padding:8px 11px;margin-top:8px;font-size:.81rem;color:#8a6d12}
   .footer{text-align:center;color:var(--muted);font-size:.78rem;margin:26px 0 0}
@@ -94,19 +84,6 @@
   .pin.act span{transform:scale(1.5);font-size:.85rem;
                 box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(34,48,60,.85),0 3px 10px rgba(0,0,0,.45)}
   .pin.dim span{opacity:.5}
-  /* --- le fermate del bus: erano nei dati e non sulla mappa (feedback v2) --- */
-  .bstop{border:none;background:none}
-  .bstop .b{display:flex;align-items:center;gap:4px;white-space:nowrap}
-  .bstop .ic{flex:none;display:flex;align-items:center;justify-content:center;
-             width:23px;height:23px;border-radius:6px;color:#fff;font-size:.75rem;
-             box-shadow:0 0 0 2.5px #fff,0 1px 4px rgba(0,0,0,.4)}
-  .bstop .lb{font-size:.6rem;font-weight:800;letter-spacing:.4px;background:#fff;
-             border-radius:4px;padding:1px 4px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
-  /* fermata di passaggio: il bus ci ferma ma noi non scendiamo - quindi vuota */
-  .bstop .via{flex:none;display:flex;align-items:center;justify-content:center;
-              width:17px;height:17px;border-radius:5px;background:#fff;
-              font-size:.6rem;font-weight:800;box-shadow:0 0 0 2px #fff,0 1px 3px rgba(0,0,0,.35)}
-  .bstop.dim{opacity:.45}
   .arrow{border:none;background:none;color:#22303c;font-size:15px;line-height:1;
          text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
 </style>
@@ -116,7 +93,7 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il gio 13</h1>
   <div class="sub">Arrivo / Midtown (sera) — si esce alle <b>19:00</b>, si rientra verso le <b>21:49</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v3 &middot; 30 lug 2026</div>
+  <div class="ver">🧭 percorso v2 &middot; 30 lug 2026</div>
 </div></header>
 
 <div class="mapwrap"><div class="wrap" style="padding-bottom:0">
@@ -133,7 +110,6 @@
       <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="14,5,2,5"/></svg>taxi
     </span>
     <span>▸ senso di marcia</span>
-    <span>🚏 <b>fermate del bus</b>: piene = si sale/scende · vuote = il bus ferma ma noi restiamo su</span>
   </div>
   <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
 </div></div>
@@ -153,7 +129,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-var STEPS = [{"n": "Times Square di notte", "i": "📸", "arr": "19:09", "dep": "19:24", "dwell": 15, "mode": "walk", "leg": 9, "brk": null, "km": 0.16, "opt": false, "lat": 40.758, "lon": -73.9855, "note": "sogno n.1 di Giulio - primo colpo d'occhio", "col": "#2a78d6", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.758322, -73.984432], [40.758257, -73.984278], [40.757579, -73.982703], [40.757448, -73.982391], [40.75739, -73.982254], [40.757454, -73.982207], [40.757963, -73.981836], [40.758016, -73.981798], [40.758075, -73.981936], [40.758314, -73.982503], [40.759175, -73.984509], [40.759223, -73.984619], [40.759148, -73.984676], [40.758668, -73.985027], [40.758597, -73.98508], [40.758524, -73.985132], [40.758367, -73.985244], [40.758036, -73.985482], [40.758002, -73.985506]], "label": ""}]}, {"n": "Ellen's Stardust Diner (cena di benvenuto)", "i": "✨", "arr": "19:40", "dep": "21:10", "dwell": 90, "mode": "walk", "leg": 16, "brk": null, "km": 0.66, "opt": false, "lat": 40.762, "lon": -73.9836, "note": "camerieri che cantano; ATTESA TIPICA 30-60' in agosto - non prenotabile", "col": "#eb6834", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.758002, -73.985506], [40.757963, -73.985534], [40.758011, -73.985649], [40.758025, -73.985684], [40.758046, -73.985732], [40.758253, -73.986227], [40.758462, -73.986728], [40.759106, -73.988259], [40.75916, -73.988386], [40.759223, -73.98834], [40.759508, -73.988132], [40.759731, -73.987969], [40.759787, -73.987929], [40.759851, -73.987881], [40.76011, -73.987691], [40.760361, -73.987511], [40.760409, -73.987475], [40.760473, -73.987429], [40.760981, -73.987058], [40.761037, -73.987018], [40.761105, -73.986968], [40.761301, -73.986834], [40.761612, -73.986604], [40.761668, -73.986566], [40.761723, -73.986525], [40.762232, -73.986147], [40.762294, -73.986101], [40.762355, -73.986057], [40.762769, -73.985755], [40.762865, -73.985685], [40.762916, -73.985648], [40.762978, -73.985604], [40.763086, -73.985527], [40.763173, -73.985466], [40.763495, -73.985238], [40.763515, -73.985223], [40.763557, -73.985194], [40.763498, -73.985055], [40.762775, -73.983336], [40.762738, -73.983261], [40.76269, -73.983161], [40.762658, -73.983094], [40.762643, -73.983063], [40.762413, -73.982514], [40.762405, -73.982494], [40.762348, -73.982347], [40.762315, -73.982372], [40.76229, -73.98239], [40.76179, -73.982755], [40.761719, -73.982807], [40.761777, -73.982944], [40.761881, -73.983192], [40.762017, -73.983514], [40.762041, -73.98357]], "label": ""}]}, {"n": "Gelato (rientro hotel)", "i": "🍽️", "arr": "21:24", "dep": "21:49", "dwell": 25, "mode": "walk", "leg": 14, "brk": null, "km": 0.55, "opt": true, "lat": 40.7585, "lon": -73.9843, "note": "", "col": "#1baf7a", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.762041, -73.98357], [40.762086, -73.983678], [40.762014, -73.983724], [40.761778, -73.983881], [40.761508, -73.984061], [40.76145, -73.984098], [40.76142, -73.984023], [40.761382, -73.983932], [40.761278, -73.983687], [40.761179, -73.983449], [40.761156, -73.983395], [40.761095, -73.98325], [40.761036, -73.983293], [40.760793, -73.983467], [40.760527, -73.983663], [40.760463, -73.983706], [40.760408, -73.983748], [40.759903, -73.984127], [40.759841, -73.984174], [40.759782, -73.984217], [40.75927, -73.984585], [40.759223, -73.984619], [40.759148, -73.984676], [40.758668, -73.985027], [40.758597, -73.98508], [40.758524, -73.985132], [40.758367, -73.985244], [40.758036, -73.985482], [40.757963, -73.985534], [40.758011, -73.985649], [40.758025, -73.985684], [40.758046, -73.985732], [40.758253, -73.986227], [40.758462, -73.986728], [40.759106, -73.988259], [40.75916, -73.988386], [40.759223, -73.98834], [40.759508, -73.988132], [40.759731, -73.987969], [40.759787, -73.987929], [40.759732, -73.987797], [40.759572, -73.987421], [40.759501, -73.987252], [40.759197, -73.986516], [40.758886, -73.98577], [40.758767, -73.985492], [40.758743, -73.985435], [40.75864, -73.985185], [40.758597, -73.98508], [40.75855, -73.984967], [40.758322, -73.984432]], "label": ""}]}];
+var STEPS = [{"n": "Times Square di notte", "i": "📸", "arr": "19:09", "dep": "19:24", "dwell": 15, "mode": "walk", "leg": 9, "brk": null, "km": 0.16, "opt": false, "lat": 40.758, "lon": -73.9855, "note": "sogno n.1 di Giulio - primo colpo d'occhio", "col": "#2a78d6", "transit": null, "segs": [{"kind": "walk", "line": [[40.758322, -73.984432], [40.758257, -73.984278], [40.757579, -73.982703], [40.757448, -73.982391], [40.75739, -73.982254], [40.757454, -73.982207], [40.757963, -73.981836], [40.758016, -73.981798], [40.758075, -73.981936], [40.758314, -73.982503], [40.759175, -73.984509], [40.759223, -73.984619], [40.759148, -73.984676], [40.758668, -73.985027], [40.758597, -73.98508], [40.758524, -73.985132], [40.758367, -73.985244], [40.758036, -73.985482], [40.758002, -73.985506]], "label": ""}]}, {"n": "Ellen's Stardust Diner (cena di benvenuto)", "i": "✨", "arr": "19:40", "dep": "21:10", "dwell": 90, "mode": "walk", "leg": 16, "brk": null, "km": 0.66, "opt": false, "lat": 40.762, "lon": -73.9836, "note": "camerieri che cantano; ATTESA TIPICA 30-60' in agosto - non prenotabile", "col": "#eb6834", "transit": null, "segs": [{"kind": "walk", "line": [[40.758002, -73.985506], [40.757963, -73.985534], [40.758011, -73.985649], [40.758025, -73.985684], [40.758046, -73.985732], [40.758253, -73.986227], [40.758462, -73.986728], [40.759106, -73.988259], [40.75916, -73.988386], [40.759223, -73.98834], [40.759508, -73.988132], [40.759731, -73.987969], [40.759787, -73.987929], [40.759851, -73.987881], [40.76011, -73.987691], [40.760361, -73.987511], [40.760409, -73.987475], [40.760473, -73.987429], [40.760981, -73.987058], [40.761037, -73.987018], [40.761105, -73.986968], [40.761301, -73.986834], [40.761612, -73.986604], [40.761668, -73.986566], [40.761723, -73.986525], [40.762232, -73.986147], [40.762294, -73.986101], [40.762355, -73.986057], [40.762769, -73.985755], [40.762865, -73.985685], [40.762916, -73.985648], [40.762978, -73.985604], [40.763086, -73.985527], [40.763173, -73.985466], [40.763495, -73.985238], [40.763515, -73.985223], [40.763557, -73.985194], [40.763498, -73.985055], [40.762775, -73.983336], [40.762738, -73.983261], [40.76269, -73.983161], [40.762658, -73.983094], [40.762643, -73.983063], [40.762413, -73.982514], [40.762405, -73.982494], [40.762348, -73.982347], [40.762315, -73.982372], [40.76229, -73.98239], [40.76179, -73.982755], [40.761719, -73.982807], [40.761777, -73.982944], [40.761881, -73.983192], [40.762017, -73.983514], [40.762041, -73.98357]], "label": ""}]}, {"n": "Gelato (rientro hotel)", "i": "🍽️", "arr": "21:24", "dep": "21:49", "dwell": 25, "mode": "walk", "leg": 14, "brk": null, "km": 0.55, "opt": true, "lat": 40.7585, "lon": -73.9843, "note": "", "col": "#1baf7a", "transit": null, "segs": [{"kind": "walk", "line": [[40.762041, -73.98357], [40.762086, -73.983678], [40.762014, -73.983724], [40.761778, -73.983881], [40.761508, -73.984061], [40.76145, -73.984098], [40.76142, -73.984023], [40.761382, -73.983932], [40.761278, -73.983687], [40.761179, -73.983449], [40.761156, -73.983395], [40.761095, -73.98325], [40.761036, -73.983293], [40.760793, -73.983467], [40.760527, -73.983663], [40.760463, -73.983706], [40.760408, -73.983748], [40.759903, -73.984127], [40.759841, -73.984174], [40.759782, -73.984217], [40.75927, -73.984585], [40.759223, -73.984619], [40.759148, -73.984676], [40.758668, -73.985027], [40.758597, -73.98508], [40.758524, -73.985132], [40.758367, -73.985244], [40.758036, -73.985482], [40.757963, -73.985534], [40.758011, -73.985649], [40.758025, -73.985684], [40.758046, -73.985732], [40.758253, -73.986227], [40.758462, -73.986728], [40.759106, -73.988259], [40.75916, -73.988386], [40.759223, -73.98834], [40.759508, -73.988132], [40.759731, -73.987969], [40.759787, -73.987929], [40.759732, -73.987797], [40.759572, -73.987421], [40.759501, -73.987252], [40.759197, -73.986516], [40.758886, -73.98577], [40.758767, -73.985492], [40.758743, -73.985435], [40.75864, -73.985185], [40.758597, -73.98508], [40.75855, -73.984967], [40.758322, -73.984432]], "label": ""}]}];
 var START = {"name": "Hotel Kimpton (Times Sq)", "lat": 40.7585, "lon": -73.9843, "time": "19:00"};
 
 /* La FORMA della linea dice come ci si muove; il COLORE dice quale tratta e'.
@@ -172,7 +148,7 @@ function bearing(a, b){
   return 90 - d;                                 /* 0 = nord, orario */
 }
 
-var all = [], lines = [], arrows = [], busstops = [];
+var all = [], lines = [], arrows = [];
 
 if(START){
   L.marker([START.lat, START.lon], {icon: L.divIcon({className:'pin',
@@ -207,37 +183,10 @@ STEPS.forEach(function(s, i){
     });
   });
 
-  /* Le fermate del bus, TUTTE quelle della nostra corsa: dove si sale, dove si
-     scende, e quelle in mezzo dove il bus ferma ma noi restiamo seduti. Erano
-     nei dati dalla v1 e non arrivavano sulla mappa. */
-  if(s.transit){
-    var t0 = s.transit;
-    var mk = function(st, kind){
-      var isVia = (kind === 'via');
-      var html = isVia
-        ? '<div class="b"><span class="via" style="color:' + s.col + ';border:2px solid ' + s.col + '">' + st.n + '</span></div>'
-        : '<div class="b"><span class="ic" style="background:' + s.col + '">\uD83D\uDE8F</span>' +
-          '<span class="lb" style="color:' + s.col + '">' + (kind === 'board' ? 'SALI' : 'SCENDI') + '</span></div>';
-      var m = L.marker([st.lat, st.lon], {icon: L.divIcon({className:'bstop', html:html,
-        iconSize: isVia ? [17,17] : [70,23], iconAnchor: isVia ? [8,8] : [11,11]})}).addTo(map);
-      m.bindTooltip('\uD83D\uDE8F fermata ' + st.n + ' &middot; ' + st.stop +
-        (isVia ? ' &middot; <i>il bus ferma ma noi restiamo su</i>'
-               : ' &middot; <b>' + (kind === 'board' ? 'si sale' : 'si scende') + '</b>' +
-                 (st.where ? '<br>' + st.where : '')), {direction:'top'});
-      m._step = i;
-      busstops.push(m);
-      all.push([st.lat, st.lon]);
-    };
-    mk(t0.board, 'board');
-    (t0.via || []).forEach(function(v){ mk(v, 'via'); });
-    mk(t0.alight, 'alight');
-  }
-
   s._marker = L.marker([s.lat, s.lon], {icon: L.divIcon({className:'pin',
     html:'<span style="background:' + s.col + '">' + (i+1) + '</span>',
     iconSize:[25,25], iconAnchor:[12,12]})}).addTo(map);
   s._marker.bindTooltip((i+1) + '. ' + s.n, {direction:'top'});
-  s._marker.setZIndexOffset(500);   /* le tappe stanno sopra le fermate */
   all.push([s.lat, s.lon]);
 });
 map.fitBounds(L.latLngBounds(all), {padding:[30,30]});
@@ -265,25 +214,6 @@ STEPS.forEach(function(s, i){
          '<span class="det">in tutto ' + s.leg + ' minuti da quando si lascia la tappa ' + i + '</span></span>' +
          '<span class="tag">TRATTA ' + (i+1) + '</span></div>';
     h += '<div class="bus"><div class="bh">\uD83D\uDE8C ' + esc(t.line) + '</div><div class="bb">';
-    if(s.clock){
-      var c = s.clock;
-      h += '<div class="clock">' +
-           '<div class="cr"><span class="ct">' + c.leave + '</span><span>si lascia la tappa precedente</span></div>' +
-           '<div class="cr"><span class="ct">' + c.at_stop + '</span><span>si e' + "'" + ' <b>alla fermata</b></span></div>' +
-           '<div class="cr big"><span class="ct">' + c.catch + '</span><span>\uD83D\uDE8C <b>la corsa che vogliamo prendere</b>' +
-           '<br><small>ne passa una ogni ~' + c.every + ' minuti: questa e' + "'" + ' quella su cui e' + "'" +
-           ' costruita la giornata</small></span></div>' +
-           (c.walk_after
-             ? '<div class="cr"><span class="ct">' + c.off + '</span><span>si e' + "'" + ' <b>alla tappa</b>' +
-               '<br><small>\u26A0\uFE0F si <b>scende prima</b>: dalla fermata c' + "'" + 'e' + "'" +
-               ' ancora un pezzo a piedi, qui sotto</small></span></div>'
-             : '<div class="cr"><span class="ct">' + c.off + '</span><span>si <b>scende</b>, ed e' + "'" +
-               ' gia' + "'" + ' la tappa</span></div>') +
-           '<div class="cnote">\u26A0\uFE0F Big Bus <b>non pubblica gli orari delle singole fermate</b>: dichiara' +
-           ' solo ogni quanto passa. Questi sono <b>gli orari che il piano si aspetta</b>, non un orario ufficiale' +
-           ' — servono a sapere <b>quando essere li' + "'" + '</b>, non a scendere al minuto.</div>' +
-           '</div>';
-    }
     h += '<div class="stopbox"><div class="k">SALI QUI</div>' +
          '<div class="v">fermata ' + t.board.n + ' &middot; ' + esc(t.board.stop) + '</div>' +
          '<div class="w">' + esc(t.board.where) + '</div></div>';
@@ -341,10 +271,6 @@ function activate(i){
   });
   arrows.forEach(function(m){
     m.setOpacity(m._step === i ? 1 : .35);
-  });
-  busstops.forEach(function(m){
-    var e = m.getElement();
-    if(e) e.classList.toggle('dim', m._step !== i);
   });
   /* il pallino sulla mappa segue la scheda selezionata */
   STEPS.forEach(function(s, k){
