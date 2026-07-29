@@ -103,8 +103,6 @@
   .sol .res2{margin-top:7px; font-weight:700; color:#2f7a46}
 
   /* approval buttons */
-  .lockrow{margin-top:10px; background:#f0f9f2; border:1px solid #bfe6cb; border-radius:10px;
-           padding:9px 12px; font-size:.86rem; color:#2f7a46}
   .appr{display:flex; flex-direction:column; gap:7px; margin-top:10px}
   .ab{border:1.5px solid var(--line); background:#fff; border-radius:11px; padding:10px 13px; font-size:.88rem; font-weight:700; cursor:pointer; text-align:left; color:var(--ink); font-family:inherit}
   .ab small{display:block; font-weight:600; color:var(--muted); margin-top:2px}
@@ -218,7 +216,7 @@
     <div class="flag">🗽🔒</div>
     <h1>Risposte ricevute</h1>
     <div class="sub">Le tue tre risposte sono <b>applicate</b>. Adesso il giro va agli altri tre, e poi si chiude. <b>Una cosa da fare tu</b>, una domanda sola.</div>
-    <div class="ver">📌 versione v7.2 &middot; 29 lug 2026</div>
+    <div class="ver">📌 versione v7.1 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -226,13 +224,13 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Novità di questa versione <span class="cd">(v7.2 &middot; 29 lug 2026)</span></h3>
+    <h3>🆕 Novità di questa versione <span class="cd">(v7.1 &middot; 29 lug 2026)</span></h3>
     <ul>
       <li>✅ <b>Le tue tre risposte sono dentro</b>: Antico Vinaio solo il martedì · lunedì «va bene così» · guida in tutti e tre i formati.</li>
       <li>🚐 <b>Il van per JFK lo cerco io</b> — è passato da domanda a mio compito.</li>
       <li>📤 <b>La pagina per gli altri tre è pronta e online</b>: te la giro qui sotto, devi solo inoltrarla.</li>
       <li>🔒 <b>Da qui in avanti si chiude</b>: ti spiego i quattro controlli prima della guida, e perché sono quattro.</li>
-      <li>🔒 <b>Le sei giornate risultano BLOCCATE, e non ti chiedo di riapprovarle.</b> Le avevi già approvate: rifartelo confermare sarebbe stato chiederti la stessa cosa una quarta volta. Adesso il lucchetto è <b>uno stato che ti mostro</b>, non una domanda — e su ogni giornata resta solo la via per <b>riaprirla</b>, se hai cambiato idea.</li>
+      <li>✅ <b>Torna il pulsante per confermare una giornata</b> — me l'hai fatto notare e avevi ragione: descrivevo una proposta e ti lasciavo solo <i>rifammela</i> o <i>modifico a mano</i>, senza un modo per dire <b>va bene</b>. Adesso ogni giornata ha tutte e tre le strade, e la conferma <b>chiude la giornata</b>.</li>
       <li>🚌 Restano il <b>mezzo su ogni tappa</b> e il quadro delle sei giornate.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
@@ -344,8 +342,7 @@
   <h2>📅 Giorno per giorno</h2>
   <p class="muted" style="margin-top:0">Ogni giornata con <b>le sue tappe vere</b>, nell'ordine e con gli orari veri — <b>presi dal calcolo, non riscritti a mano</b>.</p>
   <div class="recalc">
-    🔒 <b>Sono tutte e sei bloccate — non ti sto richiedendo di approvarle.</b> Le hai già approvate, e da lì in poi non le ho più toccate: le trovi qui sotto per <b>controllo</b>, non per rispondere.<br><br>
-    Servono solo se <b>hai cambiato idea</b>: in quel caso su ogni giornata trovi come <b>riaprirla</b>. Riaprirne una adesso costa poco; fra una settimana, a guida scritta, costa parecchio di più.
+    ✅ <b>Qui si chiude, giornata per giornata.</b> Le avevi già approvate, ma adesso la conferma vale una cosa in più: <b>la giornata entra nella guida in questa forma esatta</b>. Su ognuna hai tre strade — <b>confermo</b>, <b>rifammela</b>, oppure <b>sblocco e tolgo qualcosa</b>. Anche solo le conferme mi servono: mi dicono cosa posso considerare chiuso.
   </div>
 
   <div id="days"></div>
@@ -368,7 +365,7 @@
   </div>
 
   <div class="footer">
-    Analisi logistica v7.2 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v7.1 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1053,10 +1050,10 @@ DAYS.forEach(function(d){
 
   h += '<div class="sol"><h4>💡 Com\'è questa giornata, e perché</h4><div>' + (T.sol || '') + '</div>' +
        '<div class="res2">' + (T.solres || '') + '</div>' +
-       '<div class="lockrow">🔒 <b>Giornata bloccata</b> — l\'hai già approvata, quindi entra nella guida in questa forma. <span class="muted">Non devi rispondere niente.</span></div>' +
        '<div class="appr">' +
-       '<button class="ab again" type="button" data-val="RIFAI PROPOSTA">🔄 Ho cambiato idea — rifammela<small>solo se questa giornata non ti convince più</small></button>' +
-       '<button class="ab edit" type="button" data-val="SBLOCCA EDIT">✏️ Riapro e tolgo qualcosa<small>tocca le tappe da togliere e spiegami sotto il perché</small></button>' +
+       '<button class="ab yes" type="button" data-val="CONFERMATA">✅ Confermo — si chiude così<small>la giornata entra nella guida esattamente in questa forma</small></button>' +
+       '<button class="ab again" type="button" data-val="RIFAI PROPOSTA">🔄 Non mi convince — rifammela<small>ti mando una soluzione diversa per questa giornata</small></button>' +
+       '<button class="ab edit" type="button" data-val="SBLOCCA EDIT">✏️ Sblocco io e tolgo qualcosa<small>tocca le tappe da togliere e spiegami sotto il perché</small></button>' +
        '</div></div>';
 
   if(T.warn){ h += '<div class="note">' + T.warn + '</div>'; }
@@ -1176,12 +1173,17 @@ document.querySelectorAll('.chips[data-group]').forEach(function(group){
 });
 
 function updateStatus(){
-  var rev = 0;
-  Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) rev++; });
+  var ok = 0, rev = 0;
+  Object.keys(dayDecision).forEach(function(k){
+    var x = dayDecision[k];
+    if(!x) return;
+    if(x.val === 'CONFERMATA') ok++; else rev++;
+  });
   var edits = Object.keys(slotOverride).length;
   var t = [];
+  if(ok) t.push(ok + '/' + DAYS.length + ' confermate');
+  if(rev) t.push(rev + ' da rivedere');
   if(sel['W1']) t.push('risposto');
-  if(rev) t.push(rev + (rev === 1 ? ' giornata da riaprire' : ' giornate da riaprire'));
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
     t.length ? (t.join(' · ') + ' — invia quando vuoi') : 'Una domanda sola 👆';
@@ -1196,7 +1198,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v7.2',
+  ver:   'v7.1',
   built: '2026-07-29',
   plan:  'itinerario v2.2 + D51 - risposte applicate, lock-in avviato',
   stale: ''
@@ -1216,18 +1218,18 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v7.2: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v7.1: risposta di Fabrizio');
 
   if(sel['W1']){ L.push(''); L.push('⏳ ASPETTARE GLI ALTRI TRE: ' + sel['W1']); }
 
-  /* Le giornate sono gia' bloccate: non si chiede di riconfermarle.
-     Nel messaggio finiscono SOLO quelle che vuole riaprire. */
-  var rev = [];
+  var ok = [], rev = [];
   DAYS.forEach(function(d){
     var x = dayDecision[d.id];
-    if(x) rev.push('   - ' + x.name + ': ' + x.val);
+    if(!x) return;
+    (x.val === 'CONFERMATA' ? ok : rev).push('   - ' + x.name + (x.val === 'CONFERMATA' ? '' : ': ' + x.val));
   });
-  if(rev.length){ L.push(''); L.push('🔓 GIORNATE DA RIAPRIRE (erano bloccate):'); rev.forEach(function(x){ L.push(x); }); }
+  if(ok.length){ L.push(''); L.push('✅ GIORNATE CONFERMATE (' + ok.length + '/' + DAYS.length + '):'); ok.forEach(function(x){ L.push(x); }); }
+  if(rev.length){ L.push(''); L.push('🔄 GIORNATE DA RIVEDERE:'); rev.forEach(function(x){ L.push(x); }); }
 
   var so = [];
   SLOTS.forEach(function(s){
