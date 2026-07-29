@@ -216,7 +216,7 @@
     <div class="flag">🗽🔒</div>
     <h1>Risposte ricevute</h1>
     <div class="sub">Le tue tre risposte sono <b>applicate</b>. Adesso il giro va agli altri tre, e poi si chiude. <b>Una cosa da fare tu</b>, una domanda sola.</div>
-    <div class="ver">📌 versione v7.1 &middot; 29 lug 2026</div>
+    <div class="ver">📌 versione v7 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -224,14 +224,13 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Novità di questa versione <span class="cd">(v7.1 &middot; 29 lug 2026)</span></h3>
+    <h3>🆕 Novità di questa versione <span class="cd">(v7 &middot; 29 lug 2026)</span></h3>
     <ul>
       <li>✅ <b>Le tue tre risposte sono dentro</b>: Antico Vinaio solo il martedì · lunedì «va bene così» · guida in tutti e tre i formati.</li>
       <li>🚐 <b>Il van per JFK lo cerco io</b> — è passato da domanda a mio compito.</li>
       <li>📤 <b>La pagina per gli altri tre è pronta e online</b>: te la giro qui sotto, devi solo inoltrarla.</li>
       <li>🔒 <b>Da qui in avanti si chiude</b>: ti spiego i quattro controlli prima della guida, e perché sono quattro.</li>
-      <li>✅ <b>Torna il pulsante per confermare una giornata</b> — me l'hai fatto notare e avevi ragione: descrivevo una proposta e ti lasciavo solo <i>rifammela</i> o <i>modifico a mano</i>, senza un modo per dire <b>va bene</b>. Adesso ogni giornata ha tutte e tre le strade, e la conferma <b>chiude la giornata</b>.</li>
-      <li>🚌 Restano il <b>mezzo su ogni tappa</b> e il quadro delle sei giornate.</li>
+      <li>🚌 Restano il <b>mezzo su ogni tappa</b> e il quadro delle sei giornate, per controllo.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
@@ -340,10 +339,7 @@
 
   <!-- ============ GIORNI ============ -->
   <h2>📅 Giorno per giorno</h2>
-  <p class="muted" style="margin-top:0">Ogni giornata con <b>le sue tappe vere</b>, nell'ordine e con gli orari veri — <b>presi dal calcolo, non riscritti a mano</b>.</p>
-  <div class="recalc">
-    ✅ <b>Qui si chiude, giornata per giornata.</b> Le avevi già approvate, ma adesso la conferma vale una cosa in più: <b>la giornata entra nella guida in questa forma esatta</b>. Su ognuna hai tre strade — <b>confermo</b>, <b>rifammela</b>, oppure <b>sblocco e tolgo qualcosa</b>. Anche solo le conferme mi servono: mi dicono cosa posso considerare chiuso.
-  </div>
+  <p class="muted" style="margin-top:0">Ogni giornata con <b>le sue tappe vere</b>, nell'ordine e con gli orari veri — <b>presi dal calcolo, non riscritti a mano</b>. Sono tutte approvate: qui sotto ci sono per controllo. <b>Se qualcosa non ti torna più</b>, tocca ✏️ — siamo ancora in tempo, ma non per molto.</p>
 
   <div id="days"></div>
 
@@ -365,7 +361,7 @@
   </div>
 
   <div class="footer">
-    Analisi logistica v7.1 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v7 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -942,7 +938,7 @@ var TEXT = {
     probs: ["Hai scelto la <b>A</b>: sveglia alle 8:00 e Little Island 45 minuti."],
     sol: "Ci si arriva alle <b>19:17</b>, il tramonto è alle <b>19:55</b>, si riparte alle <b>20:02</b>. Il tramonto <b>cade dentro la sosta</b> con 38 minuti di margine, invece di sfiorarla per otto. E la giornata finisce alle 20:34, <b>alla stessa ora di prima</b>.",
     solres: "➜ 08:00 → 20:34. Tramonto guardato da seduti.",
-    warn: "🍽️ <b>La cosa dei pasti: hai detto che va bene così, e non tocco niente.</b> Ma resta scritta, perché in viaggio serve saperla: Katz's alle 13:06, Joe's Pizza alle 15:04, Chelsea Market alle 16:34 — <b>tre soste in tre ore e mezza</b>, e poi più niente fino al rientro delle 20:34. Quel Chelsea Market <b>è una merenda, non una cena</b>. <b>Finisce nella guida come nota</b>: quella sera conviene avere qualcosa in borsa, o fermarsi per un gelato al rientro."
+    warn: "🍽️ <b>Ma rifacendo i conti ne ho trovata un'altra, e non è tua: è mia.</b> Katz's alle 13:06, Joe's Pizza alle 15:04, Chelsea Market alle 16:34 — <b>tre soste da mangiare in tre ore e mezza</b>, e poi più niente fino al rientro alle 20:34. Quel Chelsea Market <b>non è una cena, è una merenda</b>. È la <b>domanda 2</b> in cima alla pagina."
   },
   g6: {
     sub: "Ultimo giorno. Top of the Rock alle 9:30, prenotato.",
@@ -1048,11 +1044,10 @@ DAYS.forEach(function(d){
     h += '</ul></div>';
   }
 
-  h += '<div class="sol"><h4>💡 Com\'è questa giornata, e perché</h4><div>' + (T.sol || '') + '</div>' +
+  h += '<div class="sol"><h4>💡 Cosa propongo</h4><div>' + (T.sol || '') + '</div>' +
        '<div class="res2">' + (T.solres || '') + '</div>' +
        '<div class="appr">' +
-       '<button class="ab yes" type="button" data-val="CONFERMATA">✅ Confermo — si chiude così<small>la giornata entra nella guida esattamente in questa forma</small></button>' +
-       '<button class="ab again" type="button" data-val="RIFAI PROPOSTA">🔄 Non mi convince — rifammela<small>ti mando una soluzione diversa per questa giornata</small></button>' +
+       '<button class="ab again" type="button" data-val="RIFAI PROPOSTA">🔄 Ho cambiato idea — rifammela<small>ti mando una soluzione diversa per questa giornata</small></button>' +
        '<button class="ab edit" type="button" data-val="SBLOCCA EDIT">✏️ Sblocco io e tolgo qualcosa<small>tocca le tappe da togliere e spiegami sotto il perché</small></button>' +
        '</div></div>';
 
@@ -1173,17 +1168,12 @@ document.querySelectorAll('.chips[data-group]').forEach(function(group){
 });
 
 function updateStatus(){
-  var ok = 0, rev = 0;
-  Object.keys(dayDecision).forEach(function(k){
-    var x = dayDecision[k];
-    if(!x) return;
-    if(x.val === 'CONFERMATA') ok++; else rev++;
-  });
+  var n = 0;
+  Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) n++; });
   var edits = Object.keys(slotOverride).length;
   var t = [];
-  if(ok) t.push(ok + '/' + DAYS.length + ' confermate');
-  if(rev) t.push(rev + ' da rivedere');
   if(sel['W1']) t.push('risposto');
+  if(n) t.push(n + ' giornate da rivedere');
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
     t.length ? (t.join(' · ') + ' — invia quando vuoi') : 'Una domanda sola 👆';
@@ -1198,7 +1188,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v7.1',
+  ver:   'v7',
   built: '2026-07-29',
   plan:  'itinerario v2.2 + D51 - risposte applicate, lock-in avviato',
   stale: ''
@@ -1218,18 +1208,16 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v7.1: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v7: risposta di Fabrizio');
 
   if(sel['W1']){ L.push(''); L.push('⏳ ASPETTARE GLI ALTRI TRE: ' + sel['W1']); }
 
-  var ok = [], rev = [];
+  var dd = [];
   DAYS.forEach(function(d){
     var x = dayDecision[d.id];
-    if(!x) return;
-    (x.val === 'CONFERMATA' ? ok : rev).push('   - ' + x.name + (x.val === 'CONFERMATA' ? '' : ': ' + x.val));
+    if(x) dd.push('   - ' + x.name + ': ' + x.val);
   });
-  if(ok.length){ L.push(''); L.push('✅ GIORNATE CONFERMATE (' + ok.length + '/' + DAYS.length + '):'); ok.forEach(function(x){ L.push(x); }); }
-  if(rev.length){ L.push(''); L.push('🔄 GIORNATE DA RIVEDERE:'); rev.forEach(function(x){ L.push(x); }); }
+  if(dd.length){ L.push(''); L.push('🔄 GIORNATE DA RIVEDERE (erano approvate):'); dd.forEach(function(x){ L.push(x); }); }
 
   var so = [];
   SLOTS.forEach(function(s){
