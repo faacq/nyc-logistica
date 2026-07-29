@@ -212,7 +212,7 @@
     <div class="flag">🗽🧮</div>
     <h1>Ci siamo</h1>
     <div class="sub">Sei giornate su sei approvate e tutte ci stanno. Mi resta <b>una scelta</b> da farti fare — dove si pranza sabato — e <b>una prenotazione</b>.</div>
-    <div class="ver">📌 versione v5 &middot; 29 lug 2026</div>
+    <div class="ver">📌 versione v5.1 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -220,13 +220,14 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Novità di questa versione <span class="cd">(v5 &middot; 29 lug 2026)</span></h3>
+    <h3>🆕 Novità di questa versione <span class="cd">(v5.1 &middot; 29 lug 2026)</span></h3>
     <ul>
       <li>🕯️ <b>9/11 Memorial portato a 45 minuti</b>, come hai chiesto — <b>senza perdere il tramonto</b> a Little Island. Sotto ti spiego come.</li>
       <li>🍸 <b>230 Fifth eliminato.</b> Sparisce anche la verifica sui minori: non c'è più niente da controllare.</li>
       <li>😴 <b>Il venerdì parte alle 10:00</b> invece che alle 8:45, e finisce alla stessa ora: un'ora di sonno in più gratis.</li>
       <li>🌉 <b>Sabato</b>: aggiunta <b>Bethesda Terrace</b> e ricalibrata la funivia di Roosevelt (2 ore erano troppe per una corsa di 5 minuti).</li>
       <li>✅ <b>Tutte e sei le giornate sono approvate e ci stanno.</b></li>
+      <li>🌭 <b>Nathan's aggiunto al martedì</b> — l'avevi chiesto il 24 luglio e non era mai finito in nessuna giornata. Venti minuti, sulla strada del rientro.</li>
       <li>❓ <b>Resta una scelta</b>: dove si pranza sabato. E una prenotazione: il Top of the Rock.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
@@ -720,11 +721,11 @@ var DAYS = [
   "id": "g6",
   "name": "Giorno 6 · Mar 18",
   "zone": "Midtown / West Side — partenza",
-  "pct": 74,
+  "pct": 80,
   "verd": "ok",
   "out": "08:30",
   "back": "17:30",
-  "end": "15:07",
+  "end": "15:41",
   "stops": [
    {
     "n": "Top of the Rock (mattina)",
@@ -749,14 +750,21 @@ var DAYS = [
     "n": "Ultimi acquisti 5th Ave + souvenir",
     "i": "🛍️",
     "s": "negozio ~20 min",
-    "m": 51,
+    "m": 54,
+    "opt": true
+   },
+   {
+    "n": "Nathan's Famous (Times Square)",
+    "i": "🍽️",
+    "s": "pasto ~20 min",
+    "m": 34,
     "opt": true
    },
    {
     "n": "Rientro hotel + bagagli",
     "i": "🚶",
     "s": "giro ~45 min",
-    "m": 64
+    "m": 56
    }
   ]
  }
@@ -797,8 +805,9 @@ var TEXT = {
     warn:'⚠️ <b>Il margine sul tramonto adesso è di 8 minuti.</b> Se tocchiamo ancora una durata del lunedì, salta — quindi da qui in avanti quella giornata la considero chiusa, a meno che tu non voglia il contrario.'
   },
   g6: {
-    sub:'Ultimo giorno. Approvato.',
-    probs:['Chiude con <b>2 ore e 23 di margine</b> prima di uscire per JFK.'],
+    sub:'Ultimo giorno. Approvato — e qui rientra Nathan's.',
+    probs:['Chiude con <b>quasi due ore di margine</b> prima di uscire per JFK.',
+           '🌭 <b>Nathan's l'avevi chiesto il 24 luglio</b> e non era mai finito in nessuna giornata: me ne sono accorto rileggendo. Messo qui, fra gli ultimi acquisti e il rientro — venti minuti, non un pasto.'],
     sol:'✅ Chiusa. Resta solo da <b>prenotare il Top of the Rock</b>, e va bene qualunque ora della mattina.',
     solres:'➜ Rientro 15:07, si esce alle 17:30.'
   }
@@ -1043,7 +1052,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v5',
+  ver:   'v5.1',
   built: '2026-07-29',
   plan:  'piano completo D43 - tutte e 6 le giornate approvate',
   stale: ''                      /* valorizzare quando la pagina resta indietro */
