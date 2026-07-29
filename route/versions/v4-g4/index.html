@@ -109,24 +109,7 @@
   .bstop .via{flex:none;display:flex;align-items:center;justify-content:center;
               width:17px;height:17px;border-radius:5px;background:#fff;
               font-size:.6rem;font-weight:800;box-shadow:0 0 0 2px #fff,0 1px 3px rgba(0,0,0,.35)}
-  /* le fermate NON si sbiadiscono come il resto: la domanda "dove sono le fermate"
-     te la fai mentre stai leggendo tutt'altro, quindi devono restare leggibili */
-  .bstop.dim{opacity:.8}
-  .stoplab{background:#fff;border:1.5px solid var(--accent);border-radius:5px;
-           padding:0 4px;font-size:.63rem;font-weight:800;color:var(--accent);
-           box-shadow:0 1px 3px rgba(0,0,0,.25);white-space:nowrap}
-  .stoplab::before{display:none}
-  /* --- l'elenco delle fermate: a mappa larga il testo batte i puntini --- */
-  .stoplist{margin:8px 0;padding:9px 10px;background:#f7f9fc;border:1px solid #dbe5f2;border-radius:10px}
-  .stoplist .h{font-size:.7rem;font-weight:800;letter-spacing:.4px;color:var(--accent);margin-bottom:6px}
-  .sl-chip{display:flex;align-items:center;gap:8px;width:100%;text-align:left;cursor:pointer;
-           background:#fff;border:1px solid #dbe5f2;border-radius:8px;padding:6px 9px;margin:4px 0;
-           font:inherit;font-size:.84rem;color:var(--ink)}
-  .sl-chip:hover{border-color:var(--accent)}
-  .sl-chip .n{flex:none;display:flex;align-items:center;justify-content:center;width:21px;height:21px;
-              border-radius:5px;font-size:.68rem;font-weight:800}
-  .sl-chip .r{margin-left:auto;font-size:.63rem;font-weight:800;letter-spacing:.4px}
-  .sl-chip small{color:var(--muted);font-weight:400}
+  .bstop.dim{opacity:.45}
   .arrow{border:none;background:none;color:#22303c;font-size:15px;line-height:1;
          text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
 </style>
@@ -136,7 +119,7 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il dom 16</h1>
   <div class="sub">Downtown & Brooklyn (Big Bus g.2, linea ROSSA) — si esce alle <b>10:30</b>, si rientra verso le <b>20:22</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v5 &middot; 30 lug 2026</div>
+  <div class="ver">🧭 percorso v4 &middot; 30 lug 2026</div>
 </div></header>
 
 <div class="mapwrap"><div class="wrap" style="padding-bottom:0">
@@ -192,7 +175,7 @@ function bearing(a, b){
   return 90 - d;                                 /* 0 = nord, orario */
 }
 
-var all = [], lines = [], arrows = [], busstops = [], STOPMK = {};
+var all = [], lines = [], arrows = [], busstops = [];
 
 var startMarker = null;
 if(START){
@@ -245,13 +228,8 @@ STEPS.forEach(function(s, i){
         (isVia ? ' &middot; <i>il bus ferma ma noi restiamo su</i>'
                : ' &middot; <b>' + (kind === 'board' ? 'si sale' : 'si scende') + '</b>' +
                  (st.where ? '<br>' + st.where : '')), {direction:'top'});
-      /* etichetta col NOME sempre in chiaro - ma solo da vicino, altrimenti a
-         mappa larga si accavallano e si legge peggio di prima */
-      m._label = L.tooltip({permanent:true, direction:'right', offset:[12,0],
-        className:'stoplab', opacity:1}).setContent(st.stop).setLatLng([st.lat, st.lon]);
       m._step = i;
       busstops.push(m);
-      STOPMK[i + '-' + st.n] = m;
       all.push([st.lat, st.lon]);
     };
     mk(t0.board, 'board');
@@ -267,18 +245,6 @@ STEPS.forEach(function(s, i){
   all.push([s.lat, s.lon]);
 });
 map.fitBounds(L.latLngBounds(all), {padding:[30,30]});
-
-/* i nomi delle fermate compaiono quando c'e' spazio per leggerli */
-function labelsByZoom(){
-  var show = map.getZoom() >= 14;
-  busstops.forEach(function(m){
-    if(!m._label) return;
-    if(show && !map.hasLayer(m._label)) m._label.addTo(map);
-    else if(!show && map.hasLayer(m._label)) map.removeLayer(m._label);
-  });
-}
-map.on('zoomend', labelsByZoom);
-labelsByZoom();
 
 function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
@@ -333,24 +299,10 @@ STEPS.forEach(function(s, i){
     } else {
       h += '<div class="ride">\u2193 <b>' + s.leg + " minuti</b><br>" + esc(t.sees) + '</div>';
     }
-    /* Le fermate scritte, in ordine. A mappa larga i puntini non bastano: qui si
-       legge dove sono, e toccandone una la mappa ci va sopra. */
-    var chips = [];
-    chips.push([t.board, 'board']);
-    (t.via || []).forEach(function(v){ chips.push([v, 'via']); });
-    chips.push([t.alight, 'alight']);
-    h += '<div class="stoplist"><div class="h">\uD83D\uDE8F LE FERMATE, IN ORDINE — toccane una per vederla sulla mappa</div>';
-    chips.forEach(function(p){
-      var st = p[0], kind = p[1], isVia = (kind === 'via');
-      h += '<button type="button" class="sl-chip" data-stop="' + i + '-' + st.n + '">' +
-           '<span class="n" style="' + (isVia
-             ? 'background:#fff;color:' + s.col + ';border:2px solid ' + s.col
-             : 'background:' + s.col + ';color:#fff') + '">' + st.n + '</span>' +
-           '<span><b>' + esc(st.stop) + '</b>' + (st.where ? '<br><small>' + esc(st.where) + '</small>' : '') + '</span>' +
-           '<span class="r" style="color:' + (isVia ? '#6b7a88' : s.col) + '">' +
-           (isVia ? 'si passa' : (kind === 'board' ? 'SI SALE' : 'SI SCENDE')) + '</span></button>';
-    });
-    h += '</div>';
+    if(t.via && t.via.length){
+      h += '<div class="ride" style="border-left-color:#cbc4b8">\uD83D\uDCCD passa da: ' +
+           t.via.map(function(v){ return esc(v.stop); }).join(' \u2192 ') + '</div>';
+    }
     h += '<div class="stopbox" style="background:#f2f9f4;border-color:#b9dcc4">' +
          '<div class="k" style="color:#2f7a46">SCENDI QUI</div>' +
          '<div class="v">fermata ' + t.alight.n + ' &middot; ' + esc(t.alight.stop) + '</div>' +
@@ -419,7 +371,7 @@ function activate(i){
   });
   busstops.forEach(function(m){
     var e = m.getElement();
-    if(e) e.classList.toggle('dim', m._step !== i);   /* .dim = 80%, restano leggibili */
+    if(e) e.classList.toggle('dim', m._step !== i);
   });
   /* il pallino sulla mappa segue la scheda selezionata */
   STEPS.forEach(function(s, k){
@@ -468,18 +420,6 @@ STEPS.forEach(function(s, i){
 if(startMarker && startCard){
   startMarker.on('click', function(){ goTo(-1, startCard); });
 }
-
-/* tocchi una fermata nell'elenco -> la mappa ci va sopra e la fermata si apre */
-document.querySelectorAll('.sl-chip').forEach(function(b){
-  b.addEventListener('click', function(ev){
-    ev.stopPropagation();                       /* non deve valere come click sulla scheda */
-    var m = STOPMK[b.getAttribute('data-stop')];
-    if(!m) return;
-    map.flyTo(m.getLatLng(), 16, {duration:.6});
-    m.openTooltip();
-    document.getElementById('map').scrollIntoView({behavior:'smooth', block:'start'});
-  });
-});
 </script>
 </body>
 </html>
