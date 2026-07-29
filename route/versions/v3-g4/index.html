@@ -33,10 +33,7 @@
   .changelog h3{margin:0 0 6px;font-size:.93rem}
   /* --- partenza --- */
   .startcard{background:#22303c;color:#fff;border-radius:var(--radius);padding:12px 14px;
-             margin:11px 0;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;
-             cursor:pointer;transition:box-shadow .2s}
-  .startcard.on{box-shadow:0 0 0 3px rgba(31,59,115,.35),var(--shadow)}
-  .step,.startcard{cursor:pointer}
+             margin:11px 0;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px}
   .startcard .p{flex:none;width:30px;height:30px;border-radius:50%;background:#fff;color:#22303c;
                 display:flex;align-items:center;justify-content:center;font-size:1rem}
   .startcard .t{font-size:.72rem;letter-spacing:.6px;font-weight:800;opacity:.75}
@@ -119,7 +116,7 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il dom 16</h1>
   <div class="sub">Downtown & Brooklyn (Big Bus g.2, linea ROSSA) — si esce alle <b>10:30</b>, si rientra verso le <b>20:22</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v4 &middot; 30 lug 2026</div>
+  <div class="ver">🧭 percorso v3 &middot; 30 lug 2026</div>
 </div></header>
 
 <div class="mapwrap"><div class="wrap" style="padding-bottom:0">
@@ -177,12 +174,11 @@ function bearing(a, b){
 
 var all = [], lines = [], arrows = [], busstops = [];
 
-var startMarker = null;
 if(START){
-  startMarker = L.marker([START.lat, START.lon], {zIndexOffset:600, icon: L.divIcon({className:'pin',
+  L.marker([START.lat, START.lon], {icon: L.divIcon({className:'pin',
     html:'<span style="background:#22303c;width:31px;height:31px;font-size:.95rem">\uD83C\uDFC1</span>',
-    iconSize:[31,31], iconAnchor:[15,15]})}).addTo(map);
-  startMarker.bindTooltip('PARTENZA &middot; ' + START.name + ' &middot; ' + START.time, {direction:'top'});
+    iconSize:[31,31], iconAnchor:[15,15]})}).addTo(map)
+   .bindTooltip('PARTENZA &middot; ' + START.name + ' &middot; ' + START.time, {direction:'top'});
   all.push([START.lat, START.lon]);
 }
 
@@ -252,9 +248,8 @@ var box = document.getElementById('steps');
 
 if(START){
   box.insertAdjacentHTML('beforeend',
-    '<div class="startcard" id="sstart"><span class="p">\uD83C\uDFC1</span><span>' +
+    '<div class="startcard"><span class="p">\uD83C\uDFC1</span><span>' +
     '<span class="t">SI PARTE DA QUI &middot; ' + START.time + '</span><br><b>' + esc(START.name) + '</b>' +
-    '<br><small style="opacity:.7">\uD83D\uDCCD toccami: te lo mostro sulla mappa</small>' +
     '</span></div>');
 }
 
@@ -332,35 +327,13 @@ STEPS.forEach(function(s, i){
   box.insertAdjacentHTML('beforeend', h);
 });
 
-/* lo step attivo accende il suo pezzo di strada - e' tutto qui il trucco.
-   i === -1 e' la PARTENZA: e' una scheda come le altre e va sulla mappa come
-   le altre, altrimenti l'unica tappa che non risponde e' quella da cui si parte. */
+/* lo step attivo accende il suo pezzo di strada - e' tutto qui il trucco */
 var cards = [].slice.call(document.querySelectorAll('.step'));
-var startCard = document.getElementById('sstart');
-var active = -2;
+var active = -1;
 function activate(i){
   if(i === active) return;
   active = i;
   cards.forEach(function(c, k){ c.classList.toggle('on', k === i); });
-  if(startCard) startCard.classList.toggle('on', i === -1);
-  if(startMarker){
-    var se = startMarker.getElement();
-    if(se){
-      se.classList.toggle('act', i === -1);
-      se.classList.toggle('dim', i !== -1);
-    }
-  }
-  if(i === -1){
-    lines.forEach(function(ln){ ln.setStyle({opacity:.3, weight:5}); });
-    arrows.forEach(function(m){ m.setOpacity(.3); });
-    busstops.forEach(function(m){ var e = m.getElement(); if(e) e.classList.add('dim'); });
-    STEPS.forEach(function(s){
-      var e = s._marker.getElement();
-      if(e){ e.classList.remove('act'); e.classList.add('dim'); }
-    });
-    map.flyTo([START.lat, START.lon], 16, {duration:.6});
-    return;
-  }
   lines.forEach(function(ln){
     var on = ln._step === i;
     ln.setStyle({opacity: on ? 1 : .45, weight: on ? 7 : 5});
@@ -389,37 +362,23 @@ function activate(i){
   map.flyToBounds(L.latLngBounds(pts), {padding:[40,40], maxZoom:16, duration:.6});
 }
 
-/* una lista sola: la partenza e' l'indice -1, le tappe da 0 in su */
-var allCards = (startCard ? [startCard] : []).concat(cards);
-function idxOf(el){ return cards.indexOf(el) >= 0 ? cards.indexOf(el) : -1; }
-
 var io = new IntersectionObserver(function(es){
   es.forEach(function(e){
-    if(e.isIntersecting) activate(idxOf(e.target));
+    if(e.isIntersecting) activate(cards.indexOf(e.target));
   });
 }, {rootMargin: '-48% 0px -48% 0px'});
-allCards.forEach(function(c){ io.observe(c); });
-
-/* click per il telefono, passaggio del mouse per chi legge da computer */
-allCards.forEach(function(c){
-  var i = idxOf(c);
-  c.addEventListener('click', function(){ activate(i); });
-  c.addEventListener('mouseenter', function(){ activate(i); });
-});
+cards.forEach(function(c){ io.observe(c); });
+cards.forEach(function(c, i){ c.addEventListener('click', function(){ activate(i); }); });
 
 /* ...e nell'altro senso: tocchi il pallino sulla mappa e ti porta alla sua scheda.
    Serve perche' la domanda arriva in tutti e due i modi - "questa tappa dov'e'?"
    ma anche "questo pallino cos'e'?" */
-function goTo(i, el){
-  activate(i);
-  el.scrollIntoView({behavior:'smooth', block:'center'});
-}
 STEPS.forEach(function(s, i){
-  s._marker.on('click', function(){ goTo(i, cards[i]); });
+  s._marker.on('click', function(){
+    activate(i);
+    cards[i].scrollIntoView({behavior:'smooth', block:'center'});
+  });
 });
-if(startMarker && startCard){
-  startMarker.on('click', function(){ goTo(-1, startCard); });
-}
 </script>
 </body>
 </html>
