@@ -211,8 +211,8 @@
   <div class="wrap">
     <div class="flag">🗽🧮</div>
     <h1>Ci siamo</h1>
-    <div class="sub">Sei giornate su sei approvate e tutte ci stanno. Restano <b>due scelte</b> che tocca a te fare: il tramonto del lunedi e dove si pranza sabato.</div>
-    <div class="ver">📌 versione v5.3 &middot; 29 lug 2026</div>
+    <div class="sub">Sei giornate su sei approvate e tutte ci stanno. Mi resta <b>una scelta</b> da farti fare — dove si pranza sabato — e <b>una prenotazione</b>.</div>
+    <div class="ver">📌 versione v5.2 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -220,14 +220,14 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Novità di questa versione <span class="cd">(v5.3 &middot; 29 lug 2026)</span></h3>
+    <h3>🆕 Novità di questa versione <span class="cd">(v5.2 &middot; 29 lug 2026)</span></h3>
     <ul>
       <li>🕯️ <b>9/11 Memorial portato a 45 minuti</b>, come hai chiesto — <b>senza perdere il tramonto</b> a Little Island. Sotto ti spiego come.</li>
       <li>🍸 <b>230 Fifth eliminato.</b> Sparisce anche la verifica sui minori: non c'è più niente da controllare.</li>
       <li>😴 <b>Il venerdì parte alle 10:00</b> invece che alle 8:45, e finisce alla stessa ora: un'ora di sonno in più gratis.</li>
       <li>🌉 <b>Sabato</b>: aggiunta <b>Bethesda Terrace</b> e ricalibrata la funivia di Roosevelt (2 ore erano troppe per una corsa di 5 minuti).</li>
       <li>✅ <b>Tutte e sei le giornate sono approvate e ci stanno.</b></li>
-      <li>🌇 <b>Sul lunedì ho un dubbio e te lo giro:</b> al tramonto di Little Island si arriva con <b>8 minuti</b> di margine. Su una giornata di dodici tappe non è un margine. Ti ho preparato <b>quattro strade</b> in fondo — <b>scegli tu</b>, perché ognuna costa qualcosa.</li>
+      <li>🌇 <b>Lunedì: si parte alle 8:00 e a Little Island ci si sta 45 minuti.</b> Con la versione di prima si arrivava 8 minuti prima del tramonto e si ripartiva 7 minuti dopo — cioè non lo si guardava. Adesso il tramonto cade dentro la sosta, e <b>la giornata finisce alla stessa ora di prima</b>: costa solo mezz'ora di sveglia.</li>
       <li>🌭 <b>Nathan's aggiunto al martedì</b> — l'avevi chiesto il 24 luglio e non era mai finito in nessuna giornata. Venti minuti, sulla strada del rientro.</li>
       <li>❓ <b>Resta una scelta</b>: dove si pranza sabato. E una prenotazione: il Top of the Rock.</li>
     </ul>
@@ -313,26 +313,6 @@
   <div id="days"></div>
 
   <!-- ============ I NODI ============ -->
-  <h2>🌇 Il lunedi: come vuoi risolvere il tramonto?</h2>
-  <p class="muted" style="margin-top:0">Te lo chiedo invece di deciderlo io, perche' <b>ognuna di queste costa qualcosa</b> - a te, alla serata o a Barbara. Non e' una scelta tecnica.</p>
-
-  <div class="knot" data-prop="M1" data-label="M1 - margine sul tramonto del lunedi">
-    <div class="kt"><span class="kid">!</span>Si arriva a Little Island con 8 minuti di margine</div>
-    <div class="why" style="font-size:.88rem; color:#4a5a68; margin:.5em 0">
-      Arrivo <b>19:47</b>, tramonto <b>19:55</b>. Tecnicamente ci siamo. Ma dopo dodici tappe e dodici ore, in otto, <b>otto minuti se li mangia una coda</b>. E con quindici minuti di sosta si arriva otto minuti prima e si riparte sette dopo: il tramonto lo si vede, ma non lo si guarda.<br><br>
-      <b>😴 A - Sveglia mezz'ora prima (8:00)</b><br>Si arriva alle <b>19:17</b>, quaranta minuti di margine, e ci si sta <b>45 minuti</b>. <b>La giornata finisce alla stessa ora di adesso (20:34).</b> Costo: mezz'ora di sonno a tutti.<br><br>
-      <b>🌙 B - Stessa sveglia, si torna piu' tardi</b><br>Sosta a 45 minuti senza anticipare: si rientra alle <b>21:04</b> invece che alle 20:34. Ma si arriva sempre a ridosso, quindi <b>il rischio resta</b>.<br><br>
-      <b>✂️ C - Stessa sveglia, si toglie una tappa</b><br>Via <b>Sex and the City</b> (Magnolia + la scalinata di Carrie): si arriva alle <b>19:25</b> con mezz'ora di margine e si rientra alle 20:41. <b>Costo: e' la tappa di Barbara.</b><br><br>
-      <b>👍 D - Va bene cosi'</b><br>Otto minuti bastano, si rischia.
-    </div>
-    <div class="chips" data-group="M1">
-      <div class="chip yes" data-val="A - SVEGLIA ALLE 8:00">😴 A - Sveglia alle 8:00</div>
-      <div class="chip maybe" data-val="B - RIENTRO ALLE 21:04">🌙 B - Rientro piu' tardi</div>
-      <div class="chip maybe" data-val="C - VIA SEX AND THE CITY">✂️ C - Via Sex and the City</div>
-      <div class="chip no" data-val="D - VA BENE COSI">👍 D - Va bene cosi'</div>
-    </div>
-  </div>
-
   <h2>🍽️ L'ultima scelta: dove si pranza sabato</h2>
   <p class="muted" style="margin-top:0">È l'unica casella rimasta vuota in tutto il giro.</p>
 
@@ -373,7 +353,7 @@
 
 <div class="bar">
   <div class="in">
-    <div class="status" id="statusLine">2 scelte da fare 👆</div>
+    <div class="status" id="statusLine">Manca solo il pranzo di sabato 👆</div>
     <button class="send" id="sendBtn">📲 Invia su WhatsApp</button>
   </div>
 </div>
@@ -660,7 +640,7 @@ var DAYS = [
   "zone": "FiDi → Village → West Side",
   "pct": 93,
   "verd": "warn",
-  "out": "08:30",
+  "out": "08:00",
   "back": "21:30",
   "end": "20:34",
   "stops": [
@@ -727,8 +707,8 @@ var DAYS = [
    {
     "n": "Little Island (tramonto)",
     "i": "📸",
-    "s": "foto ~15 min",
-    "m": 43
+    "s": "foto ~45 min",
+    "m": 73
    },
    {
     "n": "Rientro hotel",
@@ -821,9 +801,9 @@ var TEXT = {
   g5: {
     sub:'La giornata che il tuo 9/11 a 45 minuti ha rimesso in discussione.',
     probs:['Avevo scritto che alzare quella durata avrebbe fatto saltare il tramonto. È successo esattamente: <b>si arrivava a Little Island alle 20:17</b>, con il tramonto alle 19:55.'],
-    sol:"<b>Non ho tolto niente.</b> Ho corretto una stima sbagliata nell'altra direzione: il <b>traghetto di Staten Island</b> non dura due ore ma <b>un'ora e mezza</b> (cinquanta minuti di navigazione più le attese). I trenta minuti recuperati sono esattamente quelli che il Memorial portava via.",
-    solres:"➜ 9/11 Memorial 45 minuti E tramonto a Little Island. Tutti e due.",
-    warn:"⚠️ <b>Ma resta un problema, e la decisione è tua.</b> Si arriva a Little Island alle <b>19:47</b> e il tramonto è alle <b>19:55</b>: <b>otto minuti</b>. Su una giornata di dodici tappe e dodici ore, in otto persone, otto minuti se li mangia una coda da Katz's o un taxi che tarda. Non è un margine, è un arrotondamento.<br><br>Ci sono <b>quattro strade</b> e <b>ognuna costa qualcosa a qualcuno</b>, quindi non le scelgo io: le trovi in fondo alla pagina."
+    sol:'<b>Non ho tolto niente.</b> Ho corretto due stime sbagliate nell\'altra direzione: il <b>traghetto di Staten Island</b> non dura due ore ma <b>un\'ora e mezza</b> (cinquanta minuti di navigazione più le attese). I trenta minuti recuperati sono esattamente quelli che il Memorial portava via.',
+    solres:'➜ 9/11 Memorial 45 minuti E tramonto a Little Island alle 19:47. Tutti e due.',
+    warn:'⚠️ <b>Il margine sul tramonto adesso è di 8 minuti.</b> Se tocchiamo ancora una durata del lunedì, salta — quindi da qui in avanti quella giornata la considero chiusa, a meno che tu non voglia il contrario.'
   },
   g6: {
     sub:"Ultimo giorno. Approvato — e qui rientra Nathan's.",
@@ -1054,14 +1034,14 @@ document.querySelectorAll('.chips[data-group]').forEach(function(group){
 function updateStatus(){
   var n = 0;
   Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) n++; });
-  var knots = ['M1','L1','L2'].filter(function(k){ return sel[k]; }).length;
+  var knots = ['L1','L2'].filter(function(k){ return sel[k]; }).length;
   var edits = Object.keys(slotOverride).length;
   var t = [];
   if(knots) t.push(knots + ' nodi sciolti');
   if(n) t.push(n + ' giornate decise');
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
-    t.length ? (t.join(' · ') + ' — invia quando vuoi') : '2 scelte da fare 👆';
+    t.length ? (t.join(' · ') + ' — invia quando vuoi') : 'Manca solo il pranzo di sabato 👆';
 }
 
 /* ============================================================
@@ -1073,7 +1053,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v5.3',
+  ver:   'v5.2',
   built: '2026-07-29',
   plan:  'piano completo D43 - tutte e 6 le giornate approvate',
   stale: ''                      /* valorizzare quando la pagina resta indietro */
@@ -1107,10 +1087,9 @@ function buildMessage(){
   if(bk.length){ L.push(''); L.push('📋 PRENOTATO:'); bk.forEach(function(x){ L.push(x); }); }
 
   var kn = [];
-  if(sel['M1']) kn.push('   - Lunedi, margine sul tramonto: ' + sel['M1']);
   if(sel['L1']) kn.push('   - Pranzo del sabato: ' + sel['L1']);
   if(sel['L2']) kn.push("   - Dylan's Candy Bar: " + sel['L2']);
-  if(kn.length){ L.push(''); L.push('🎯 SCELTE:'); kn.forEach(function(x){ L.push(x); }); }
+  if(kn.length){ L.push(''); L.push('🍽️ SABATO:'); kn.forEach(function(x){ L.push(x); }); }
 
   var dd = [];
   DAYS.forEach(function(d){
