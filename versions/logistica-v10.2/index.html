@@ -103,10 +103,6 @@
   .sol .res2{margin-top:7px; font-weight:700; color:#2f7a46}
 
   /* approval buttons */
-  .ask{margin-top:10px; background:#fffdf6; border:1px dashed var(--accent2); border-radius:11px; padding:10px 12px}
-  .ask .aq{font-size:.87rem; font-weight:700; color:#8a6d12; margin-bottom:7px}
-  .ask .chips{gap:7px}
-  .ask .chip{padding:7px 13px; font-size:.86rem}
   .lockrow{margin-top:10px; background:#f0f9f2; border:1px solid #bfe6cb; border-radius:10px;
            padding:9px 12px; font-size:.86rem; color:#2f7a46}
   .appr{display:flex; flex-direction:column; gap:7px; margin-top:10px}
@@ -223,7 +219,7 @@
     <div class="flag">🗽🔒</div>
     <h1>Ho fatto attaccare il piano</h1>
     <div class="sub">Prima di scrivere la guida ho fatto cercare i difetti del giro a un altro sistema. <b>Ne ha trovati sei, e sono tutti veri.</b> Cinque li ho già sistemati; <b>uno tocca a te</b>.</div>
-    <div class="ver">📌 versione v10.3 &middot; 29 lug 2026</div>
+    <div class="ver">📌 versione v10.2 &middot; 29 lug 2026</div>
   </div>
 </header>
 
@@ -231,7 +227,7 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(v10.3 &middot; 29 lug 2026 — rispetto alla v9, l'ultima che hai visto)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(v10.2 &middot; 29 lug 2026 — rispetto alla v9, l'ultima che hai visto)</span></h3>
     <ul>
       <li>🔍 <b>Il piano è stato passato al setaccio da un revisore esterno</b>, con l'istruzione di cercare dove si rompe. <b>Sei difetti trovati, tutti veri</b> — verificati uno per uno sui dati prima di crederci.</li>
       <li>🧹 <b>Cinque erano errori di fatto e li ho già chiusi io</b>: l'attesa del bus era calcolata male su tutte le giornate, Midtown Comics il giovedì è chiuso, e due miei documenti erano rimasti indietro rispetto ai dati.</li>
@@ -239,7 +235,6 @@
       <li>🎯 <b>Con una buona notizia</b>: spostando il pranzo a Columbus Circle il problema si ridimensiona quasi del tutto, <b>senza togliere niente a nessuno</b>.</li>
       <li>🥵 <b>E una cosa che la revisione ha fatto emergere e che nessuno aveva nominato</b>: quella corsa <b>non può stare fuori dalle ore calde</b>, e il piano di sopra è scoperto.</li>
       <li>🎟️ <b>Una cosa da fare tu</b> prima di partire: riscattare i pass Go City nell'app.</li>
-      <li>👆 <b>Dove ti propongo qualcosa, adesso c'è un pulsante.</b> Niente più «scrivimelo nel testo libero»: tocchi <b>sì</b> o <b>no</b> e mi arriva.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
@@ -331,8 +326,7 @@
   <div class="applied">
     <h3>Già sistemato, senza disturbarti</h3>
     <div class="arow"><span class="ai">🚌</span><span class="an"><b>L'attesa del bus, su tutte le giornate</b><small>Il calcolo aspettava 9 minuti ovunque. Ora aspetta <b>30 minuti sulla linea blu</b> (passa ogni ora) e <b>15 sulla rossa</b> (ogni mezz'ora). Anche la domenica si sposta un po': finisce alle 20:22 invece che alle 20:10.</small></span></div>
-    <div class="arow"><span class="ai">📚</span><span class="an"><b>Midtown Comics il giovedì sera: è chiuso</b><small>Avevo l'orario sbagliato — chiude alle <b>21:00</b>, non alle 22, e noi ci arriveremmo alle 21:32. <b>È il negozio di Giulio</b>, quindi preferisco dirtelo adesso che lasciarglielo sperare.</small></span></div>
-    <div class="ask" data-prop="GIULIO" data-label="GIULIO - recuperare Midtown Comics per Giulio"><div class="aq">📚 Lo recupero in un altro giorno, per Giulio?</div><div class="chips" data-group="GIULIO"><div class="chip yes" data-val="SI">👍 Sì, incastralo</div><div class="chip no" data-val="NO">🙅 No, lascia perdere</div></div></div>
+    <div class="arow"><span class="ai">📚</span><span class="an"><b>Midtown Comics il giovedì sera: è chiuso</b><small>Avevo l'orario sbagliato — chiude alle <b>21:00</b>, non alle 22, e noi ci arriveremmo alle 21:32. <b>È il negozio di Giulio</b>, quindi preferisco dirtelo adesso che lasciarglielo sperare. Se ci tiene, si può incastrare in un altro giorno: dimmelo.</small></span></div>
     <div class="arow"><span class="ai">🧹</span><span class="an"><b>Due punti dove i miei documenti erano rimasti indietro</b><small>Uno diceva ancora che il Top of the Rock era da prenotare (l'hai prenotato stamattina), un altro dava per aperta la domanda sull'Antico Vinaio (chiusa ieri). Roba mia, sistemata.</small></span></div>
   </div>
 
@@ -344,8 +338,7 @@
 
   <div class="note" style="border-left-color:var(--red)">
     <b>🥵 E una cosa che avevo raccontato meglio di com'è.</b> Sulla domenica avevo scritto che il Ponte di Brooklyn «esce dall'ora più calda». Non è del tutto vero: <b>ci si passa fra le 15:22 e le 16:22</b>, cioè ancora dentro la fascia calda per metà, e sono <b>un'ora di camminata senza ombra</b>. È molto meglio delle 13:37 di prima, ma non è fresco.<br><br>
-    Non lo cambio di mia iniziativa perché il ponte è il sogno di <b>MariaPaola e Peppe</b> e lo spot fotografico di altri tre, e spostarlo vuol dire rifare la domenica. <b>Ma tu sappilo</b>: acqua, cappelli, e nessuno che parta convinto di fare una passeggiata all'ombra.
-    <div class="ask" data-prop="PONTE" data-label="PONTE - provare a spostare il ponte fuori dal caldo"><div class="aq">🌉 Provo a spostarlo in una fascia più fresca? (vuol dire rifare la domenica)</div><div class="chips" data-group="PONTE"><div class="chip yes" data-val="SI">👍 Sì, provaci</div><div class="chip no" data-val="NO">🙅 No, va bene così</div></div></div>
+    Non lo cambio di mia iniziativa perché il ponte è il sogno di <b>MariaPaola e Peppe</b> e lo spot fotografico di altri tre, e spostarlo vuol dire rifare la domenica. <b>Ma tu sappilo</b>: acqua, cappelli, e nessuno che parta convinto di fare una passeggiata all'ombra. Se preferisci che ci lavori, dimmelo nel testo libero.
   </div>
 
   <!-- ============ COSA SUCCEDE ADESSO ============ -->
@@ -406,8 +399,7 @@
     <b>🚌 E adesso che si vede, salta fuori una cosa.</b> Su <b>51 spostamenti</b> di tutto il viaggio:
     <b>42 a piedi</b>, <b>6 in taxi</b> e <b>3 col Big Bus</b> — uno il sabato (per salire al Met) e due la domenica (Ghostbusters e il ponte).<br><br>
     Il pass da <b>due giorni</b> è comprato, quindi non si spreca niente: quei tre passaggi da soli valgono i taxi che avremmo preso. <b>Ma il Big Bus non è solo un modo per spostarsi: è anche il giro panoramico in sé</b>, col piano di sopra scoperto — e questo il calcolo non lo sa vedere, perché per lui un bus è solo una tratta fra due tappe.<br><br>
-    <b>Se ai ragazzi va di farsi un pezzo di anello tanto per vedere la città dall'alto</b>, sabato e domenica c'è margine.
-    <div class="ask" data-prop="ANELLO" data-label="ANELLO - pezzo di giro panoramico in piu' per i ragazzi"><div class="aq">🚌 Incastro un pezzo di anello in più, per i ragazzi?</div><div class="chips" data-group="ANELLO"><div class="chip yes" data-val="SI">👍 Sì, incastralo</div><div class="chip no" data-val="NO">🙅 No, basta così</div></div></div>
+    <b>Se ai ragazzi va di farsi un pezzo di anello tanto per vedere la città dall'alto</b>, sabato e domenica c'è margine (il sabato chiude con quasi due ore d'avanzo). Dimmelo nel testo libero in fondo e lo incastro.
   </div>
 
   <!-- ============ GIORNI ============ -->
@@ -438,7 +430,7 @@
   </div>
 
   <div class="footer">
-    Analisi logistica v10.3 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v10.2 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1258,10 +1250,8 @@ function updateStatus(){
   var rev = 0;
   Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) rev++; });
   var edits = Object.keys(slotOverride).length;
-  var extra = ['GIULIO','PONTE','ANELLO'].filter(function(k){ return sel[k]; }).length;
   var t = [];
   if(sel['SAB']) t.push('sabato ✓');
-  if(extra) t.push(extra + (extra === 1 ? ' richiesta' : ' richieste'));
   if(rev) t.push(rev + (rev === 1 ? ' giornata da riaprire' : ' giornate da riaprire'));
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
@@ -1277,7 +1267,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v10.3',
+  ver:   'v10.2',
   built: '2026-07-29',
   plan:  'itinerario v2.2 + D57 - risultati della adversarial review',
   stale: ''
@@ -1297,22 +1287,9 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v10.3: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v10.2: risposta di Fabrizio');
 
   if(sel['SAB']){ L.push(''); L.push('🌉 SABATO, strada scelta: ' + sel['SAB']); }
-
-  /* Le raccomandazioni sparse nella pagina: ognuna ha il suo pulsante, cosi'
-     non serve che le riscriva a mano nel testo libero (dove non arriverebbero mai). */
-  var EXTRA = [
-    ['GIULIO', "Recuperare Midtown Comics per Giulio"],
-    ['PONTE',  "Provare a spostare il Ponte di Brooklyn fuori dal caldo"],
-    ['ANELLO', "Incastrare un pezzo di giro panoramico in piu' per i ragazzi"]
-  ];
-  var ex = [];
-  EXTRA.forEach(function(e){
-    if(sel[e[0]]) ex.push('   - ' + e[1] + ': ' + sel[e[0]]);
-  });
-  if(ex.length){ L.push(''); L.push('🔧 RICHIESTE:'); ex.forEach(function(x){ L.push(x); }); }
 
   /* Le giornate sono gia' bloccate: non si chiede di riconfermarle.
      Nel messaggio finiscono SOLO quelle che vuole riaprire. */
