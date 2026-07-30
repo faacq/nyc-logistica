@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il bus come struttura della giornata - studio sul sabato</title>
+<style>
+:root{
+  --bg:#fbf7f0; --card:#fff; --ink:#22303c; --muted:#6b7a88; --line:#e7ddcd;
+  --accent:#1f3b73; --accent2:#e0912f; --g5:#3f9d5a; --red:#d1495b;
+  --radius:16px; --shadow:0 6px 22px rgba(30,40,60,.10);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55; padding-bottom:98px;
+}
+.wrap{max-width:660px; margin:0 auto; padding:18px 14px 0}
+h1{font-size:1.45rem; line-height:1.25; margin:0 0 6px}
+h2{font-size:1.12rem; margin:26px 0 10px; color:var(--accent)}
+h3{font-size:1rem; margin:18px 0 6px}
+p,li{font-size:.97rem}
+small{color:var(--muted)}
+.badge{
+  display:inline-block; background:var(--accent); color:#fff; font-weight:700;
+  font-size:.78rem; padding:4px 10px; border-radius:999px; letter-spacing:.02em;
+}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+      padding:14px 15px; margin:14px 0; box-shadow:var(--shadow)}
+.note{background:#fdf6e7; border:1px solid #f0dcae; border-left:5px solid var(--accent2);
+      border-radius:12px; padding:12px 14px; margin:14px 0}
+.prob{background:#fdeef0; border:1px solid #f3ccd3; border-left:5px solid var(--red);
+      border-radius:12px; padding:12px 14px; margin:14px 0}
+.sol{background:#eef7f0; border:1px solid #c9e3d1; border-left:5px solid var(--g5);
+     border-radius:12px; padding:12px 14px; margin:14px 0}
+.res{background:#eef2fa; border:1px solid #ccd8ee; border-left:5px solid var(--accent);
+     border-radius:12px; padding:12px 14px; margin:14px 0}
+.changelog{background:#eef7f0; border-left:5px solid var(--g5); border-radius:12px;
+           padding:12px 14px; margin:14px 0}
+table{width:100%; border-collapse:collapse; font-size:.88rem; margin:10px 0}
+th,td{border-bottom:1px solid var(--line); padding:7px 5px; text-align:left; vertical-align:top}
+th{color:var(--muted); font-weight:600; font-size:.8rem}
+.tw{overflow-x:auto; -webkit-overflow-scrolling:touch}
+.win{color:var(--g5); font-weight:700}
+.lose{color:var(--red); font-weight:700}
+.tl{list-style:none; padding:0; margin:8px 0}
+.tl li{display:flex; gap:10px; padding:6px 0; border-bottom:1px dashed var(--line)}
+.tl b{min-width:96px; font-variant-numeric:tabular-nums; color:var(--accent)}
+.tl .bus{background:#eef2fa; border-radius:8px; padding:6px 8px; margin:4px 0}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0}
+.chips button{
+  font:inherit; font-size:.9rem; background:#fff; color:var(--ink);
+  border:1.5px solid var(--line); border-radius:999px; padding:10px 14px;
+  min-height:42px; cursor:pointer;
+}
+.chips button.on{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600}
+textarea.free{
+  width:100%; min-height:110px; font:inherit; font-size:.95rem; padding:10px;
+  border:1.5px solid var(--line); border-radius:12px; background:#fff; resize:vertical;
+}
+.bar{
+  position:fixed; left:0; right:0; bottom:0; background:rgba(251,247,240,.97);
+  border-top:1px solid var(--line); padding:10px 14px; backdrop-filter:blur(6px);
+}
+.bar .in{max-width:660px; margin:0 auto; display:flex; gap:10px; align-items:center}
+.bar small{flex:1; line-height:1.3}
+.send{
+  font:inherit; font-weight:700; font-size:.95rem; background:#25D366; color:#0b2a17;
+  border:none; border-radius:12px; padding:13px 16px; min-height:46px; cursor:pointer;
+}
+.k{font-variant-numeric:tabular-nums; font-weight:700}
+hr{border:none; border-top:1px solid var(--line); margin:22px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="badge">v1 · 30 lug 2026</span>
+  <h1>Il bus come struttura della giornata</h1>
+  <p><small>Studio di fattibilità su <b>una sola giornata</b>: sabato 15.
+  Non è il piano, non ho cambiato niente. È una cosa da valutare.</small></p>
+
+  <div class="changelog">
+    <b>Prima versione di questa pagina.</b> Non sostituisce la logistica né la mappa
+    del percorso: quelle restano dove sono. Qui c'è una cosa sola, misurata su un
+    giorno solo. Se non ti convince, si butta e il sabato resta esattamente com'è.
+    <br><small>Se rileggendola più tardi vedi ancora "v1", è la cache: tira giù la
+    pagina per aggiornarla.</small>
+  </div>
+
+  <div class="prob">
+    <b>⚠️ Non ho applicato niente.</b> Il sabato che hai approvato è intatto nei dati.
+    Se non rispondi, non succede nulla.
+  </div>
+
+  <div class="sol">
+    <b>E non è «prendere o lasciare».</b> Questa idea si può adottare a <b>tre
+    profondità</b>: la prima non sposta nemmeno una tappa, la seconda cambia un
+    trasferimento solo, la terza ricostruisce il pomeriggio. Puoi fermarti dove vuoi —
+    anche al primo, che è quello che rende di più per quanto poco costa.
+  </div>
+
+  <h2>1. Il cambiamento strutturale, in due righe</h2>
+
+  <div class="card">
+    <p><b>Come è costruito il piano oggi:</b> prima si scelgono i posti da vedere,
+    poi si cerca come collegarli, e il bus è <i>uno dei modi</i> per andare da uno
+    all'altro — in concorrenza con i piedi e con il taxi. Il bus è un <b>costo</b>:
+    tempo speso per spostarsi.</p>
+    <p><b>Cosa cambierebbe:</b> il giro del bus diventa <b>lo scheletro della
+    giornata</b>. Le fermate diventano <i>poli</i>, e i posti da vedere si
+    raggruppano attorno al polo che li serve. Ogni discesa <b>apre uno slot</b> —
+    «scendi qui, hai 1 ora, vedi queste tre cose a piedi, torni alla fermata» — e la
+    corsa fra un polo e l'altro non è tempo perso: è il giro panoramico, dal piano
+    di sopra, all'ombra.</p>
+    <div class="note">
+      <b>La conseguenza che conta, ed è per questo che si chiama strutturale:</b>
+      la durata degli slot <b>non la decidiamo noi</b>. La decide la frequenza della
+      linea. La linea blu passa <b>ogni 60 minuti</b>: uno slot dura 60 minuti, o
+      120, non 75. E se torni alla fermata con 5 minuti di ritardo, non perdi 5
+      minuti — ne perdi 60.
+    </div>
+  </div>
+
+  <h2>2. Come l'ho misurato (prima dei numeri)</h2>
+
+  <div class="res">
+    <ul style="margin:0; padding-left:18px">
+      <li>Ho usato <b>lo stesso motore di calcolo</b> del piano normale, non uno fatto
+      apposta: le versioni qui sotto sono misurate tutte con lo stesso metro.</li>
+      <li>Le tappe, le durate delle soste e l'ordine <b>sono quelli che hai
+      approvato</b>. Non ho tolto niente e non ho aggiunto niente.</li>
+      <li>Ho aggiunto una cosa sola che prima non c'era: gli <b>orari di passaggio</b>.
+      Finora il piano metteva in conto «mezz'ora di attesa media». Su una linea che
+      passa ogni 60 minuti l'attesa media non esiste: o sei lì per quella corsa, o
+      aspetti un'ora.</li>
+      <li><b>Quello che non so, e lo dico subito:</b> Big Bus <b>non pubblica gli orari
+      di passaggio</b>. Li ho ricostruiti dalla frequenza dichiarata (60') e dalla
+      durata dell'anello (75'). I tempi delle tratte che ne escono coincidono con la
+      ricerca (<span class="k">51'</span> calcolati contro i ~50' dichiarati per
+      Columbus Circle → Met), ma <b>gli orari veri vanno verificati sull'app</b> nei
+      giorni prima di partire.</li>
+    </ul>
+  </div>
+
+  <h2>3. Le quattro cose che ho trovato</h2>
+
+  <p>Prima dei numeri, cosa è venuto fuori — perché due di queste valgono più della
+  proposta stessa.</p>
+
+  <div class="res">
+    <h3 style="margin-top:0">① L'attesa media non esiste, e ci costa mezz'ora</h3>
+    <p style="margin:0">Il piano mette in conto <b>30 minuti di attesa media</b> del bus.
+    Ma la linea blu passa <b>ogni 60</b>: o si è alla fermata per quella corsa, o si
+    aspetta un'ora. Non c'è una media. Oggi si arriva alla fermata alle <b>13:14</b>,
+    sei minuti dopo il passaggio — e su una linea così, sei minuti non sono sei minuti.
+    <b>Saperlo vale 35 minuti di giornata, senza toccare niente.</b></p>
+  </div>
+
+  <div class="res">
+    <h3 style="margin-top:0">② Il Guggenheim non costa 15 minuti. Ne costa 32.</h3>
+    <p style="margin:0">È una tappa da 15 minuti, vista da fuori. Ma sta <b>17 minuti a
+    piedi dal Met e 15 dalla fermata</b>: è l'andare e tornare, non il guardarlo. Ed è
+    quella deviazione — non la visita — a decidere <b>quale corsa del bus si prende</b>,
+    e quindi a che ora si finisce la giornata. <b>Una tappa opzionale da 15 minuti
+    sposta la fine del sabato di un'ora.</b> Non me ne ero accorto finché non ho messo
+    gli orari del bus nel conto.</p>
+  </div>
+
+  <div class="res">
+    <h3 style="margin-top:0">③ Il gruppo di negozi c'è davvero — e il bus ci passa accanto</h3>
+    <p style="margin:0">Bloomingdale's e la funivia di Roosevelt Island stanno
+    <b>a tre isolati</b> l'uno dall'altra, e a un quarto d'ora a piedi da una fermata
+    del bus <b>che il piano non usa mai</b>. Oggi ci si arriva camminando 3,4 km dal
+    Guggenheim.</p>
+  </div>
+
+  <div class="res">
+    <h3 style="margin-top:0">④ Quella fermata era sbagliata di 145 metri</h3>
+    <p style="margin:0">È l'unica delle 19 che il piano non tocca, quindi non era passata
+    dal controllo delle coordinate: <b>cadeva dentro Central Park</b>, in mezzo alle
+    voliere dello zoo, invece che sulla 5th Avenue dove passa il bus. Verificata e
+    corretta prima di scriverti. <b>Sul piano cambia un minuto</b> — ma è lo stesso
+    errore che ne aveva prodotti sei su dodici il giorno prima.</p>
+  </div>
+
+  <h2>4. Il pilota: sabato 15</h2>
+
+  <p>Ho scelto il sabato per tre motivi: è il giorno dove il bus si usa <b>meno</b>
+  (una corsa sola), contiene il <b>buco più grosso a forma di bus</b> — dal Guggenheim
+  a Bloomingdale's ci sono <b>3,4 km a piedi in 52 minuti</b>, alle 15:30 — ed è il
+  caso <b>difficile</b>, perché la linea blu è quella che passa ogni ora.</p>
+
+  <div class="tw">
+  <table>
+    <tr><th></th><th>oggi</th><th>① miri<br>alla corsa</th><th>② una discesa<br>in più</th><th>③ giornata<br>a slot</th></tr>
+    <tr><td><b>Fine giornata</b></td><td>19:51</td><td>19:16</td><td>19:51</td><td class="win">18:51</td></tr>
+    <tr><td><b>Km a piedi</b></td><td>9,1</td><td>9,1</td><td>6,5</td><td class="win">5,7</td></tr>
+    <tr><td><b>A piedi sotto il sole</b><br><small>(12-16)</small></td>
+        <td>78'</td><td class="lose">96'</td><td class="win">44'</td><td>55'</td></tr>
+    <tr><td><b>Fermi ad aspettare</b></td><td>30'</td><td class="win">0'</td><td>38'</td><td>16'</td></tr>
+    <tr><td><b>Corse panoramiche</b></td><td>1</td><td>1</td><td class="win">2</td><td class="win">2</td></tr>
+    <tr><td><b>Tappe tolte</b></td><td>—</td><td>—</td><td>—</td><td class="lose">Guggenheim</td></tr>
+  </table>
+  </div>
+
+  <h3>① Miri alla corsa — non cambia niente, e chiude 35 minuti prima</h3>
+  <div class="sol">
+    <p style="margin:0">Stesse tappe, stesso ordine, stessa giornata. L'unica differenza
+    è che il pranzo a Columbus Circle dura <b>fino a che passa il bus</b> (34' invece di
+    40' tondi) e si sale alla corsa precisa invece di mettere in conto mezz'ora di attesa.
+    <b>Fine alle 19:16 invece che alle 19:51.</b> Non è una modifica al piano: è sapere
+    un orario.</p>
+  </div>
+  <div class="note">
+    <b>Ma c'è un effetto collaterale, e va detto:</b> anticipando tutto di 35 minuti,
+    la camminata verso Bloomingdale's <b>scivola dentro l'ora calda</b> invece di
+    uscirne. Si cammina lo stesso numero di chilometri, ma <b>18 minuti in più sotto
+    il sole</b>. Finire prima e stare peggio è possibile.
+  </div>
+
+  <h3>② Una discesa in più — cambia un trasferimento, non la giornata</h3>
+  <p>Qui si tocca <b>una cosa sola</b>: il pezzo fra il Guggenheim e Bloomingdale's, che
+  oggi sono 3,4 km a piedi. Tutto il resto — ordine, tappe, soste, cena — resta identico.
+  È questo il disegno:</p>
+
+  <ul class="tl">
+    <li><b>fino alle 13:01</b><span>mattina in bici + Bethesda + pranzo a Columbus Circle
+      <small>(tutto identico a oggi)</small></span></li>
+    <li class="bus"><b>13:08 → 13:59</b><span>🚌 <b>si sale a Columbus Circle</b> — 51' di giro
+      panoramico: Midtown, Times Square, il Rockefeller, poi tutta la 5th Avenue
+      lungo il parco. <b>Si scende davanti al Met.</b></span></li>
+    <li><b>14:04 → 15:44</b><span><b>SLOT AL MET</b> — la scalinata di Gossip Girl, il
+      Museum Mile, il Guggenheim da fuori, e si torna alla fermata.
+      <br><small>Le cose da vedere ne riempiono ~62': alle <b>15:06</b> si è di nuovo
+      alla fermata, e il bus passa alle 15:44.</small></span></li>
+    <li class="bus"><b>15:44 → 15:58</b><span>🚌 <b>si risale sullo stesso bus</b> — 14' giù
+      per la 5th costeggiando il parco. <b>Si scende sulla 5th all'altezza della 66ª</b>,
+      davanti allo zoo.
+      <br><small>Nel piano di oggi questo pezzo si fa <b>a piedi: 3,4 km, 52 minuti,
+      in pieno sole</b>.</small></span></li>
+    <li><b>16:19 → 17:36</b><span><b>SLOT ALLA 59ª</b> — Bloomingdale's e la funivia di
+      Roosevelt Island, a tre isolati l'uno dall'altra</span></li>
+    <li><b>18:03 → 19:23</b><span>cena da Eataly in taxi, poi hotel <small>(identico a
+      oggi)</small></span></li>
+  </ul>
+
+  <div class="sol">
+    <b>Cosa compra:</b> <b>2,6 km in meno a piedi</b>, di cui <b>34 minuti in meno
+    sotto il sole</b>, e <b>una seconda corsa panoramica</b> al posto di una camminata
+    lungo la Terza Avenue. Il pass del bus, che è pagato, viene usato il doppio.
+  </div>
+
+  <div class="note">
+    <b>Cosa costa — e costa meno di quanto sembri.</b> In tabella il ② ha «38 minuti fermi
+    ad aspettare», che sembra tanto. Ma il piano di oggi ne ha <b>30</b>: sono
+    l'attesa media del bus, solo che non si vedono perché stanno impastati dentro
+    la sosta. <b>La differenza vera è di 8 minuti.</b> E cambia il posto dove si
+    aspetta: non in coda a una fermata, ma <b>sulla scalinata del Met</b>.
+  </div>
+
+  <div class="prob">
+    <b>I due rischi, senza addolcirli.</b>
+    <ul style="margin:6px 0 0; padding-left:18px">
+      <li><b>La corsa delle 15:44 è l'ultima utile.</b> Il servizio finisce alle 16:00:
+      dopo quella, non ce n'è un'altra. Se la si perde si va a piedi e si arriva a
+      Bloomingdale's alle <b>16:28</b> invece che alle 16:19: nove minuti. Il danno
+      però non sono i nove minuti — è che <b>si sono aspettati 38 minuti e poi si
+      cammina lo stesso</b>. È <b>un colpo solo</b>, senza rete.
+      <br><small>Il ③ non ha questo problema: dopo le 14:44 c'è ancora la 15:44.</small></li>
+      <li><b>Gli orari di passaggio non sono pubblicati.</b> Li ho ricostruiti; li
+      confermo sull'app nei giorni prima di partire. Se la griglia vera è sfasata, si
+      spostano tutti e tre i livelli.</li>
+    </ul>
+  </div>
+
+  <div class="sol">
+    <b>✅ Una cosa che ho già verificato, e che era sbagliata.</b> La fermata dove si
+    scende (5th Avenue all'altezza della 66ª) era l'unica delle 19 che il piano non usa
+    mai, quindi non era passata dal controllo delle coordinate: <b>e infatti stava
+    145 metri fuori posto, dentro Central Park</b>, in mezzo alle voliere dello zoo
+    invece che sulla strada dove passa il bus. L'ho corretta e ancorata a un civico
+    vero della 5th Avenue. <b>Sul piano non cambia niente</b> — un minuto di cammino in
+    meno — ma non volevo chiederti di scegliere su una fermata che non stava dove
+    dicevo io.
+  </div>
+
+  <h3>③ La giornata a slot — il solo che vince su tutto, e costa una tappa</h3>
+  <p>Nel ② lo slot al Met dura un'ora e mezza perché la corsa utile è quella delle
+  15:44. Ne esiste una <b>un'ora prima</b>, alle 14:44, e prenderla cambia la giornata:
+  si è a Bloomingdale's alle <b>15:19 invece che alle 16:19</b>, e si finisce alle
+  <b>18:51 invece che alle 19:51</b>.</p>
+
+  <div class="prob">
+    <p style="margin:0 0 8px"><b>Per prenderla, però, il Guggenheim deve uscire.</b>
+    E il motivo è più interessante del fatto: il Guggenheim <b>non costa i suoi 15
+    minuti di sosta, ne costa 32 di strada</b> — sta 17' a piedi dal Met e 15' dalla
+    fermata. È l'andare e tornare, non il guardarlo, a far perdere il bus. Col
+    Guggenheim dentro si è alla fermata alle <b>15:06: ventidue minuti dopo</b> che la
+    corsa è passata — e su una linea che passa ogni ora non c'è una via di mezzo.</p>
+    <p style="margin:0"><b>Non lo tolgo io.</b> È una tappa tua, opzionale, e questo è
+    esattamente il tipo di scambio che decidi tu: <b>un museo visto da fuori contro
+    un'ora di giornata e 3,4 km di cammino.</b></p>
+  </div>
+
+  <div class="sol">
+    <b>Una cosa in più a favore del ③:</b> la corsa delle 14:44 <b>non è l'ultima</b> —
+    dopo c'è ancora quella delle 15:44. Se la si perde si aspetta un'ora, ma non si
+    resta a piedi. È l'unica delle tre versioni che <b>ha una rete</b>.
+  </div>
+
+  <h2>5. Pro e contro, senza girarci intorno</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">Lasciare tutto com'è</h3>
+    <p style="margin:0"><span class="win">PRO</span> — è approvato, nessuno deve
+    ripensarci, e la giornata funziona: finisce alle 19:51 con 99 minuti di margine.
+    <br><span class="lose">CONTRO</span> — si cammina <b>9,1 km</b>, di cui 3,4 in un
+    colpo solo alle 15:30; il bus del pass si usa <b>una volta sola</b>; e mezz'ora
+    di attesa resta messa in conto ma non pianificata.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">① Miri alla corsa</h3>
+    <p style="margin:0"><span class="win">PRO</span> — <b>35 minuti</b> di giornata in
+    meno senza spostare una sola tappa. Non è una modifica al piano, è sapere un orario.
+    Costo zero, rischio zero.
+    <br><span class="lose">CONTRO</span> — <b>18 minuti in più a piedi sotto il sole</b>:
+    anticipando tutto, la camminata lunga scivola dentro l'ora calda invece di uscirne.
+    E resta l'unica versione dove il bus si usa una volta sola.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">② Una discesa in più</h3>
+    <p style="margin:0"><span class="win">PRO</span> — <b>2,6 km e 34 minuti di sole in
+    meno</b>, che è il risultato migliore dei tre sul caldo. Due corse panoramiche invece
+    di una. <b>Non si toglie niente a nessuno</b>, e si finisce alla stessa ora di oggi.
+    <br><span class="lose">CONTRO</span> — la corsa delle 15:44 è <b>l'ultima</b>:
+    perderla vuol dire aver aspettato 38 minuti e camminare lo stesso. Nessuna rete. E
+    restano <b>~40 minuti fermi</b> al Met da riempire.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">③ Giornata a slot</h3>
+    <p style="margin:0"><span class="win">PRO</span> — <b>un'ora di giornata in meno</b>
+    (18:51), <b>3,4 km in meno a piedi</b>, 26 minuti in meno di sole, due corse. Ed è
+    <b>l'unico con una rete</b>: dopo la corsa delle 14:44 c'è ancora quella delle 15:44.
+    <br><span class="lose">CONTRO</span> — <b>esce il Guggenheim.</b> E si cammina 8
+    minuti in più sotto il sole rispetto al ②, perché si arriva ai negozi un'ora prima,
+    quando fa ancora caldo.</p>
+  </div>
+
+  <div class="note">
+    <b>Il mio consiglio, e poi decidi tu:</b> <b>③</b>, se il Guggenheim visto da fuori
+    vale meno di un'ora di giornata e di 3,4 km. Se vale di più, <b>②</b> — che sul caldo
+    è addirittura il migliore. <b>Il ① da solo non lo consiglio</b>: fa finire prima e
+    stare peggio.
+  </div>
+
+  <h2>6. Una cosa che ti avevo detto e che ora correggo</h2>
+  <div class="note">
+    <p style="margin:0 0 8px">Quando hai detto <b>sì al giro panoramico in più per i
+    ragazzi</b>, ti ho risposto che <b>sul sabato non ci stava</b>, e che si poteva fare
+    solo la domenica. <b>Quella risposta era giusta per la domanda che mi ero fatto:</b>
+    <i>restare a bordo più a lungo</i> — e restando a bordo oltre il Met si finisce a
+    Columbus Circle, dall'altra parte del parco, con 25 minuti di sole in più.</p>
+    <p style="margin:0"><b>Non avevo considerato di scendere e risalire.</b> È
+    un'altra manovra, e cade in un posto utile. Le due cose non si contraddicono, ma
+    la prima era una risposta più stretta della domanda.
+    <br><small>👉 Questo <b>non tocca</b> la scelta sulla domenica (le due opzioni,
+    +20' o +34'): quella resta com'è, e la aspetto separatamente.</small></p>
+  </div>
+
+  <h2>7. Cosa si muove davvero, livello per livello</h2>
+  <div class="card">
+    <div class="tw">
+    <table>
+      <tr><th>Cosa si sposta</th><th>①</th><th>②</th><th>③</th></tr>
+      <tr><td>Pranzo a Columbus Circle: 40' → 34' <small>(fino al bus)</small></td>
+          <td>sì</td><td>sì</td><td>sì</td></tr>
+      <tr><td>Discesa verso Bloomingdale's: 3,4 km a piedi → bus + 800 m</td>
+          <td>no</td><td>sì</td><td>sì</td></tr>
+      <tr><td>Tempo al Met: 15' → ~1h30 <small>(②)</small> / ~40' <small>(③)</small></td>
+          <td>no</td><td>sì</td><td>sì</td></tr>
+      <tr><td><b>Tappe tolte</b></td><td>nessuna</td><td>nessuna</td>
+          <td class="lose">Guggenheim</td></tr>
+      <tr><td><b>Sveglia</b></td><td colspan="3"><b>invariata in tutti e tre</b> — si esce
+          alle 08:45 come adesso</td></tr>
+      <tr><td><b>Cena e rientro</b></td><td colspan="3">stessi posti, solo più presto nel ①
+          e nel ③</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>8. La domanda che conta</h2>
+
+  <div class="card" style="border:2px solid var(--accent)">
+    <h3 style="margin-top:0">⭐ Approvi la modifica?</h3>
+    <p style="margin:0 0 4px"><b>Riorganizzare il sabato attorno al bus, come proposto qui sopra.</b></p>
+    <p style="margin:0 0 8px"><small>Questa è la domanda che conta. Le due sotto servono
+    solo se qui rispondi <b>sì</b> o <b>in parte</b>.</small></p>
+    <div class="chips" data-group="approvazione">
+      <button data-v="SI - approvo, applicala">✅ sì, applicala</button>
+      <button data-v="NO - lascia la giornata com'e'">❌ no, lascia com'è</button>
+      <button data-v="IN PARTE - vedi sotto e nel testo libero">🟡 in parte — ti dico cosa</button>
+    </div>
+    <p style="margin:6px 0 0"><small>Se scegli <b>in parte</b>, usa le scelte qui sotto e
+    il riquadro in fondo: <b>scrivi quello che vuoi, anche a ruota libera</b>. Non devi
+    stare dentro le opzioni che ho previsto io — se la cosa giusta non è fra quelle,
+    dimmela e rifaccio i conti.</small></p>
+  </div>
+
+  <h3>E poi, se vuoi entrare nel dettaglio</h3>
+
+  <div class="card">
+    <h3>a) Fin dove vuoi andare?</h3>
+    <p><small>Non rispondendo resta tutto <b>com'è</b>: il sabato che hai già approvato.
+    Ogni livello include quello prima.</small></p>
+    <div class="chips" data-group="livello">
+      <button data-v="Lascia il sabato esattamente com'e'">lascia com'è</button>
+      <button data-v="① solo mirare alla corsa - niente cambia, finiamo 35' prima">① miro alla corsa</button>
+      <button data-v="② una discesa in piu' - meno 2,6 km a piedi, due corse, stessa ora">② una discesa in più</button>
+      <button data-v="③ giornata a slot - finiamo 18:51, ma esce il Guggenheim">③ tutto, senza Guggenheim</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>b) Il Guggenheim vale un'ora di giornata?</h3>
+    <p>È la sola domanda che il calcolo non può risolvere. Oggi è una tappa
+    <b>opzionale</b>, vista <b>solo da fuori</b>, 15 minuti. Ma per come sta messa —
+    17' a piedi all'andata, 15' al ritorno — è quella che tiene la giornata sulla corsa
+    delle 15:44 invece che su quella delle 14:44.</p>
+    <div class="chips" data-group="guggenheim">
+      <button data-v="Il Guggenheim resta: vale l'ora">resta, vale l'ora</button>
+      <button data-v="Il Guggenheim esce: preferisco l'ora di giornata">esce, prendo l'ora</button>
+      <button data-v="Si decide sul posto in base al caldo e a come stiamo">si decide sul posto</button>
+    </div>
+    <p><small>💡 Se il Guggenheim resta, nel ② avanzano <b>~40 minuti liberi</b> sulla
+    scalinata del Met. A 8 minuti da lì c'è il laghetto delle barchine con la statua di
+    Alice nel Paese delle Meraviglie — è un'idea mia, non l'ho messa nel piano.</small></p>
+  </div>
+
+  <div class="card">
+    <h3>Dimmi quello che vuoi — anche fuori dalle mie opzioni</h3>
+    <textarea class="free" placeholder="Anche solo: «non mi convince», o «e la domenica?»"></textarea>
+  </div>
+
+  <p><small>🔴 <b>Sulla domenica sto facendo lo stesso studio</b>, e te lo mando
+  insieme a questo. Lì la linea è la <b>rossa</b> e passa ogni <b>30</b> minuti invece
+  che ogni 60: gli slot sono molto più facili da far quadrare, quindi mi aspetto numeri
+  diversi. <b>Le due giornate si decidono separatamente</b> — dire di sì a una non
+  impegna sull'altra.</small></p>
+
+</div>
+
+<div class="bar"><div class="in">
+  <small id="status">Scegli almeno una risposta</small>
+  <button class="send" id="send">Manda su WhatsApp</button>
+</div></div>
+
+<script>
+var FORM = {
+  id:    "bus-first-studio",
+  ver:   "v1",
+  built: "2026-07-30",
+  plan:  "day3 canonico dopo D71 (Dylan's tolto) - sabato 08:45-19:51",
+  stale: ""
+};
+
+var answers = {};
+
+document.querySelectorAll(".chips").forEach(function (box) {
+  var group = box.getAttribute("data-group");
+  box.querySelectorAll("button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var was = b.classList.contains("on");
+      box.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+      if (was) { delete answers[group]; }
+      else { b.classList.add("on"); answers[group] = b.getAttribute("data-v"); }
+      refresh();
+    });
+  });
+});
+
+function refresh() {
+  var n = Object.keys(answers).length;
+  var free = document.querySelector("textarea.free").value.trim();
+  var s = document.getElementById("status");
+  if (!n && !free) { s.textContent = "Scegli almeno una risposta"; }
+  else { s.textContent = n + " risposta/e" + (free ? " + testo libero" : ""); }
+}
+document.querySelector("textarea.free").addEventListener("input", refresh);
+
+function buildMessage() {
+  var L = [];
+  L.push("NYC - studio: il bus come struttura della giornata");
+  L.push("");
+  if (answers["approvazione"]) {
+    L.push("APPROVAZIONE");
+    L.push("   " + answers["approvazione"]);
+    L.push("");
+  }
+  if (answers["livello"]) {
+    L.push("SABATO 15 - fin dove andare");
+    L.push("   " + answers["livello"]);
+    L.push("");
+  }
+  if (answers["guggenheim"]) {
+    L.push("IL GUGGENHEIM");
+    L.push("   " + answers["guggenheim"]);
+    L.push("");
+  }
+  var free = document.querySelector("textarea.free").value.trim();
+  if (free) {
+    L.push("ALTRO");
+    free.split("\n").forEach(function (r) { if (r.trim()) L.push("   " + r.trim()); });
+    L.push("");
+  }
+  var d = new Date();
+  function p(x) { return (x < 10 ? "0" : "") + x; }
+  L.push("---");
+  L.push("Fabrizio");
+  L.push("pagina: " + FORM.id + " " + FORM.ver + " - pubblicata " + FORM.built);
+  L.push("piano mostrato: " + FORM.plan);
+  L.push("inviato: " + p(d.getDate()) + "/" + p(d.getMonth() + 1) + "/" + d.getFullYear() +
+         " " + p(d.getHours()) + ":" + p(d.getMinutes()));
+  if (FORM.stale) { L.push("ATTENZIONE: " + FORM.stale); }
+  return L.join("\n");
+}
+
+document.getElementById("send").addEventListener("click", function () {
+  var free = document.querySelector("textarea.free").value.trim();
+  if (!Object.keys(answers).length && !free) {
+    document.getElementById("status").textContent = "Scegli qualcosa prima di mandare";
+    return;
+  }
+  window.open("https://wa.me/?text=" + encodeURIComponent(buildMessage()), "_blank");
+});
+</script>
+</body>
+</html>
