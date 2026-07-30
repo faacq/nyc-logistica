@@ -107,6 +107,8 @@
   .ask .aq{font-size:.87rem; font-weight:700; color:#8a6d12; margin-bottom:7px}
   /* la via d'uscita da una cosa gia' decisa: NON e' una domanda nuova, quindi
      e' volutamente piu' spenta di .ask - si nota solo se la si sta cercando */
+  .reopen{margin-top:12px; background:#f7f6f3; border:1px dashed #cbc4b8; border-radius:11px; padding:10px 12px}
+  .reopen .aq{font-size:.87rem; font-weight:700; color:#6b7a88; margin-bottom:4px}
   .ask .chips{gap:7px}
   .ask .chip{padding:7px 13px; font-size:.86rem}
   .lockrow{margin-top:10px; background:#f0f9f2; border:1px solid #bfe6cb; border-radius:10px;
@@ -225,7 +227,7 @@
     <div class="flag">🗽✅</div>
     <h1>Fatto tutto quello che hai detto</h1>
     <div class="sub">Le tue tre risposte sono applicate, e il calcolo è rigirato su tutte e sei le giornate. <b>Questa pagina non ti chiede niente: ti dice cosa è cambiato.</b> Una cosa sola resta da fare a te, ed è in cima.</div>
-    <div class="ver">📌 versione v14 &middot; 30 lug 2026</div>
+    <div class="ver">📌 versione v13 &middot; 30 lug 2026</div>
   </div>
 </header>
 
@@ -233,15 +235,14 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(v14 &middot; 30 lug 2026 — rispetto alla v12, l'ultima su cui hai risposto)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(v13 &middot; 30 lug 2026 — rispetto alla v12, quella su cui hai risposto alle 14:48)</span></h3>
     <ul>
-      <li>🧹 <b>Ho ripulito la pagina: era diventata l'archivio di tre giri di domande.</b> Tutto ciò che è deciso sta ora in <b>quattro righe</b> in fondo, invece di mezza pagina di tabelle. <b>Quello che ti chiede qualcosa è solo in cima.</b></li>
-      <li>👉 <b>E ho cambiato come ti chiedo le cose.</b> Ieri c'erano due pulsantini <i>"solo se hai cambiato idea, altrimenti non toccare niente"</i>. Non li hai toccati, quindi <b>li leggo come confermati e li ho tolti</b> — ma era un modo sbagliato di chiedere: si confermava col silenzio, e il silenzio non fa sparire il pulsante. <b>Da qui in avanti, dove serve una conferma ci sarà un pulsante «confermo».</b></li>
-      <li>🛍️ <b>Marc Jacobs: fatto come hai detto</b> — resta solo quello di SoHo, la domenica. <b>Il sabato guadagna 27 minuti</b> e finisce alle <b>20:18</b> invece di 20:45.</li>
-      <li>🏙️ <b>L'Empire al posto del Top of the Rock: ho la risposta, ed è sì.</b> Ho rifatto il calcolo del martedì e controllato le quattro cose che potevano dire no. <b>Ne resta una sola in dubbio, e ci vuole una tua mossa</b> — è la sezione qui sotto, con il pulsante per dirmi se procedo.</li>
-      <li>⚠️ <b>Se si fa, c'è un ordine da rispettare</b>, e sbagliarlo costa la mattina del martedì: <b>prima si prenota l'Empire, e solo con la conferma in mano si annulla il Top of the Rock.</b></li>
-      <li>🚌 <b>L'anello in più per i ragazzi: ricevuto il tuo sì, ci sto lavorando.</b> Non è più una domanda. Non ci sta sul sabato — sotto c'è il perché, coi numeri — e sto guardando la domenica: <b>ti arriveranno due opzioni con i minuti in chiaro</b>.</li>
+      <li>🛍️ <b>Marc Jacobs: fatto come hai detto</b> — resta solo quello di SoHo, la domenica. <b>Il sabato guadagna 27 minuti</b> e finisce alle <b>20:18</b> invece di 20:45. Non cambia nient'altro, e non devi rispondere niente su questo.</li>
+      <li>🏙️ <b>L'Empire al posto del Top of the Rock: ho la risposta, ed è sì.</b> Ho rifatto il calcolo del martedì e ho controllato le tre cose che potevano bloccarlo. <b>Ne restava una sola in dubbio, e ci vuole una tua mossa</b> — è la sezione qui sotto, con il pulsante per dirmi se procedo.</li>
+      <li>⚠️ <b>C'è un ordine da rispettare</b>, e se si sbaglia costa la mattina del martedì: <b>prima si prenota l'Empire, e solo con la conferma in mano si annulla il Top of the Rock.</b> Il perché è spiegato sotto.</li>
+      <li>🚌 <b>Il pezzo di anello in più per i ragazzi: ricevuto il tuo sì, ci sto lavorando.</b> Non è più una domanda. Ma <b>non ci sta sul sabato</b> come pensavo — te lo spiego sotto con i numeri — e sto guardando la domenica. <b>Ti arriveranno due opzioni con i minuti in chiaro</b>, non una proposta vaga.</li>
       <li>🎟️ <b>I pass Go City non sono ancora riscattati</b>, e adesso da lì passano <i>due</i> cose e non più una: il ritiro delle bici e la prenotazione dell'Empire.</li>
+      <li>✅ <b>Nient'altro è stato toccato.</b> Sabato, Midtown Comics e il ponte restano come li hai lasciati.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
@@ -328,20 +329,92 @@
     </div>
   </div>
 
-  <!-- ============ RESOCONTO: TUTTO CIO' CHE E' CHIUSO ============ -->
-  <h2>🔒 Quello che è già chiuso — solo per memoria</h2>
-
+  <!-- ============ COSA HO FATTO CON LE SUE RISPOSTE ============ -->
+  <h2>✅ Cosa ho fatto con le tue risposte</h2>
   <div class="res">
-    <h3 style="margin-top:0">Questa parte non ti chiede niente</h3>
-    <p style="margin-top:0">Sono le cose decise nei giorni scorsi, tenute qui in poche righe perché ti servano da promemoria e nient'altro. <b>Prima occupavano mezza pagina</b> con tabelle e confronti: ora che sono ferme non serve più raccontarle per esteso.</p>
-    <p style="margin-bottom:0">⚠️ <b>Una cosa te la devo dire chiaramente, perché riguarda come ti faccio le domande.</b> Nella pagina di ieri c'erano due pulsantini per tornare indietro — sul sabato e su Midtown Comics — con scritto <i>"solo se hai cambiato idea, altrimenti non toccare niente"</i>. <b>Non li hai toccati, quindi le prendo per confermate e li ho tolti.</b> Ma era un modo sbagliato di chiedere: si confermava col silenzio, e il silenzio non fa sparire il pulsante — così la pagina si riempiva di roba già decisa. <b>Da qui in avanti, dove serve una conferma ci sarà un pulsante «confermo».</b> Un tocco in più per te, ma niente più cose appese.</p>
+    <h3>Tre risposte, tre cose fatte</h3>
+    <p style="margin-top:0">Hai risposto ieri sera alle 19:16. <b>Ho applicato tutte e tre le cose e rigirato il calcolo su tutte e sei le giornate</b>, così quello che vedi qui sotto sono i numeri veri, non le previsioni che ti avevo dato.</p>
+    <p style="margin-bottom:0"><b>Non devi rispondere niente di tutto questo</b>: è già deciso e già fatto. Dove ho speso qualcosa che non mi avevi esplicitamente concesso, te lo dico e ti lascio il modo di tornare indietro.</p>
   </div>
 
   <div class="card">
-    <div class="princ"><span class="ic">🌉</span><div><b>Sabato: giro panoramico in Big Bus + riordino</b> — scelto da te il 29. Si pranza a Columbus Circle, si sale sul bus alle <b>13:14</b> con 2-3 corse di riserva, ~50 minuti di città dal piano di sopra, si scende al Met. Con Marc Jacobs sfoltito la giornata chiude alle <b>20:18</b> con <b>72 minuti</b> di margine. <small class="muted">Il costo che resta: ~50 minuti al sole scoperto fra l'una e le tre. Il piano B sul posto è sempre valido — se il caldo è insopportabile si salta il giro e si va al Met in taxi, 17 minuti e ~16 dollari.</small></div></div>
-    <div class="princ"><span class="ic">📚</span><div><b>Midtown Comics per Giulio: martedì alle 15:03</b> — è l'unico giorno del viaggio in cui quel negozio è aperto quando gli passiamo davanti (orario controllato sul loro sito). Costa 36 minuti del cuscino prima dell'aeroporto, che resta di <b>1h03</b>. <small class="muted">Se il pomeriggio del martedì va lungo, è la prima tappa che salta: è un negozio, non una prenotazione.</small></div></div>
-    <div class="princ"><span class="ic">🌉</span><div><b>Il Ponte di Brooklyn resta nel pomeriggio caldo</b> — come hai detto tu. Non è un difetto da curare, è un costo accettato: acqua, ombra e nessuna fretta finiscono nella guida. <small class="muted">La mia descrizione diceva il contrario e l'ho corretta: raccontava che il ponte usciva dall'ora più calda, e non era vero.</small></div></div>
-    <div class="princ"><span class="ic">🔒</span><div><b>Tutte e sei le giornate sono bloccate</b>, e la revisione esterna è chiusa: sei difetti trovati, sei sistemati. <small class="muted">Bloccata non vuol dire intoccabile: una giornata si può riaprire, ma passando da te e col costo dichiarato.</small></div></div>
+    <h3 style="margin-top:0">📋 In breve</h3>
+    <div class="princ"><span class="ic">🌉</span><div><b>Sabato = A</b> — giro panoramico + riordino. <b>20:18, margine 72 minuti</b>, si sale alle 13:14. Niente tolto a nessuno.</div></div>
+    <div class="princ"><span class="ic">📚</span><div><b>Midtown Comics recuperato</b> — al <b>martedì</b>, alle 15:03. È l'unico giorno in cui il negozio è aperto quando gli passiamo davanti.</div></div>
+    <div class="princ"><span class="ic">🌉</span><div><b>Ponte di Brooklyn: non lo sposto</b>, come hai detto. Ho corretto la mia descrizione, che raccontava meglio del vero.</div></div>
+    <div class="princ"><span class="ic">🌙</span><div><b>Giovedì sera si accorcia</b> — Midtown Comics esce da lì (a quell'ora è chiuso) e la serata finisce alle <b>21:52</b> invece che alle 22:33.</div></div>
+    <div class="princ"><span class="ic">✅</span><div><b>La revisione esterna è chiusa</b>: sei difetti trovati, sei sistemati. Gli ultimi due li hai chiusi tu.</div></div>
+  </div>
+
+  <h2>🌉 Il sabato, com'è adesso</h2>
+
+  <div class="sol">
+    <h4>✅ Hai scelto A — applicata, giro e riordino insieme</h4>
+    <div style="font-size:.89rem">
+      <b>Non devi rispondere niente qui:</b> è fatta. Questa è la giornata vera, ricalcolata.<br><br>
+      Si pranza a <b>Columbus Circle</b>, dove finiscono le bici, e da lì si sale sul bus a due passi. Poi <b>50 minuti di New York dal piano di sopra</b> — Midtown, Times Square, Rockefeller, su per la 5th Avenue — e si scende al Met. Il pomeriggio scende da nord a sud: Guggenheim, Marc Jacobs, Bloomingdale's, Dylan's, la funivia, e cena da Eataly.<br><br>
+      <table style="width:100%; font-size:.86rem; border-collapse:collapse">
+        <tr><td style="padding:4px 0"></td><td style="padding:4px 6px"><b>Come te l'avevo data</b></td><td style="padding:4px 6px"><b>Com'è adesso</b></td></tr>
+        <tr><td style="padding:4px 0">Si sale alle</td><td style="padding:4px 6px">~15:00 — una sola corsa dopo</td><td style="padding:4px 6px"><b>13:14</b> — ne restano 2-3</td></tr>
+        <tr><td style="padding:4px 0">A piedi fino alla fermata</td><td style="padding:4px 6px">28 minuti</td><td style="padding:4px 6px"><b>5 minuti</b></td></tr>
+        <tr><td style="padding:4px 0">Il sabato finisce</td><td style="padding:4px 6px">21:11, margine 19'</td><td style="padding:4px 6px"><b>20:18, margine 72'</b></td></tr>
+        <tr><td style="padding:4px 0">Tappe tolte</td><td style="padding:4px 6px">—</td><td style="padding:4px 6px"><b>Nessuna.</b> La funivia di MariaPaola resta</td></tr>
+      </table>
+    </div>
+    <div class="res2">➜ <b>Il guadagno vero non sono i 27 minuti: sono le corse di riserva.</b> Prima il pomeriggio uptown dipendeva dall'ultima corsa della linea blu — perderla non costava minuti, cancellava il pomeriggio. Adesso non dipende più da quella.</div>
+  </div>
+
+  <div class="note" style="border-left-color:var(--red)">
+    <b>🥵 Quello che la scelta costa, e che resta costato.</b><br><br>
+    Il bello del Big Bus è il piano di sopra scoperto, e la corsa <b>non può evitare le ore calde</b>: la linea blu circola solo dalle <b>10:00 alle 16:00</b> e la mattina è occupata dalle bici. Sono <b>circa 50 minuti al sole pieno fra l'una e le tre</b>. <b>Tu, Barbara e Carol</b> avete scritto che il caldo lo soffrite <i>tanto</i>.<br><br>
+    Non lo scrivo per rimetterlo in discussione — <b>l'hai scelto sapendolo</b>. Lo scrivo perché finisca nella guida: cappelli, acqua, crema.<br><br>
+    🚕 <b>E la porta di riserva resta aperta fino a quel giorno.</b> Se il sabato mattina il caldo è insopportabile, si salta il giro e si va al Met in taxi: <b>2,8 km, 17 minuti, 16 dollari</b> per due auto. Si perdono sedici dollari e si guadagna un'ora. Non serve deciderlo adesso.
+  </div>
+
+  <div class="reopen" data-prop="SABRI" data-label="SABATO - vuole ripensarci">
+    <div class="aq">🔄 Hai ripensato al sabato?</div>
+    <p class="muted" style="margin:.2em 0 .6em; font-size:.86rem">Solo se hai cambiato idea. Se va bene così — e credo di sì — <b>non toccare niente</b>.</p>
+    <div class="chips" data-group="SABRI">
+      <div class="chip no" data-val="RIAPRIRE: tornare al giro SENZA riordino (21:11, margine 19')">🔁 Rivoglio la giornata nell'ordine di prima</div>
+      <div class="chip no" data-val="RIAPRIRE: togliere del tutto il giro panoramico (20:02, margine 1h28)">✂️ Ripensandoci, togli il giro</div>
+    </div>
+  </div>
+
+  <!-- ============ MIDTOWN COMICS ============ -->
+  <h2>📚 Midtown Comics, per Giulio</h2>
+
+  <div class="sol">
+    <h4>✅ Recuperato — martedì 18, alle 15:03</h4>
+    <div style="font-size:.89rem">
+      <b>Non devi rispondere niente:</b> hai detto di incastrarlo, e l'ho incastrato. Ma il <i>dove</i> l'ho scelto io, quindi ti spiego perché è finito lì.<br><br>
+      <b>Il martedì è l'unico giorno del viaggio in cui quel negozio è aperto quando gli passiamo davanti.</b> Ho guardato i loro orari, tutti e sette i giorni:<br><br>
+      <table style="width:100%; font-size:.86rem; border-collapse:collapse">
+        <tr><td style="padding:3px 0">🚫 <b>Giovedì</b></td><td style="padding:3px 6px">chiude alle 21:00, noi ci arriviamo alle 21:32</td></tr>
+        <tr><td style="padding:3px 0">🚫 <b>Venerdì</b></td><td style="padding:3px 6px">la giornata del Summit ha 3 minuti di margine</td></tr>
+        <tr><td style="padding:3px 0">🚫 <b>Sabato</b></td><td style="padding:3px 6px">si rientra alle 20:18 e chiude alle 21:00</td></tr>
+        <tr><td style="padding:3px 0">🚫 <b>Dom / Lun</b></td><td style="padding:3px 6px">chiude alle 19:00, noi rientriamo dopo le 20</td></tr>
+        <tr><td style="padding:3px 0">✅ <b>Martedì</b></td><td style="padding:3px 6px"><b>aperto fino alle 19:00</b>, e il negozio è a 5 minuti dall'hotel</td></tr>
+      </table>
+      <br>Venti minuti, subito dopo l'hot dog da Nathan's, sulla strada verso l'hotel e i bagagli.
+    </div>
+    <div class="res2">➜ <b>Ed è anche il motivo per cui l'ho tolto dal giovedì sera:</b> lì era una tappa che non poteva succedere. Lasciarla in lista voleva dire farlo sperare due volte.</div>
+  </div>
+
+  <div class="note">
+    <b>⏳ Quello che costa, detto chiaro.</b> Il martedì finisce alle <b>16:27</b> invece che alle 15:48, quindi <b>il cuscino prima di uscire per JFK scende da 1h42 a 1h03</b>.<br><br>
+    Resta comodo per i bagagli. Ma è il tempo che serve <b>quando qualcosa va storto</b> — e quel giorno c'è un volo intercontinentale in fondo. <b>Tu mi hai detto di recuperare il negozio, non di spendere quel cuscino</b>, quindi la scelta di dove prenderlo era mia e te la sto dichiarando.<br><br>
+    Se preferisci il cuscino pieno, tocca il pulsante e Comics esce: si torna a <b>1h42</b>. In ogni caso resta una <b>tappa opzionale</b>: se quel pomeriggio va lungo, è la prima che si salta sul posto.
+    <div class="reopen" data-prop="COMICS" data-label="COMICS - toglierlo dal martedi"><div class="aq">📚 Lo tolgo dal martedì?</div><div class="chips" data-group="COMICS"><div class="chip no" data-val="TOGLIERE Midtown Comics dal martedi (torna 1h42 di cuscino)">✂️ Sì, togli Comics e ridammi il cuscino</div></div></div>
+  </div>
+
+  <!-- ============ IL PONTE ============ -->
+  <h2>🌉 Il Ponte di Brooklyn</h2>
+
+  <div class="applied">
+    <h3>Resta dov'è, come hai detto — e ho corretto quello che avevo scritto</h3>
+    <div class="arow"><span class="ai">✅</span><span class="an"><b>Non l'ho spostato</b><small>Mi hai detto di no, e la domenica resta esattamente com'era. <b>Non devi rispondere niente</b>: nessun dato è cambiato.</small></span></div>
+    <div class="arow"><span class="ai">✏️</span><span class="an"><b>Ma ho cambiato la mia descrizione</b><small>Nella descrizione del viaggio avevo scritto che il ponte «esce dall'ora più calda». <b>Non era vero</b> — ci si passa nel pomeriggio pieno, ed è un'ora di camminata senza ombra. Adesso c'è scritto com'è davvero, col perché non si sposta: l'anello del bus gira in un senso solo, e l'ora fresca costerebbe rifare tutta la domenica.</small></span></div>
+    <div class="arow"><span class="ai">💧</span><span class="an"><b>E la conseguenza va nella guida, non nel calcolo</b><small>Questa non la copre nessun margine: la copre come ci si arriva. Acqua, l'ombra sul lato di Brooklyn, e nessuna fretta. È il sogno di MariaPaola e Peppe e lo spot fotografico di altri tre: vale la camminata, ma nessuno deve partire credendo che sia fresca.</small></span></div>
   </div>
 
   <!-- ============ COSA SUCCEDE ADESSO ============ -->
@@ -350,7 +423,7 @@
     <p style="margin-top:0">Quattro controlli prima di scrivere la guida. Sembrano tanti: sono quattro perché <b>ognuno prende un tipo di errore diverso</b>, e nessuno degli altri lo prenderebbe.</p>
     <div class="proc"><span class="pn">1</span><div><b>I loro commenti</b> ✅ — hai scelto di non aspettarli: la pagina resta aperta e quello che arriva lo integro strada facendo.</div></div>
     <div class="proc"><span class="pn">2</span><div><b>Una revisione ostile del piano</b> ✅ — <b>fatta, e chiusa con le tue risposte di ieri sera.</b> Sei difetti trovati, sei sistemati.</div></div>
-    <div class="proc now"><span class="pn">3</span><div><span class="youare" style="margin:0 6px 0 0">👈 siamo qui</span><b>Un controllo a mano, umano</b> — orari di apertura, fermate, indirizzi. È il tipo di errore che un computer sbaglia <b>con più sicurezza di tutti</b>: una fermata che non esiste, un indirizzo credibile ma sbagliato. <b>Cominciato, e ha già pagato:</b> sei fermate del bus su dodici erano fuori posto, l'hotel era segnato a un'avenue e due strade da dov'è, e <b>Marc Jacobs è venuto fuori da qui</b> — non da un controllo sugli acquisti, da un controllo sulla mappa. <b>Non ti chiede niente</b>, è lavoro mio, e sto finendo le tappe rimaste.</div></div>
+    <div class="proc now"><span class="pn">3</span><div><span class="youare" style="margin:0 6px 0 0">👈 siamo qui</span><b>Un controllo a mano, umano</b> — orari di apertura, fermate, indirizzi. È il tipo di errore che un computer sbaglia <b>con più sicurezza di tutti</b>: una fermata che non esiste, un indirizzo credibile ma sbagliato. <b>Non ti chiede niente</b>: è lavoro mio, e comincia adesso. <i>Che serva l'ho appena visto: l'orario di Midtown Comics, controllato alla fonte, ha spostato la tappa di quattro giorni.</i></div></div>
     <div class="proc"><span class="pn">4</span><div><b>Un ultimo giro sui trasporti, pochi giorni prima</b> — bus, metro, linee. È l'unica categoria che nessuna revisione può prevedere: <b>quello che cambia nel mondo dopo che il piano è scritto</b>. Ne abbiamo già due esempi: il giro di Brooklyn del Big Bus sospeso, e l'ora esatta del tramonto.</div></div>
     <div class="proc"><span class="pn">5</span><div><b>La guida</b>, nei tre formati.</div></div>
   </div>
@@ -360,7 +433,7 @@
     <h4>📋 Prenotazioni: nessuna aperta</h4>
     <div style="font-size:.89rem">
       🔒 <b>Summit One Vanderbilt</b> — ven 14, ore 19:00 · pagato<br>
-      🟠 <b>Top of the Rock</b> — mar 18, ore 9:30 · nel pass Go City · <b>è quello in discussione qui sopra</b><br>
+      🔒 <b>Top of the Rock</b> — mar 18, ore 9:30 · nel pass Go City<br>
       🔒 <b>MoMA</b> — ven 14 · comprato a parte, ragazzi gratis<br>
       🔒 <b>Bici a Central Park</b> — sab 15 mattina · nel pass Go City<br>
       🚌 <b>Big Bus 2 giorni</b> — sab + dom · nel pass Go City
@@ -442,7 +515,7 @@
   </div>
 
   <div class="footer">
-    Analisi logistica v14 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v13 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1260,6 +1333,7 @@ function updateStatus(){
   var rev = 0;
   Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) rev++; });
   var edits = Object.keys(slotOverride).length;
+  var undo = ['SABRI','COMICS'].filter(function(k){ return sel[k]; }).length;
   var bici = (document.getElementById('biciTxt') || {}).value || '';
   var t = [];
   /* La domanda che blocca una modifica al piano viene contata PRIMA, e finche' manca
@@ -1267,6 +1341,7 @@ function updateStatus(){
      la stessa cosa. */
   if(sel['EMPIRE']) t.push('Empire ✓');
   if(sel['BICI'] || bici.trim()) t.push('bici ✓');
+  if(undo) t.push(undo + (undo === 1 ? ' ripensamento' : ' ripensamenti'));
   if(rev) t.push(rev + (rev === 1 ? ' giornata da riaprire' : ' giornate da riaprire'));
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
@@ -1284,7 +1359,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v14',
+  ver:   'v13',
   built: '2026-07-30',
   plan:  'itinerario v2.2 + D66 (Marc Jacobs solo SoHo) - hotel e fermate Big Bus ricollocati (O34/E0) - ToR ancora in piano, Empire in attesa di via libera (O37)',
   stale: ''
@@ -1304,7 +1379,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v14: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v13: risposta di Fabrizio');
 
   /* v13: Marc Jacobs e l'anello sono RISPOSTI e applicati, quindi non hanno piu'
      un pulsante (§3.1: cio' che e' deciso si mostra come stato). Resta una sola
@@ -1323,11 +1398,24 @@ function buildMessage(){
     if(sel['BICI']) L.push('   - ' + sel['BICI']);
   }
 
-  /* v14: i due pulsanti "torna indietro" su sabato e Comics NON esistono piu'.
-     Si confermavano col silenzio - e il silenzio non fa sparire un pulsante,
-     quindi restavano appesi in pagina giro dopo giro. Il silenzio del 30 lug e'
-     stato letto come conferma e messo agli atti nel resoconto; da qui in avanti,
-     dove serve una conferma, si mette un pulsante "confermo" esplicito. */
+  /* v11 e' una pagina di RESOCONTO: sabato, Comics e ponte sono gia' decisi e
+     applicati, quindi non hanno piu' un pulsante di scelta. Quello che puo'
+     ancora arrivare da qui e' di due tipi soltanto: un ripensamento su cio' che
+     ho applicato, e l'unica domanda rimasta senza risposta (l'anello). */
+  var UNDO = [
+    ['SABRI',  "SABATO"],
+    ['COMICS', "MIDTOWN COMICS al martedi"]
+  ];
+  var un = [];
+  UNDO.forEach(function(e){
+    if(sel[e[0]]) un.push('   - ' + e[1] + ': ' + sel[e[0]]);
+  });
+  if(un.length){
+    L.push('');
+    L.push("🔄 CI HO RIPENSATO (queste le avevo gia' applicate):");
+    un.forEach(function(x){ L.push(x); });
+  }
+
 
   /* Le giornate sono gia' bloccate: non si chiede di riconfermarle.
      Nel messaggio finiscono SOLO quelle che vuole riaprire. */
