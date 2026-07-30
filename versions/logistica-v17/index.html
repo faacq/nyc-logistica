@@ -230,7 +230,7 @@
     <div class="flag">🗽✅</div>
     <h1>Fatto tutto quello che hai detto</h1>
     <div class="sub">Le tue tre risposte sono applicate, e il calcolo è rigirato su tutte e sei le giornate. <b>Questa pagina non ti chiede niente: ti dice cosa è cambiato.</b> Una cosa sola resta da fare a te, ed è in cima.</div>
-    <div class="ver">📌 versione v18 &middot; 30 lug 2026</div>
+    <div class="ver">📌 versione v17 &middot; 30 lug 2026</div>
   </div>
 </header>
 
@@ -238,7 +238,7 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(v18 &middot; 30 lug 2026 — rispetto alla v12, l'ultima su cui hai risposto)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(v17 &middot; 30 lug 2026 — rispetto alla v12, l'ultima su cui hai risposto)</span></h3>
     <ul>
       <li>🏙️ <b>«L'Empire al posto del Top of the Rock, stessa data stesso orario: è possibile?»</b> — <b>Sì.</b> Ho rifatto il calcolo del martedì e controllato le quattro cose che potevano dire no: <b>ne resta una sola</b>, ed è l'unica che non posso vedere io. <b>Prima sezione qui sotto</b>, con i numeri e il pulsante per dirmi se procedo.</li>
       <li>⚠️ <b>Se si fa, c'è un ordine da rispettare</b>, e sbagliarlo costa la mattina del martedì: <b>prima si prenota l'Empire, e solo con la conferma in mano si annulla il Top of the Rock.</b></li>
@@ -248,14 +248,6 @@
       <li>🧹 <b>E ho ripulito:</b> quello che è deciso sta in quattro righe in fondo invece di mezza pagina; il cartello «giornata bloccata» si dice <b>una volta per tutte e sei</b> invece di sei volte con due pulsanti ciascuna; la via per riaprire una giornata è ancora lì, in fondo a ognuna, solo chiusa. <b>Sopra resta solo ciò che ti chiede davvero qualcosa.</b></li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
-  </div>
-
-  <div class="note" style="border-left-color:var(--accent2)">
-    <b>🙋 Tre cose aspettano te, e sono le prime tre qui sotto.</b> Tutto il resto della pagina
-    è roba fatta o già decisa: <b>non devi rispondere niente altro</b>.<br><br>
-    <b>1)</b> l'<b>Empire</b> al posto del Top of the Rock — ti serve un pulsante, e una prenotazione<br>
-    <b>2)</b> il <b>giro in più</b> per i ragazzi — due opzioni calcolate, scegli quale<br>
-    <b>3)</b> il <b>pass Go City</b> — da riscattare, e da lì mi dici dove si ritirano le bici
   </div>
 
   <!-- ============ L'EMPIRE: SPIEGA -> COSA FARE -> CONFERMA ============ -->
@@ -300,7 +292,7 @@
   </div>
 
   <div class="ask" data-prop="EMPIRE" data-label="EMPIRE al posto del ToR - via libera">
-    <div class="aq">🏙️ Rispondo a questa tua di oggi: <i>«gli amici mi chiedono di rimettere l'Empire al posto del Top of the Rock, stessa data stesso orario — è possibile?»</i><br><b>Sì. Procedo?</b> Il piano non l'ho ancora cambiato: aspetto che me lo dica tu</div>
+    <div class="aq">🏙️ Procedo? <b>Il piano non l'ho ancora cambiato</b> — aspetto che me lo dica tu</div>
     <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
       Appena mi dici sì e hai la prenotazione, sposto la tappa nel calcolo e ti rimando il martedì rifatto. <b>Finché non me lo dici, nel piano resta il Top of the Rock:</b> non voglio che ti trovi un itinerario con dentro una cosa che non hai ancora prenotato.
     </p>
@@ -312,15 +304,50 @@
     </div>
   </div>
 
-  <!-- ============ L'ANELLO: UNA SCELTA, NON UN RESOCONTO ============ -->
-  <h2>🚌 Il giro in più per i ragazzi — quanto ne facciamo?</h2>
+  <!-- ============ IL PASS: ORA CI PASSANO DUE COSE ============ -->
+  <h2>🎟️ Il pass Go City — ora ci passano due cose</h2>
+
+  <div class="note">
+    <b>Mi hai detto che non li hai ancora riscattati</b>, e va bene: non è tardi. Ma è diventato il collo di bottiglia di <b>due</b> cose invece di una.<br><br>
+    <b>Serve per la prenotazione dell'Empire</b> (qui sopra) <b>e per le bici del sabato mattina.</b> Per un gruppo conviene metterli tutti in <b>un'unica prenotazione</b> — servono un documento e una carta. Se ci si presenta impreparati al banco del noleggio, <b>il sabato si inceppa sulla prima tappa</b>, che è anche quella che tiene tutti al fresco prima del caldo.<br><br>
+    <b>È l'unica cosa con una scadenza vera in tutta questa pagina.</b>
+  </div>
+
+  <div class="ask" data-prop="BICI" data-label="BICI - punto di ritiro dal pass Go City">
+    <div class="aq">🚲 E quando sei dentro: <b>dove si ritirano le bici?</b></div>
+    <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
+      È la <b>prima tappa del sabato, alle 09:15</b>, e nel calcolo quel punto è ancora <b>dentro il parco, su un ponticello</b> — l'ho messo a occhio io, perché il noleggio lo decide il pass e non noi.<br><br>
+      Mi basta <b>il nome del noleggio e l'incrocio</b> (es. <i>«Central Park Bike Rental, 6th Ave e 59th»</i>). Da lì calcolo il tragitto vero dall'hotel, e sapremo se le 09:15 tengono davvero.
+    </p>
+    <input id="biciTxt" type="text" placeholder="Nome del noleggio + incrocio, come lo vedi nell'app"
+           style="width:100%;border:1px solid var(--line);border-radius:11px;padding:10px 12px;font:inherit;font-size:.92rem;background:#fff">
+    <div class="chips" data-group="BICI" style="margin-top:9px">
+      <div class="chip no" data-val="ANCORA non riscattati: il punto di ritiro non si vede">⏳ Non ancora, non lo vedo</div>
+    </div>
+  </div>
+
+  <!-- ============ COSA HO FATTO CON LE SUE 4 RISPOSTE ============ -->
+  <h2>✅ Le altre due risposte — già fatte</h2>
+
+
+  <div class="sol">
+    <h4>✅ Marc Jacobs — resta solo quello di SoHo, come hai detto</h4>
+    <div style="font-size:.89rem">
+      Tolto quello dell'Upper East Side dal sabato. <b>Il sabato passa da 20:45 a 20:18</b> e il margine da 45 a <b>72 minuti</b>. Niente altro si muove, nessuna prenotazione è toccata.<br><br>
+      <b>Una cosa che ti devo, però:</b> quel doppione era in lista da giorni, ed è passato indenne attraverso cinque giri di correzioni, l'approvazione di tutte e sei le giornate e una revisione esterna. <b>Nessuno l'aveva visto, io compreso.</b> È venuto fuori solo perché stavo controllando le posizioni sulla mappa — e non come un errore, ma come un <i>numero strano</i> che ho deciso di guardare invece di ignorare.
+    </div>
+  </div>
+
+  <div class="sol">
+    <h4>🚌 L'anello in più per i ragazzi — ecco dove ci sta e quanto costa</h4>
+    <div style="font-size:.89rem">
+      Hai detto di provarci, e l'ho calcolato. <b>Sul sabato non ci sta</b>, e non per i minuti: l'anello blu è un <b>circuito a senso unico da 75 minuti</b> e noi già ne percorriamo <b>una cinquantina</b>. Restare a bordo oltre il Met vuol dire fare i 25 che restano e <b>ritrovarsi a Columbus Circle</b> — dall'altra parte del parco, mentre il pomeriggio scende verso sud — più <b>25 minuti in più di sole scoperto fra l'una e le tre</b>, che è l'ora peggiore.<br><br>
+      <b>Sulla domenica invece sì, e senza perdere nessuna tappa.</b> Oggi si scende a SoHo dopo <b>27 minuti</b> di corsa, su un anello che ne dura 90. Restando a bordo si attraversa <b>tutta la Lower Manhattan dal piano di sopra</b> — Chinatown, l'imbocco del ponte, Wall Street, Trinity Church — e si scende a una fermata che è <b>comunque un buon punto di partenza per i Ghostbusters</b>. Non si toglie niente: si allunga solo la corsa.
+    </div>
+  </div>
 
   <div class="ask" data-prop="ANELLO2" data-label="ANELLO - quanto giro in piu' la domenica">
-    <div class="aq">🚌 Rispondo a questa tua di oggi: <i>«un pezzo di giro panoramico in più per i ragazzi — sì, provaci»</i><br><b>L'ho calcolato: ci sta, ma non dove pensavo. Quanta ne facciamo?</b></div>
-    <p class="muted" style="margin:.2em 0 .8em; font-size:.87rem">
-      <b>Sul sabato non ci sta</b>, e non per i minuti: l'anello blu è un <b>circuito a senso unico da 75 minuti</b> e noi già ne percorriamo <b>una cinquantina</b>. Restare a bordo oltre il Met vuol dire fare i 25 che restano e <b>ritrovarsi a Columbus Circle</b> — dall'altra parte del parco, mentre il pomeriggio scende verso sud — più <b>25 minuti in più di sole scoperto fra l'una e le tre</b>, che è l'ora peggiore.<br><br>
-      <b>Sulla domenica invece sì, e senza perdere nessuna tappa.</b> Oggi si scende a SoHo dopo <b>27 minuti</b> di corsa, su un anello che ne dura 90. Restando a bordo si attraversa <b>tutta la Lower Manhattan dal piano di sopra</b> — Chinatown, l'imbocco del ponte, Wall Street, Trinity Church — e si scende a una fermata che è <b>comunque un buon punto di partenza per i Ghostbusters</b>. Non si toglie niente: si allunga solo la corsa.
-    </p>
+    <div class="aq">🚌 Quanto ne facciamo? <b>Decidi tu, i numeri sono questi</b></div>
     <table style="width:100%; font-size:.86rem; border-collapse:collapse; margin:.4em 0 .8em">
       <tr style="color:var(--muted); font-size:.79rem">
         <td style="padding:3px 0">dove si scende</td><td style="padding:3px 5px">a bordo</td><td style="padding:3px 5px">in più</td><td style="padding:3px 5px">la domenica finisce</td><td style="padding:3px 5px">margine</td><td style="padding:3px 5px">cena a Dumbo</td></tr>
@@ -339,41 +366,6 @@
       <div class="chip" data-val="ANELLO - decidere sul posto in base a come va la mattina">🤔 Decidiamo sul posto quel giorno</div>
     </div>
   </div>
-
-  <!-- ============ IL PASS: ORA CI PASSANO DUE COSE ============ -->
-  <h2>🎟️ Il pass Go City — ora ci passano due cose</h2>
-
-  <div class="note">
-    <b>Mi hai detto che non li hai ancora riscattati</b>, e va bene: non è tardi. Ma è diventato il collo di bottiglia di <b>due</b> cose invece di una.<br><br>
-    <b>Serve per la prenotazione dell'Empire</b> (qui sopra) <b>e per le bici del sabato mattina.</b> Per un gruppo conviene metterli tutti in <b>un'unica prenotazione</b> — servono un documento e una carta. Se ci si presenta impreparati al banco del noleggio, <b>il sabato si inceppa sulla prima tappa</b>, che è anche quella che tiene tutti al fresco prima del caldo.<br><br>
-    <b>È l'unica cosa con una scadenza vera in tutta questa pagina.</b>
-  </div>
-
-  <div class="ask" data-prop="BICI" data-label="BICI - punto di ritiro dal pass Go City">
-    <div class="aq">🚲 Rispondo a questa tua di oggi: <i>«i pass non li ho ancora riscattati, il punto di ritiro non si vede»</i><br><b>Quando li apri: dove si ritirano le bici?</b></div>
-    <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
-      È la <b>prima tappa del sabato, alle 09:15</b>, e nel calcolo quel punto è ancora <b>dentro il parco, su un ponticello</b> — l'ho messo a occhio io, perché il noleggio lo decide il pass e non noi.<br><br>
-      Mi basta <b>il nome del noleggio e l'incrocio</b> (es. <i>«Central Park Bike Rental, 6th Ave e 59th»</i>). Da lì calcolo il tragitto vero dall'hotel, e sapremo se le 09:15 tengono davvero.
-    </p>
-    <input id="biciTxt" type="text" placeholder="Nome del noleggio + incrocio, come lo vedi nell'app"
-           style="width:100%;border:1px solid var(--line);border-radius:11px;padding:10px 12px;font:inherit;font-size:.92rem;background:#fff">
-    <div class="chips" data-group="BICI" style="margin-top:9px">
-      <div class="chip no" data-val="ANCORA non riscattati: il punto di ritiro non si vede">⏳ Non ancora, non lo vedo</div>
-    </div>
-  </div>
-
-  <!-- ============ COSA HO FATTO CON LE SUE 4 RISPOSTE ============ -->
-  <h2>✅ E la quarta risposta: già fatta</h2>
-
-
-  <div class="sol">
-    <h4>✅ Marc Jacobs — resta solo quello di SoHo, come hai detto</h4>
-    <div style="font-size:.89rem">
-      Tolto quello dell'Upper East Side dal sabato. <b>Il sabato passa da 20:45 a 20:18</b> e il margine da 45 a <b>72 minuti</b>. Niente altro si muove, nessuna prenotazione è toccata.<br><br>
-      <b>Una cosa che ti devo, però:</b> quel doppione era in lista da giorni, ed è passato indenne attraverso cinque giri di correzioni, l'approvazione di tutte e sei le giornate e una revisione esterna. <b>Nessuno l'aveva visto, io compreso.</b> È venuto fuori solo perché stavo controllando le posizioni sulla mappa — e non come un errore, ma come un <i>numero strano</i> che ho deciso di guardare invece di ignorare.
-    </div>
-  </div>
-
 
   <!-- ============ RESOCONTO: TUTTO CIO' CHE E' CHIUSO ============ -->
   <h2>🔒 Quello che è già chiuso — solo per memoria</h2>
@@ -483,7 +475,7 @@
   </div>
 
   <div class="footer">
-    Analisi logistica v18 · la compagnia · New York 13–18 ago 2026<br>
+    Analisi logistica v17 · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1333,7 +1325,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v18',
+  ver:   'v17',
   built: '2026-07-30',
   plan:  'itinerario v2.2 + D66 (Marc Jacobs solo SoHo) - hotel e fermate Big Bus ricollocati (O34/E0) - ToR ancora in piano, Empire in attesa di via libera (O37)',
   stale: ''
@@ -1353,7 +1345,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v18: risposta di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v17: risposta di Fabrizio');
 
   /* v13: Marc Jacobs e l'anello sono RISPOSTI e applicati, quindi non hanno piu'
      un pulsante (§3.1: cio' che e' deciso si mostra come stato). Resta una sola
