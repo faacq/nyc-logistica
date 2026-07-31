@@ -265,7 +265,7 @@
       <li>🚐 <b>Il van lo devi prendere tu</b>: avevo scritto «lo cerco io» e non posso. 👇</li>
       <li>🛍️ <b>Big Bus: si prende 4 volte, non 2</b> — il conto era sbagliato, metà sono il sabato.</li>
       <li>🚦 <b>Venerdì 101%</b>: sono i 5 minuti di Junior's, adesso è spiegato.</li>
-      <li>🚌 <b>Lo studio del bus è dentro sabato e domenica</b>, e da lì si torna indietro.</li>
+      <li>🗺️ <b>Le mappe delle giornate adesso dicono di chi era ogni tappa</b> — prima mostravano i miei appunti di lavoro.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
@@ -1044,45 +1044,42 @@ var DAYS = [
 
 /* prosa per giornata (scritta a mano, i numeri vengono dal motore) */
 var TEXT = {
+  /* Riscritti il 31 lug: prima raccontavano le revisioni passate, con numeri
+     fermi a due versioni fa e un negozio chiuso dal 2021 dentro. Qui c'e' cosa
+     serve sapere della giornata, e basta. Gli orari vengono dai dataset. */
   g1: {
-    sub: "Serata di arrivo. Adesso finisce prima: Midtown Comics è uscito da qui.",
-    probs: ["<b>Midtown Comics il giovedì sera è chiuso</b> — ci arrivavamo alle 21:32, il negozio chiude alle 21:00. Era una tappa che non poteva succedere, quindi l'ho tolta da questa serata."],
-    sol: "Non è persa: <b>l'ho recuperata al martedì</b>, come mi hai detto tu. Qui restano Times Square di notte, la cena da Ellen's Stardust e il gelato al rientro — e la serata si accorcia di tre quarti d'ora, che dopo un volo non è poco.",
-    solres: "➜ 19:00 → 21:52, invece delle 22:33."
+    sub: "Serata di arrivo, presa con calma.",
+    sol: "Cena da <b>Ellen's Stardust</b>, poi <b>Times Square col buio</b> — che è l'unico modo per vederla — e gelato rientrando. Midtown Comics è al martedì: il giovedì sera chiude alle 21:00.",
+    solres: "➜ 19:00 → 21:48."
   },
   g2: {
-    sub: "Il Summit. Si parte comodi alle 10:00.",
-    probs: ["Il <b>230 Fifth</b> è fuori, come hai detto — e con lui è sparita anche la verifica sui minori."],
-    sol: "La partenza è alle <b>10:00</b> invece che alle 8:45, e la giornata finisce <b>alla stessa ora</b>: è il Summit ad ancorarla, quindi partire prima avrebbe solo aggiunto attesa. Un'ora di sonno in più che non costa niente.",
-    solres: "➜ 10:00 → 22:35. Summit alle 19:00 in punto, cena da Junior's."
+    sub: "Il giorno del Summit.",
+    sol: "Si esce alle <b>10:00</b> e non prima: la giornata è ancorata al <b>Summit delle 19:00</b>, quindi alzarsi presto aggiungerebbe solo attesa. MoMA nel pomeriggio, che è anche il rifugio con aria condizionata nell'ora peggiore.",
+    solres: "➜ 10:00 → 22:35. Cena da Junior's dopo il Summit."
   },
   g3: {
-    sub: "Rifatta sulla tua scelta A: giro panoramico + riordino.",
-    probs: ["Il rischio vero non erano i minuti, era <b>l'ultima corsa della linea blu alle 16:00</b>: si saliva verso le 15:00, e se quella la si perdeva il giro saltava."],
-    sol: "Col pranzo spostato a <b>Columbus Circle</b> si sale alle <b>13:14</b>, con <b>due o tre corse di riserva</b> davanti. La giornata si riordina da nord a sud: pranzo, giro, Met, Guggenheim, poi si scende su Marc Jacobs, Bloomingdale's, Dylan's, la funivia e la cena da Eataly. <b>Non è uscito niente</b>: le tappe sono tutte quelle di prima.",
-    solres: "➜ 08:45 → 20:18, con <b>72 minuti</b> di margine. Cena da Eataly alle 18:57.",
-    warn: "🥵 <b>Il prezzo di questa scelta è il sole, e resta.</b> La corsa cade fra l'una e le tre, il piano di sopra è scoperto e la linea blu non circola in altre ore: sono <b>circa 50 minuti al sole pieno</b>. Cappelli, acqua e crema non sono un dettaglio. <b>E resta aperta la porta di riserva</b>: se quel giorno il caldo è insopportabile, il giro si salta sul posto e si va al Met in taxi — 16 dollari, un'ora guadagnata. Va nella guida come nota, non è una decisione da riprendere adesso."
+    sub: "Central Park in bici, poi il giro panoramico verso l'Alta città.",
+    sol: "Bici alle <b>9:08</b>, Central Park quando è ancora fresco. Pranzo d'asporto a <b>Columbus Circle</b> mangiato alla fermata, perché il bus passa alle <b>13:02</b> e quella corsa non si perde. Poi Met, Guggenheim da fuori, la funivia di Roosevelt Island e cena da Eataly.",
+    solres: "➜ 08:45 → 19:48.",
+    warn: "🥵 <b>Il prezzo di questa giornata è il sole.</b> Il giro panoramico cade fra l'una e le tre, col piano di sopra scoperto: <b>circa 50 minuti al sole pieno</b>. Cappelli, acqua e crema non sono un dettaglio. Se quel giorno il caldo è insopportabile, il giro si salta sul posto e si va al Met in taxi: 16 dollari."
   },
   g4: {
-    sub: "Invariata — e il ponte resta nel caldo, come hai detto tu.",
-    probs: ["<b>Il ponte si attraversa nel pomeriggio pieno</b>, dentro la fascia calda: un'ora di camminata senza ombra. Non è come te l'avevo raccontato la prima volta."],
-    sol: "Mi hai detto di <b>non spostarlo</b>, e non l'ho spostato: l'ora fresca costerebbe rifare la domenica attorno al bus, che gira in un senso solo. <b>Quello che ho cambiato è il testo</b>, che diceva che il ponte usciva dall'ora più calda — non era vero, e adesso dice come stanno le cose.",
-    solres: "➜ 10:30 → 20:24, con 1h06 di margine.",
-    warn: "💧 <b>Questa non è coperta da nessun margine, è coperta da come ci si arriva.</b> Acqua addosso, l'ombra sta sul lato di Brooklyn, e nessuno che parta convinto di fare una passeggiata al fresco. <b>Tu, Barbara e Carol</b> avete scritto che il caldo lo soffrite tanto: la guida ve lo dirà prima, non sul ponte."
+    sub: "Downtown e Brooklyn, col bus e col ponte.",
+    sol: "Corsa panoramica lunga fino al <b>World Trade Center</b>, poi Ghostbusters, SoHo e pranzo a Little Italy. Nel pomeriggio <b>il ponte di Brooklyn a piedi</b> — il sogno di MariaPaola e Peppe — e cena a Dumbo coi ponti davanti.",
+    solres: "➜ 10:00 → 20:47.",
+    warn: "🥵 <b>Il ponte si attraversa nel pomeriggio pieno: un'ora senza un filo d'ombra.</b> Mi avevi detto di non spostarlo e non l'ho spostato — l'ora fresca costerebbe rifare tutta la domenica attorno agli orari del bus. Acqua prima di salire."
   },
   g5: {
-    sub: "Il tramonto è preso bene. Ma c'è una cosa sui pasti.",
-    probs: ["Hai scelto la <b>A</b>: Little Island 45 minuti, e mezz'ora di sveglia in più come prezzo."],
-    sol: "La sveglia è poi tornata indietro di 25 minuti — <b>si parte alle 08:25</b>, non alle 8:00 — perché le due tratte in metro sono risultate più veloci del previsto e il tempo guadagnato l'ho rimesso sul sonno invece che sull'arrivo. Ci si arriva alle <b>19:18</b>, il tramonto è alle <b>19:55</b>, si riparte alle <b>20:04</b>: <b>cade dentro la sosta</b>.",
-    solres: "➜ 08:25 → 20:36. Tramonto guardato da seduti.",
-    warn: "🍽️ <b>La cosa dei pasti: hai detto che va bene così, e non tocco niente.</b> Ma resta scritta, perché in viaggio serve saperla: Katz's alle 13:06, Joe's Pizza alle 15:04, Chelsea Market alle 16:34 — <b>tre soste in tre ore e mezza</b>, e poi più niente fino al rientro delle 20:34. Quel Chelsea Market <b>è una merenda, non una cena</b>. <b>Finisce nella guida come nota</b>: quella sera conviene avere qualcosa in borsa, o fermarsi per un gelato al rientro."
+    sub: "Dalla punta sud al West Side, tutto a piedi e in traghetto.",
+    sol: "Traghetto gratis davanti alla <b>Statua della Libertà</b>, Wall Street, il <b>9/11 Memorial</b>, poi Katz's per il pastrami di Tony e il Village. Si chiude sulla <b>High Line</b> e a <b>Little Island col tramonto</b>, verso le 19:55.",
+    solres: "➜ 08:45 → 21:02.",
+    warn: "🌇 <b>È la giornata più lunga e più camminata delle sei</b>, e finisce con il tramonto: vale la pena, ma le scarpe contano."
   },
   g6: {
-    sub: "Ultimo giorno — ed è la giornata di cui stiamo parlando in cima: qui c'è la terrazza.",
-    probs: ["<b>È l'unico giorno del viaggio in cui quel negozio è aperto quando ci passiamo.</b> Giovedì chiude prima di noi, venerdì la giornata è piena al minuto, sabato si rientra alle 20:18, domenica e lunedì chiude alle 19:00 e noi rientriamo dopo le 20."],
-    sol: "Al martedì è a <b>cinque minuti dall'hotel</b>, sulla strada fra Nathan's e i bagagli, e apre fino alle 19:00. Venti minuti, subito dopo l'hot dog. <b>Dentro c'è tutto il resto:</b> Top of the Rock, Vessel, l'Antico Vinaio a pranzo, gli ultimi acquisti sulla 5th, Nathan's.",
-    solres: "➜ 08:30 → 16:27, si esce alle 17:30. <b>Qui sotto c'è ancora il Top of the Rock: cambia solo se mi dai il via libera sull'Empire.</b>",
-    warn: "⏳ <b>Quello che costa, detto chiaro: il cuscino prima dell'aeroporto scende da 1h42 a 1h03.</b> Restano più di un'ora per i bagagli, ed è ancora comodo — ma è il tempo che serve quando qualcosa va storto, quindi non te lo nascondo. <b>Se preferisci non toccarlo, qui sotto c'è il pulsante per togliere Comics</b>, e si torna a 1h42. E se quel pomeriggio va lungo, è comunque la prima tappa che si salta: è opzionale."
+    sub: "Ultima mattina, poi l'aeroporto.",
+    sol: "<b>Empire State alle 9:30</b>, che è l'ora con meno coda e meno foschia. Poi il Vessel, la schiacciata di All'Antico Vinaio, gli ultimi souvenir scendendo la 5th e il fumetto di Giulio da Midtown Comics.",
+    solres: "➜ 08:30 → 16:20, e restano <b>1 ora e 10</b> di margine prima del volo.",
+    warn: "🚐 <b>Il van per JFK va prenotato</b> — in otto coi bagagli è l'unico spostamento che non regge in taxi. Uscita dall'hotel alle 16:20, volo alle 17:30."
   }
 };
 </script>
@@ -1183,16 +1180,16 @@ DAYS.forEach(function(d){
      giornata significa presentare come aperta una discussione chiusa.
      Il testo resta in TEXT[].probs: se una giornata si riapre torna utile. */
 
-  /* I collegamenti della giornata. Prima stavano TUTTI in una sezione a parte, in cima:
-     le due pagine sullo studio del bus si trovavano solo li', dentro un blocco di roba
-     gia' risposta e gia' comunicata - cioe' nel posto in cui uno smette di leggere.
-     Adesso stanno dove servono: dentro la giornata a cui appartengono. */
-  h += '<div class="storylnk"><a class="btn" href="route/' + d.id + '/">🧭 vai alla <b>story map</b> di questa giornata — il giro sulla mappa, pezzo per pezzo</a>';
-  var BUSPAGE = { g3: ['bus/sabato/', 'sabato'], g4: ['bus/domenica/', 'domenica'] };
-  if(BUSPAGE[d.id]){
-    h += '<a class="btn" href="' + BUSPAGE[d.id][0] + '" style="margin-top:6px">🚌 lo <b>studio del bus</b> di ' + BUSPAGE[d.id][1] + ' — i conti che hai già approvato, se vuoi rileggerli</a>';
-  }
-  h += '</div>';
+  /* UN SOLO collegamento per giornata: la story map.
+     Storia breve, e vale come regola. Le due pagine sullo studio del bus stavano
+     prima in una sezione a parte in cima, dentro un blocco di roba gia' risposta;
+     le ho spostate qui dentro perche' almeno fossero raggiungibili. Poi il doc
+     owner ha tagliato il nodo: *"non serve piu', e' approvato ed integrato"*.
+     Ha ragione, ed e' la stessa regola di tutto il resto - un rimando a una cosa
+     CHIUSA e' peso morto, e spostarlo in un posto migliore non lo rende utile.
+     Le due pagine restano online con il loro pulsante di ritorno, per chi ha
+     ancora il link: non sono cancellate, solo non piu' pubblicizzate. */
+  h += '<div class="storylnk"><a class="btn" href="route/' + d.id + '/">🧭 vai alla <b>story map</b> di questa giornata — il giro sulla mappa, pezzo per pezzo</a></div>';
 
   h += '<div class="sol"><h4>💡 Com\'è questa giornata, e perché</h4><div>' + (T.sol || '') + '</div>' +
        '<div class="res2">' + (T.solres || '') + '</div>' +
