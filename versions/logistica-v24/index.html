@@ -102,16 +102,6 @@
   .sol h4{margin:0 0 5px; font-size:.94rem; color:#2f7a46}
   .sol .res2{margin-top:7px; font-weight:700; color:#2f7a46}
 
-  /* RISPOSTO E APPLICATO (D83/D67, v25). Una cosa decisa si mostra come STATO, non si
-     richiede: percio' questo blocco e' verde e pieno - non giallo e tratteggiato come
-     .ask, che significa "manca qualcosa da te". Il colore e' il primo a dire che qui
-     non c'e' niente da fare, prima ancora che si legga la frase. */
-  .done{margin-top:10px; background:#f0f9f2; border:1px solid #bfe6cb; border-left:5px solid var(--g5);
-        border-radius:11px; padding:11px 13px; font-size:.89rem}
-  .done .dh{font-size:.94rem; color:#2f7a46; margin-bottom:2px}
-  .done .res2{margin-top:7px; font-weight:700; color:#2f7a46}
-  .done table td{vertical-align:top}
-
   /* approval buttons */
   .ask{margin-top:10px; background:#fffdf6; border:1px dashed var(--accent2); border-radius:11px; padding:10px 12px}
   .ask .aq{font-size:.87rem; font-weight:700; color:#8a6d12; margin-bottom:7px}
@@ -250,7 +240,7 @@
     <div class="flag">🗽📍</div>
     <h1>Il ponte era contato due volte, e la domenica ci guadagna</h1>
     <div class="sub">Ho controllato le tappe che <b>non sono posti ma zone</b> — passeggiate, tratti di negozi — e ne sono uscite due correzioni vere: <b>la domenica finisce alle 20:27</b> (il ponte era contato due volte) e <b>il lunedì si dorme venti minuti in più</b>. Nessuna toglie niente. <b>Cinque domande, tutte con un default</b>: se non rispondi non si rompe nulla.</div>
-    <div class="ver">📌 versione v25 &middot; 31 lug 2026</div>
+    <div class="ver">📌 versione v24 &middot; 31 lug 2026</div>
   </div>
 </header>
 
@@ -258,38 +248,8 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(pacchetto v25 &middot; 31 lug 2026 — rispetto alla v24)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(pacchetto v24 &middot; 31 lug 2026 — rispetto alla v23 di stamattina)</span></h3>
     <ul>
-      <li>🎉 <b>Per la prima volta questa pagina non ti chiede niente.</b> Le tue cinque risposte sono
-      tutte applicate, e il registro delle domande aperte è <b>vuoto</b>. Dove c'era un pulsante adesso
-      c'è il resoconto di cosa è successo con la tua risposta.</li>
-      <li>🍰 <b>La cena del venerdì è Junior's, e il controllo ha eliminato uno dei tre.</b> Mi hai detto
-      di scegliere io fra i tre misurati: <b>Havana Central è fuori — il venerdì chiude alle 22:30</b> e
-      saremmo usciti tre minuti prima della chiusura, in otto. Ho preso Junior's perché <b>la cheesecake
-      è dentro il locale</b> e il dolce smette di essere un secondo posto da cercare a notte fonda.
-      ⚠️ <b>Costa più di quanto ti avevo scritto: +8 minuti, non +3</b> — quel «+3» rispondeva a un'altra
-      domanda. <b>Il venerdì finisce alle 22:35.</b> Te lo spiego dove c'è la tabella.</li>
-      <li>🍽️ <b>La domenica riprende la cena piena: 80 minuti, si rientra alle 20:47.</b> Avevi ribaltato
-      il default, ed era la scelta giusta — quei venti minuti li avevi pagati per un numero sbagliato.</li>
-      <li>🛍️ <b>Il martedì si accorcia da solo: 16:20 invece di 16:29, e il cuscino prima del volo sale a
-      70 minuti.</b> La tua risposta sui souvenir ha confermato che quella tappa è una passeggiata e non
-      un punto, e ha sbloccato una correzione che tenevo ferma apposta.</li>
-      <li>🧭 <b>Il controllo sulle zone è passato da 5 su 16 a 11 su 15 — in un pomeriggio, e senza
-      guardare una mappa.</b> Mi ero costruito uno strumento che chiedeva un controllo a occhio ogni volta
-      che una tappa non aveva un elenco di punti dentro. <b>Ma la risposta era già scritta nei dati</b>,
-      in prosa: <i>«il gelato non ha un indirizzo, il punto sta sull'hotel»</i>, <i>«è la scalinata sulla
-      5th, non il centro del museo»</i>. <b>Stavo facendo cercare a mano roba che avevo già.</b>
-      Le quattro rimaste non chiedono occhi, chiedono misure.</li>
-      <li>🗺️ <b>Le sei mappe adesso disegnano il cammino vero.</b> Il servizio che tracciava i percorsi a
-      piedi <b>non aveva il profilo pedonale</b>: instradava a piedi come un'automobile, sensi unici
-      compresi. Un controllo scartava quei tracciati e disegnava una linea dritta — onesto, ma succedeva
-      su <b>41 tratte a piedi su 60</b>. Adesso sono <b>4</b>.</li>
-      <li>⏱️ <b>Come stanno le sei giornate adesso:</b> giovedì <b>21:48</b> · venerdì <b>22:35</b>
-      <small class="muted">(+8, Junior's)</small> · sabato <b>19:48</b> · domenica <b>20:47</b>
-      <small class="muted">(+20, cena piena)</small> · lunedì <b>21:02</b> · martedì <b>16:20</b>
-      <small class="muted">(−9)</small>. <b>Nessuna prenotazione si è mossa</b>, il tramonto è dentro la
-      sosta, e il margine per JFK è salito a <b>1 ora e 10</b>.</li>
-      <li class="muted" style="font-size:.9rem">👇 <b>Da qui in giù è la v24</b>, che hai già letto.</li>
       <li>🌉 <b>Il ponte di Brooklyn era contato due volte, e la domenica passa da 20:57 a 20:27.</b> Il programma faceva pagare il tragitto verso Dumbo <i>partendo dall'imbocco lato Manhattan</i>: rifaceva tutto il ponte, dopo averlo già messo nell'ora della traversata. E la traversata non è di 40-55 minuti come credevo — <b>è di 25</b>, letto sulla mappa. <b>👉 Conseguenza: i venti minuti di cena che hai pagato ieri non servivano più</b>, e te li puoi riprendere finendo comunque alle <b>20:47</b>.</li>
       <li>🌇 <b>Lunedì si dorme venti minuti in più: sveglia alle 8:45 invece che alle 8:25.</b> Stessa cosa sulla High Line — il punto stava in mezzo al parco e faceva contare la passeggiata due volte. ⚠️ <b>Il tempo non l'ho incassato come rientro anticipato di proposito</b>: avrebbe rovinato il tramonto che avevi scelto tu. Little Island resta <b>19:15-20:30</b>, identica — 40 minuti prima del tramonto e 35 dopo. Cambia solo la sveglia, ed era <b>la più presta del viaggio</b>.</li>
       <li>📐 <b>Anche il venerdì aveva lo stesso difetto sulla 5th Avenue, e lì non cambia niente.</b> La giornata è agganciata al Summit delle 19:00, quindi il tempo recuperato diventa attesa. L'ho corretto lo stesso, perché <b>il piano deve dire il vero anche quando il vero non fa guadagnare</b>.</li>
@@ -309,7 +269,7 @@
       <li>⚠️ <b>Due cose aspettano te, e sono tue</b>: il <b>Top of the Rock è ancora prenotato</b> nello stesso identico slot dell'Empire, e <b>non mi hai detto l'ora</b> che hai preso all'Empire — nel piano ho messo 9:30 per deduzione, e su una prenotazione non voglio dedurre.</li>
       <li>🔗 <b>Da adesso questa pagina e le sei story map sono UNA COSA SOLA, e portano lo stesso numero: <b>v24</b>.</b> Prima avevano numerazioni separate, e l'altra sera è successo quello che doveva succedere: hai risposto a quattro pagine in tredici minuti e <b>due risposte si sono contraddette</b>, perché ognuna ti mostrava un piano diverso. Col numero unico, quando mi scrivi qualcosa <b>so esattamente cosa avevi davanti</b>. 🧭 <b>E adesso si passa dall'una all'altra</b>: ogni giornata qui sotto ha il suo pulsante per la mappa, e da ogni mappa si torna qui.</li>
       <li>🔒 <b>Ho scritto come si chiude, da qui alla guida — e ci sono due passaggi che prima non esistevano.</b> Il <b>4</b>: <b>la tua approvazione dell'itinerario tutto intero</b>. Finora hai approvato le singole modifiche, una alla volta, ognuna sulla sua pagina — ma <b>da quando avevi approvato le sei giornate, cinque sono cambiate</b>, e il risultato nessuno l'ha mai guardato tutto insieme. <b>La domenica è la prova che serve</b>: due pezzi giusti che insieme non stanno in piedi. E ci si arriva <b>solo quando questa pagina non ti chiede più niente</b>. Il <b>5</b>: <b>ogni giornata si blocca una alla volta</b>, e da lì la verifico soltanto — con le <b>sei domande</b> che sono la lista degli errori che questo viaggio ha già fatto. Le trovi scritte in fondo.</li>
-      <li>⏱️ <b>Come stavano alla v24:</b> giovedì <b>21:48</b> · venerdì <b>22:27</b> · sabato <b>19:48</b> · domenica <b>20:27</b> · lunedì <b>21:02</b> <small class="muted">(sveglia 8:45)</small> · martedì <b>16:29</b>. <b>Nessuna prenotazione si è mossa</b>, il tramonto è dentro la sosta, il margine per JFK è di un'ora.</li>
+      <li>⏱️ <b>Come stanno le sei giornate adesso:</b> giovedì <b>21:48</b> · venerdì <b>22:27</b> · sabato <b>19:48</b> · domenica <b>20:27</b> · lunedì <b>21:02</b> <small class="muted">(sveglia 8:45)</small> · martedì <b>16:29</b>. <b>Nessuna prenotazione si è mossa</b>, il tramonto è dentro la sosta, il margine per JFK è di un'ora.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
@@ -364,13 +324,20 @@
     <b>E il sabato finisce tre minuti prima di prima</b>, alle 19:48.</div>
   </div>
 
-  <div class="done">
-    <div class="dh">✅ <b>Hai risposto: 🅰️ vanno bene — «da asporto lì alla fermata»</b></div>
-    <p style="margin:.35em 0 0">Il sabato resta com'era: pranzo <b>27 minuti</b>, bus delle <b>13:02</b>,
-    giornata chiusa alle <b>19:48</b>. <b>Nessun numero è cambiato</b> — ma le tre parole che hai aggiunto
-    sono entrate nel piano, perché sono <i>la ragione</i> per cui 27 minuti bastano: non ci si siede,
-    si compra e si aspetta il bus mangiando. Senza quella riga sembrava un pranzo compresso per far
-    quadrare i conti.</p>
+  <div class="ask" data-prop="PRANZOSAB" data-label="SABATO - il pranzo a Columbus Circle, 27 minuti">
+    <div class="aq">🥪 <b>Ventisette minuti di pranzo, in otto e con Giulio: ti bastano?</b><br>
+    È l'unica cosa che decidi tu qui — il resto l'ho già corretto</div>
+    <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
+      Non è una domanda sul cibo. Quel pranzo <b>è</b> il cuscino del pomeriggio: dura quanto manca al
+      passaggio del bus, quindi allungarlo vuol dire perdere la corsa. E <b>alle 13:02 bisogna essere in
+      piedi accanto al monumento di Colombo</b>, che è esattamente dove si sale.<br><br>
+      <b>👉 Se non rispondi vale 🅰️</b>, cioè com'è adesso: 27 minuti, e il sabato finisce alle <b>19:48</b>.
+    </p>
+    <div class="chips" data-group="PRANZOSAB">
+      <div class="chip yes" data-val="SABATO PRANZO: A - 27 minuti vanno bene, da asporto li' alla fermata: bus 13:02, fine 19:48">🅰️ Vanno bene — da asporto, lì alla fermata</div>
+      <div class="chip yes" data-val="SABATO PRANZO: B - troppo stretto: anticipare la mattina per allungare il pranzo tenendo il bus delle 13:02">🅱️ Troppo stretto — anticipa la mattina e allunga il pranzo</div>
+      <div class="chip no" data-val="SABATO PRANZO: C - pranzo comodo e si prende la corsa delle 14:02: costa un'ora di pomeriggio">🅲 Pranzo comodo, prendo quello dopo (<b>−1 ora</b>)</div>
+    </div>
   </div>
 
   <h2 style="margin-top:38px">🎁 Tre cose nuove — e una ti ridà indietro qualcosa</h2>
@@ -386,15 +353,16 @@
     <b>e</b> un minuto meglio del 20:48 che ti avevo promesso.</div>
   </div>
 
-  <div class="done">
-    <div class="dh">✅ <b>Hai risposto: sì, rivoglio la cena piena</b></div>
-    <p style="margin:.35em 0 0">Cena a Dumbo di nuovo <b>80 minuti</b>, e la domenica finisce alle
-    <b>20:47</b>. Il default dichiarato qui era <i>no</i>, e l'hai ribaltato: <b>hai ripreso i venti
-    minuti che avevi pagato</b> per tenere l'anello lungo fino al World Trade Center. Li avevi comprati
-    per un numero sbagliato, e ora ce li hai indietro senza rinunciare a niente.</p>
-    <p class="muted" style="margin:.5em 0 0; font-size:.86rem">Il 20:47 non è il numero che ti avevo
-    promesso e poi ricopiato: <b>è quello che è uscito rifacendo il calcolo</b> dopo aver rimesso gli 80
-    minuti. Terzo giro di fila in cui la cifra promessa e quella calcolata coincidono.</p>
+  <div class="ask" data-prop="CENADOM" data-label="DOMENICA - rivuoi i 20 minuti di cena?">
+    <div class="aq">🍽️ <b>Li rivuoi indietro?</b></div>
+    <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
+      <b>👉 Se non rispondi lascio la tua scelta com'è</b> — cena da 60', si rientra alle <b>20:27</b>.
+      Hai deciso tu di accorciarla e non mi sostituisco a te: ma l'avevi decisa per un motivo che non c'è più.
+    </p>
+    <div class="chips" data-group="CENADOM">
+      <div class="chip yes" data-val="DOMENICA CENA: rimettere gli 80 minuti, si rientra 20:47">🍽️ Sì, cena piena — rientro <b>20:47</b></div>
+      <div class="chip no" data-val="DOMENICA CENA: lasciare 60 minuti, si rientra 20:27">⏱️ No, tengo la cena corta — <b>20:27</b></div>
+    </div>
   </div>
 
   <div class="res" style="margin-top:22px">
@@ -408,11 +376,16 @@
     in più, e va messa.</div>
   </div>
 
-  <div class="done">
-    <div class="dh">✅ <b>Hai risposto: si passa davanti camminando, nessuna sosta</b></div>
-    <p style="margin:.35em 0 0">Coincide col default: <b>nessun dato è cambiato</b>. I tre palazzi
-    restano dove sono — nella <b>guida</b>, come cose da guardare passando, a costo zero di minuti.
-    Era l'ultima cosa rimasta aperta dentro la zona del ponte, e adesso è chiusa.</p>
+  <div class="ask" data-prop="CITYHALL" data-label="DOMENICA - fermarsi a City Hall prima del ponte?">
+    <div class="aq">🏛️ <b>Ci si ferma, o si passa?</b></div>
+    <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
+      <b>👉 Se non rispondi si passa e basta</b>, come adesso. Fermarsi costa quello che decidi tu:
+      un quarto d'ora sposta la domenica di un quarto d'ora, non di più.
+    </p>
+    <div class="chips" data-group="CITYHALL">
+      <div class="chip no" data-val="PONTE: si passa davanti camminando, nessuna sosta a City Hall">🚶 Si passa, va bene così</div>
+      <div class="chip yes" data-val="PONTE: fermarsi ~15' a City Hall / Woolworth prima di salire sul ponte">🏛️ Fermiamoci 15 minuti</div>
+    </div>
   </div>
 
   <div class="res" style="margin-top:22px">
@@ -424,21 +397,22 @@
     I <b>negozi grandi</b> (LEGO, Nintendo) stanno al Rockefeller, <b>ma sono gli stessi del venerdì</b>.</div>
   </div>
 
-  <div class="done">
-    <div class="dh">✅ <b>Hai risposto: souvenir, scendendo la 5th verso Times Square</b></div>
-    <p style="margin:.35em 0 0">Coincide col default — ma <b>ha sbloccato una correzione che tenevo
-    ferma</b>. Confermando che si <i>scende</i> comprando, hai confermato che quella tappa è una
-    passeggiata e non un punto: il programma contava i venti minuti fermi <b>più</b> il cammino verso
-    Nathan's, mentre quel cammino <b>è</b> la sosta.</p>
-    <div class="res2" style="margin-top:10px">➜ <b>Il martedì si accorcia: finisce alle 16:20 invece che
-    alle 16:29, e il cuscino prima del volo sale da 61 a 70 minuti.</b> Non ti tolgo niente — è tempo
-    che non esisteva, contato due volte. Ma è una giornata che avevi già approvato, quindi te lo dico.</div>
+  <div class="ask" data-prop="ULTACQ" data-label="MARTEDI - ultimi acquisti: souvenir o negozi grandi?">
+    <div class="aq">🛍️ <b>Quale delle due?</b></div>
+    <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
+      <b>👉 Se non rispondi vale il souvenir</b>, che è quello che il piano fa già — e non costa niente,
+      perché si scende verso Times Square comprando lungo la strada.
+    </p>
+    <div class="chips" data-group="ULTACQ">
+      <div class="chip yes" data-val="MARTEDI ULTIMI ACQUISTI: souvenir, scendendo la 5th verso Times Square">🧲 Souvenir, scendendo verso Times Square</div>
+      <div class="chip no" data-val="MARTEDI ULTIMI ACQUISTI: i negozi grandi (LEGO/Nintendo) al Rockefeller">🧱 I negozi grandi al Rockefeller</div>
+    </div>
   </div>
 
   <div class="res" style="margin-top:22px">
     <h3 style="margin-top:0">🍰 La cena del venerdì: è l'unica cosa che mi preoccupa, e ti porto una proposta</h3>
     <p style="margin-top:0">Il venerdì è <b>la giornata con meno margine di tutte</b>: si esce dal Summit alle
-    21:00 e si chiudeva alle <b>22:27</b>, che era a tre minuti dalla soglia oltre la quale la giornata smette di
+    21:00 e si chiude alle <b>22:27</b>, che è a tre minuti dalla soglia oltre la quale la giornata smette di
     essere comoda. E la cena è <b>l'unica tappa del viaggio senza un posto</b> — per scelta, si decideva lì.</p>
     <p><b>Il rischio è concreto</b>: alle nove e mezza di sera, in otto, «vediamo dove capita» vuol dire
     girare. E ogni dieci minuti di giro escono da quei tre.</p>
@@ -456,33 +430,23 @@
     metterlo nel piano — è lo stesso controllo che ha scoperto che <b>Dylan's era chiuso dal 2021</b>.</p>
   </div>
 
-  <div class="done">
-    <div class="dh">✅ <b>Hai risposto: «uno dei tre che hai misurato, scegli tu» → è Junior's</b></div>
-    <p style="margin:.35em 0 0">Ho fatto il controllo che avevo promesso, <b>e uno dei tre è caduto.</b></p>
-    <table style="width:100%; font-size:.88rem; border-collapse:collapse; margin-top:10px">
-      <tr style="color:var(--muted); font-size:.79rem"><td style="padding:3px 0">posto</td><td style="padding:3px 5px">esiste?</td><td style="padding:3px 5px">venerdì chiude</td></tr>
-      <tr><td style="padding:5px 0"><b>Havana Central</b></td><td style="padding:5px 5px">sì</td><td style="padding:5px 5px"><b style="color:#c0392b">22:30 — fuori</b></td></tr>
-      <tr><td style="padding:5px 0"><b>Virgil's Real BBQ</b></td><td style="padding:5px 5px">sì</td><td style="padding:5px 5px">mezzanotte</td></tr>
-      <tr><td style="padding:5px 0"><b>Junior's</b></td><td style="padding:5px 5px">sì, ed è la sede attiva</td><td style="padding:5px 5px"><b>01:00</b></td></tr>
-    </table>
-    <p style="margin:.7em 0 0"><b>Havana Central non l'ho escluso per gusto: chiude alle 22:30.</b>
-    Saremmo entrati alle 21:20 per uscire tre minuti prima della chiusura, in otto. È esattamente la
-    casella di Dylan's, solo che stavolta l'abbiamo aperta prima e non dopo.</p>
-    <div class="res2" style="margin-top:10px">➜ <b>Ho scelto Junior's</b>, e la ragione è nel nome della
-    tappa: si chiamava <i>«cena + gelato»</i>. <b>La cheesecake è dentro il locale</b> — così il dolce
-    smette di essere un secondo posto da trovare alle dieci e mezza di sera, in otto. Chiude all'una.</div>
-    <p style="margin:.7em 0 0">⚠️ <b>E ti devo dire cosa costa, perché costa.</b> Il «+3 minuti» qui sopra
-    rispondeva a un'altra domanda: era il costo rispetto al <i>tornare dritti in hotel</i>. Rispetto al
-    piano il costo vero è <b>+8 minuti</b> — perché il punto generico che avevo usato per «la cena» stava
-    a 396 metri dal Summit, e <b>nessun ristorante vero è così vicino</b>. Quel 22:27 era l'orario di un
-    ristorante che non esiste.</p>
-    <div class="res2" style="margin-top:10px">➜ <b>Il venerdì finisce alle 22:35</b>, cinque minuti oltre
-    la soglia della giornata comoda. <b>Non te l'ho chiesto</b> perché lasciare le cose così non toglie
-    niente a nessuno: sarebbe stata la <i>cura</i> a costare — accorciare la cena a 70 minuti riporta
-    esatti alle 22:30. <b>Se li rivuoi, quei cinque minuti, basta dirmelo</b>: è una riga.</div>
-    <p class="muted" style="margin:.7em 0 0; font-size:.86rem">🎟️ <b>Una cosa da fare, e tocca a voi:</b>
-    otto persone alle 21:20 di venerdì a Times Square. Junior's non prende prenotazioni normali ma tiene
-    una lista d'attesa — conviene mettersi in lista appena arrivati, non appena seduti.</p>
+  <div class="ask" data-prop="CENAVEN" data-label="VENERDI - la cena dopo il Summit, chi sceglie il posto">
+    <div class="aq">🍰 <b>Come vuoi farla, questa cena?</b><br>
+    È l'unica tappa del viaggio senza un posto, e resta tua</div>
+    <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
+      Se ne trovi uno tu scrivimelo e te lo metto nel piano coi minuti giusti — <b>basta che stia fra il
+      Summit e l'hotel</b> e non costa niente. Se hai già un'idea, o vuoi chiedere ai ragazzi, meglio ancora.<br><br>
+      <b>👉 Se non rispondi resta libera</b>, cioè com'è adesso: si decide sul posto. È l'unico punto del
+      piano dove non ho un numero, e volevo che lo sapessi tu invece di scoprirlo quella sera.
+    </p>
+    <input id="cenaTxt" type="text" placeholder="Se hai un posto in mente, scrivilo qui — lo misuro io"
+           style="width:100%;border:1px solid var(--line);border-radius:11px;padding:10px 12px;font:inherit;font-size:.92rem;background:#fff">
+    <div class="chips" data-group="CENAVEN" style="margin-top:9px">
+      <div class="chip yes" data-val="VENERDI CENA: lo cerco io e ti mando il nome">🔎 Lo cerco io, ti mando il nome</div>
+      <div class="chip yes" data-val="VENERDI CENA: chiedo ai ragazzi e ti dico">👨‍👩‍👧 Chiedo ai ragazzi</div>
+      <div class="chip yes" data-val="VENERDI CENA: uno dei tre che hai misurato, scegli tu">📍 Uno dei tre che hai misurato</div>
+      <div class="chip no" data-val="VENERDI CENA: facciamo a caso, accetto il rischio dei minuti">🎲 Facciamo a caso — accetto il rischio</div>
+    </div>
   </div>
 
   <h2 style="margin-top:38px">🧭 Il controllo sulle zone: a che punto sono, e cosa resta</h2>
@@ -748,7 +712,7 @@
   </div>
 
   <div class="footer">
-    Itinerario e logistica v25 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
+    Itinerario e logistica v24 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -828,11 +792,11 @@ var DAYS = [
   "id": "g2",
   "name": "Giorno 2 · Ven 14",
   "zone": "Midtown + Summit",
-  "pct": 101,
-  "verd": "bad",
+  "pct": 100,
+  "verd": "warn",
   "out": "10:00",
   "back": "22:30",
-  "end": "22:35",
+  "end": "22:27",
   "bus": 0,
   "taxi": 1,
   "stops": [
@@ -897,18 +861,18 @@ var DAYS = [
     "n": "SUMMIT One Vanderbilt",
     "i": "🏙️",
     "s": "terrazza ~2h",
-    "m": 140,
+    "m": 136,
     "mv": "walk",
     "lg": 20,
     "fixed": "19:00"
    },
    {
-    "n": "Junior's (1515 Broadway) - CENA + cheesecake",
+    "n": "Cena + gelato (Midtown)",
     "i": "🍽️",
     "s": "pasto ~1h15",
-    "m": 95,
+    "m": 87,
     "mv": "walk",
-    "lg": 20
+    "lg": 12
    }
   ]
  },
@@ -1024,11 +988,11 @@ var DAYS = [
   "id": "g4",
   "name": "Giorno 4 · Dom 16",
   "zone": "Downtown & Brooklyn",
-  "pct": 94,
+  "pct": 91,
   "verd": "warn",
   "out": "10:00",
   "back": "21:30",
-  "end": "20:47",
+  "end": "20:27",
   "bus": 0,
   "taxi": 1,
   "stops": [
@@ -1111,8 +1075,8 @@ var DAYS = [
    {
     "n": "Time Out Market Dumbo - CENA",
     "i": "🍽️",
-    "s": "pasto ~1h20",
-    "m": 95,
+    "s": "pasto ~1h",
+    "m": 75,
     "mv": "walk",
     "lg": 16
    },
@@ -1240,11 +1204,11 @@ var DAYS = [
   "id": "g6",
   "name": "Giorno 6 · Mar 18",
   "zone": "Midtown / West Side + partenza",
-  "pct": 87,
+  "pct": 89,
   "verd": "ok",
   "out": "08:30",
   "back": "17:30",
-  "end": "16:20",
+  "end": "16:29",
   "bus": 0,
   "taxi": 0,
   "stops": [
@@ -1277,7 +1241,7 @@ var DAYS = [
     "n": "Ultimi acquisti 5th Ave + souvenir",
     "i": "🛍️",
     "s": "negozio ~20 min",
-    "m": 45,
+    "m": 54,
     "mv": "walk",
     "lg": 25,
     "opt": true
@@ -1286,9 +1250,9 @@ var DAYS = [
     "n": "Nathan's Famous (Times Square)",
     "i": "🍽️",
     "s": "pasto ~20 min",
-    "m": 19,
+    "m": 28,
     "mv": "walk",
-    "lg": 13,
+    "lg": 22,
     "opt": true
    },
    {
@@ -1324,7 +1288,7 @@ var TEXT = {
     sub: "Il Summit. Si parte comodi alle 10:00.",
     probs: ["Il <b>230 Fifth</b> è fuori, come hai detto — e con lui è sparita anche la verifica sui minori."],
     sol: "La partenza è alle <b>10:00</b> invece che alle 8:45, e la giornata finisce <b>alla stessa ora</b>: è il Summit ad ancorarla, quindi partire prima avrebbe solo aggiunto attesa. Un'ora di sonno in più che non costa niente.",
-    solres: "➜ 10:00 → 22:35. Summit alle 19:00 in punto, cena da Junior's."
+    solres: "➜ 10:00 → 22:27. Summit alle 19:00 in punto."
   },
   g3: {
     sub: "Rifatta sulla tua scelta A: giro panoramico + riordino.",
@@ -1590,9 +1554,8 @@ document.querySelectorAll('.chips[data-group]').forEach(function(group){
    accorgersene mentre lui scrive, altrimenti scrive un posto e la pagina continua
    a dire che manca. (In v23 questo listener era sparito insieme al campo dell'ora
    dell'Empire, ed e' tornato necessario con `cenaTxt`.) */
-/* v25: `cenaTxt` non esiste piu' - la cena del venerdi ha un posto (Junior's, D103).
-   Il listener e' rimosso insieme al campo, non lasciato "difensivo": un ascoltatore
-   su un elemento che non c'e' e' un pezzo di codice che dichiara una domanda morta. */
+var _ct = document.getElementById('cenaTxt');
+if(_ct) _ct.addEventListener('input', function(){ updateStatus(); });
 
 /* v23: le quattro domande della v22 sono RISPOSTE e applicate, quindi non hanno piu'
    un pulsante - si mostrano come stato (D83/D67). Con loro sono spariti i quattro
@@ -1604,11 +1567,16 @@ function updateStatus(){
   Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) rev++; });
   var edits = Object.keys(slotOverride).length;
   var t = [];
+  if(sel['PRANZOSAB']) t.push('pranzo sabato ✓');
+  if(sel['CENADOM'])   t.push('cena domenica ✓');
+  if(sel['CITYHALL'])  t.push('City Hall ✓');
+  if(sel['ULTACQ'])    t.push('ultimi acquisti ✓');
+  if(sel['CENAVEN'] || ((document.getElementById('cenaTxt')||{}).value||'').trim()) t.push('cena venerdì ✓');
   if(rev) t.push(rev + (rev === 1 ? ' giornata da riaprire' : ' giornate da riaprire'));
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
     t.length ? (t.join(' · ') + ' — invia quando vuoi')
-             : "Nessuna domanda aperta: la pagina non ti chiede niente 👍";
+             : "Cinque domande, e hanno tutte un default dichiarato 👇";
 }
 
 /* ============================================================
@@ -1620,9 +1588,9 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v25',
+  ver:   'v24',
   built: '2026-07-31',
-  plan:  "itinerario v2.3 al 31 lug sera. FINI: gio 21:48 - ven 22:35 - sab 08:45-19:48 - dom 10:00-20:47 - lun 08:45-21:02 - mar 08:30-16:20, cuscino JFK 70'. v25 = LE SUE CINQUE RISPOSTE ALLA v24, tutte applicate, log VUOTO per la prima volta. D99 cena domenica 60'->80' (ha ribaltato il default), dom 20:27->20:47. D100 nessuna sosta a City Hall, residuo chiuso, zero dati toccati. D101 pranzo sabato 27' confermati + il vincolo nuovo 'da asporto li' alla fermata'. D102 souvenir confermato -> sbloccato il doppio conto trattenuto sul martedi, Nathan's leg_verified 8' (capo sud della zona, 526 m misurati col router pedonale, non i 366 m in linea d'aria del modello): mar 16:29->16:20, cuscino JFK 61'->70'. D103 cena venerdi = JUNIOR'S 1515 Broadway (lui ha delegato la scelta fra i tre): HAVANA CENTRAL ESCLUSO perche' il venerdi chiude alle 22:30 e si usciva 3' prima della chiusura in otto - il controllo Dylan's ha funzionato. Junior's verificato alla fonte, ven-sab 07:00-01:00, sede attiva. leg_verified 15' (Summit->Junior's 1076 m). ATTENZIONE: il '+3'' scritto nella v24 rispondeva a un'altra domanda (costo sul rientro diretto); il costo vero contro il piano e' +8', perche' il pin ZONA stava a 396 m dal Summit - il 22:27 era l'orario di un ristorante che non esiste. Ven 22:27->22:35, 5' oltre la fine comoda, dentro l'hard end. NON richiesto a lui: il default non toglie niente, sarebbe stata la cura (cena 70' -> 22:30 esatte) a costare, ed e' offerta in pagina. D98 zone: 7 ratificate DAL NODO leggendo coords_src, O44 da 5/16 a 11/15. D105 check_zones.py ora legge coords_src: 'serve l'occhio' da 8 zone a ZERO. D104 gen_route.py aveva il router sbagliato per i tratti a piedi (profilo auto): 41 tratte su 60 ripiegavano su linea dritta, ora 4. NESSUNA DOMANDA APERTA. Restano sul tavolo del doc owner: O44 (4 zone, misure non occhio), O47, residuo O36 in 7g. Il passo dopo e' l'approvazione dell'ITINERARIO INTERO (D90), che aspetta O44 e non lui.",
+  plan:  "itinerario v2.2 al 31 lug sera. FINI: gio 21:48 - ven 22:27 - sab 08:45-19:48 - dom 10:00-20:27 - lun 08:45-21:02 (sveglia spostata da 08:25, D96) - mar 08:30-16:29, cuscino JFK 61'. v24 = correzioni ZONE (O44, 5 ratificate su 16): D95 il ponte di Brooklyn era contato due volte (tratta verso Dumbo misurata dall'imbocco lato Manhattan), traversata 25' non 40-55', dom 20:57 -> 20:27; D96 High Line pin 601 m a nord dell'ingresso, tratte 32'->12', i 20' diventano SVEGLIA e non fine anticipata per non rompere l'opzione C del tramonto (Little Island resta 19:15-20:30); D96 5th Avenue pin a meta', tratte 19'->8', effetto ZERO perche' il venerdi e' ancorato al Summit. Prima: v23 orari Big Bus letti alla fonte (D94), v22 le sue 4 risposte (D92/D93). CINQUE domande aperte, tutte con default: pranzo sabato 27' (O49, gia' nella v23 e senza risposta) - cena domenica, i 20' indietro (default: NO, resta 60') - sosta a City Hall (default: si passa) - ultimi acquisti martedi (default: souvenir) - riferimento cena venerdi, Junior's 1515 Broadway (default: resta LIBERA, il posto lo sceglie lui - Junior's e' dato solo come metro di misura, +3' sul rientro diretto). ⚠️ SE SCEGLIE JUNIOR'S, VERIFICARE CHE ESISTA E GLI ORARI PRIMA DI METTERLO NEI DATI (casella Dylan's).",
   stale: ''
 };
 
@@ -1640,14 +1608,39 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v25: messaggio di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v24: risposta di Fabrizio');
 
-  /* v25: LE CINQUE DELLA v24 HANNO TUTTE UNA RISPOSTA, E IL LOG E' VUOTO PER LA PRIMA
-     VOLTA. Con i cinque blocchi sono spariti i cinque gruppi (PRANZOSAB, CENADOM,
-     CITYHALL, ULTACQ, CENAVEN) e il campo di testo `cenaTxt`: un JS che legge gruppi
-     non piu' presenti nel DOM e' esattamente cio' che `check_pages.py` intercetta.
-     Da qui questa pagina NON produce piu' un messaggio di risposta a domande: produce
-     solo cio' che parte da lui - giornate da riaprire e blocchi di tempo cambiati. */
+  /* v23: le quattro della v22 hanno una risposta e sono applicate - la domenica sui
+     dati (D92), le altre tre no perche' coincidevano col default (D93). Qui non ci
+     sono piu': cio' che e' deciso si mostra come stato, non si richiede. Resta il
+     pranzo del sabato, unica domanda della pagina. */
+  if(sel['PRANZOSAB']){
+    L.push('');
+    L.push('🥪 SABATO - pranzo a Columbus Circle (27 minuti, corsa delle 13:02):');
+    L.push('   - ' + sel['PRANZOSAB']);
+  }
+  if(sel['CENADOM']){
+    L.push('');
+    L.push('🍽️ DOMENICA - i 20 minuti di cena a Dumbo:');
+    L.push('   - ' + sel['CENADOM']);
+  }
+  if(sel['CITYHALL']){
+    L.push('');
+    L.push('🏛️ DOMENICA - sosta a City Hall / Woolworth prima del ponte:');
+    L.push('   - ' + sel['CITYHALL']);
+  }
+  if(sel['ULTACQ']){
+    L.push('');
+    L.push('🛍️ MARTEDI - ultimi acquisti: souvenir o negozi grandi:');
+    L.push('   - ' + sel['ULTACQ']);
+  }
+  var cena = (document.getElementById('cenaTxt') || {}).value || '';
+  if(sel['CENAVEN'] || cena.trim()){
+    L.push('');
+    L.push("🍰 VENERDI - la cena dopo il Summit:");
+    if(cena.trim())    L.push('   - Posto scelto da lui: ' + cena.trim());
+    if(sel['CENAVEN']) L.push('   - ' + sel['CENAVEN']);
+  }
 
   /* v14: i due pulsanti "torna indietro" su sabato e Comics NON esistono piu'.
      Si confermavano col silenzio - e il silenzio non fa sparire un pulsante,
