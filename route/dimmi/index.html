@@ -32,6 +32,10 @@
       padding:15px 20px;border-radius:12px;font-weight:600;margin-top:6px}
   .go:hover{background:#16294f}
   .go small{display:block;font-weight:400;font-size:.8rem;opacity:.85;margin-top:3px}
+  /* il ritorno e' secondario rispetto all'azione: stesso ingombro, meno voce */
+  .go.back{background:#fff;color:var(--accent);border:1px solid var(--line);margin-top:9px}
+  .go.back:hover{background:#f4f6fa}
+  .go.back small{opacity:.7}
   .foot{color:var(--muted);font-size:.8rem;text-align:center;margin:26px 0 34px}
 </style>
 </head>
@@ -56,6 +60,11 @@
     <h2>👉 Quello che ti serve adesso è qui</h2>
     <p style="margin:0 0 12px;font-size:.93rem">Le sei giornate stanno dentro l'itinerario, ognuna col suo pulsante per la mappa.</p>
     <a class="go" href="../../">🗽 Vai all'itinerario<small>e da lì a tutte e sei le mappe</small></a>
+    <!-- IL RITORNO (31 lug 2026, richiesta del doc owner). Queste pagine erano
+         raggiungibili ma senza uscita: chi ci entrava dall'itinerario doveva usare
+         il tasto indietro del browser, o restava fuori dal flusso. Da qui in poi
+         ogni pagina chiusa sa dire da dove si torna. -->
+    <a class="go back" href="../../">&larr; torna all'itinerario<small>alla pagina principale, dove stanno i numeri buoni</small></a>
   </div>
 
   <p class="foot">Questa pagina resta raggiungibile solo perché il link ce l'hai ancora.<br>
