@@ -270,13 +270,19 @@
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
 
+  <!-- ORIENTAMENTO. Qui c'era un cappello della v22 - "hai risposto a quattro pagine
+       in tredici minuti... le trovi tutte in fondo... sotto ce ne sono altre tre" - che
+       la pulizia del 31 lug ha reso FALSO su tre punti: la sezione "in fondo" non esiste
+       piu' (cancellata), non c'e' nessuna domanda "qui sopra", e le domande sono due, non
+       quattro. Errore di metodo: avevo tolto le sezioni ma non il paragrafo che le
+       annunciava. Da qui questo blocco dice SOLO quante domande ci sono, cosi' se il
+       numero cambia si nota subito che va riscritto. -->
   <div class="note" style="border-left-color:var(--accent2)">
-    <b>🙏 Hai risposto a quattro pagine in tredici minuti.</b> Dodici risposte.
-    <b>Undici sono già dentro il piano</b>, e le trovi tutte in fondo, una per una.<br><br>
-    <b>Qui sopra ti chiedo una cosa sola</b> — ed è quella in cui <b>non ottieni quello che ti
-    avevo promesso</b>, quindi te la metto per prima e non in fondo.<br><br>
-    Sotto ce ne sono altre tre, e <b>hanno tutte un default</b>: se le lasci stare succede
-    quello che ti scrivo io, e non si rompe niente.
+    <b>🙏 Le tue cinque risposte sono tutte dentro il piano</b> — le trovi qui sotto, con
+    quello che hanno cambiato.<br><br>
+    <b>Questa volta ti chiedo due cose sole</b>, e stanno tutt'e due nella seconda metà:
+    <b>quanto tempo state in quattro tappe</b> (i minuti li ho messi io, puoi cambiarli) e
+    <b>il van per l'aeroporto</b>, che devi prendere tu.
   </div>
 
   <h2 style="margin-top:38px">🥪 Il pranzo del sabato</h2>
@@ -397,7 +403,7 @@
 
   <!-- ============ COSE CHE VERIFICO IO ============ -->
   <h2>🔎 Le tre cose che verifico io prima di partire</h2>
-  <p class="muted" style="margin-top:0">Non ti chiedono niente: sono il <b>passo 4</b> qui sopra, e li faccio fra l'8 e il 10 agosto. Te le scrivo perché sono <b>le cose che possono cambiare da qui ad agosto</b>.</p>
+  <p class="muted" style="margin-top:0">Non ti chiedono niente: sono il <b>passo 6</b> qui sopra, e li faccio fra l'8 e il 10 agosto. Te le scrivo perché sono <b>le cose che possono cambiare da qui ad agosto</b>.</p>
   <div class="card">
     <div class="princ"><span class="ic">🚲</span><div><b>Il noleggio bici del pass chiede un orario?</b><br><small class="muted">Il Go City dice solo «incluso». Se invece vuole uno slot prenotato, il sabato mattina va fissato.</small></div></div>
     <div class="princ"><span class="ic">🚌</span><div><b>Il giro di Brooklyn del Big Bus è sospeso fino al 31 agosto</b><br><small class="muted">Per questo a Dumbo si va <b>a piedi sul ponte</b> e si torna in taxi. Se lo riattivano, la domenica si semplifica.</small></div></div>
@@ -478,7 +484,7 @@
 
 <div class="bar">
   <div class="in">
-    <div class="status" id="statusLine">Una cosa sola blocca: la domenica. Le altre quattro hanno un default 👇</div>
+    <div class="status" id="statusLine">Due cose sole: i tempi delle tappe e il van 👇</div>
     <button class="send" id="sendBtn">📲 Invia su WhatsApp</button>
   </div>
 </div>
@@ -1346,7 +1352,7 @@ function updateStatus(){
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
     t.length ? (t.join(' · ') + ' — invia quando vuoi')
-             : "Due cose sole: le zone e il van 👇";
+             : "Due cose sole: i tempi delle tappe e il van 👇";
 }
 
 /* ============================================================
