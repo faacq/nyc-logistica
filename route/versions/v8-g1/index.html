@@ -138,17 +138,6 @@
       background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;
       font-size:.78rem;font-weight:700;color:var(--accent)}
   .gm:hover{border-color:var(--accent)}
-  .backlnk{display:inline-block;margin-top:9px;color:#dbe6ff;text-decoration:none;font-size:.82rem;
-           border-bottom:1px solid rgba(219,230,255,.4)}
-  .backlnk:hover{color:#fff;border-bottom-color:#fff}
-  .say{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent2);
-       border-radius:12px;padding:14px 16px;margin:18px 0 6px}
-  .say h3{margin:0 0 6px;font-size:1rem}
-  .say p{margin:.3em 0 0;font-size:.88rem}
-  .say .tiny{font-size:.79rem;color:var(--muted);margin-top:.6em}
-  .say button{margin-top:11px;border:none;background:var(--accent);color:#fff;padding:11px 20px;
-              border-radius:999px;font:inherit;font-size:.92rem;font-weight:600;cursor:pointer}
-  .say button:hover{background:#16294f}
   .arrow{border:none;background:none;color:#22303c;font-size:15px;line-height:1;
          text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
 </style>
@@ -157,9 +146,8 @@
 
 <header class="hero"><div class="wrap">
   <h1>Come si gira il gio 13</h1>
-  <div class="sub">Arrivo / Midtown (sera) — si esce alle <b>19:00</b>, si rientra verso le <b>21:48</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v22 &middot; 31 lug 2026</div>
-  <a class="backlnk" href="../../">← torna all'itinerario e alle domande</a>
+  <div class="sub">Arrivo / Midtown (sera) — si esce alle <b>19:00</b>, si rientra verso le <b>21:52</b>. Qui sotto il giro, pezzo per pezzo.</div>
+  <div class="ver">🧭 percorso v8 &middot; 30 lug 2026</div>
 </div></header>
 
 <div class="mapwrap"><div class="wrap" style="padding-bottom:0">
@@ -227,23 +215,12 @@
 
   <div id="steps"></div>
 
-  <div class="say">
-    <h3>🗣️ C'è qualcosa che non ti piace, o che vuoi cambiare?</h3>
-    <p>Su <b>come è fatta</b> questa pagina non ti chiedo più niente: mi hai già risposto, e va bene così.
-    Questo serve a dirmi una cosa <b>su questa giornata</b> quando la guardi — un orario che non torna,
-    una tappa nell'ordine sbagliato, una che manca.</p>
-    <button type="button" id="sayBtn">💬 Dimmi qui</button>
-    <p class="tiny">Si apre WhatsApp con già scritto <b>di quale giornata</b> e <b>di quale versione</b> stai
-    parlando: così non devo indovinarlo — è quello che è mancato l'altra sera.</p>
-  </div>
-
-  <div class="footer">Giorno 1 · Gio 13 · la compagnia · New York 13-18 ago 2026<br>Percorso generato dai dati del giro — 3 tappe<br>
-    <a href="../../" style="color:inherit">← torna all'itinerario</a></div>
+  <div class="footer">Giorno 1 · Gio 13 · la compagnia · New York 13-18 ago 2026<br>Percorso generato dai dati del giro — 3 tappe</div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-var STEPS = [{"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.76104,-73.98702&destination=40.76200,-73.98360&travelmode=walking", "n": "Ellen's Stardust Diner (cena di benvenuto)", "i": "✨", "arr": "19:13", "dep": "20:43", "dwell": 90, "mode": "walk", "leg": 13, "brk": null, "km": 0.43, "opt": false, "lat": 40.762, "lon": -73.9836, "note": "camerieri che cantano; ATTESA TIPICA 30-60' in agosto - non prenotabile. D77 (O41): la cena e' passata PRIMA di Times Square, quindi ci si arriva alle 19:13 invece che alle 19:40. ⚠️ Sull'attesa questo e' un guadagno, non un costo: 19:13 e' prima dell'onda della cena, non dopo. E la prenotazione non c'entra - qui non si prenota per definizione, verificato sul sito ufficiale il 30 lug", "col": "#2a78d6", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.76104, -73.98702], [40.762, -73.9836]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.76200,-73.98360&destination=40.75915,-73.98494&travelmode=walking", "n": "Times Square di notte", "i": "📸", "arr": "20:56", "dep": "21:11", "dwell": 15, "mode": "walk", "leg": 13, "brk": null, "km": 0.47, "opt": false, "lat": 40.75915, "lon": -73.98494, "note": "sogno n.1 di Giulio - primo colpo d'occhio. ✅ D77 (O41) - RISOLTO IL 31 lug, scelta di Fabrizio al form logistica v20: la tappa e' stata INVERTITA con la cena. Il problema era che il nodo si chiama 'di notte' ma ci si arrivava alle 19:12, e il 13 agosto il sole tramonta verso le 20:00: piena luce, i tabelloni non si vedono come nelle foto. Adesso si arriva alle 20:56, un'ora dopo il tramonto, cioe' col muro di schermi acceso sul nero. ⚠️ COSTO ZERO: la giornata finisce alle 21:48 esattamente come prima - e' lo stesso giro percorso nell'ordine opposto. E' l'unica delle sette risposte che non sposta un solo minuto", "col": "#eb6834", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.762041, -73.98357], [40.762086, -73.983678], [40.762014, -73.983724], [40.761778, -73.983881], [40.761508, -73.984061], [40.76145, -73.984098], [40.76142, -73.984023], [40.761382, -73.983932], [40.761278, -73.983687], [40.761179, -73.983449], [40.761156, -73.983395], [40.761095, -73.98325], [40.761036, -73.983293], [40.760793, -73.983467], [40.760527, -73.983663], [40.760463, -73.983706], [40.760408, -73.983748], [40.759903, -73.984127], [40.759841, -73.984174], [40.759782, -73.984217], [40.75927, -73.984585], [40.759223, -73.984619], [40.759148, -73.984676], [40.759065, -73.984737]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.75915,-73.98494&destination=40.76104,-73.98702&travelmode=walking", "n": "Gelato (rientro hotel)", "i": "🍽️", "arr": "21:23", "dep": "21:48", "dwell": 25, "mode": "walk", "leg": 12, "brk": null, "km": 0.38, "opt": true, "lat": 40.76104, "lon": -73.98702, "note": "", "col": "#1baf7a", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.75915, -73.98494], [40.76104, -73.98702]], "label": ""}]}];
+var STEPS = [{"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.76104,-73.98702&destination=40.75800,-73.98550&travelmode=walking", "n": "Times Square di notte", "i": "📸", "arr": "19:14", "dep": "19:29", "dwell": 15, "mode": "walk", "leg": 14, "brk": null, "km": 0.51, "opt": false, "lat": 40.758, "lon": -73.9855, "note": "sogno n.1 di Giulio - primo colpo d'occhio", "col": "#2a78d6", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.761038, -73.987021], [40.761037, -73.987018], [40.760982, -73.986888], [40.76036, -73.985411], [40.760182, -73.984983], [40.760165, -73.984943], [40.760113, -73.98482], [40.760092, -73.98477], [40.76006, -73.984694], [40.759897, -73.984307], [40.759841, -73.984174], [40.759782, -73.984217], [40.75927, -73.984585], [40.759223, -73.984619], [40.759148, -73.984676], [40.758668, -73.985027], [40.758597, -73.98508], [40.758524, -73.985132], [40.758367, -73.985244], [40.758036, -73.985482], [40.758002, -73.985506]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.75800,-73.98550&destination=40.76200,-73.98360&travelmode=walking", "n": "Ellen's Stardust Diner (cena di benvenuto)", "i": "✨", "arr": "19:45", "dep": "21:15", "dwell": 90, "mode": "walk", "leg": 16, "brk": null, "km": 0.66, "opt": false, "lat": 40.762, "lon": -73.9836, "note": "camerieri che cantano; ATTESA TIPICA 30-60' in agosto - non prenotabile", "col": "#eb6834", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.758, -73.9855], [40.762, -73.9836]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.76200,-73.98360&destination=40.76104,-73.98702&travelmode=walking", "n": "Gelato (rientro hotel)", "i": "🍽️", "arr": "21:27", "dep": "21:52", "dwell": 25, "mode": "walk", "leg": 13, "brk": null, "km": 0.43, "opt": true, "lat": 40.76104, "lon": -73.98702, "note": "", "col": "#1baf7a", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.762, -73.9836], [40.76104, -73.98702]], "label": ""}]}];
 var START = {"name": "Hotel Kimpton (Times Sq)", "lat": 40.76104, "lon": -73.98702, "time": "19:00"};
 
 /* La FORMA della linea dice come ci si muove; il COLORE dice quale tratta e'.
@@ -554,22 +531,6 @@ document.querySelectorAll('.num[data-goto]').forEach(function(b){
 });
 
 /* tocchi una fermata nell'elenco -> la mappa ci va sopra e la fermata si apre */
-var _say = document.getElementById('sayBtn');
-if(_say){
-  _say.addEventListener('click', function(){
-    var L = ["🗽 NEW YORK - «Come si gira»: una cosa da cambiare",
-             "",
-             "📅 giornata: Come si gira il gio 13",
-             "",
-             "✍️ (scrivi qui cosa non va: un orario, una tappa fuori posto, una che manca)",
-             "",
-             "———",
-             "📋 pagina: route-g1 · pacchetto v22 · 31 lug 2026",
-             "🗺️ piano mostrato: Giorno 1 - Gio 13 - Arrivo / Midtown (sera) - 3 tappe, si esce 19:00, si rientra 21:48"];
-    window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
-  });
-}
-
 document.querySelectorAll('.sl-chip').forEach(function(b){
   b.addEventListener('click', function(ev){
     ev.stopPropagation();                       /* non deve valere come click sulla scheda */
