@@ -256,7 +256,7 @@
     il controllo di posti e orari. Adesso <b>le tue due risposte</b> → l'approvazione
     dell'itinerario intero → il blocco delle giornate → la guida.<br>
     <span style="opacity:.85">Si parte fra <b>13 giorni</b>.</span></div>
-    <div class="ver">📌 versione v29 &middot; 1 ago 2026</div>
+    <div class="ver">📌 versione v28 &middot; 1 ago 2026</div>
   </div>
 </header>
 
@@ -265,7 +265,7 @@
   <!-- CHANGELOG. Scritto contro la v27, che e' l'ultima che ha visto DAVVERO (consegnata
        la sera del 31 lug). -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(v29 &middot; 1 ago, rispetto alla v27)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(v28 &middot; 1 ago, rispetto alla v27)</span></h3>
     <ul>
       <li>✍️ <b>Mi hai chiesto di rifare il giro del venerdì, e la risposta è pronta.</b>
       Sta in una <b>pagina sua</b>, perché cambia la forma di una giornata e voglio che tu la
@@ -274,9 +274,6 @@
       delle quattro tappe restano quelli, e <b>il van non te lo chiedo più</b>.</li>
       <li>🧹 <b>Le due domande sono sparite dalla pagina</b> — al loro posto c'è scritto
       cos'hanno prodotto. Quello che è deciso te lo mostro, non te lo richiedo.</li>
-      <li>🧽 <b>Tolte due sezioni che ti raccontavano di nuovo cose di sabato scorso</b> —
-      il pranzo del sabato e le quattro risposte della volta prima. Te le avevo già mandate
-      il 31 luglio, e rileggerle qui faceva sembrare vecchio anche quello che è nuovo.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
@@ -306,23 +303,54 @@
        annunciava. Da qui questo blocco dice SOLO quante domande ci sono, cosi' se il
        numero cambia si nota subito che va riscritto. -->
   <div class="note" style="border-left-color:var(--g5)">
-    <b>🙏 Su questa pagina non ti chiedo più niente.</b> Tutte le tue risposte sono dentro il
-    piano, e <b>te le ho già raccontate</b>: quelle della v24 con il messaggio del 31 luglio,
-    le due della v27 qui sotto.<br><br>
+    <b>🙏 Su questa pagina non ti chiedo più niente.</b> Le cinque risposte della v24 e le due
+    della v27 sono tutte dentro il piano — le trovi qui sotto, con quello che hanno cambiato.<br><br>
     <b>L'unica cosa aperta è il venerdì</b>, e sta nella sua pagina, qui sopra. 👆
   </div>
 
-  <!-- v29: qui c'erano DUE SEZIONI - "Il pranzo del sabato" e "Le tue risposte, e cosa hanno
-       cambiato" (domenica / ponte / martedi / Junior's). Erano il contenuto della v25, gia'
-       CONSEGNATO il 31 lug: in pagina si presentavano come la novita' di adesso. Segnalato
-       dal doc owner. E' D106 di nuovo - una pagina che tiene tutto smette di dire cos'e' nuovo.
-       🔴 E dentro il blocco di Junior's c'era una DOMANDA VIVA sulla cena del venerdi
-       ("rivuoi i 5 minuti? cena a 70'"), mentre /venerdi/ sta chiedendo QUELLA STESSA CENA:
-       due pagine che chiedono la stessa cosa senza sapersi l'una dell'altra e' esattamente
-       come e' nato D81. La cura dei 70' non si perde: sulla pagina del venerdi la cena e'
-       una riga modificabile, quindi si ottiene lo stesso risultato in un posto solo.
-       ⚠️ Anche l'azione "in otto alle 21:20 conviene mettersi in lista" non si perde:
-       vive nella `card` di Junior's, che arriva sia alla story map sia all'itinerario. -->
+  <h2 style="margin-top:38px">🥪 Il pranzo del sabato</h2>
+
+  <div class="done">
+    <div class="dh">✅ <b>27 minuti — «da asporto lì alla fermata»</b></div>
+    <p style="margin:.35em 0 0">Il bus vero passa alle <b>13:02</b>, non alle 13:08 che avevo
+    ricostruito io: sei minuti che valevano <b>un'ora di pomeriggio</b>. Il pranzo dura quanto manca
+    al passaggio, quindi è sceso a 27'. <b>Sabato chiuso alle 19:48.</b></p>
+  </div>
+
+  <h2 style="margin-top:38px">🎁 Le tue risposte, e cosa hanno cambiato</h2>
+
+  <div class="done">
+    <div class="dh">🍽️ <b>Domenica: cena piena, si rientra alle 20:47</b></div>
+    <p style="margin:.35em 0 0">Avevi accorciato la cena di 20' per tenere l'anello — ma il ponte di
+    Brooklyn era <b>contato due volte</b>, quindi non servivano. <b>Li hai ripresi.</b></p>
+  </div>
+
+  <div class="done">
+    <div class="dh">🏛️ <b>Ponte: si passa davanti, nessuna sosta</b></div>
+    <p style="margin:.35em 0 0">Niente cambia. Municipal Building, City Hall e Woolworth restano
+    nella <b>guida</b>, da guardare passando.</p>
+  </div>
+
+  <div class="done">
+    <div class="dh">🛍️ <b>Martedì: souvenir — e la giornata si accorcia a 16:20</b></div>
+    <p style="margin:.35em 0 0">Confermando che si <i>scende</i> la 5th comprando, hai confermato che
+    quella tappa è una passeggiata: il calcolo contava i 20' fermi <b>più</b> il cammino, ma quel
+    cammino <b>è</b> la sosta. <b>Margine prima del volo: 1 ora e 10.</b></p>
+  </div>
+
+  <div class="done">
+    <div class="dh">🍰 <b>Venerdì: cena da Junior's</b> <small class="muted">(1515 Broadway, la 45ª)</small></div>
+    <p style="margin:.35em 0 0">Mi hai detto di scegliere io fra i tre. 🔴 <b>Havana Central è fuori:
+    il venerdì chiude alle 22:30</b> e saremmo usciti tre minuti prima della chiusura, in otto — è la
+    casella di Dylan's, aperta stavolta <i>prima</i>. Ho preso Junior's perché la tappa si chiamava
+    <i>«cena + gelato»</i> e <b>la cheesecake è nel locale</b>. Chiude all'una.</p>
+    <div class="res2" style="margin-top:9px">⚠️ <b>Costa 8 minuti, non i 3 che ti avevo scritto: il
+    venerdì finisce 22:35.</b> Quel «+3» era il costo sul rientro diretto. Il punto generico che usavo
+    per «la cena» stava a 396 m dal Summit: <b>era l'orario di un ristorante che non esiste.</b></div>
+    <p class="muted" style="margin:.55em 0 0; font-size:.86rem">👉 <b>Rivuoi i 5 minuti?</b> Cena a 70'
+    e torna a 22:30 esatte — dimmelo. 🎟️ <b>Da fare voi:</b> in otto alle 21:20 conviene mettersi in
+    lista appena arrivati.</p>
+  </div>
 
   <h2 style="margin-top:38px">⏱️ I tempi delle quattro tappe</h2>
 
@@ -458,7 +486,7 @@
   </div>
 
   <div class="footer">
-    Itinerario e logistica v29 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
+    Itinerario e logistica v28 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1341,7 +1369,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v29',
+  ver:   'v28',
   built: '2026-08-01',
   plan:  "itinerario v2.3 al 1 ago. LE SEI FINI NON SONO CAMBIATE: gio 21:48 - ven 22:35 - sab 08:45-19:48 - dom 10:00-20:47 - lun 08:45-21:02 - mar 08:30-16:20, cuscino JFK 70'. NOVITA' DELLA v28, e sono tre. (1) D112: ZONETEMPI ratificati da lui (5th 60' / Chinatown 75' / SoHo 60' / shopping SoHo 20') - nessun numero cambia, ma la ratifica e' andata in un campo NUOVO, dwell_checked, e NON in zone_checked: ha approvato QUANTO SI STA, non la FORMA della zona, e il doppio conto ingresso/uscita (bandiera A, +9' su Shopping 5th e su SoHo/Tribeca) resta aperto dentro O44. check_zones.py continua a dire 4 zone da fare, ed e' corretto. (2) D113: VAN per JFK PRENOTATO da lui, promemoria di D107 spento; entrato nei dati come booking confermato sul nodo di rientro del martedi (slot 16:20), quindi compare nel rollup Prenotazioni - baseline invarianti ricongelata per questo. (3) IL VENERDI' E' RIAPERTO DA UNA SUA RICHIESTA del 31 lug arrivata dalla story map route-g2: Bryant Park per primo, Grand Central seconda, Raising Cane's fuori dal pranzo, un pranzo vicino al MoMA, taxi eliminato, cena da scegliere fra Raising Cane's e Junior's. MISURATO E NON APPLICATO: sta sulla pagina venerdi-scenario v1 (/venerdi/), che chiede l'approvazione. Il riordino non muove la fine (22:35): il venerdi e' ancorato al Summit delle 19:00, quindi cio' che si guadagna prima diventa attesa - che passa da 28' a 43'. Toglie il taxi, 12' di cammino, e porta Bryant Park fuori dalla fascia calda. Costo dichiarato: muore il 4' MISURATO fra Bryant e la 5th (D96), perche' quel numero era della TRATTA e non del nodo, e con Grand Central in mezzo torna stimato a 16'. Pranzo verificato alla fonte: Five Guys 43 W 55th (opzione A) o Dos Toros 1290 6th Ave (opzione B) - ATTENZIONE, l'indirizzo '52 W 52nd' che danno le piattaforme di consegna NON e' quello ufficiale. Opzione A fine 22:35, opzione B fine 22:07. ATTENZIONE PER CHI PROCESSA: finche' lui non risponde su /venerdi/, il day2 canonico e' ancora quello VECCHIO. Restano sul tavolo del doc owner: O44 (4 zone, misure non occhio), O47, residuo O36 in 7g. L'approvazione dell'ITINERARIO INTERO (D90) adesso aspetta anche il venerdi, non solo O44. STORICO v27: FINI: gio 21:48 - ven 22:35 - sab 08:45-19:48 - dom 10:00-20:47 - lun 08:45-21:02 - mar 08:30-16:20, cuscino JFK 70'. v25 = LE SUE CINQUE RISPOSTE ALLA v24, tutte applicate, log VUOTO per la prima volta. D99 cena domenica 60'->80' (ha ribaltato il default), dom 20:27->20:47. D100 nessuna sosta a City Hall, residuo chiuso, zero dati toccati. D101 pranzo sabato 27' confermati + il vincolo nuovo 'da asporto li' alla fermata'. D102 souvenir confermato -> sbloccato il doppio conto trattenuto sul martedi, Nathan's leg_verified 8' (capo sud della zona, 526 m misurati col router pedonale, non i 366 m in linea d'aria del modello): mar 16:29->16:20, cuscino JFK 61'->70'. D103 cena venerdi = JUNIOR'S 1515 Broadway (lui ha delegato la scelta fra i tre): HAVANA CENTRAL ESCLUSO perche' il venerdi chiude alle 22:30 e si usciva 3' prima della chiusura in otto - il controllo Dylan's ha funzionato. Junior's verificato alla fonte, ven-sab 07:00-01:00, sede attiva. leg_verified 15' (Summit->Junior's 1076 m). ATTENZIONE: il '+3'' scritto nella v24 rispondeva a un'altra domanda (costo sul rientro diretto); il costo vero contro il piano e' +8', perche' il pin ZONA stava a 396 m dal Summit - il 22:27 era l'orario di un ristorante che non esiste. Ven 22:27->22:35, 5' oltre la fine comoda, dentro l'hard end. NON richiesto a lui: il default non toglie niente, sarebbe stata la cura (cena 70' -> 22:30 esatte) a costare, ed e' offerta in pagina. D98 zone: 7 ratificate DAL NODO leggendo coords_src, O44 da 5/16 a 11/15. D105 check_zones.py ora legge coords_src: 'serve l'occhio' da 8 zone a ZERO. D104 gen_route.py aveva il router sbagliato per i tratti a piedi (profilo auto): 41 tratte su 60 ripiegavano su linea dritta, ora 4. NESSUNA DOMANDA APERTA. Restano sul tavolo del doc owner: O44 (4 zone, misure non occhio), O47, residuo O36 in 7g. Il passo dopo e' l'approvazione dell'ITINERARIO INTERO (D90), che aspetta O44 e non lui.",
   stale: ''
@@ -1361,7 +1389,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v29: messaggio di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v28: messaggio di Fabrizio');
 
   /* v28: qui NON c'e' piu' nessun gruppo di domande. ZONETEMPI e VAN hanno avuto
      risposta il 31 lug (D112, D113) e sono usciti dalla pagina insieme al JS che
