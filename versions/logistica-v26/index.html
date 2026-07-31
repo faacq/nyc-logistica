@@ -256,7 +256,7 @@
     il controllo di posti e orari. Adesso <b>le tue due risposte</b> → l'approvazione
     dell'itinerario intero → il blocco delle giornate → la guida.<br>
     <span style="opacity:.85">Si parte fra <b>13 giorni</b>.</span></div>
-    <div class="ver">📌 versione v27 &middot; 31 lug 2026</div>
+    <div class="ver">📌 versione v26 &middot; 31 lug 2026</div>
   </div>
 </header>
 
@@ -264,11 +264,8 @@
 
   <!-- CHANGELOG -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(v27 &middot; 31 lug)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(v26 &middot; 31 lug)</span></h3>
     <ul>
-      <li>📌 <b>Se hai già aperto questa pagina oggi, il tuo telefono te ne mostra una copia
-      vecchia.</b> Per questo il numero in alto è passato a <b>v27</b>: se non lo vedi, ricarica
-      forzando (Ctrl+F5, o tira giù per aggiornare).</li>
       <li>🔴 <b>Alcuni riquadri ti davano numeri sbagliati, e li ho corretti.</b> Il sabato diceva
       «si sale alle 13:14» (è <b>13:02</b>), «finisce alle 20:18» (è <b>19:48</b>) e nominava
       <b>Dylan's, che è chiuso dal 2021</b> ed era già uscito dal piano. Erano rimasti da due
@@ -493,7 +490,7 @@
   </div>
 
   <div class="footer">
-    Itinerario e logistica v27 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
+    Itinerario e logistica v26 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1377,7 +1374,7 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v27',
+  ver:   'v26',
   built: '2026-07-31',
   plan:  "itinerario v2.3 al 31 lug sera. FINI: gio 21:48 - ven 22:35 - sab 08:45-19:48 - dom 10:00-20:47 - lun 08:45-21:02 - mar 08:30-16:20, cuscino JFK 70'. v25 = LE SUE CINQUE RISPOSTE ALLA v24, tutte applicate, log VUOTO per la prima volta. D99 cena domenica 60'->80' (ha ribaltato il default), dom 20:27->20:47. D100 nessuna sosta a City Hall, residuo chiuso, zero dati toccati. D101 pranzo sabato 27' confermati + il vincolo nuovo 'da asporto li' alla fermata'. D102 souvenir confermato -> sbloccato il doppio conto trattenuto sul martedi, Nathan's leg_verified 8' (capo sud della zona, 526 m misurati col router pedonale, non i 366 m in linea d'aria del modello): mar 16:29->16:20, cuscino JFK 61'->70'. D103 cena venerdi = JUNIOR'S 1515 Broadway (lui ha delegato la scelta fra i tre): HAVANA CENTRAL ESCLUSO perche' il venerdi chiude alle 22:30 e si usciva 3' prima della chiusura in otto - il controllo Dylan's ha funzionato. Junior's verificato alla fonte, ven-sab 07:00-01:00, sede attiva. leg_verified 15' (Summit->Junior's 1076 m). ATTENZIONE: il '+3'' scritto nella v24 rispondeva a un'altra domanda (costo sul rientro diretto); il costo vero contro il piano e' +8', perche' il pin ZONA stava a 396 m dal Summit - il 22:27 era l'orario di un ristorante che non esiste. Ven 22:27->22:35, 5' oltre la fine comoda, dentro l'hard end. NON richiesto a lui: il default non toglie niente, sarebbe stata la cura (cena 70' -> 22:30 esatte) a costare, ed e' offerta in pagina. D98 zone: 7 ratificate DAL NODO leggendo coords_src, O44 da 5/16 a 11/15. D105 check_zones.py ora legge coords_src: 'serve l'occhio' da 8 zone a ZERO. D104 gen_route.py aveva il router sbagliato per i tratti a piedi (profilo auto): 41 tratte su 60 ripiegavano su linea dritta, ora 4. NESSUNA DOMANDA APERTA. Restano sul tavolo del doc owner: O44 (4 zone, misure non occhio), O47, residuo O36 in 7g. Il passo dopo e' l'approvazione dell'ITINERARIO INTERO (D90), che aspetta O44 e non lui.",
   stale: ''
@@ -1397,7 +1394,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v27: messaggio di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v26: messaggio di Fabrizio');
 
   /* v26: la pagina e' stata ripulita di tutto cio' che era gia' stato comunicato
      (quattro sezioni intere e tredici voci di changelog). Restano DUE gruppi, e
