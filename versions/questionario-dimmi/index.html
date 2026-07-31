@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Come si gira — dimmi se funziona</title>
+<style>
+  :root{--bg:#fbf7f0;--card:#fff;--ink:#22303c;--muted:#6b7a88;--line:#e7ddcd;
+        --accent:#1f3b73;--accent2:#e0912f;--g5:#3f9d5a;--red:#d1495b;
+        --radius:16px;--shadow:0 6px 22px rgba(30,40,60,.10)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55;padding-bottom:98px;
+       font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:660px;margin:0 auto;padding:0 14px}
+  header.hero{background:linear-gradient(160deg,#1f3b73,#2d5296);color:#fff;padding:20px 0 17px}
+  h1{margin:.1em 0 .2em;font-size:1.36rem;letter-spacing:-.2px}
+  .sub{font-size:.93rem;opacity:.94}
+  .ver{margin-top:10px;display:inline-block;background:rgba(255,255,255,.16);
+       border-radius:999px;padding:3px 11px;font-size:.74rem;font-weight:700}
+  h2{font-size:1.05rem;margin:26px 0 8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+        padding:13px 15px;margin:12px 0;box-shadow:var(--shadow)}
+  .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
+             padding:12px 14px;margin:14px 0;font-size:.88rem}
+  .changelog h3{margin:0 0 7px;font-size:.95rem}
+  .note{background:#fffdf6;border-left:4px solid var(--accent2);border-radius:11px;
+        padding:12px 14px;margin:12px 0;font-size:.87rem}
+  .res{background:#f4f7fc;border-left:4px solid var(--accent);border-radius:11px;
+       padding:12px 14px;margin:12px 0;font-size:.88rem}
+  .res h3{margin:0 0 6px;font-size:.95rem}
+  .muted{color:var(--muted)}
+  /* --- i due link da provare: senza aprirli, le domande non hanno senso --- */
+  .try{display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .try a{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);
+         background:#fff;border:2px solid var(--accent);border-radius:13px;padding:12px 14px;
+         box-shadow:var(--shadow)}
+  .try a .e{font-size:1.5rem;flex:none}
+  .try a b{display:block;font-size:1rem}
+  .try a small{color:var(--muted)}
+  .try a .go{margin-left:auto;font-weight:800;color:var(--accent);white-space:nowrap}
+  /* --- domande --- */
+  .q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+     padding:13px 15px;margin:12px 0;box-shadow:var(--shadow)}
+  .q.key{border:2px solid var(--accent2)}
+  .qn{font-size:.68rem;font-weight:800;letter-spacing:.7px;color:var(--muted)}
+  .q.key .qn{color:var(--accent2)}
+  .qt{font-weight:800;font-size:1rem;margin:3px 0 4px}
+  .qh{font-size:.85rem;color:#4a5a68;margin-bottom:9px}
+  .chips{display:flex;flex-direction:column;gap:7px}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:11px;padding:9px 12px;
+        font-size:.89rem;cursor:pointer;min-height:42px;display:flex;align-items:center;gap:8px}
+  .chip:hover{border-color:var(--muted)}
+  .chip.sel{background:#eef4fb;border-color:var(--accent);font-weight:700}
+  .chip.sel.yes{background:#f0f9f2;border-color:var(--g5)}
+  .chip.sel.no{background:#fdf0f2;border-color:var(--red)}
+  textarea.free{width:100%;min-height:120px;border:1px solid var(--line);border-radius:12px;
+                padding:11px;font:inherit;font-size:.92rem;background:#fff;resize:vertical}
+  .footer{text-align:center;color:var(--muted);font-size:.78rem;margin:26px 0 10px}
+  /* --- barra fissa --- */
+  .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(251,247,240,.97);
+       border-top:1px solid var(--line);padding:9px 0;z-index:900;
+       box-shadow:0 -6px 18px -10px rgba(30,40,60,.4)}
+  .bar .in{max-width:660px;margin:0 auto;padding:0 14px;display:flex;align-items:center;gap:11px}
+  .status{font-size:.79rem;color:var(--muted);flex:1}
+  .send{background:#25d366;color:#fff;border:none;border-radius:12px;padding:12px 15px;
+        font-size:.94rem;font-weight:800;cursor:pointer;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <h1>Ho provato a farti "vedere" la giornata</h1>
+  <div class="sub">Rileggendo l'itinerario mi sono accorto che dice <b>dove si va, non come ci si arriva</b> — soprattutto col bus.
+  Ho costruito una cosa nuova per provare a rimediare, <b>su due giornate</b>. Guardale e dimmi se funziona —
+  o se il problema che ho immaginato non era il tuo.</div>
+  <div class="ver">📌 questionario v1 &middot; 30 lug 2026</div>
+</div></header>
+
+<div class="wrap">
+
+  <div class="changelog">
+    <h3>🆕 Cos'è questa pagina</h3>
+    <b>Non è l'itinerario e non ti chiede di riapprovare niente.</b> Il giro è chiuso: le sei giornate sono
+    decise e questa pagina non le tocca.<br><br>
+    Quello che ti chiedo è <b>solo sul modo di presentarlo</b>: se guardando quelle due pagine adesso
+    riesci a immaginarti la giornata prima di viverla. <b>Sono 6 domande a risposta chiusa</b>, un tocco
+    ciascuna, e uno spazio libero in fondo.
+  </div>
+
+  <h2>👀 Prima guarda queste due</h2>
+  <p class="muted" style="margin-top:0">Senza aprirle le domande non hanno senso. Due giornate diverse
+  di proposito: una semplice, una piena di bus.</p>
+
+  <div class="try">
+    <a href="https://faacq.github.io/nyc-logistica/route/g4/" target="_blank" rel="noopener">
+      <span class="e">🚌</span>
+      <span><b>Domenica 16 — quella col bus</b><small>Ghostbusters, SoHo, Little Italy, il ponte a piedi, Dumbo.
+      È la giornata da guardare bene: ci sono due salite e due discese dal Big Bus.</small></span>
+      <span class="go">apri →</span>
+    </a>
+    <a href="https://faacq.github.io/nyc-logistica/route/g1/" target="_blank" rel="noopener">
+      <span class="e">🌙</span>
+      <span><b>Giovedì 13 — la sera dell'arrivo</b><small>Tre tappe, tutte a piedi. Serve per capire se il
+      formato regge anche quando la giornata è semplice.</small></span>
+      <span class="go">apri →</span>
+    </a>
+  </div>
+
+  <div class="res">
+    <h3>🔧 Come è fatta, in due righe</h3>
+    Le tappe, gli orari e le fermate <b>non li ho scritti a mano</b>: escono dagli stessi dati con cui
+    calcolo le giornate, quindi non possono raccontarti una cosa diversa dal piano.<br><br>
+    ⚠️ <b>Una cosa la devo dire chiaro:</b> la linea sulla mappa è <b>un'ipotesi del percorso</b>, non il
+    percorso ufficiale. Dove il calcolo mi dava un tracciato assurdo — un giro del blocco per fare
+    cento metri — ho preferito <b>una linea dritta</b>, che dice "grosso modo di qui" ed è onesta.
+    <b>Il percorso vero lo trovi col link a Google Maps che c'è su ogni tappa.</b><br><br>
+    Sul bus: <b>nomi e numeri delle fermate sono verificati</b>; il tracciato dell'anello no, perché
+    Big Bus non lo pubblica — e non me lo sono inventato.<br><br>
+    📖 <b>In cima a ogni pagina c'è un riquadro «Come si legge»</b> con le sette cose che servono: cosa
+    vuol dire il colore, cosa vuol dire la forma della linea, e che <b>cliccando il numero di una tappa
+    la mappa ci va sopra</b>. Leggilo prima, sono trenta secondi.
+  </div>
+
+  <h2>❓ Le 6 domande</h2>
+
+  <div class="q key" data-q="Q1">
+    <div class="qn">DOMANDA 1 — È QUELLA CHE CONTA</div>
+    <div class="qt">Guardando la domenica: riesci a immaginarti la giornata prima di viverla?</div>
+    <div class="qh">Non "è bella": <b>riesci a seguirla</b>. Sai dove ti trovi, dove vai dopo e come ci arrivi.</div>
+    <div class="chips" data-group="Q1">
+      <div class="chip yes" data-val="SI - adesso la vedo">✅ Sì, adesso la vedo</div>
+      <div class="chip" data-val="QUASI - la seguo ma devo rileggere">🤔 Quasi: la seguo, ma devo rileggere due volte</div>
+      <div class="chip no" data-val="NO - ancora non mi torna">🙅 No, ancora non mi torna</div>
+    </div>
+  </div>
+
+  <div class="q key" data-q="Q2">
+    <div class="qn">DOMANDA 2 — IL BUS, CHE ERA IL PROBLEMA</div>
+    <div class="qt">Sali qui, il bus passa ogni tanto, scendi là: è chiaro adesso?</div>
+    <div class="qh">Fermata di salita col suo numero, quelle di passaggio, la discesa, e a che ora essere lì.</div>
+    <div class="chips" data-group="Q2">
+      <div class="chip yes" data-val="SI - chiaro tutto">✅ Chiaro: dove si sale, dove si scende, quando</div>
+      <div class="chip" data-val="META - le fermate si capiscono, gli orari no">🕐 Le fermate sì, <b>gli orari no</b></div>
+      <div class="chip" data-val="META - gli orari si capiscono, le fermate no">🚏 Gli orari sì, <b>le fermate no</b></div>
+      <div class="chip no" data-val="NO - ancora confuso">🙅 No, ancora confuso</div>
+    </div>
+  </div>
+
+  <div class="q" data-q="Q3">
+    <div class="qn">DOMANDA 3</div>
+    <div class="qt">La mappa: ti serve davvero o guardi soprattutto il testo?</div>
+    <div class="qh">Serve a me per sapere <b>dove mettere il lavoro</b>: la mappa costa parecchio, le schede molto meno.</div>
+    <div class="chips" data-group="Q3">
+      <div class="chip" data-val="MAPPA - e la parte che mi serve">🗺️ La mappa è la parte che mi serve</div>
+      <div class="chip" data-val="MISTO - utile, ma leggo le schede">⚖️ Utile, ma leggo soprattutto le schede</div>
+      <div class="chip" data-val="TESTO - la mappa non la guardo">📄 La mappa non la guardo, mi bastano le schede</div>
+    </div>
+  </div>
+
+  <div class="q" data-q="Q4">
+    <div class="qn">DOMANDA 4</div>
+    <div class="qt">Il livello di dettaglio è giusto?</div>
+    <div class="qh">Minuti, metri, numeri di fermata, quanto si sta in ogni tappa.</div>
+    <div class="chips" data-group="Q4">
+      <div class="chip yes" data-val="GIUSTO">👌 Giusto così</div>
+      <div class="chip" data-val="TROPPO - mi perdo">😵 Troppo, mi perdo</div>
+      <div class="chip" data-val="POCO - ne voglio di piu">🔍 Poco, ne voglio di più</div>
+    </div>
+  </div>
+
+  <div class="q" data-q="Q5">
+    <div class="qn">DOMANDA 5</div>
+    <div class="qt">La linea dritta al posto del tracciato: ti va bene?</div>
+    <div class="qh">Dove il percorso calcolato era inaffidabile ho messo <b>una linea dritta</b> più il link a
+    Google Maps, invece di disegnare un giro che non si fa.</div>
+    <div class="chips" data-group="Q5">
+      <div class="chip yes" data-val="OK - va bene la linea dritta + Google">✅ Va bene: dritta + Google per il percorso vero</div>
+      <div class="chip" data-val="TRACCIATO - preferisco il percorso anche se approssimativo">✏️ Preferisco il tracciato, anche se approssimativo</div>
+      <div class="chip" data-val="SOLO GOOGLE - togli la linea">🗺️ Togli la linea, basta il link a Google</div>
+    </div>
+  </div>
+
+  <div class="q key" data-q="Q6">
+    <div class="qn">DOMANDA 6 — QUELLA CHE SBLOCCA IL LAVORO</div>
+    <div class="qt">Faccio anche le altre quattro giornate?</div>
+    <div class="qh">Ne ho fatte due di proposito, per non costruirne sei sulla forma sbagliata.
+    Le altre quattro sono <b>poco lavoro</b>, ora che il meccanismo esiste.</div>
+    <div class="chips" data-group="Q6">
+      <div class="chip yes" data-val="SI - fai le altre 4 cosi come sono">🚀 Sì, fai le altre quattro così come sono</div>
+      <div class="chip" data-val="SI MA - prima sistema quello che scrivo sotto">🔧 Sì, ma prima sistema quello che ti scrivo sotto</div>
+      <div class="chip no" data-val="ASPETTA - ne parliamo">✋ Aspetta, ne parliamo</div>
+    </div>
+  </div>
+
+  <h2>💬 Lo spazio libero</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">Qui va tutto quello che le sei domande non prendono: una cosa
+    che non si capisce, una che manca, una che ti ha dato fastidio. <b>Anche "questa riga non l'ho capita"
+    mi serve</b> — e se una tappa precisa non ti torna, scrivi quale.</p>
+    <textarea class="free" id="openText" placeholder="Scrivi qui..."></textarea>
+  </div>
+
+  <div class="note">
+    ⚠️ <b>Una cosa che NON ti sto chiedendo:</b> di rimettere in discussione il giro. Le sei giornate sono
+    chiuse e questa pagina non le cambia. Se però guardandole ti viene voglia di spostare qualcosa,
+    <b>scrivilo nello spazio libero</b> e la trattiamo come una richiesta a parte — con il suo costo,
+    come sempre.
+  </div>
+
+  <div class="footer">
+    Questionario sul formato "come si gira" v1 · la compagnia · New York 13–18 ago 2026<br>
+    Il feedback arriva su WhatsApp 💚
+  </div>
+</div>
+
+<div class="bar">
+  <div class="in">
+    <div class="status" id="statusLine">0 risposte su 6</div>
+    <button class="send" id="sendBtn">📲 Invia su WhatsApp</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   TAG DI ORIGINE - lega la risposta alla pagina esatta e al piano
+   che stava mostrando. Da aggiornare a OGNI pubblicazione, insieme
+   al badge di versione.
+   ============================================================ */
+var FORM = {
+  id:    'questionario-percorso',
+  ver:   'v1',
+  built: '2026-07-30',
+  plan:  'story map g1+g4 v8 - itinerario v2.2 + D61/D62/D63 + O34 (fermate ricollocate)',
+  stale: ''
+};
+
+var QUESTIONS = [
+  ['Q1', "La giornata si riesce a immaginare"],
+  ['Q2', "Il bus: salita, fermate, orari"],
+  ['Q3', "Quanto serve la mappa"],
+  ['Q4', "Livello di dettaglio"],
+  ['Q5', "Linea dritta invece del tracciato"],
+  ['Q6', "Faccio anche le altre 4 giornate"]
+];
+
+var sel = {};
+document.querySelectorAll('.chips[data-group]').forEach(function(group){
+  var g = group.getAttribute('data-group');
+  group.querySelectorAll('.chip').forEach(function(el){
+    el.addEventListener('click', function(){
+      var already = el.classList.contains('sel');
+      group.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('sel'); });
+      sel[g] = already ? '' : el.getAttribute('data-val');
+      if(!already) el.classList.add('sel');
+      updateStatus();
+    });
+  });
+});
+
+function answered(){
+  return QUESTIONS.filter(function(q){ return sel[q[0]]; }).length;
+}
+
+function updateStatus(){
+  var n = answered();
+  var el = document.getElementById('statusLine');
+  if(n === QUESTIONS.length){
+    el.textContent = "Tutte e 6 — puoi inviare";
+  } else if(n === 0){
+    el.textContent = "0 risposte su 6";
+  } else {
+    el.textContent = n + " risposte su 6 — mancano le altre, ma puoi mandarlo comunque";
+  }
+}
+
+function formTag(){
+  var d = new Date(), p = function(n){ return (n<10?'0':'') + n; };
+  var L = ['', '———',
+    '📋 form: ' + FORM.id + ' ' + FORM.ver + ' · pubblicata ' + FORM.built,
+    '🗺️ piano mostrato: ' + FORM.plan,
+    '🕘 inviato: ' + p(d.getDate()) + '/' + p(d.getMonth()+1) + '/' + d.getFullYear() +
+      ' ' + p(d.getHours()) + ':' + p(d.getMinutes())];
+  if(FORM.stale) L.push('⚠️ ' + FORM.stale);
+  return L;
+}
+
+function buildMessage(){
+  var L = [];
+  L.push("🗽 NEW YORK — Questionario sul formato \"come si gira\": risposta di Fabrizio");
+
+  /* La 6 e' la risposta che sblocca il lavoro: va in cima, non in fondo. */
+  if(sel['Q6']){
+    L.push('');
+    L.push("🚀 LE ALTRE 4 GIORNATE: " + sel['Q6']);
+  }
+
+  var ans = [];
+  QUESTIONS.forEach(function(q){
+    if(q[0] === 'Q6') return;
+    if(sel[q[0]]) ans.push('   - ' + q[1] + ': ' + sel[q[0]]);
+  });
+  if(ans.length){
+    L.push('');
+    L.push("📝 COME VEDE IL RISULTATO:");
+    ans.forEach(function(x){ L.push(x); });
+  }
+
+  var senza = QUESTIONS.filter(function(q){ return !sel[q[0]]; });
+  if(senza.length && senza.length < QUESTIONS.length){
+    L.push('');
+    L.push("➖ non risposte: " + senza.map(function(q){ return q[0]; }).join(', '));
+  }
+
+  var open = document.getElementById('openText').value.trim();
+  if(open){ L.push(''); L.push("💬 SPAZIO LIBERO: " + open); }
+
+  formTag().forEach(function(x){ L.push(x); });
+  return L.join('\n');
+}
+
+document.getElementById('sendBtn').addEventListener('click', function(){
+  window.open('https://wa.me/?text=' + encodeURIComponent(buildMessage()), '_blank');
+});
+updateStatus();
+</script>
+</body>
+</html>

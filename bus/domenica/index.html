@@ -3,372 +3,64 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La domenica e il bus - cosa ho trovato rifacendo i conti</title>
+<title>Chiusa - lo studio sul bus, domenica</title>
 <style>
-:root{
-  --bg:#fbf7f0; --card:#fff; --ink:#22303c; --muted:#6b7a88; --line:#e7ddcd;
-  --accent:#1f3b73; --accent2:#e0912f; --g5:#3f9d5a; --red:#d1495b;
-  --radius:16px; --shadow:0 6px 22px rgba(30,40,60,.10);
-}
-*{box-sizing:border-box}
-body{
-  margin:0; background:var(--bg); color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  line-height:1.55; padding-bottom:98px;
-}
-.wrap{max-width:660px; margin:0 auto; padding:18px 14px 0}
-h1{font-size:1.45rem; line-height:1.25; margin:0 0 6px}
-h2{font-size:1.12rem; margin:26px 0 10px; color:var(--accent)}
-h3{font-size:1rem; margin:18px 0 6px}
-p,li{font-size:.97rem}
-small{color:var(--muted)}
-.badge{
-  display:inline-block; background:var(--accent); color:#fff; font-weight:700;
-  font-size:.78rem; padding:4px 10px; border-radius:999px; letter-spacing:.02em;
-}
-.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-      padding:14px 15px; margin:14px 0; box-shadow:var(--shadow)}
-.note{background:#fdf6e7; border:1px solid #f0dcae; border-left:5px solid var(--accent2);
-      border-radius:12px; padding:12px 14px; margin:14px 0}
-.prob{background:#fdeef0; border:1px solid #f3ccd3; border-left:5px solid var(--red);
-      border-radius:12px; padding:12px 14px; margin:14px 0}
-.sol{background:#eef7f0; border:1px solid #c9e3d1; border-left:5px solid var(--g5);
-     border-radius:12px; padding:12px 14px; margin:14px 0}
-.res{background:#eef2fa; border:1px solid #ccd8ee; border-left:5px solid var(--accent);
-     border-radius:12px; padding:12px 14px; margin:14px 0}
-.changelog{background:#eef7f0; border-left:5px solid var(--g5); border-radius:12px;
-           padding:12px 14px; margin:14px 0}
-table{width:100%; border-collapse:collapse; font-size:.88rem; margin:10px 0}
-th,td{border-bottom:1px solid var(--line); padding:7px 5px; text-align:left; vertical-align:top}
-th{color:var(--muted); font-weight:600; font-size:.8rem}
-.tw{overflow-x:auto; -webkit-overflow-scrolling:touch}
-.win{color:var(--g5); font-weight:700}
-.lose{color:var(--red); font-weight:700}
-.tl{list-style:none; padding:0; margin:8px 0}
-.tl li{display:flex; gap:10px; padding:6px 0; border-bottom:1px dashed var(--line)}
-.tl b{min-width:96px; font-variant-numeric:tabular-nums; color:var(--accent)}
-.tl .bus{background:#eef2fa; border-radius:8px; padding:6px 8px; margin:4px 0}
-.chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0}
-.chips button{
-  font:inherit; font-size:.9rem; background:#fff; color:var(--ink);
-  border:1.5px solid var(--line); border-radius:999px; padding:10px 14px;
-  min-height:42px; cursor:pointer;
-}
-.chips button.on{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600}
-textarea.free{
-  width:100%; min-height:110px; font:inherit; font-size:.95rem; padding:10px;
-  border:1.5px solid var(--line); border-radius:12px; background:#fff; resize:vertical;
-}
-.bar{
-  position:fixed; left:0; right:0; bottom:0; background:rgba(251,247,240,.97);
-  border-top:1px solid var(--line); padding:10px 14px; backdrop-filter:blur(6px);
-}
-.bar .in{max-width:660px; margin:0 auto; display:flex; gap:10px; align-items:center}
-.bar small{flex:1; line-height:1.3}
-.send{
-  font:inherit; font-weight:700; font-size:.95rem; background:#25D366; color:#0b2a17;
-  border:none; border-radius:12px; padding:13px 16px; min-height:46px; cursor:pointer;
-}
-.k{font-variant-numeric:tabular-nums; font-weight:700}
-hr{border:none; border-top:1px solid var(--line); margin:22px 0}
+  :root{
+    --bg:#fbf7f0; --card:#fff; --ink:#22303c; --muted:#6b7a88; --line:#e7ddcd;
+    --accent:#1f3b73; --g5:#3f9d5a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:680px;margin:0 auto;padding:0 18px}
+  header{background:linear-gradient(160deg,#1f3b73,#2d5296);color:#fff;padding:26px 0 22px}
+  header h1{margin:0;font-size:1.32rem;line-height:1.3}
+  header .sub{margin-top:8px;font-size:.93rem;color:#dbe6ff}
+  .ver{margin-top:11px;display:inline-block;font-size:.78rem;background:rgba(255,255,255,.16);
+       padding:4px 10px;border-radius:999px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:17px 19px;margin:20px 0}
+  .card h2{margin:0 0 9px;font-size:1.03rem}
+  .done{border-left:5px solid var(--g5)}
+  .yours{background:#f5fbf6;border:1px solid #cfe8d6;border-radius:11px;padding:12px 14px;
+         margin:.6em 0;font-size:.92rem}
+  .yours b{display:block;margin-bottom:5px;font-size:.79rem;letter-spacing:.4px;
+           text-transform:uppercase;color:var(--muted)}
+  ul{margin:.4em 0 0;padding-left:1.15em}
+  li{margin:.32em 0;font-size:.93rem}
+  .go{display:block;text-align:center;text-decoration:none;background:var(--accent);color:#fff;
+      padding:15px 20px;border-radius:12px;font-weight:600;margin-top:6px}
+  .go:hover{background:#16294f}
+  .go small{display:block;font-weight:400;font-size:.8rem;opacity:.85;margin-top:3px}
+  .foot{color:var(--muted);font-size:.8rem;text-align:center;margin:26px 0 34px}
 </style>
 </head>
 <body>
+
+<header><div class="wrap">
+  <h1>Fatto — ma su questa c'è una cosa che devi ancora dirmi</h1>
+  <div class="sub">Era lo studio sui conti della domenica. Mi hai risposto il 30 luglio alle 23:43, e ho applicato tutto quello che hai scelto.</div>
+  <div class="ver">📌 pacchetto v22 &middot; 31 lug 2026</div>
+</div></header>
+
 <div class="wrap">
 
-  <span class="badge">v1 · 30 lug 2026</span>
-  <h1>La domenica e il bus</h1>
-  <p><small>Ho fatto sulla domenica lo stesso studio del sabato. È venuto fuori
-  l'opposto, e va detto subito.</small></p>
-
-  <div class="changelog">
-    <b>Questa pagina va letta dopo quella del sabato</b>, ma le due giornate si
-    decidono separatamente: dire sì a una non impegna sull'altra.
-    <br><small>Se rileggendola più tardi vedi ancora "v1", è la cache.</small>
-  </div>
-
-  <div class="prob">
-    <b>⚠️ Non ho applicato niente</b>, e qui c'è una ragione in più per dirlo: quello
-    che ho trovato <b>non è una proposta, è un problema</b>. Ci sono tre modi di
-    affrontarlo e nessuno è ovvio, quindi non ho scelto io.
-  </div>
-
-  <h2>1. La buona notizia, ed è la prima</h2>
-
-  <div class="sol">
-    <p style="margin:0 0 8px"><b>Sulla domenica il modello del sabato non serve:
-    la giornata è già costruita così.</b></p>
-    <p style="margin:0">Le tre fermate che usiamo — SoHo, Chinatown, l'imbocco del
-    ponte — sono già <b>poli</b>: ogni tappa sta a meno di 7 minuti a piedi dalla sua
-    fermata, e stanno già <b>nell'ordine giusto dell'anello</b>. E la seconda metà
-    della giornata (il ponte, Dumbo, il molo, la cena) è <b>fuori rete per forza</b>:
-    il giro di Brooklyn del Big Bus è sospeso fino al 31 agosto, lì il bus non arriva.
-    <br>Non c'è niente da ristrutturare. <b>Il grosso del lavoro, la domenica, è già
-    fatto.</b></p>
-  </div>
-
-  <h2>2. La cattiva, ed è più grossa</h2>
-
-  <p>Per misurare la giornata come si deve ho dovuto scomporre le due tratte in bus:
-  <i>vai alla fermata → aspetti → viaggi → cammini fino alla tappa</i>. Fatta così,
-  la domenica <b>non finisce alle 20:20. Finisce verso le 21:00.</b></p>
-
-  <div class="prob">
-    <p style="margin:0 0 8px"><b>Il motivo non sono gli orari del bus. È che i tratti
-    a piedi da e verso le fermate non li conta nessuno.</b></p>
-    <p style="margin:0 0 8px">Il calcolo tratta la corsa in bus come una linea retta
-    da tappa a tappa — come se il bus partisse da sotto l'hotel e ci lasciasse davanti
-    alla porta. Ma la nota del piano dice, con le sue stesse parole:
-    <br><i>«dalla fermata ~15' a piedi verso ovest fino a N Moore St»</i>.</p>
-    <p style="margin:0"><b>Quei 15 minuti non li paga nessuno.</b> E lo stesso, in
-    piccolo, all'imbocco del ponte (~3'). Sommando i tratti a piedi per andare alla
-    fermata e per arrivare alla tappa, mancano all'appello <b>circa 30 minuti e un
-    chilometro</b>.</p>
-  </div>
-
-  <div class="res">
-    <b>Come ho controllato di non essermi sbagliato io.</b> Ho fatto girare una
-    versione di prova con <b>la mia struttura ma le vecchie ipotesi</b> (stessa
-    attesa media di prima, stesse tappe): finisce alle <b>20:59</b>. Quindi i 39
-    minuti di differenza non vengono dagli orari — vengono da <b>cammino vero non
-    contato</b>. Gli orari veri del bus aggiungono altri <b>9 minuti</b>, e si arriva
-    alle 21:08.
-    <br><small>Onestà: <b>circa 10 di quei 39 minuti sono un artefatto mio</b> — per
-    agganciare le corse ho spezzato ogni tratta in due pezzi, e il calcolo aggiunge 5
-    minuti di «riaggruppamoci» a ogni pezzo. Il resto, <b>una mezz'ora buona</b>, è
-    reale.</small>
-  </div>
-
-  <div class="note">
-    <b>Perché è successo solo alla domenica.</b> Sul sabato questo problema era già
-    stato corretto: lì la corsa in bus è diventata un blocco esplicito, con dentro
-    l'attesa e il viaggio. La domenica è rimasta com'era. È l'unica delle sei giornate
-    con due tratte in bus calcolate a quel modo — le ho controllate tutte.
-  </div>
-
-  <h2>3. Cosa cambia davvero, in tabella</h2>
-
-  <div class="tw">
-  <table>
-    <tr><th></th><th>come è<br>scritta oggi</th><th>coi conti<br>rifatti</th>
-        <th>+ riordino<br>SoHo</th><th>+ uscita<br>alle 10:00</th></tr>
-    <tr><td><b>Fine giornata</b></td><td>20:20</td><td class="lose">21:08</td>
-        <td class="lose">21:08</td><td>20:38</td></tr>
-    <tr><td><b>Km a piedi</b></td><td>6,0</td><td>7,0</td><td class="win">6,6</td><td class="win">6,6</td></tr>
-    <tr><td><b>Fermi ad aspettare</b></td><td>30'</td><td>39'</td><td>47'</td><td>47'</td></tr>
-    <tr><td><b>Corse panoramiche</b></td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
-    <tr><td><b>Tappe tolte</b></td><td colspan="4"><b>nessuna, in nessuna colonna</b></td></tr>
-  </table>
-  </div>
-
-  <p><small>La colonna «come è scritta oggi» non è un'opzione: è quello che il piano
-  <i>dice</i>. Le altre tre sono la stessa giornata, contata meglio.</small></p>
-
-  <h2>4. Il riordino: poco tempo, meno fatica</h2>
-
-  <div class="card">
-    <p style="margin:0 0 8px">Una cosa il metodo l'ha trovata anche qui. Oggi si scende
-    dal bus a SoHo, si cammina <b>15 minuti verso ovest</b> fino alla casa dei
-    Ghostbusters, e poi si <b>torna indietro</b> a SoHo per la passeggiata e i negozi —
-    per poi ripartire verso est, a Chinatown, per il pranzo.</p>
-    <p style="margin:0 0 8px"><b>La casa dei Ghostbusters sta sulla strada per
-    Chinatown, non fuori da SoHo.</b> Facendo prima SoHo tutto insieme e passando dai
-    Ghostbusters scendendo verso il pranzo, si cammina <b>400 metri e 8 minuti in
-    meno</b>, senza togliere niente.</p>
-    <p style="margin:0"><span class="lose">MA</span> — e questo è il punto amaro della
-    domenica — <b>non si finisce prima</b>. Si arriva alla fermata del ponte otto
-    minuti prima e si aspetta otto minuti in più, perché <b>la linea rossa passa ogni
-    30 minuti</b>. Il tempo risparmiato camminando lo si passa fermi.</p>
-  </div>
-
-  <h2>5. Pro e contro delle tre strade</h2>
-
-  <div class="card">
-    <h3 style="margin-top:0">Lasciare tutto com'è, sapendo che finisce verso le 21</h3>
-    <p style="margin:0"><span class="win">PRO</span> — non si tocca niente di quello
-    che avevi già approvato: stessa partenza, stesse tappe, stessa cena a Dumbo con la
-    luce giusta. E la giornata <b>ci sta comunque</b>: rientro alle 21:08, non c'è
-    nessun treno da prendere.
-    <br><span class="lose">CONTRO</span> — è <b>quasi un'ora più lunga</b> di come la
-    ricordi, l'ultimo giorno pieno prima della partenza, e con i ragazzi. E se qualcosa
-    va storto non c'è cuscino.</p>
+  <div class="card done">
+    <h2>✅ Hai risposto, e la tua risposta è nel piano</h2>
+    <div class="yours"><b>cosa mi hai detto</b>«<b>Sì, approvo, applicala</b>» · «<b>usciamo alle 10:00 e recuperiamo la mezz'ora</b>» · «<b>sì al riordino di SoHo</b>»</div>
+    <p style="margin:.8em 0 0;font-size:.93rem"><b>Cosa ne è uscito:</b></p>
+    <ul><li>🕙 <b>Si esce alle 10:00</b>, come hai chiesto.</li><li>🚶 <b>I 31 minuti a piedi da e verso le fermate adesso sono contati</b>: prima non li pagava nessuno, ed è la ragione per cui ti avevo dato un numero più bello del vero.</li><li>🔄 <b>Il riordino di SoHo ce l'hai già, e non l'ho dovuto applicare</b>: te lo dà l'anello lungo che avevi scelto sei minuti prima, su un'altra pagina. Con quello si scende dall'altra parte e i Ghostbusters sono già sulla strada.</li><li>🔴 <b>Ma la mezz'ora non si recupera: se l'è mangiata l'anello.</b> È l'unica cosa di tutte le tue risposte che non ti dà quello che ti avevo promesso — e nell'itinerario trovi <b>quattro strade calcolate</b>, coi minuti in chiaro.</li></ul>
   </div>
 
   <div class="card">
-    <h3 style="margin-top:0">Uscire alle 10:00 invece che alle 10:30</h3>
-    <p style="margin:0"><span class="win">PRO</span> — <b>recupera mezz'ora secca</b>
-    (fine alle 20:38) prendendo la corsa delle 10:30 invece di quella delle 11:00.
-    Nessuna tappa tolta, nessuna sosta accorciata.
-    <br><span class="lose">CONTRO</span> — <b>mezz'ora di sveglia in meno</b>, e tocca
-    una scelta che avevi già fatto: la partenza alle 10:30 era stata messa lì apposta
-    perché la cena a Dumbo cadesse a un'ora da cena e con la luce buona sui ponti.
-    Anticipando, si anticipa anche quello.</p>
+    <h2>👉 Quello che ti serve adesso è qui</h2>
+    <p style="margin:0 0 12px;font-size:.93rem">⚠️ <b>I numeri di questa pagina sono superati.</b> La domenica è l'unica giornata su cui aspetto ancora una tua parola: la trovi in cima all'itinerario.</p>
+    <a class="go" href="../../">🗽 Vai all'itinerario — la domenica è la prima cosa<small>quattro strade: 21:08 · 20:38 · 20:48 · 20:18</small></a>
   </div>
 
-  <div class="card">
-    <h3 style="margin-top:0">Il riordino di SoHo <small>(si può fare con tutte e due)</small></h3>
-    <p style="margin:0"><span class="win">PRO</span> — <b>400 metri e 8 minuti a piedi
-    in meno</b>, gratis, senza togliere niente. E l'ordine è più naturale: si scende,
-    si sta a SoHo, si scende verso il pranzo.
-    <br><span class="lose">CONTRO</span> — <b>non fa finire prima</b> (il tempo va in
-    attesa alla fermata), e i Ghostbusters cadono più tardi nel pomeriggio.</p>
-  </div>
-
-  <div class="note">
-    <b>Il mio consiglio:</b> <b>il riordino sì</b> (costa nulla e si cammina meno), e
-    poi la scelta vera è <b>se la mezz'ora la vuoi indietro o no</b>. Se il gruppo
-    regge un rientro alle 21, lascerei la partenza alle 10:30 dov'è: quella scelta era
-    stata fatta per una buona ragione, e la luce a Dumbo non si recupera.
-  </div>
-
-  <h2>6. Una cosa che NON ti sto chiedendo qui</h2>
-  <div class="res">
-    <b>Quanto anello panoramico fare la domenica</b> — le due opzioni, Wall Street
-    (+20') o World Trade Center (+34') — <b>resta una domanda a parte, quella di
-    prima, e non l'ho toccata</b>. È l'unico vero modo di «usare più bus» la domenica,
-    e i suoi numeri non cambiano per via di questa pagina: si sommano.
-    <br><small>Se scegli di recuperare la mezz'ora, l'anello ci sta più comodo. Se non
-    la recuperi, sommare l'anello porta il rientro oltre le 21:30.</small>
-  </div>
-
-  <hr>
-
-  <h2>7. La domanda che conta</h2>
-
-  <div class="card" style="border:2px solid var(--accent)">
-    <h3 style="margin-top:0">⭐ Approvi la modifica?</h3>
-    <p style="margin:0 0 4px"><b>Rifare i conti della domenica come proposto qui sopra (e scegliere cosa farne).</b></p>
-    <p style="margin:0 0 8px"><small>Questa è la domanda che conta. Le due sotto servono
-    solo se qui rispondi <b>sì</b> o <b>in parte</b>.</small></p>
-    <div class="chips" data-group="approvazione">
-      <button data-v="SI - approvo, applicala">✅ sì, applicala</button>
-      <button data-v="NO - lascia la giornata com'e'">❌ no, lascia com'è</button>
-      <button data-v="IN PARTE - vedi sotto e nel testo libero">🟡 in parte — ti dico cosa</button>
-    </div>
-    <p style="margin:6px 0 0"><small>Se scegli <b>in parte</b>, usa le scelte qui sotto e
-    il riquadro in fondo: <b>scrivi quello che vuoi, anche a ruota libera</b>. Non devi
-    stare dentro le opzioni che ho previsto io — se la cosa giusta non è fra quelle,
-    dimmela e rifaccio i conti.</small></p>
-  </div>
-
-  <h3>E poi, se vuoi entrare nel dettaglio</h3>
-
-  <div class="card">
-    <h3>a) La mezz'ora: la vuoi indietro?</h3>
-    <p><small>Non rispondendo, resta tutto com'è — con la giornata che finisce verso
-    le 21:00 invece che alle 20:20.</small></p>
-    <div class="chips" data-group="mezzora">
-      <button data-v="Lascia la partenza alle 10:30: si rientra verso le 21, va bene">va bene rientrare alle 21</button>
-      <button data-v="Usciamo alle 10:00 e recuperiamo la mezz'ora">usciamo alle 10:00</button>
-      <button data-v="Preferisco togliere qualcosa dalla giornata invece di alzarmi prima">togliamo qualcosa</button>
-      <button data-v="Decidiamo sul posto la mattina stessa">decidiamo sul posto</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>b) Il riordino di SoHo</h3>
-    <p><small>400 metri e 8 minuti a piedi in meno. Non cambia l'ora di rientro.</small></p>
-    <div class="chips" data-group="riordino">
-      <button data-v="Si al riordino: prima SoHo, poi Ghostbusters scendendo verso Chinatown">sì, riordina</button>
-      <button data-v="No: preferisco i Ghostbusters appena scesi dal bus, come adesso">no, lascia com'è</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Dimmi quello che vuoi — anche fuori dalle mie opzioni</h3>
-    <textarea class="free" placeholder="Anche solo: «ma sei sicuro dei 30 minuti?»"></textarea>
-  </div>
-
-  <p><small>⚠️ Un limite che vale per tutte e due le pagine: <b>Big Bus non pubblica
-  gli orari di passaggio</b>. Li ho ricostruiti dalla frequenza dichiarata e dalla
-  durata del giro, e li confermo sull'app nei giorni prima di partire. La mezz'ora di
-  cammino non contato, invece, <b>non dipende dagli orari</b>: quella c'è comunque.</small></p>
+  <p class="foot">Questa pagina resta raggiungibile solo perché il link ce l'hai ancora.<br>
+  Non ti chiede più niente: la sua domanda è chiusa.</p>
 
 </div>
-
-<div class="bar"><div class="in">
-  <small id="status">Scegli almeno una risposta</small>
-  <button class="send" id="send">Manda su WhatsApp</button>
-</div></div>
-
-<script>
-var FORM = {
-  id:    "bus-first-domenica",
-  ver:   "v1",
-  built: "2026-07-30",
-  plan:  "day4 canonico (D37 + D63) con le coordinate di O34/E0 - domenica 10:30-20:20",
-  stale: ""
-};
-
-var answers = {};
-
-document.querySelectorAll(".chips").forEach(function (box) {
-  var group = box.getAttribute("data-group");
-  box.querySelectorAll("button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var was = b.classList.contains("on");
-      box.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
-      if (was) { delete answers[group]; }
-      else { b.classList.add("on"); answers[group] = b.getAttribute("data-v"); }
-      refresh();
-    });
-  });
-});
-
-function refresh() {
-  var n = Object.keys(answers).length;
-  var free = document.querySelector("textarea.free").value.trim();
-  var s = document.getElementById("status");
-  if (!n && !free) { s.textContent = "Scegli almeno una risposta"; }
-  else { s.textContent = n + " risposta/e" + (free ? " + testo libero" : ""); }
-}
-document.querySelector("textarea.free").addEventListener("input", refresh);
-
-function buildMessage() {
-  var L = [];
-  L.push("NYC - domenica 16: i conti del bus rifatti");
-  L.push("");
-  if (answers["approvazione"]) {
-    L.push("APPROVAZIONE");
-    L.push("   " + answers["approvazione"]);
-    L.push("");
-  }
-  if (answers["mezzora"]) {
-    L.push("LA MEZZ'ORA");
-    L.push("   " + answers["mezzora"]);
-    L.push("");
-  }
-  if (answers["riordino"]) {
-    L.push("RIORDINO DI SOHO");
-    L.push("   " + answers["riordino"]);
-    L.push("");
-  }
-  var free = document.querySelector("textarea.free").value.trim();
-  if (free) {
-    L.push("ALTRO");
-    free.split("\n").forEach(function (r) { if (r.trim()) L.push("   " + r.trim()); });
-    L.push("");
-  }
-  var d = new Date();
-  function p(x) { return (x < 10 ? "0" : "") + x; }
-  L.push("---");
-  L.push("Fabrizio");
-  L.push("pagina: " + FORM.id + " " + FORM.ver + " - pubblicata " + FORM.built);
-  L.push("piano mostrato: " + FORM.plan);
-  L.push("inviato: " + p(d.getDate()) + "/" + p(d.getMonth() + 1) + "/" + d.getFullYear() +
-         " " + p(d.getHours()) + ":" + p(d.getMinutes()));
-  if (FORM.stale) { L.push("ATTENZIONE: " + FORM.stale); }
-  return L.join("\n");
-}
-
-document.getElementById("send").addEventListener("click", function () {
-  var free = document.querySelector("textarea.free").value.trim();
-  if (!Object.keys(answers).length && !free) {
-    document.getElementById("status").textContent = "Scegli qualcosa prima di mandare";
-    return;
-  }
-  window.open("https://wa.me/?text=" + encodeURIComponent(buildMessage()), "_blank");
-});
-</script>
 </body>
 </html>
