@@ -204,43 +204,26 @@
   .sc-send{display:block;width:100%;max-width:632px;margin:0 auto;background:#25d366;color:#fff;
         border:0;border-radius:13px;padding:14px;font-size:1rem;font-weight:800;cursor:pointer}
   body{padding-bottom:118px}
-  /* IL TERMOMETRO - stessi nomi di classe e stessa formula della pagina della
-     logistica, di proposito: due barre che si assomigliano e misurano cose diverse
-     sarebbero peggio di nessuna barra. (`--amber` li' non esiste qui: e' `--accent2`.) */
-  .score{margin:11px 0 4px}
-  .scoretop{display:flex;align-items:baseline;gap:7px;font-size:.85rem;margin-bottom:4px}
-  .scoretop .pct{font-weight:800;font-size:1.15rem}
-  .scoretop .lbl{font-weight:700}
-  .track{position:relative;height:16px;background:#f0ece3;border-radius:999px;
-        overflow:hidden;border:1px solid var(--line)}
-  .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px}
-  .limitlbl{font-size:.72rem;color:var(--muted);text-align:right;margin-top:2px}
-  .ok .fill{background:linear-gradient(90deg,#5cb874,#3f9d5a)}
-  .warn .fill{background:linear-gradient(90deg,#f0b657,#e0912f)}
-  .bad .fill{background:linear-gradient(90deg,#e2707f,#d1495b)}
-  .verd{display:inline-block;font-size:.7rem;font-weight:800;padding:3px 10px;
-        border-radius:999px;color:#fff}
-  .verd.ok{background:var(--g5)} .verd.warn{background:var(--accent2)} .verd.bad{background:var(--red)}
 </style>
 </head>
 <body>
 
 <header class="hero"><div class="wrap">
   <h1>Il venerdì come l'hai chiesto tu</h1>
-  <div class="sub">Hai chiesto di rifare il giro del venerdì. <b>Ecco come verrebbe</b> — con tre cose da scegliere. <b>Non l'ho ancora applicato al piano.</b></div>
-  <div class="ver">🧭 percorso v2 &middot; 1 ago 2026</div>
+  <div class="sub">Hai chiesto di rifare il giro del venerdì. <b>Ecco come verrebbe</b> — con due cose da scegliere. <b>Non l'ho ancora applicato al piano.</b></div>
+  <div class="ver">🧭 percorso v1 &middot; 1 ago 2026</div>
   <a class="backlnk" href="../">← torna all'itinerario e alle domande</a>
 </div></header>
 
 <div class="wrap">
 
   <div class="changelog">
-    <h3>🆕 Che pagina è questa <span style="opacity:.75">(v2 &middot; 1 ago 2026)</span></h3>
+    <h3>🆕 Che pagina è questa <span style="opacity:.75">(v1 &middot; 1 ago 2026)</span></h3>
     <ul style="margin:.4em 0 0;padding-left:1.15em">
       <li><b>Hai chiesto di rifare il giro del venerdì, e questa è la risposta.</b> Non l'ho
       applicata: il venerdì che trovi nelle altre pagine è ancora quello di prima.</li>
-      <li><b>Ci sono tre cose da scegliere</b>, e la terza è quella che conta: <b>lo metto
-      nel piano o no?</b> Le altre due sono dettagli dentro la giornata.</li>
+      <li><b>Ci sono due cose da scegliere</b>, e sono in mezzo alla pagina. Il resto è solo
+      per farti vedere cosa cambia.</li>
       <li>In fondo c'è <b>il giro sulla mappa</b> come verrebbe con le tue modifiche.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica
@@ -266,22 +249,6 @@
           <td class="n"><b>✅ no, alle 10:24</b></td></tr>
       <tr><td>attesa ferma prima del Summit</td><td class="n">28'</td><td class="n">🟠 43'</td></tr>
     </table>
-  </div>
-
-  <div class="sc-card">
-    <b>🌡️ Il termometro, come sulle altre giornate</b>
-    <p style="margin:.3em 0 0;font-size:.9rem">Quanto è piena la giornata: <b>il tempo che
-    serve diviso il tempo che c'è</b>, fra l'uscita dall'hotel e il traguardo delle 22:30.
-    Sopra il 100% vuol dire che si sfora — non che salta qualcosa, ma che si finisce oltre.</p>
-    <div class="score bad" style="margin-top:14px"><div class="scoretop"><span class="pct">101%</span><span class="lbl">il venerdì di <b>oggi</b></span> <span class="verd bad">non ci sta</span></div><div class="track"><span class="fill" style="width:100%"></span></div><div class="limitlbl">si esce 10:00 · si finisce <b>22:35</b> · traguardo 22:30 · com'è adesso nel piano</div></div>
-<div class="score bad" style="margin-top:14px"><div class="scoretop"><span class="pct">101%</span><span class="lbl">col tuo ordine — <b>🅰️ Junior's</b></span> <span class="verd bad">non ci sta</span></div><div class="track"><span class="fill" style="width:100%"></span></div><div class="limitlbl">si esce 10:00 · si finisce <b>22:35</b> · traguardo 22:30</div></div>
-<div class="score warn" style="margin-top:14px"><div class="scoretop"><span class="pct">97%</span><span class="lbl">col tuo ordine — <b>🅱️ Raising Cane's</b></span> <span class="verd warn">piena ma ok</span></div><div class="track"><span class="fill" style="width:97%"></span></div><div class="limitlbl">si esce 10:00 · si finisce <b>22:07</b> · traguardo 22:30</div></div>
-    <div class="sc-warn" style="margin-top:14px;font-size:.9rem">
-      👉 <b>Guarda le prime due barre: sono identiche.</b> Il tuo riordino <b>non cambia di
-      un punto</b> quanto è piena la giornata — e non è un difetto della tua idea, è che il
-      Summit delle 19:00 tiene ferma la sera. <b>L'unica cosa che sposta il termometro è la
-      cena</b>: con Raising Cane's si scende sotto il 100% e il venerdì <b>rientra</b>.
-    </div>
   </div>
 
   <div class="sc-warn">
@@ -335,9 +302,8 @@
   </div>
 
   <!-- ============ 3. COSE DA SCEGLIERE ============ -->
-  <h2 style="margin-top:34px">🤔 Le tre cose che devo sapere da te</h2>
-  <p style="margin-top:0">Le prime due sono <b>dettagli dentro il venerdì</b>. La terza, in fondo,
-  è <b>il venerdì</b>: è quella che fa cambiare il piano. Tutto il resto l'ho già fatto.</p>
+  <h2 style="margin-top:34px">🤔 Le due cose che devo sapere da te</h2>
+  <p style="margin-top:0">Sono <b>due</b>, e sono le uniche. Tutto il resto l'ho già fatto.</p>
 
   <div class="sc-ask" data-prop="CENAVEN">
     <div class="aq">🍽️ 1. La cena: Junior's o Raising Cane's?</div>
@@ -400,29 +366,6 @@
 <div class="sc-it" data-name="Junior's (1515 Broadway)" data-min="75"><div class="h">21:20-22:35</div><div class="b"><div class="nm">Junior's (1515 Broadway)</div><div style="font-size:.85rem;color:var(--muted)">Cena + dolce nello stesso posto: e' il locale della cheesecake di New York. In otto conviene mettersi in lista appena arrivati.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">75'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
   </div>
 
-  <!-- ============ LA DOMANDA CHE CHIUDE ============
-       Le due sopra sono dettagli DENTRO il venerdi; questa e' la domanda sul venerdi.
-       Senza, la pagina chiedeva il contorno e non il piatto: si poteva scegliere la
-       cena senza mai poter dire "si, mettilo nel piano" (regola 10 dello standard, e
-       regola 11 - una proposta che cambia la forma di una giornata deve avere un modo
-       proprio di essere ACCETTATA e uno di essere RIFIUTATA). -->
-  <div class="sc-ask" data-prop="VENOK" style="border-width:3px">
-    <div class="aq" style="font-size:1.05rem">✅ 3. Lo metto nel piano?</div>
-    <p style="margin:.3em 0 0;font-size:.93rem">Questa è <b>la</b> domanda: le due qui sopra
-    sono dettagli dentro il venerdì, questa è il venerdì. <b>Finché non rispondi qui non tocco
-    niente</b>, e il venerdì resta quello che vedi in tutte le altre pagine.</p>
-    <div class="sc-warn" style="font-size:.9rem;margin-top:.7em">
-      ⚠️ <b>Se approvi senza rispondere alle due domande sopra</b>, applico quello che vedi
-      scritto qui: <b>cena da Junior's, pranzo da Five Guys, shopping 60'</b>, si rientra alle
-      <b>22:35</b>. Te lo dico prima, così non è una sorpresa.
-    </div>
-    <div class="sc-chips" data-group="VENOK">
-      <div class="sc-chip" data-val="VENERDI: APPROVA E SOSTITUISCI - applica questo venerdi al piano al posto di quello attuale">✅ <b>Approva e sostituisci</b><br><small>mettilo nel piano al posto di quello di adesso</small></div>
-      <div class="sc-chip" data-val="VENERDI: NON APPROVO - rifammelo, ti dico cosa non va nel testo libero">🔁 Rifammelo<br><small>non mi convince — ti dico cosa sotto</small></div>
-      <div class="sc-chip" data-val="VENERDI: LASCIA COM'E' - tieni il venerdi attuale, la mia richiesta la ritiro">❌ Lascia com'è<br><small>ritiro la richiesta, va bene quello di prima</small></div>
-    </div>
-  </div>
-
   <div class="sc-card">
     <b>💬 Altro da dirmi su questa giornata?</b>
     <p style="margin:.3em 0 .6em;font-size:.9rem">Una tappa che manca, una che non vuoi, un
@@ -431,13 +374,11 @@
   </div>
 
   <div class="sc-card" style="border-style:dashed">
-    <b>🔒 Cosa succede se approvi</b>
-    <p style="margin:.35em 0 0;font-size:.9rem">Sostituisco il venerdì nel piano vero e
-    <b>tutte le altre pagine si aggiornano</b> — l'itinerario, la mappa del venerdì, i conti.
-    Poi <b>questa pagina si spegne</b>, perché avrà finito il suo lavoro.</p>
-    <p style="margin:.5em 0 0;font-size:.9rem">Ed è anche <b>l'ultimo pezzo che manca</b>: dopo
-    questo ti chiedo di guardare <b>l'itinerario intero</b> una volta sola, tutto insieme —
-    cosa che non è mai successa, perché finora hai approvato una modifica alla volta.</p>
+    <b>🔒 Cosa succede alla tua risposta</b>
+    <p style="margin:.35em 0 0;font-size:.9rem">Quando rispondi, <b>applico questo venerdì al
+    piano vero</b> e le altre pagine si aggiornano. Finché non rispondi <b>non tocco niente</b>:
+    il venerdì resta come lo conosci. E questo è anche <b>l'ultimo pezzo</b> prima di chiederti
+    di approvare l'itinerario intero.</p>
   </div>
 
 </div>
@@ -848,7 +789,7 @@ if(_say){
              "✍️ (scrivi qui cosa non va: un orario, una tappa fuori posto, una che manca)",
              "",
              "———",
-             "📋 pagina: venerdi-scenario · pacchetto v2 · 1 ago 2026",
+             "📋 pagina: venerdi-scenario · pacchetto v1 · 1 ago 2026",
              "🗺️ piano mostrato: SCENARIO venerdi 14 (NON applicato al piano) - riordino chiesto da Fabrizio il 31 lug: Bryant Park prima, Grand Central seconda, pranzo vicino al MoMA, taxi eliminato. Mappa = opzione A (Junior's), fine 22:35; opzione B (Raising Cane's) fine 22:07. Pacchetto di riferimento v29"];
     window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
   });
@@ -911,17 +852,14 @@ document.querySelectorAll('.sc-it [data-edit]').forEach(function(b){
 
 function scStatus(){
   var t = [];
-  /* Il verdetto sta davanti a tutto, anche nella riga di stato: e' la risposta
-     che sblocca il lavoro, le altre due sono dettagli dentro la giornata. */
-  if(SC['VENOK']) t.push(SC['VENOK'].indexOf('APPROVA') === 0 ? "\u2705 approvato" : "verdetto \u2713");
   if(SC['CENAVEN']) t.push('cena \u2713');
   if(SC['ATTESAVEN']) t.push('attesa \u2713');
   var n = Object.keys(SCEDIT).length;
   if(n) t.push(n + (n === 1 ? ' minuto cambiato' : ' minuti cambiati'));
   var el = document.getElementById('scStatus');
   if(!el) return;
-  el.textContent = t.length ? (t.join(' \u00b7 ') + " \u2014 manda quando vuoi")
-    : "La domanda che conta \u00e8 la 3: lo metto nel piano? \u1F447";
+  el.textContent = t.length ? t.join(' \u00b7 ')
+    : "Due domande: la cena e i 43 minuti d'attesa \u1F447";
 }
 
 /* Il testo italiano dentro le stringhe JS sta fra VIRGOLETTE DOPPIE, sempre: un
@@ -931,9 +869,6 @@ var scSend = document.getElementById('scSend');
 if(scSend){
   scSend.addEventListener('click', function(){
     var L = ["\uD83D\uDDFD NEW YORK - VENERDI riordinato: la mia risposta", ""];
-    /* Il verdetto per primo (§8: blocking answers first). E' l'unica riga che
-       decide se il piano cambia; le altre due la rifiniscono. */
-    if(SC['VENOK']){ L.push("\u2705 " + SC['VENOK']); L.push(""); }
     if(SC['CENAVEN']){ L.push("\uD83C\uDF7D\uFE0F " + SC['CENAVEN']); L.push(""); }
     if(SC['ATTESAVEN']){ L.push("\u23F3 " + SC['ATTESAVEN']); L.push(""); }
     var ks = Object.keys(SCEDIT);
@@ -948,7 +883,7 @@ if(scSend){
     if(f && f.value.trim()){ L.push("\uD83D\uDCAC ALTRO:"); L.push("   " + f.value.trim()); L.push(""); }
     if(L.length <= 2){ L.push("(non ho ancora scelto niente)"); L.push(""); }
     L.push("\u2014\u2014\u2014");
-    L.push("\uD83D\uDCCB pagina: venerdi-scenario v2 \u00b7 1 ago 2026");
+    L.push("\uD83D\uDCCB pagina: venerdi-scenario v1 \u00b7 1 ago 2026");
     L.push("\uD83D\uDDFA\uFE0F piano mostrato: SCENARIO venerdi 14 (NON applicato al piano) - riordino chiesto da Fabrizio il 31 lug: Bryant Park prima, Grand Central seconda, pranzo vicino al MoMA, taxi eliminato. Mappa = opzione A (Junior's), fine 22:35; opzione B (Raising Cane's) fine 22:07. Pacchetto di riferimento v29");
     L.push("\uD83D\uDD52 inviato: " + new Date().toLocaleString('it-IT'));
     window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
