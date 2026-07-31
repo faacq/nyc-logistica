@@ -327,88 +327,40 @@
 
   <div class="res">
     <p style="margin-top:0"><b>Il Met è un posto: ci si entra e si esce dalla stessa porta. Una
-    passeggiata no.</b> Il calcolo però tratta tutto come un punto solo — e su una zona che si
-    attraversa questo <b>gonfia i tempi</b>: la strada per arrivarci e quella per ripartirne vengono
-    contate anche se una parte la stai già facendo <i>dentro</i> la sosta.</p>
-    <div class="res2">➜ <b>Ne ho controllate 11 su 15.</b> La peggiore era il ponte di Brooklyn:
-    <b>mezz'ora contata due volte</b>.</div>
+    passeggiata no.</b> Il calcolo tratta tutto come un punto solo, e su una zona che si attraversa
+    questo <b>gonfia i tempi</b>. <b>Ne ho sistemate 11 su 15</b> — la peggiore era il ponte di
+    Brooklyn, mezz'ora contata due volte.</p>
+    <div class="res2">➜ Le quattro che restano <b>possono solo far finire prima</b>, mai più tardi:
+    al massimo <b>18 minuti</b>, e si liberano. <b>Le giornate che leggi sono già il caso peggiore.</b></div>
   </div>
 
   <div class="card" style="margin-top:12px">
-    <h3 style="margin-top:0">⏱️ Quanto tempo ho dato a ognuna delle quattro</h3>
-    <p style="margin-top:0; font-size:.9rem"><b>Questi minuti sono lo slot che ho messo io</b>, zona
-    per zona. Non sono un dato di fatto: sono una scelta mia, e puoi cambiarla.</p>
-    <table style="width:100%; font-size:.9rem; border-collapse:collapse">
-      <tr style="color:var(--muted); font-size:.79rem">
-        <td style="padding:4px 0">zona</td><td style="padding:4px 6px">quando</td><td style="padding:4px 6px; text-align:right">slot</td></tr>
-      <tr><td style="padding:6px 0"><b>Shopping sulla 5th</b> <small class="muted">LEGO, NBA, Nike, Sephora</small></td>
-          <td style="padding:6px 6px">ven 14</td><td style="padding:6px 6px; text-align:right"><b>60'</b></td></tr>
-      <tr><td style="padding:6px 0"><b>Chinatown / Little Italy</b> <small class="muted">è il pranzo</small></td>
-          <td style="padding:6px 6px">dom 16</td><td style="padding:6px 6px; text-align:right"><b>75'</b></td></tr>
-      <tr><td style="padding:6px 0"><b>SoHo / Tribeca</b> <small class="muted">la passeggiata</small></td>
-          <td style="padding:6px 6px">dom 16</td><td style="padding:6px 6px; text-align:right"><b>60'</b></td></tr>
-      <tr><td style="padding:6px 0"><b>Shopping a SoHo</b> <small class="muted">Marc Jacobs, Alo, sneakers</small></td>
-          <td style="padding:6px 6px">dom 16</td><td style="padding:6px 6px; text-align:right"><b>20'</b></td></tr>
-      <tr style="border-top:1px solid var(--line)"><td style="padding:7px 0"><b>in tutto</b></td>
-          <td></td><td style="padding:7px 6px; text-align:right"><b>3 ore e 35</b></td></tr>
-    </table>
-    <div class="res2" style="margin-top:11px">➜ <b>Se una di queste ti sembra corta, dimmi quale e
-    quanto.</b> Rifaccio il calcolo e ti dico <b>cosa costa</b> — di solito sposta l'ora di rientro
-    di quella giornata, e basta.</div>
-
-    <div class="ask" data-prop="ZONETEMPI" data-label="ZONE - i tempi per zona vanno bene?" style="margin-top:11px">
-      <div class="aq">⏱️ <b>Vanno bene così?</b></div>
-      <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
-        <b>👉 Se non rispondi restano questi.</b> Se scegli «di più», scrivimi sotto <b>quale zona e
-        quanti minuti</b> — nel riquadro in fondo alla pagina.
+    <h3 style="margin-top:0">⏱️ Quanto tempo ho dato a ognuna — e puoi cambiarlo</h3>
+    <p style="margin-top:0; font-size:.9rem">Questi minuti <b>sono una scelta mia, non un dato</b>.
+    Se una ti sembra corta o lunga, <b>tocca la matita e scrivi il numero che vuoi</b>: rifaccio il
+    calcolo e ti dico cosa sposta.</p>
+    <div id="stopfix"></div>
+    <div class="ask" data-prop="ZONETEMPI" data-label="ZONE - i tempi per tappa vanno bene?" style="margin-top:11px">
+      <p class="muted" style="margin:0 0 .6em; font-size:.87rem">
+        <b>👉 Se non tocchi niente restano questi</b> — ma dimmelo lo stesso, così so che li hai visti.
       </p>
       <div class="chips" data-group="ZONETEMPI">
-        <div class="chip yes" data-val="ZONE TEMPI: vanno bene cosi' (5th 60' / Chinatown 75' / SoHo passeggiata 60' / shopping SoHo 20')">✅ Vanno bene</div>
-        <div class="chip no" data-val="ZONE TEMPI: voglio piu' tempo su almeno una zona - dettaglio nel testo libero">➕ Ne voglio di più su qualcuna</div>
-        <div class="chip no" data-val="ZONE TEMPI: sono troppo lunghe, si puo' stringere">➖ Sono troppo lunghe</div>
+        <div class="chip yes" data-val="ZONE TEMPI: li ho visti e vanno bene cosi'">✅ Li ho visti, vanno bene</div>
       </div>
-    </div>
-  </div>
-
-  <div class="sol" style="margin:13px 0">
-    <b>🔑 E il rischio di quelle non verificate va sempre nella stessa direzione: verso il meno.</b>
-    Un punto messo in mezzo a una zona <b>gonfia</b> i tragitti, non li accorcia. Al massimo quelle
-    quattro valgono <b>18 minuti</b>, e sono minuti che <b>si liberano</b>: le giornate che leggi
-    sono già il caso peggiore.
-  </div>
-
-  <div class="ask" data-prop="ZONE" data-label="ZONE - aspettare o approvare adesso">
-    <div class="aq">🤝 <b>Aspetti che le chiuda, o andiamo?</b></div>
-    <p class="muted" style="margin:.2em 0 .7em; font-size:.87rem">
-      È l'ultima cosa prima che ti chieda <b>approvi tutto?</b>. <b>👉 Se non rispondi le chiudo io</b>
-      e te lo chiedo dopo.
-    </p>
-    <div class="chips" data-group="ZONE">
-      <div class="chip yes" data-val="ZONE: A - aspetto che chiudi le ultime 4, poi mi chiedi di approvare tutto">🎯 Chiudile prima <small class="muted">(1-2 giorni)</small></div>
-      <div class="chip yes" data-val="ZONE: B - chiedimi l'approvazione ADESSO, accetto che le 4 possano togliere fino a 18 minuti">🏆 Chiedimi di approvare <b>adesso</b></div>
     </div>
   </div>
 
   <!-- ============ COSA SUCCEDE ADESSO ============ -->
   <h2>🔒 Come si chiude, da qui alla guida</h2>
   <div class="card">
-    <p style="margin-top:0"><b>Come si chiude, da qui alla guida.</b> Sembrano tanti passaggi: <b>ognuno prende un tipo di errore diverso</b>, e nessuno degli altri lo prenderebbe. ⚠️ <b>I numeri 4 e 5 sono nuovi</b>, e ce li ha messi una cosa che è successa a te: due risposte giuste che, prese insieme, non stavano in piedi.</p>
-    <div class="proc"><span class="pn">1</span><div><b>I loro commenti</b> ✅ — hai scelto di non aspettarli: la pagina resta aperta e quello che arriva lo integro strada facendo.</div></div>
-    <div class="proc"><span class="pn">2</span><div><b>Una revisione ostile del piano</b> ✅ — <b>fatta e chiusa.</b> Sei difetti trovati, sei sistemati.</div></div>
-    <div class="proc now"><span class="pn">3</span><div><span class="youare" style="margin:0 6px 0 0">👈 siamo qui</span><b>Un controllo a mano, umano</b> — orari, fermate, indirizzi. È il tipo di errore che un computer sbaglia <b>con più sicurezza di tutti</b>. <b>Ha già pagato tantissimo:</b> sei fermate del bus su dodici fuori posto, l'hotel a due strade da dov'è, Dylan's chiuso dal 2021, e <b>Marc Jacobs è venuto fuori da qui</b>. <b>Non ti chiede niente, è lavoro mio</b> — ma <b>non è finito</b>: restano le tappe che <b>non sono posti ma zone</b> (una passeggiata, un tratto di negozi, un giro in bus), dove la domanda non è <i>«il punto è lì»</i> ma <i>«quel punto regge il conto che ci faccio sopra»</i>. Lì ho già trovato una volta <b>diciannove minuti che non esistevano</b>. Quando ho finito te lo dico.</div></div>
-    <div class="proc"><span class="pn">4</span><div>🔴 <b>La tua approvazione dell'itinerario, tutto intero</b> — e questo è nuovo. Finora hai approvato le singole modifiche, una alla volta e ognuna sulla sua pagina. Ma <b>da quando avevi approvato le sei giornate cinque sono cambiate</b>: l'Empire, il tramonto più lungo, l'anello, Times Square dopo cena, il sabato rifatto sul bus. Il piano che hai approvato a pezzi <b>nessuno l'ha mai guardato tutto insieme</b> — e la domenica è la prova che due pezzi giusti possono non stare in piedi insieme.<br><br>✅ <b>Il registro delle domande è vuoto: era la condizione, ed è soddisfatta.</b> Non c'è più niente in cima che tu debba decidere prima.<br><br>👉 <b>Adesso quando arriva il passo 4 lo decidi tu</b>, e la scelta sta qui sopra, nella sezione sulle zone: <b>aspettare che chiuda le ultime quattro</b> (uno o due giorni, ed è quello che farei io), oppure <b>farlo adesso</b> sapendo che quelle quattro possono ancora togliere fino a diciotto minuti — e <b>solo togliere, mai aggiungere</b>. ⚠️ <b>Ho cambiato idea su questo punto</b>: fino a stamattina ti scrivevo che le zone erano affar mio e che avresti approvato dopo. Ma è il tuo viaggio e il tuo tempo: quanto aspettare non è una decisione tecnica.</div></div>
-    <div class="proc"><span class="pn">5</span><div>🔒 <b>Poi ogni giornata si blocca per davvero, una alla volta</b> — e non serve aspettare che siano pronte tutte: si comincia da quelle decise. <b>Da lì in poi, su quella giornata non ti chiedo più niente: la verifico soltanto.</b><br><br>E la verifica non me la invento adesso — <b>è la lista degli errori che questo viaggio ha già fatto</b>. Su ogni tappa di quella giornata, sei domande:<br>
-      <div style="margin:9px 0 0; font-size:.9rem; line-height:1.75">
-        <b>1.</b> esiste ancora? <small class="muted">— Dylan's aveva chiuso nel 2021</small><br>
-        <b>2.</b> è la filiale giusta? <small class="muted">— a Central Park ci sono tre noleggi con lo stesso nome</small><br>
-        <b>3.</b> è aperto quando ci arriviamo? <small class="muted">— i fumetti il giovedì, il MoMA sbagliato di tre ore</small><br>
-        <b>4.</b> è in lista due volte? <small class="muted">— Marc Jacobs, sopravvissuto a cinque revisioni</small><br>
-        <b>5.</b> è dove diciamo? <small class="muted">— diciannove coordinate erano fuori posto</small><br>
-        <b>6.</b> <b>quel punto regge il conto che ci faccio sopra?</b> <small class="muted">— i diciannove minuti inventati della passeggiata</small>
-      </div>
-      <div class="res2" style="margin-top:11px">➜ <b>Le prime due e mezza le fa già un programma.</b> Le altre sono il lavoro vero, ed è per questo che si fa <b>una giornata alla volta</b>: su un giorno solo si arriva in fondo, su sei si fa finta.</div></div></div>
-    <div class="proc"><span class="pn">6</span><div><b>Un ultimo giro sui trasporti, pochi giorni prima</b> — bus, metro, linee. È l'unica categoria che nessuna revisione può prevedere: <b>quello che cambia nel mondo dopo che il piano è scritto</b>. Ne abbiamo già due esempi: il giro di Brooklyn del Big Bus sospeso, e l'ora esatta del tramonto. ⚠️ <b>E adesso ce n'è un terzo che pesa</b>: il sabato punta a due corse precise, e quegli orari li ho ricostruiti io.</div></div>
-    <div class="proc"><span class="pn">7</span><div><b>La guida</b>, costruita sulla mappa — come mi hai detto che ti serve.</div></div>
+    <div class="proc"><span class="pn">1</span><div><b>I commenti degli altri</b> ✅ — hai scelto di non aspettarli.</div></div>
+    <div class="proc"><span class="pn">2</span><div><b>Revisione ostile del piano</b> ✅ — sei difetti trovati, sei sistemati.</div></div>
+    <div class="proc now"><span class="pn">3</span><div><span class="youare">siamo qui</span> <b>Controllo posti e tempi</b> — le 47 posizioni ✅, le zone <b>11 su 15</b>.</div></div>
+    <div class="proc"><span class="pn">4</span><div>🔴 <b>La tua approvazione dell'itinerario intero.</b> Finora hai approvato modifiche una alla volta — ma <b>da allora cinque giornate su sei sono cambiate</b>, e il risultato nessuno l'ha guardato tutto insieme.</div></div>
+    <div class="proc"><span class="pn">5</span><div><b>Ogni giornata si blocca, una alla volta</b> — da lì in poi su quella non si chiede più niente, si verifica soltanto.</div></div>
+    <div class="proc"><span class="pn">6</span><div><b>Ultimo giro sui trasporti</b>, pochi giorni prima: gli orari veri di agosto.</div></div>
+    <div class="proc"><span class="pn">7</span><div><b>La guida</b>, costruita sulla mappa.</div></div>
+    <div class="res2" style="margin-top:11px">➜ <b>Siamo al 3, e manca poco.</b> Le quattro zone qui sopra sono l'ultima cosa prima del passo 4.</div>
   </div>
 
   <!-- ============ TUTTO PRENOTATO ============ -->
@@ -461,18 +413,11 @@
   <h2>🚦 Il quadro dei 6 giorni</h2>
   <div class="card">
     <div class="summ" id="summary"></div>
-    <p class="muted" style="margin:12px 0 0"><b>Una sola giornata sfora, ed è il venerdì: 101%.</b> 📐 <b>Cosa vuol dire quel numero:</b> è quanto la
-    giornata occupa della <i>sua</i> finestra — dall'ora di uscita all'ora oltre la quale smette di essere comoda.
-    Il venerdì esce alle 10:00 e la sua finestra chiude alle <b>22:30</b>; adesso finisce alle <b>22:35</b>.
-    <b>Sono cinque minuti oltre: 101%.</b><br><br>
-    🔑 <b>E quei cinque minuti sono Junior's.</b> Alla versione precedente il venerdì era al 100% esatto,
-    perché la cena era un punto generico a 396 metri dal Summit. Messo il ristorante vero, la tratta si allunga
-    di 8 minuti e la giornata sfora di 5. <b>Non è un peggioramento del piano: è il piano che ha smesso di
-    raccontarsi una cena che non esisteva.</b><br><br>
-    ⚠️ <b>Perché il venerdì è comunque il giorno più pieno:</b> il Summit alle 19:00 più due ore di terrazza
-    più la cena <b>non stanno</b> in una giornata che finisce prima. È il prezzo di quella prenotazione, ed era
-    già così quando l'hai approvata. <b>Se rivuoi i cinque minuti basta accorciare la cena a 70'</b> — torna
-    a 22:30 esatte, cioè al 100%.</p>
+    <p class="muted" style="margin:12px 0 0"><b>Solo il venerdì sfora, di poco: 101%.</b>
+    Quel numero è quanto la giornata riempie la <i>sua</i> finestra — esce alle 10:00, comoda fino
+    alle 22:30, finisce alle <b>22:35</b>. <b>Sono i cinque minuti di Junior's</b>: la cena vera
+    costa 8 minuti più del punto generico che c'era prima. <b>Se li rivuoi, cena a 70' e torna a
+    22:30.</b></p>
   </div>
 
   <!-- ============ COME CI SI MUOVE ============ -->
@@ -486,14 +431,12 @@
 
   <div class="note">
 <!-- MIX:START - generato da gen_mix.py, non scrivere a mano -->
-    <b>🚌 Il conto del Big Bus, adesso che si vede.</b> Su <b>53 spostamenti</b> di tutto il viaggio:
-    <b>41 a piedi</b>, <b>6 in taxi</b>, <b>4 col Big Bus</b> (2 sabato e 2 domenica) e <b>2 in metro</b>.<br><br>
-    ⚠️ <b>Questo conto era sbagliato fino a ieri</b>, e non di poco: diceva <i>«52 spostamenti, 42 a piedi,
-    2 col Big Bus, entrambi la domenica»</i>. Il Big Bus si prende <b>4 volte</b>, e metà sono il sabato.
-    Era scritto a mano ed è invecchiato senza che nessuno se ne accorgesse: <b>adesso lo genera il programma
-    dai dati veri</b>, quindi non può più restare indietro.<br><br>
-    <b>Più il pezzo che il calcolo non sa contare come spostamento: il giro panoramico del sabato</b>, che non
-    è una tratta fra due tappe ma <b>50 minuti di corsa fatti apposta</b>, col piano di sopra scoperto.
+    <b>🚌 Il Big Bus, adesso che si vede.</b> Su <b>53 spostamenti</b> di tutto il viaggio:
+    <b>41 a piedi</b>, <b>6 in taxi</b>, <b>4 col Big Bus</b> (2 sabato e 2 domenica) e
+    <b>2 in metro</b>. <small class="muted">(Questo conto era sbagliato: diceva 2 corse,
+    «entrambi la domenica». Adesso lo genera il programma dai dati.)</small><br><br>
+    <b>Più il giro panoramico del sabato</b>, che il calcolo non conta come spostamento: non è una
+    tratta fra due tappe ma <b>50 minuti di corsa fatti apposta</b>, col piano di sopra scoperto.
     <!-- MIX:END -->
   </div>
 
@@ -501,13 +444,13 @@
 
   <!-- ============ GIORNI ============ -->
   <h2>📅 Giorno per giorno</h2>
-  <p class="muted" style="margin-top:0">Ogni giornata con <b>le sue tappe vere</b>, nell'ordine e con gli orari veri — <b>presi dal calcolo, non riscritti a mano</b>.</p>
-  <div class="recalc">
-    🔒 <b>Sono tutte e sei bloccate — e questa riga lo dice una volta sola, per tutte.</b> Prima te lo ripetevo su ognuna, con due pulsanti e una casella sotto: dodici inviti a cambiare idea su cose che avevi già deciso. <b>Qui sotto non c'è niente da rispondere</b>, le trovi per controllo.<br><br>
-    ✏️ <b>L'unica cambiata rispetto all'ultima volta è il sabato</b>, e per una cosa che hai chiesto tu: senza Marc Jacobs all'Upper East Side chiude alle <b>20:18</b> invece di 20:45.<br><br>
-    🚪 <b>Se hai cambiato idea la porta c'è</b>, in fondo a ogni giornata: <i>«⋯ voglio cambiare questa giornata»</i>. Non l'ho tolta, l'ho solo messa a sedere. Riaprire una giornata adesso costa poco; fra una settimana, a guida scritta, parecchio di più.
+  <div class="card">
+    <p style="margin-top:0">Le tappe vere, nell'ordine e con gli orari veri — <b>presi dal calcolo,
+    non riscritti a mano</b>. 🔒 <b>Sono tutte e sei bloccate: qui sotto non c'è niente da
+    rispondere</b>, le trovi per controllo.</p>
+    <p class="muted" style="margin:.5em 0 0; font-size:.88rem">🚪 Se hai cambiato idea la porta c'è,
+    in fondo a ogni giornata. <b>Riaprirne una adesso costa poco; a guida scritta, parecchio di più.</b></p>
   </div>
-
   <div id="days"></div>
 
   <!-- ============ BLOCCHI ============ -->
@@ -559,9 +502,10 @@ var SLOTS = [
 ];
 
 var STOPFIX = [
-  {k:'sept11',  i:'🕯️', n:'9/11 Memorial',            ex:'con la regola "foto" scende da 50 a 15 minuti', v:15},
-  {k:'island',  i:'🌇', n:'Little Island al tramonto', ex:'con la regola "foto" scende da 45 a 15 minuti', v:15},
-  {k:'chelsea', i:'🍽️', n:'Chelsea Market',            ex:'da "negozio" 20 min l\'ho già rimesso a 1h come CENA — altrimenti il lunedì restava senza cena', v:60}
+  {k:'shop5th',  i:'🛍️', n:'Shopping sulla 5th',      ex:'venerdì — LEGO, NBA, Nike, Sephora', v:60},
+  {k:'chinatown',i:'🥟', n:'Chinatown / Little Italy', ex:'domenica — è il pranzo', v:75},
+  {k:'soho',     i:'🚶', n:'SoHo / Tribeca',           ex:'domenica — la passeggiata', v:60},
+  {k:'shopsoho', i:'👟', n:'Shopping a SoHo',          ex:'domenica — Marc Jacobs, Alo, sneakers', v:20}
 ];
 
 var DAYS = [
@@ -1396,7 +1340,6 @@ function updateStatus(){
   /* v26: due gruppi nuovi. ZONE e' una scelta vera (quanto aspettare prima
      dell'approvazione dell'intero); VAN non e' una domanda sul piano ma un
      promemoria che si chiude solo con la sua conferma - io non prenoto niente. */
-  if(sel['ZONE']) t.push('zone ✓');
   if(sel['ZONETEMPI']) t.push('tempi zone ✓');
   if(sel['VAN'])  t.push('van ✓');
   if(rev) t.push(rev + (rev === 1 ? ' giornata da riaprire' : ' giornate da riaprire'));
@@ -1447,11 +1390,6 @@ function buildMessage(){
     L.push("⏱️ ZONE - i tempi per zona (5th 60' / Chinatown 75' / SoHo 60' / shopping SoHo 20'):");
     L.push('   - ' + sel['ZONETEMPI']);
   }
-  if(sel['ZONE']){
-    L.push('');
-    L.push("🧭 ZONE - le ultime quattro, e quando chiedere l'approvazione dell'intero:");
-    L.push('   - ' + sel['ZONE']);
-  }
   if(sel['VAN']){
     L.push('');
     L.push('🚐 VAN per JFK (mar 18, uscita 16:20 / volo 17:30):');
@@ -1472,6 +1410,17 @@ function buildMessage(){
     if(x) rev.push('   - ' + x.name + ': ' + x.val);
   });
   if(rev.length){ L.push(''); L.push('🔓 GIORNATE DA RIAPRIRE (erano bloccate):'); rev.forEach(function(x){ L.push(x); }); }
+
+  /* I minuti per singola tappa. NON venivano riportati: `stopOverride` era
+     scritto e mai letto, e il contenitore era sparito con una sezione tolta -
+     chi avesse modificato un valore l'avrebbe visto cambiare in pagina senza
+     che arrivasse niente. Difetto trovato e chiuso il 31 lug. */
+  var zo = [];
+  STOPFIX.forEach(function(s){
+    if(stopOverride[s.k] !== undefined)
+      zo.push('   - ' + s.n + ': da ' + hm(s.v) + ' a ' + hm(stopOverride[s.k]));
+  });
+  if(zo.length){ L.push(''); L.push('\u23f1 MINUTI CAMBIATI SU UNA TAPPA (rifare il calcolo):'); zo.forEach(function(x){ L.push(x); }); }
 
   var so = [];
   SLOTS.forEach(function(s){
