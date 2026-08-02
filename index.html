@@ -1262,6 +1262,14 @@ DAYS.forEach(function(d){
    e non puo' dire "bloccata" una giornata che il registro non ha bloccato.
    Qui c'e' SOLO il riepilogo: i flag stanno dentro le card delle giornate, dove uno
    li incontra dopo aver guardato le tappe e la story map. */
+/* ⚠️ `lockPick` si dichiara QUI e non piu' giu' insieme a `dayDecision`. Stava dopo la
+   chiamata a renderLockboard(): `var` viene issato ma vale `undefined`, quindi
+   `lockPick[d.id]` lanciava un TypeError e **tutto il resto dello script moriva** -
+   comprese le card delle giornate, che si costruiscono venti righe piu' sotto. La
+   pagina e' andata online senza l'itinerario. E' la stessa famiglia di D123: JS
+   sintatticamente perfetto, semantica morta, e `check_pages.py` verde. */
+var lockPick = {};        /* id giornata -> true se l'ha spuntata adesso (D131) */
+
 function renderLockboard(){
   var box = document.getElementById('lockboard');
   if(!box) return;                       /* la guardia serve: la sezione puo' non esserci */
@@ -1476,7 +1484,6 @@ document.querySelectorAll('.it').forEach(function(el){
 
 /* ---------- approva / rifai / sblocca ---------- */
 var dayDecision = {};
-var lockPick = {};        /* id giornata -> true se l'ha spuntata adesso (D131) */
 document.querySelectorAll('.appr').forEach(function(group){
   group.querySelectorAll('.ab').forEach(function(btn){
     btn.addEventListener('click', function(){
