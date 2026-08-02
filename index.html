@@ -191,6 +191,14 @@
   .btn:hover{border-color:var(--accent); background:#fff8ee}
   .storylnk{margin:10px 0 2px}
   .storylnk .btn{display:block; text-align:center; border-style:dashed; font-size:.86rem}
+  /* IL FLAG DEL BLOCCO (D131). Sta dentro la giornata, subito sotto la story map:
+     e' il punto in cui uno ha appena guardato le tappe. */
+  .lockrow{margin:11px 0 2px;background:#f7fbf8;border:2px solid #cfe8d6;border-radius:12px;
+           padding:11px 13px;font-size:.89rem;transition:background .15s,border-color .15s}
+  .lockrow.picked{background:#eaf7ee;border-color:var(--g5)}
+  .lockrow.done{background:#f2faf4;border-color:var(--g5)}
+  .lockrow label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+  .lockrow input{flex:none;width:22px;height:22px;margin-top:1px;accent-color:var(--g5)}
   .btn.now{background:var(--red); border-color:var(--red); color:#fff}
   .btn.now:hover{background:#b93d4e; border-color:#b93d4e}
   .chip.sel{background:var(--accent); border-color:var(--accent); color:#fff}
@@ -273,8 +281,8 @@
       <li>✅ <b>Hai approvato il sabato senza taxi, e l'ho messo nel piano.</b> Non è più una
       proposta su una pagina a parte: è <b>il sabato</b>, qui e su tutte le mappe.</li>
       <li>🚕 <b>I due taxi sono spariti, e con loro Eataly</b> — era sulla 23esima, fuori dalla
-      giornata, e le corse pagavano solo quella distanza. <b>Restano 3 taxi in tutta la
-      vacanza</b>, non 5.</li>
+      giornata, e le corse pagavano solo quella distanza. <b>In tutta la vacanza restano 2
+      corse in taxi</b>, non 4.</li>
       <li>🚇 <b>Dalla funivia si torna in metro</b> (treno N, <b>15 minuti porta a porta</b>,
       3 dollari): la <b>camminata più lunga di fila</b> passa da <b>43 minuti a 13</b>. Non è
       per il tempo — è per il caldo e per i ragazzi.</li>
@@ -490,10 +498,9 @@
 
   <div class="note">
 <!-- MIX:START - generato da gen_mix.py, non scrivere a mano -->
-    <b>🚌 Il Big Bus, adesso che si vede.</b> Su <b>53 spostamenti</b> di tutto il viaggio:
-    <b>42 a piedi</b>, <b>5 in taxi</b>, <b>4 col Big Bus</b> (2 sabato e 2 domenica) e
-    <b>2 in metro</b>. <small class="muted">(Questo conto era sbagliato: diceva 2 corse,
-    «entrambi la domenica». Adesso lo genera il programma dai dati.)</small><br><br>
+    <b>🚌 Come ci si sposta, in tutto il viaggio.</b> Su <b>54 spostamenti</b>:
+    <b>43 a piedi</b>, <b>5 in metro</b>, <b>4 col Big Bus</b> (2 sabato e 2 domenica) e
+    <b>2 in taxi</b>.<br><br>
     <b>Più il giro panoramico del sabato</b>, che il calcolo non conta come spostamento: non è una
     tratta fra due tappe ma <b>50 minuti di corsa fatti apposta</b>, col piano di sopra scoperto.
     <!-- MIX:END -->
@@ -506,16 +513,18 @@
        map, dove la giornata si vede davvero. Due pagine che chiedono la stessa cosa sono
        il difetto che ha prodotto D81. Lo stato lo legge da `lock` dentro DAYS, che viene
        da locks.json - la stessa fonte del quadro dentro STATUS. -->
-  <h2 style="margin-top:34px">🔒 Il blocco delle giornate</h2>
+  <h2 id="blocco" style="margin-top:34px">🔒 Il blocco delle giornate</h2>
   <div class="card">
     <p style="margin-top:0"><b>Da qui in avanti non ti chiedo più di approvare "tutto".</b>
-    Te lo chiedo <b>una giornata alla volta</b>, e il pulsante sta in fondo alla mappa di
-    ogni giornata.</p>
+    Te lo chiedo <b>una giornata alla volta</b> — ma <b>da qui, e con un messaggio solo</b>:
+    scorri le giornate qui sotto, guardale (c'è il pulsante per la mappa dentro ognuna) e
+    <b>segna quelle che ti vanno bene</b>. Partono tutte insieme.</p>
     <p style="margin:.5em 0 0"><b>Bloccare vuol dire una cosa sola: su quella giornata non
     ti chiedo più niente.</b> Io continuo a <b>verificarla</b> — che i posti siano aperti,
     che gli orari del bus reggano — ma non te la rimetto davanti, e comincio a scriverne
     <b>l'itinerario da portare in viaggio</b>.</p>
     <div id="lockboard" style="margin-top:14px"></div>
+    <div id="lockact" style="margin-top:13px"></div>
     <p class="muted" style="margin:.7em 0 0; font-size:.88rem">🚪 <b>Non è per sempre.</b>
     Se dopo ti viene in mente una cosa, si riapre — bloccare significa <i>«smetti di
     chiedermelo»</i>, non <i>«non si tocca più»</i>. ⚠️ Riaprirne una adesso costa poco;
@@ -559,7 +568,7 @@
 
 <div class="bar">
   <div class="in">
-    <div class="status" id="statusLine">Qui non ti chiedo niente. Il venerdì è nella sua pagina 👆</div>
+    <div class="status" id="statusLine">Segna le giornate che ti vanno bene 🔒 e mandamele tutte insieme</div>
     <button class="send" id="sendBtn">📲 Invia su WhatsApp</button>
   </div>
 </div>
@@ -1250,46 +1259,57 @@ DAYS.forEach(function(d){
 
 /* ---------- il quadro del blocco (D131) ----------
    Legge `lock` dentro DAYS, che viene da locks.json: la pagina non sa niente da sola,
-   e non puo' dire "bloccata" una giornata che il registro non ha bloccato. */
-(function(){
+   e non puo' dire "bloccata" una giornata che il registro non ha bloccato.
+   Qui c'e' SOLO il riepilogo: i flag stanno dentro le card delle giornate, dove uno
+   li incontra dopo aver guardato le tappe e la story map. */
+function renderLockboard(){
   var box = document.getElementById('lockboard');
   if(!box) return;                       /* la guardia serve: la sezione puo' non esserci */
-  var n = 0, html = '';
+  var gia = 0, ora = 0, righe = '';
   DAYS.forEach(function(d){
-    var on = !!d.lock;
-    if(on) n++;
-    html += '<div style="display:flex;gap:9px;align-items:center;padding:9px 0;' +
-            'border-bottom:1px solid var(--line)">' +
-            '<span style="font-size:1.1rem">' + (on ? '🔒' : '⬜') + '</span>' +
-            '<div style="flex:1;min-width:0">' +
-              '<b>' + d.name + '</b> <span class="muted">· ' + d.zone + '</span><br>' +
-              '<small class="muted">' + (on
-                 ? ('bloccata' + (d.lockon ? ' il ' + d.lockon : '') +
-                    ' — su questa non ti chiedo più niente')
-                 : 'ancora aperta — il pulsante è in fondo alla sua mappa') + '</small>' +
-            '</div>' +
-            '<a href="route/' + d.id + '/" style="flex:none;color:var(--accent);' +
-              'font-weight:800;text-decoration:none;font-size:.85rem">' +
-              (on ? 'rivedi →' : 'apri →') + '</a>' +
-            '</div>';
+    var bloccata = !!d.lock, scelta = !!lockPick[d.id];
+    if(bloccata) gia++; else if(scelta) ora++;
+    var ic = bloccata ? '🔒' : (scelta ? '✅' : '⬜');
+    var st = bloccata
+      ? ('bloccata' + (d.lockon ? ' il ' + d.lockon : '') + ' — non ti chiedo più niente')
+      : (scelta ? '<b>la blocchi con questo invio</b>'
+                : 'ancora aperta — il flag è dentro la giornata, qui sotto');
+    righe += '<div style="display:flex;gap:9px;align-items:center;padding:8px 0;' +
+             'border-bottom:1px solid var(--line)">' +
+             '<span style="font-size:1.05rem">' + ic + '</span>' +
+             '<div style="flex:1;min-width:0"><b>' + d.name + '</b> ' +
+               '<span class="muted">· ' + d.zone + '</span><br>' +
+               '<small class="muted">' + st + '</small></div>' +
+             '<a href="#' + d.id + '" style="flex:none;color:var(--accent);font-weight:800;' +
+               'text-decoration:none;font-size:.85rem">vai →</a></div>';
   });
-  var testa;
+  var n = gia + ora, tot = DAYS.length, testa;
   if(n === 0){
-    testa = '<div style="font-weight:800;color:var(--accent2)">⬜ Nessuna giornata bloccata ' +
-            '— 0 su 6</div><div class="muted" style="font-size:.88rem">Comincia da quella ' +
-            'di cui sei più sicuro: <b>non devi farle tutte insieme</b>.</div>';
-  } else if(n === DAYS.length){
-    testa = '<div style="font-weight:800;color:var(--g5)">🎉 Tutte e sei bloccate — 6 su 6' +
-            '</div><div class="muted" style="font-size:.88rem">Da qui non ti chiedo più ' +
-            'niente su nessuna giornata: scrivo l\'itinerario da portare in viaggio.</div>';
+    testa = '<div style="font-weight:800;color:var(--accent2)">⬜ Nessuna giornata bloccata — 0 su ' + tot +
+            '</div><div class="muted" style="font-size:.88rem">Scorri le giornate qui sotto e segna quelle ' +
+            'che ti vanno bene: <b>partono tutte in un messaggio solo</b>.</div>';
+  } else if(n === tot){
+    testa = '<div style="font-weight:800;color:var(--g5)">🎉 Tutte e ' + tot + ' bloccate</div>' +
+            '<div class="muted" style="font-size:.88rem">Da qui non ti chiedo più niente su nessuna giornata: ' +
+            'scrivo l\'itinerario da portare in viaggio.</div>';
   } else {
-    testa = '<div style="font-weight:800;color:var(--g5)">🔒 ' + n + ' giornate bloccate su 6' +
-            '</div><div class="muted" style="font-size:.88rem">Sulle altre ' + (DAYS.length-n) +
-            ' posso ancora farti domande. <b>L\'itinerario lo comincio dalle bloccate</b>, ' +
-            'senza aspettare le altre.</div>';
+    testa = '<div style="font-weight:800;color:var(--g5)">🔒 ' + n + ' giornate su ' + tot + '</div>' +
+            '<div class="muted" style="font-size:.88rem">Sulle altre ' + (tot - n) + ' posso ancora farti domande. ' +
+            '<b>L\'itinerario lo comincio dalle bloccate</b>, senza aspettare le altre.</div>';
   }
-  box.innerHTML = testa + '<div style="margin-top:10px">' + html + '</div>';
-})();
+  box.innerHTML = testa + '<div style="margin-top:10px">' + righe + '</div>';
+
+  var act = document.getElementById('lockact');
+  if(act){
+    act.innerHTML = ora
+      ? ('<div style="background:#f2faf4;border:2px solid var(--g5);border-radius:12px;padding:11px 13px;' +
+         'font-size:.9rem">✅ <b>Stai per bloccare ' + ora + (ora === 1 ? ' giornata' : ' giornate') +
+         '.</b> Sono già nel messaggio: premi <b>Invia su WhatsApp</b> in fondo alla pagina e ' +
+         'partono <b>tutte insieme</b>, con le altre cose che hai segnato.</div>')
+      : '';
+  }
+}
+renderLockboard();
 
 /* ---------- giorni ---------- */
 var wrapDays = document.getElementById('days');
@@ -1331,6 +1351,22 @@ DAYS.forEach(function(d){
      ancora il link: non sono cancellate, solo non piu' pubblicizzate. */
   h += '<div class="storylnk"><a class="btn" href="route/' + d.id + '/">🧭 vai alla <b>story map</b> di questa giornata — il giro sulla mappa, pezzo per pezzo</a></div>';
 
+  /* IL FLAG DEL BLOCCO (D131), e sta DENTRO la giornata per un motivo preciso: e' il
+     punto del giro di lettura in cui uno ha appena visto le tappe ed e' tornato dalla
+     story map. Un pulsante per giornata su sei pagine diverse avrebbe prodotto SEI
+     messaggi per dire una cosa sola; qui si spuntano quelle che vanno bene e partono
+     insieme, nello stesso messaggio che porta gia' le modifiche e i commenti. */
+  if(d.lock){
+    h += '<div class="lockrow done">🔒 <b>Bloccata</b>' + (d.lockon ? ' il ' + d.lockon : '') +
+         ' — su questa giornata non ti chiedo più niente.' +
+         ' <span class="muted">Se cambi idea si riapre qui sotto.</span></div>';
+  } else {
+    h += '<div class="lockrow"><label><input type="checkbox" data-lockday="' + d.id + '">' +
+         '<span><b>🔒 Questa giornata mi va bene — bloccala.</b> ' +
+         'Da qui in poi non ti chiedo più niente su di lei: la verifico e basta, e ' +
+         'comincio a scriverne l\'itinerario da portare in viaggio.</span></label></div>';
+  }
+
   h += '<div class="sol"><h4>💡 Com\'è questa giornata, e perché</h4><div>' + (T.sol || '') + '</div>' +
        '<div class="res2">' + (T.solres || '') + '</div>' +
        '</div>';
@@ -1364,6 +1400,22 @@ DAYS.forEach(function(d){
 
   el.innerHTML = h;
   wrapDays.appendChild(el);
+});
+
+/* ---------- il flag del blocco (D131) ----------
+   DELEGAZIONE SUL DOCUMENT e non getElementById: le card delle giornate sono costruite
+   in JS, quindi quando questo codice gira gli elementi non esistono ancora. E' la regola
+   nata da D123, dove un listener agganciato a un elemento non ancora nel documento non e'
+   mai nato - e nessuno se n'e' accorto per giorni, perche' il JS era sintatticamente
+   perfetto. */
+document.addEventListener('change', function(ev){
+  var c = ev.target;
+  if(!c || !c.getAttribute || !c.getAttribute('data-lockday')) return;
+  lockPick[c.getAttribute('data-lockday')] = c.checked;
+  var row = c.closest('.lockrow');
+  if(row) row.classList.toggle('picked', c.checked);
+  renderLockboard();
+  updateStatus();
 });
 
 /* ---------- editing righe ---------- */
@@ -1424,6 +1476,7 @@ document.querySelectorAll('.it').forEach(function(el){
 
 /* ---------- approva / rifai / sblocca ---------- */
 var dayDecision = {};
+var lockPick = {};        /* id giornata -> true se l'ha spuntata adesso (D131) */
 document.querySelectorAll('.appr').forEach(function(group){
   group.querySelectorAll('.ab').forEach(function(btn){
     btn.addEventListener('click', function(){
@@ -1484,11 +1537,14 @@ function updateStatus(){
      risposto a tutt'e due e sono diventati stato. Tolti anche di qui: un JS che
      legge gruppi non piu' presenti e' esattamente il caso che check_pages.py
      intercetta, ed e' come si accumulano domande gia' risposte. */
+  var lk = 0;
+  Object.keys(lockPick).forEach(function(k){ if(lockPick[k]) lk++; });
+  if(lk) t.push('🔒 ' + lk + (lk === 1 ? ' giornata da bloccare' : ' giornate da bloccare'));
   if(rev) t.push(rev + (rev === 1 ? ' giornata da riaprire' : ' giornate da riaprire'));
   if(edits) t.push(edits + ' blocchi cambiati');
   document.getElementById('statusLine').textContent =
     t.length ? (t.join(' · ') + ' — invia quando vuoi')
-             : "Qui non ti chiedo niente: non ci sono più domande aperte 🙌";
+             : "Segna le giornate che ti vanno bene 🔒 e mandamele tutte insieme";
 }
 
 /* ============================================================
@@ -1536,6 +1592,23 @@ function buildMessage(){
 
   /* Le giornate sono gia' bloccate: non si chiede di riconfermarle.
      Nel messaggio finiscono SOLO quelle che vuole riaprire. */
+  /* I BLOCCHI (D131) stanno in cima al messaggio, prima delle riaperture e delle
+     modifiche: sono la cosa che chiude, e vanno lette per prime. Un messaggio solo
+     per tutte le giornate - il pulsante per giornata ne avrebbe prodotti sei. */
+  var lock = [];
+  DAYS.forEach(function(d){
+    if(lockPick[d.id]) lock.push('   - ' + d.name + ' (' + d.zone + ')');
+  });
+  if(lock.length){
+    L.push('');
+    L.push('🔒 BLOCCO QUESTE GIORNATE — su queste non chiedermi più niente:');
+    lock.forEach(function(x){ L.push(x); });
+    var manca = DAYS.length - lock.length;
+    L.push('');
+    L.push(manca ? ('   (le altre ' + manca + ' le guardo con calma)')
+                 : '   (sono tutte e sei: l\'itinerario per me è chiuso)');
+  }
+
   var rev = [];
   DAYS.forEach(function(d){
     var x = dayDecision[d.id];

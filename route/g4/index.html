@@ -240,14 +240,17 @@
   <div id="steps"></div>
 
   <div class="lock">
-    <h3>🔒 Questa giornata è a posto? Bloccala.</h3>
+    <h3>🔒 Questa giornata ti va bene? Si blocca dall'itinerario</h3>
     <p><b>Bloccare vuol dire una cosa sola: su questa giornata non ti chiedo più niente.</b>
     Da lì in poi io la <b>verifico</b> — che i posti siano aperti, che gli orari del bus
     reggano — ma non la <b>rimetto in discussione</b>, e comincio a scriverne l'itinerario
     da portare in viaggio.</p>
-    <button type="button" data-lock="Giorno 4 · Dom 16">🔒 Blocco il dom 16</button>
-    <p class="tiny"><b>Una giornata alla volta, e bloccarne una non blocca le altre</b>: se
-    il sabato ti va bene puoi bloccarlo anche se la domenica non l'hai ancora guardata.
+    <a class="btn" href="../../#blocco"
+       style="display:block;background:var(--g5);color:#fff;text-decoration:none;
+              border-radius:12px;padding:13px;text-align:center;font-weight:800;
+              margin-top:12px">🔒 Vai a bloccare le giornate</a>
+    <p class="tiny">📌 <b>Il pulsante sta là e non qui apposta</b>: da lì le blocchi
+    <b>tutte insieme con un messaggio solo</b>, invece di mandarmene uno per giornata.
     ⚠️ E non è per sempre — se dopo ti viene in mente una cosa, si riapre: bloccare significa
     <i>«smetti di chiedermelo»</i>, non <i>«non si tocca più»</i>.</p>
   </div>
@@ -578,25 +581,9 @@ document.querySelectorAll('.num[data-goto]').forEach(function(b){
   });
 });
 
-/* LOCK-IN (D131). DELEGAZIONE SUL DOCUMENT, non getElementById: e' la regola nata da
-   D123, dove un pulsante d'invio non era agganciato a niente e nessuno se n'era accorto
-   per giorni perche' il JS era sintatticamente perfetto. Qui il listener non dipende da
-   quando l'elemento compare nel documento. */
-document.addEventListener('click', function(ev){
-  var b = ev.target.closest ? ev.target.closest('[data-lock]') : null;
-  if(!b) return;
-  var d = new Date(), p = function(n){ return (n<10?'0':'') + n; };
-  var L = ["🗽 NEW YORK - " + b.getAttribute('data-lock') + ": la mia risposta",
-           "",
-           "🔒 BLOCCO QUESTA GIORNATA - va bene così, non chiedermi più niente su questa",
-           "",
-           "———",
-           "📋 pagina: route-g4 · pacchetto v33 · 2 ago 2026",
-           "🗺️ piano mostrato: Giorno 4 - Dom 16 - Downtown & Brooklyn (Big Bus g.2, linea ROSSA) - 11 tappe, si esce 10:00, si rientra 20:47",
-           "🕒 inviato: " + p(d.getDate()) + "/" + p(d.getMonth()+1) + "/" + d.getFullYear() +
-             " " + p(d.getHours()) + ":" + p(d.getMinutes())];
-  window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
-});
+/* LOCK-IN (D131): il pulsante NON sta qui. Sta sulla pagina principale, dove Fabrizio
+   puo' bloccare piu' giornate con UN messaggio solo - qui ne servirebbe uno per giornata,
+   cioe' sei messaggi per dire una cosa sola. Su questa pagina c'e' solo il rimando. */
 
 /* tocchi una fermata nell'elenco -> la mappa ci va sopra e la fermata si apre */
 var _say = document.getElementById('sayBtn');
