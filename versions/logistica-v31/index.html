@@ -257,7 +257,7 @@
     <b>due giornate aspettano te</b> (sabato e lunedì) → poi l'approvazione dell'itinerario
     intero → il blocco delle giornate → la guida.<br>
     <span style="opacity:.85">Si parte fra <b>12 giorni</b>.</span></div>
-    <div class="ver">📌 versione v32 &middot; 2 ago 2026</div>
+    <div class="ver">📌 versione v31 &middot; 2 ago 2026</div>
   </div>
 </header>
 
@@ -267,7 +267,7 @@
        e' la sola cosa cambiata, ma cambia SEI numeri in pagina, quindi il changelog dice
        il numero e non solo il fatto. -->
   <div class="changelog">
-    <h3>🆕 Cosa è cambiato <span class="cd">(v32 &middot; 2 ago, rispetto alla v29 — l'ultima che hai visto)</span></h3>
+    <h3>🆕 Cosa è cambiato <span class="cd">(v31 &middot; 2 ago, rispetto alla v29 — l'ultima che hai visto)</span></h3>
     <ul>
       <li>✅ <b>Hai approvato il venerdì riordinato, e l'ho messo nel piano.</b> Non è più uno
       scenario su una pagina a parte: è <b>il venerdì</b>, qui e su tutte le mappe.</li>
@@ -282,12 +282,6 @@
       che alle 12.</li>
       <li>🛍️ <b>I 43 minuti fermi davanti al Summit sono diventati shopping</b>: 100 minuti sulla
       5th invece di 60. Non cambia l'ora di rientro — cambia dove li passate.</li>
-      <li>📏 <b>Hai beccato un errore vero, e c'era su tutte le mappe.</b> Su una tratta
-      leggevi <i>«29 minuti · 6,8 km»</i> a piedi, che fa 14 km/h. <b>Non erano le miglia</b>:
-      i minuti erano <b>misurati</b> e i chilometri <b>calcolati dal punto sbagliato</b> — dalla
-      fermata dove <i>sali</i> sul bus, non da dove scendi. <b>Erano sei tratte così.</b> Adesso
-      dove il tempo è misurato <b>i chilometri non te li scrivo</b>: quel numero non lo so, e
-      dirtelo sbagliato è peggio che non dirtelo.</li>
       <li>👋 <b>E ci sono due giornate nuove che aspettano te</b>: il <b>sabato</b> senza i due
       taxi, e il <b>lunedì</b> come me l'hai riscritto. Stanno nelle loro pagine, coi pulsanti
       qui sotto. <b>Finché non rispondi lì, quelle due giornate non cambiano.</b></li>
@@ -518,7 +512,7 @@
   </div>
 
   <div class="footer">
-    Itinerario e logistica v32 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
+    Itinerario e logistica v31 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1401,9 +1395,9 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v32',
+  ver:   'v31',
   built: '2026-08-02',
-  plan:  "itinerario v2.4 al 2 ago, pacchetto v32. VENERDI GIA' NEL PIANO (D122). LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-19:48 - dom 10:00-20:47 - lun 08:45-21:02 - mar 08:30-16:20, cuscino JFK 70'. Tutte e sei rientrano. D127: dove il tempo di una tratta e' VERIFICATO, la distanza non e' piu' dichiarata (era la linea d'aria dal pin precedente, e sui nodi bus quel pin sta sulla fermata di salita: usciva '29 minuti - 6,8 km' a piedi, segnalato da Fabrizio). Sei tratte corrette; controllo nuovo check_legs.py, il settimo. DUE GIORNATE APERTE: /sabato/ (SABOK, TEMPO23) e /lunedi/ (LUNOK, HLTEMPO). RESTA DIETRO: D90 e O44.",
+  plan:  "itinerario v2.4 al 2 ago, pacchetto v31. VENERDI GIA' NEL PIANO (D122, approvato da lui): Bryant Park 10:24 - Grand Central - 5th - San Patrizio - PRANZO Five Guys - MoMA - shopping 100' - SUMMIT 19:00 - CENA Raising Cane's, niente taxi, fine 22:07. LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-19:48 - dom 10:00-20:47 - lun 08:45-21:02 - mar 08:30-16:20, cuscino JFK 70'. Tutte e sei rientrano nel traguardo comodo. DUE GIORNATE APERTE, non applicate: /sabato/ (via i 2 taxi ed Eataly, cena Junior's, metro dalla funivia - gruppi SABOK e TEMPO23) e /lunedi/ (metro al traghetto, tutta la High Line, cena dopo - gruppi LUNOK e HLTEMPO). RESTA DIETRO: D90, l'approvazione dell'ITINERARIO INTERO, e O44 (4 zone, lavoro del PM).",
   stale: ''
 };
 
@@ -1421,7 +1415,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v32: messaggio di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v31: messaggio di Fabrizio');
 
   /* v28: qui NON c'e' piu' nessun gruppo di domande. ZONETEMPI e VAN hanno avuto
      risposta il 31 lug (D112, D113) e sono usciti dalla pagina insieme al JS che
