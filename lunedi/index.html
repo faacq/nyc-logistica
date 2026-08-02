@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Lunedi riordinato - la tua richiesta</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{--bg:#fbf7f0;--card:#fff;--ink:#22303c;--muted:#6b7a88;--line:#e7ddcd;
+        --accent:#1f3b73;--accent2:#e0912f;--g5:#3f9d5a;--red:#d1495b;
+        --radius:16px;--shadow:0 6px 22px rgba(30,40,60,.10)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55;
+       font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:660px;margin:0 auto;padding:0 14px 60px}
+  header.hero{background:linear-gradient(160deg,#1f3b73,#2d5296);color:#fff;padding:18px 0 16px}
+  header .wrap{padding-bottom:0}
+  h1{margin:.1em 0 .15em;font-size:1.32rem;letter-spacing:-.2px}
+  .sub{font-size:.92rem;opacity:.93}
+  .ver{margin-top:9px;display:inline-block;background:rgba(255,255,255,.16);
+       border-radius:999px;padding:3px 11px;font-size:.74rem;font-weight:700}
+  .mapwrap{position:sticky;top:0;z-index:400;background:var(--bg);padding:8px 0 6px;
+           box-shadow:0 6px 14px -8px rgba(30,40,60,.35)}
+  #map{height:44vh;min-height:250px;border-radius:13px;border:1px solid var(--line);
+       box-shadow:var(--shadow)}
+  .keys{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:6px;
+        font-size:.71rem;color:var(--muted)}
+  .keys b{color:var(--ink)}
+  .keys svg{vertical-align:middle;margin-right:3px}
+  .maphint{font-size:.74rem;color:var(--muted);text-align:center;margin:4px 2px 0}
+  .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
+             padding:11px 13px;margin:13px 0;font-size:.87rem}
+  .changelog h3{margin:0 0 6px;font-size:.93rem}
+  /* --- chiave di lettura --- */
+  .pr{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid #f2ede3}
+  .pr:first-of-type{border-top:none}
+  .pr .pi{flex:none;width:24px;text-align:center;font-size:1.05rem;line-height:1.4}
+  .pr small{color:#4a5a68}
+  /* --- partenza --- */
+  .startcard{background:#22303c;color:#fff;border-radius:var(--radius);padding:12px 14px;
+             margin:11px 0;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;
+             cursor:pointer;transition:box-shadow .2s}
+  .startcard.on{box-shadow:0 0 0 3px rgba(31,59,115,.35),var(--shadow)}
+  .step,.startcard{cursor:pointer}
+  .startcard .p{flex:none;width:30px;height:30px;border-radius:50%;background:#fff;color:#22303c;
+                display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .startcard .t{font-size:.72rem;letter-spacing:.6px;font-weight:800;opacity:.75}
+  /* --- la TRATTA: e' il pezzo che mancava, quindi qui e' grossa --- */
+  .legcard{margin:9px 0 9px 6px;padding:9px 12px;border-radius:12px;background:#fff;
+           border:1px solid var(--line);border-left:6px solid var(--ink);
+           display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(30,40,60,.06)}
+  .legcard .em{font-size:1.35rem;flex:none}
+  .legcard .mode{font-weight:800;font-size:.95rem;letter-spacing:.2px}
+  .legcard .det{font-size:.8rem;color:var(--muted)}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;
+          vertical-align:-1px;border:1px solid rgba(0,0,0,.18)}
+  .legcard .tag{margin-left:auto;font-size:.68rem;font-weight:800;letter-spacing:.4px;
+                color:var(--muted);white-space:nowrap;text-align:right}
+  /* --- gli step --- */
+  .step{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--ink);
+        border-radius:var(--radius);padding:12px 14px;margin:0 0 4px;box-shadow:var(--shadow);
+        transition:box-shadow .2s}
+  .step.on{box-shadow:0 0 0 3px rgba(31,59,115,.16),var(--shadow)}
+  .step .hd{display:flex;align-items:baseline;gap:8px}
+  .num{flex:none;width:26px;height:26px;border-radius:50%;color:#fff;font-size:.8rem;
+       font-weight:800;display:flex;align-items:center;justify-content:center;
+       cursor:pointer;box-shadow:0 0 0 0 rgba(31,59,115,.5);transition:box-shadow .18s}
+  .num:hover{box-shadow:0 0 0 4px rgba(31,59,115,.18)}
+  .nm{font-weight:800;font-size:1rem;flex:1}
+  .tm{font-size:.78rem;color:var(--muted);font-weight:700;white-space:nowrap}
+  .dw{margin-top:5px;font-size:.83rem;color:var(--muted)}
+  .dw b{color:var(--ink)}
+  .opt{display:inline-block;background:#f1f0ec;color:#5c6873;border-radius:999px;
+       padding:0 7px;font-size:.68rem;font-weight:800;margin-left:5px}
+  .nt{margin-top:7px;font-size:.83rem;color:#4a5a68}
+  .bus{margin:9px 0 9px 6px;border:2px solid var(--accent);border-radius:13px;overflow:hidden;background:#fff}
+  .bus .bh{background:var(--accent);color:#fff;padding:7px 12px;font-weight:800;font-size:.87rem}
+  .bus .bb{padding:10px 12px;font-size:.86rem}
+  .stopbox{background:#eef4fb;border:1px dashed #b9cde6;border-radius:9px;padding:8px 10px;margin:6px 0}
+  .stopbox .k{font-size:.7rem;font-weight:800;letter-spacing:.5px;color:var(--accent)}
+  .stopbox .v{font-weight:800;font-size:.95rem}
+  .stopbox .w{font-size:.79rem;color:var(--muted)}
+  .ride{margin:7px 0;padding-left:12px;border-left:3px solid var(--accent2);color:#4a5a68}
+  /* --- gli orari del bus: la domanda vera e' "a che ora devo essere li'" --- */
+  .clock{background:#f7f9fc;border:1px solid #dbe5f2;border-radius:10px;padding:9px 11px;margin:2px 0 9px}
+  .clock .cr{display:flex;gap:10px;align-items:flex-start;padding:3px 0;font-size:.84rem;color:#4a5a68}
+  .clock .ct{flex:none;width:47px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .clock .cr.big{background:#fff;border:1px solid var(--accent);border-radius:8px;
+                 padding:7px 9px;margin:4px 0;color:var(--ink)}
+  .clock .cr.big .ct{font-size:1.12rem;color:var(--accent)}
+  .clock small{color:var(--muted)}
+  .cnote{margin-top:7px;font-size:.76rem;color:#8a6d12;background:#fffdf6;
+         border:1px dashed var(--accent2);border-radius:8px;padding:6px 9px}
+  .warnbox{background:#fffdf6;border:1px dashed var(--accent2);border-radius:10px;
+           padding:8px 11px;margin-top:8px;font-size:.81rem;color:#8a6d12}
+  .footer{text-align:center;color:var(--muted);font-size:.78rem;margin:26px 0 0}
+  .leaflet-container{font:inherit}
+  .pin{border:none;background:none}
+  .pin span{display:flex;align-items:center;justify-content:center;width:25px;height:25px;
+            border-radius:50%;color:#fff;font-weight:800;font-size:.78rem;
+            box-shadow:0 0 0 2.5px #fff,0 1px 4px rgba(0,0,0,.4);
+            transition:transform .18s,box-shadow .18s;transform-origin:50% 50%}
+  /* il pallino della scheda che stai leggendo: cresce e si mette l'anello scuro */
+  .pin.act span{transform:scale(1.5);font-size:.85rem;
+                box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(34,48,60,.85),0 3px 10px rgba(0,0,0,.45)}
+  .pin.dim span{opacity:.5}
+  /* --- le fermate del bus: erano nei dati e non sulla mappa (feedback v2) --- */
+  .bstop{border:none;background:none}
+  .bstop .b{display:flex;align-items:center;gap:4px;white-space:nowrap}
+  .bstop .ic{flex:none;display:flex;align-items:center;justify-content:center;
+             width:23px;height:23px;border-radius:6px;color:#fff;font-size:.75rem;
+             box-shadow:0 0 0 2.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+  .bstop .lb{font-size:.6rem;font-weight:800;letter-spacing:.4px;background:#fff;
+             border-radius:4px;padding:1px 4px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+  /* fermata di passaggio: il bus ci ferma ma noi non scendiamo - quindi vuota */
+  .bstop .via{flex:none;display:flex;align-items:center;justify-content:center;
+              width:17px;height:17px;border-radius:5px;background:#fff;
+              font-size:.6rem;font-weight:800;box-shadow:0 0 0 2px #fff,0 1px 3px rgba(0,0,0,.35)}
+  /* le fermate NON si sbiadiscono come il resto: la domanda "dove sono le fermate"
+     te la fai mentre stai leggendo tutt'altro, quindi devono restare leggibili */
+  .bstop.dim{opacity:.8}
+  .stoplab{background:#fff;border:1.5px solid var(--accent);border-radius:5px;
+           padding:0 4px;font-size:.63rem;font-weight:800;color:var(--accent);
+           box-shadow:0 1px 3px rgba(0,0,0,.25);white-space:nowrap}
+  .stoplab::before{display:none}
+  /* --- l'elenco delle fermate: a mappa larga il testo batte i puntini --- */
+  .stoplist{margin:8px 0;padding:9px 10px;background:#f7f9fc;border:1px solid #dbe5f2;border-radius:10px}
+  .stoplist .h{font-size:.7rem;font-weight:800;letter-spacing:.4px;color:var(--accent);margin-bottom:6px}
+  .sl-chip{display:flex;align-items:center;gap:8px;width:100%;text-align:left;cursor:pointer;
+           background:#fff;border:1px solid #dbe5f2;border-radius:8px;padding:6px 9px;margin:4px 0;
+           font:inherit;font-size:.84rem;color:var(--ink)}
+  .sl-chip:hover{border-color:var(--accent)}
+  .sl-chip .n{flex:none;display:flex;align-items:center;justify-content:center;width:21px;height:21px;
+              border-radius:5px;font-size:.68rem;font-weight:800}
+  .sl-chip .r{margin-left:auto;font-size:.63rem;font-weight:800;letter-spacing:.4px}
+  .sl-chip small{color:var(--muted);font-weight:400}
+  .gm{display:inline-flex;align-items:center;gap:5px;margin-top:7px;text-decoration:none;
+      background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;
+      font-size:.78rem;font-weight:700;color:var(--accent)}
+  .gm:hover{border-color:var(--accent)}
+  .backlnk{display:inline-block;margin-top:9px;color:#dbe6ff;text-decoration:none;font-size:.82rem;
+           border-bottom:1px solid rgba(219,230,255,.4)}
+  .backlnk:hover{color:#fff;border-bottom-color:#fff}
+  .say{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent2);
+       border-radius:12px;padding:14px 16px;margin:18px 0 6px}
+  .say h3{margin:0 0 6px;font-size:1rem}
+  .say p{margin:.3em 0 0;font-size:.88rem}
+  .say .tiny{font-size:.79rem;color:var(--muted);margin-top:.6em}
+  .say button{margin-top:11px;border:none;background:var(--accent);color:#fff;padding:11px 20px;
+              border-radius:999px;font:inherit;font-size:.92rem;font-weight:600;cursor:pointer}
+  .say button:hover{background:#16294f}
+  .arrow{border:none;background:none;color:#22303c;font-size:15px;line-height:1;
+         text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
+
+  .sc-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+        padding:15px 16px;margin:12px 0;box-shadow:var(--shadow)}
+  .sc-quote{background:#fffdf7;border-left:4px solid var(--accent2);border-radius:10px;
+        padding:13px 15px;margin:12px 0;font-size:.95rem}
+  .sc-quote .qh{font-weight:800;color:var(--accent2);font-size:.78rem;letter-spacing:.4px;
+        text-transform:uppercase;margin-bottom:7px}
+  .sc-quote ol{margin:.4em 0 0;padding-left:1.3em}
+  .sc-quote li{margin:.16em 0}
+  .sc-done{background:#f2faf4;border-left:4px solid var(--g5);border-radius:10px;
+        padding:12px 14px;margin:10px 0}
+  .sc-warn{background:#fff8f0;border-left:4px solid var(--accent2);border-radius:10px;
+        padding:12px 14px;margin:10px 0}
+  .sc-prob{background:#fdf2f4;border-left:4px solid var(--red);border-radius:10px;
+        padding:12px 14px;margin:10px 0}
+  .sc-tbl{width:100%;border-collapse:collapse;font-size:.9rem;margin:.6em 0}
+  .sc-tbl th,.sc-tbl td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left}
+  .sc-tbl th{font-size:.74rem;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+  .sc-tbl td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .sc-ask{border:2px dashed var(--accent);border-radius:14px;padding:14px 15px;margin:14px 0;
+        background:#f7f9fe}
+  .sc-ask .aq{font-weight:800;color:var(--accent);margin-bottom:3px}
+  .sc-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+  .sc-chip{border:2px solid var(--line);background:#fff;border-radius:12px;padding:11px 13px;
+        font-size:.9rem;cursor:pointer;min-height:44px;display:flex;align-items:center;
+        flex:1 1 220px;line-height:1.35}
+  .sc-chip:hover{border-color:var(--accent)}
+  .sc-chip.on{border-color:var(--g5);background:#eef8f1;font-weight:700}
+  .sc-it{display:flex;gap:10px;align-items:flex-start;padding:9px 0;
+        border-bottom:1px solid var(--line)}
+  .sc-it:last-child{border-bottom:0}
+  .sc-it .h{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.82rem;
+        white-space:nowrap;padding-top:2px;min-width:92px}
+  .sc-it .b{flex:1}
+  .sc-it .nm{font-weight:700}
+  .sc-it.off .nm{text-decoration:line-through;color:var(--red)}
+  .sc-eb{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 9px;
+        font-size:.82rem;cursor:pointer;min-height:34px;white-space:nowrap}
+  .sc-eb:hover{border-color:var(--accent2)}
+  .sc-pill{background:#eef2fb;border-radius:8px;padding:2px 7px;font-weight:700;
+        font-variant-numeric:tabular-nums}
+  .sc-it.edited .sc-pill{text-decoration:line-through;opacity:.55;font-weight:400}
+  .sc-new{color:var(--accent2);font-weight:800}
+  .sc-in{width:64px;border:2px solid var(--accent2);border-radius:8px;padding:5px 7px;
+        font-size:.9rem;font-variant-numeric:tabular-nums}
+  .sc-free{width:100%;min-height:88px;border:1px solid var(--line);border-radius:12px;
+        padding:11px;font:inherit;font-size:.92rem}
+  .sc-bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+        padding:9px 14px 12px;box-shadow:0 -6px 22px rgba(30,40,60,.10);z-index:900}
+  .sc-bar .st{font-size:.8rem;color:var(--muted);margin-bottom:6px;text-align:center}
+  .sc-send{display:block;width:100%;max-width:632px;margin:0 auto;background:#25d366;color:#fff;
+        border:0;border-radius:13px;padding:14px;font-size:1rem;font-weight:800;cursor:pointer}
+  body{padding-bottom:118px}
+  /* IL TERMOMETRO - stessi nomi di classe e stessa formula della pagina della
+     logistica, di proposito: due barre che si assomigliano e misurano cose diverse
+     sarebbero peggio di nessuna barra. (`--amber` li' non esiste qui: e' `--accent2`.) */
+  .score{margin:11px 0 4px}
+  .scoretop{display:flex;align-items:baseline;gap:7px;font-size:.85rem;margin-bottom:4px}
+  .scoretop .pct{font-weight:800;font-size:1.15rem}
+  .scoretop .lbl{font-weight:700}
+  .track{position:relative;height:16px;background:#f0ece3;border-radius:999px;
+        overflow:hidden;border:1px solid var(--line)}
+  .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px}
+  .limitlbl{font-size:.72rem;color:var(--muted);text-align:right;margin-top:2px}
+  .ok .fill{background:linear-gradient(90deg,#5cb874,#3f9d5a)}
+  .warn .fill{background:linear-gradient(90deg,#f0b657,#e0912f)}
+  .bad .fill{background:linear-gradient(90deg,#e2707f,#d1495b)}
+  .verd{display:inline-block;font-size:.7rem;font-weight:800;padding:3px 10px;
+        border-radius:999px;color:#fff}
+  .verd.ok{background:var(--g5)} .verd.warn{background:var(--accent2)} .verd.bad{background:var(--red)}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <h1>Il lunedì come l'hai chiesto tu</h1>
+  <div class="sub">Ho applicato tutto. <b>La cena dopo è gratis — ma si porta via il tramonto.</b> Resta una cosa da decidere: quanto state sulla High Line.</div>
+  <div class="ver">🧭 percorso v1 &middot; 2 ago 2026</div>
+  <a class="backlnk" href="../">← torna all'itinerario e alle domande</a>
+</div></header>
+
+<div class="wrap">
+
+  <div class="changelog">
+    <h3>🆕 Che pagina è questa <span style="opacity:.75">(v1 &middot; 2 ago 2026)</span></h3>
+    <ul style="margin:.4em 0 0;padding-left:1.15em">
+      <li><b>Ho rifatto il lunedì come l'hai scritto</b>, e ho applicato tutt'e due le
+      risposte che mi hai dato dopo.</li>
+      <li>🔑 <b>La cena dopo è gratis: non allunga la giornata di un minuto.</b>
+      Ma <b>si porta via il tramonto</b>, e ti spiego sotto perché — non è ovvio.</li>
+      <li>👉 <b>C'è una cosa sola da decidere</b>, ed è una: <b>quanto volete stare
+      sulla High Line</b>. Quel numero, da solo, decide se vedete il sole calare.</li>
+    </ul>
+    <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica
+    forzando (Ctrl+F5, o tira giù per aggiornare).</p>
+  </div>
+
+  <!-- ============ 1. LA SUA RICHIESTA ============ -->
+  <h2 style="margin-top:30px">✍️ Quello che mi hai scritto</h2>
+  <div class="sc-quote">
+    <div class="qh">dalla mappa del lunedì, il 2 agosto</div>
+    «Metro da hotel a traghetto Staten Island · a piedi Wall Street · a piedi Memorial
+    9/11 · a piedi Oculus · metro Katz's Delicatessen · a piedi Sanctum Sanctorum ·
+    a piedi Joe's Pizza · <b>metro fino all'ingresso della High Line dalla parte di
+    Gansevoort</b> · <b>percorriamo tutta la High Line</b> · <b>Little Island al
+    tramonto</b> · <b>cena Chelsea Market</b> · rientro in hotel con taxi»
+  </div>
+  <div class="sc-quote" style="border-left-color:var(--g5);background:#f2faf4">
+    <div class="qh" style="color:var(--g5)">e le due risposte di dopo</div>
+    «Sex and the City: <b>lascialo come opzione se c'è tempo</b>» · «<b>La cena dopo</b>»
+  </div>
+
+  <!-- ============ 2. FATTO ============ -->
+  <h2 style="margin-top:34px">✅ Quello che ho già fatto, senza chiederti niente</h2>
+
+  <div class="sc-done">
+    <table class="sc-tbl">
+      <tr><td>🚇 <b>Metro al traghetto</b></td>
+          <td>Fatto. Treno <b>W</b> dalla 49 St, <b>29 minuti</b> porta a porta,
+          <b>$3 a testa</b>. Verificato su Google per il tuo lunedì.</td></tr>
+      <tr><td>👜 <b>Sex and the City</b></td>
+          <td>Fatto: adesso è <b>opzionale</b>. Resta nel giro, ma è <b>la prima che
+          salta</b> se la giornata stringe. È la tappa di Barbara.</td></tr>
+      <tr><td>🚶 <b>Tutta la High Line</b></td>
+          <td>Fatto. Oggi <b>non la percorrete tutta</b>: ne fate meno della metà.</td></tr>
+      <tr><td>🍴 <b>Cena al Chelsea Market dopo</b></td>
+          <td>Fatto — ed è la cosa che apre la questione qui sotto.</td></tr>
+    </table>
+  </div>
+
+  <div class="sc-warn">
+    🔄 <b>Una cosa l'ho girata al contrario, e te lo dico perché è una tua riga.</b>
+    Mi hai chiesto di entrare <b>da Gansevoort</b> e di <b>percorrerla tutta</b>: ma le due
+    cose insieme non stanno in piedi, perché <b>entrando da sud si esce alla 34esima</b>, che
+    è a <b>1,7 km da Little Island</b> — dove vi aspetta il tramonto. Dovreste rifare tutta
+    la strada indietro.<br><br>
+    ✅ <b>Entrando dalla 34esima si esce a Gansevoort</b>, che è a <b>350 metri</b> da Little
+    Island e <b>397</b> dal Chelsea Market. <b>Stessa camminata, stessa High Line, zero
+    ritorno.</b> Se avevi un motivo per entrare da Gansevoort dimmelo e la rigiro.
+  </div>
+
+  <!-- ============ 3. IL PUNTO ============ -->
+  <h2 style="margin-top:34px">🌇 «La cena dopo» è gratis. Il tramonto no.</h2>
+
+  <div class="sc-card">
+    <p style="margin:0;font-size:.93rem"><b>Spostare la cena in fondo non allunga la
+    giornata di un minuto</b> — la trovi qui sotto, prima riga: si finisce alle <b>20:59</b>,
+    cioè come adesso. <b>Ma toglie una cosa che non si vedeva:</b> era <b>la cena a fare da
+    cuscinetto</b>, e a spingere Little Island alle <b>19:15</b>, che è l'ora giusta per un
+    sole che cala alle <b>19:55</b>. Tolta da lì, <b>Little Island scivola indietro di un'ora
+    e mezza</b> e il sole vi trova al chiuso, dentro una food hall.</p>
+    <p style="margin:.7em 0 0;font-size:.93rem">🔑 <b>E l'unica cosa che può rifare da
+    cuscinetto è la tua stessa richiesta:</b> percorrere <b>tutta</b> la High Line invece di
+    mezza. Più ci state, più il tramonto torna al suo posto. <b>È una leva sola.</b></p>
+  </div>
+
+  <!-- ============ 4. LA LEVA ============ -->
+  <div class="sc-ask" data-prop="HLTEMPO">
+    <div class="aq">🕛 Quanto volete stare sulla High Line?</div>
+    <p style="margin:.3em 0 0;font-size:.92rem">Il parco è lungo <b>2,3 km</b>. Quanto ci
+    state dentro decide tutto il resto della sera. <b>La riga grigia è il lunedì di oggi</b>,
+    così vedi cosa scambi.</p>
+    <table class="sc-tbl">
+      <tr><th>quanto sulla High Line</th><th>Little Island</th><th>dopo il tramonto</th><th>si rientra</th></tr>
+      <tr style="opacity:.62"><td><i>oggi — mezzo parco, cena prima</i></td>
+          <td class="n">19:15-20:30</td><td class="n">✅ <b>35'</b></td><td class="n"><b>21:02</b></td></tr>
+      <tr><td><b>1h15</b> — si cammina e basta</td><td class="n">17:57-19:12</td><td class="n">🔴 <b>perso di 43'</b></td><td class="n"><b>20:59</b></td></tr>
+      <tr><td><b>2h</b> — tutta, con calma</td><td class="n">18:42-19:57</td><td class="n">🟠 <b>2'</b></td><td class="n"><b>21:44</b></td></tr>
+      <tr><td>⭐ <b>2h15</b> — tutta, senza fretta</td><td class="n">18:57-20:12</td><td class="n">✅ <b>17'</b></td><td class="n"><b>21:59</b></td></tr>
+      <tr><td><b>2h30</b> — margine come oggi</td><td class="n">19:12-20:27</td><td class="n">✅ <b>32'</b></td><td class="n"><b>22:14</b></td></tr>
+    </table>
+    <p style="margin:.55em 0 0;font-size:.92rem">⭐ <b>Io ti consiglio le 2h15.</b> Il sole
+    ve lo godete con <b>17 minuti di coda</b>, la giornata finisce alle <b>21:59</b> — un'ora
+    prima del venerdì — e <b>2h15 per 2,3 km di parco</b>, in otto e con i ragazzi che si
+    fermano a fotografare, <b>è un ritmo vero, non gonfiato</b>.</p>
+    <p style="margin:.55em 0 0;font-size:.92rem">⚠️ <b>Perché non ti consiglio le 2h30</b>,
+    che pure ti ridarebbe i 35 minuti di tramonto che hai oggi: si rientra alle
+    <b>22:14</b>, e soprattutto <b>2,3 km in due ore e mezza fa 0,9 km all'ora</b>. A quel
+    punto non è più «percorriamo la High Line»: è «stiamo sulla High Line».</p>
+    <div class="sc-chips" data-group="HLTEMPO">
+      <div class="sc-chip" data-val="LUNEDI, HIGH LINE: 75' - si cammina e basta. Tramonto PERSO, rientro 20:59">🚶 <b>1h15</b><br><small>tramonto perso, fine 20:59</small></div>
+      <div class="sc-chip" data-val="LUNEDI, HIGH LINE: 120' - tutta con calma. Tramonto dentro per un pelo, rientro 21:44">⏱️ <b>2h</b><br><small>tramonto per un pelo, fine 21:44</small></div>
+      <div class="sc-chip" data-val="LUNEDI, HIGH LINE: 135' - tutta senza fretta. Tramonto con 17' di coda, rientro 21:59">⭐ <b>2h15</b><br><small>tramonto +17', fine 21:59</small></div>
+      <div class="sc-chip" data-val="LUNEDI, HIGH LINE: 150' - margine sul tramonto come oggi, rientro 22:14">🌆 <b>2h30</b><br><small>tramonto +32', fine 22:14</small></div>
+    </div>
+    <p class="muted" style="margin:.7em 0 0;font-size:.88rem">👉 <b>Se approvi e non
+    scegli qui, faccio le 2h15</b>, quella consigliata. Te lo dico prima così non è una
+    sorpresa.</p>
+  </div>
+
+  <div class="sc-prob">
+    ⚠️ <b>Una cosa che va detta, perché quel numero l'avevi scelto tu.</b> I <b>35 minuti</b>
+    dopo il tramonto che ci sono oggi non sono capitati: li hai scelti tu il 30 luglio, quando
+    ti avevo dato tre opzioni e hai preso <b>la più larga</b>. Con la cena dopo, <b>il massimo
+    ragionevole scende a 17</b>. Non è un dettaglio ed è il vero prezzo dello spostamento —
+    molto più della mezz'ora sull'orologio.
+  </div>
+
+  <div class="sc-card">
+    <b>🌡️ Il termometro, come sulle altre giornate</b>
+    <p style="margin:.3em 0 0;font-size:.9rem">Il lunedì è <b>la giornata più piena del
+    viaggio</b>: quattro ore di movimento e il margine più stretto delle sei. Per questo qui
+    ogni minuto si vede, mentre sabato non si vedeva.</p>
+    <div class="score warn" style="margin-top:14px"><div class="scoretop"><span class="pct">96%</span><span class="lbl">il lunedì di <b>oggi</b></span> <span class="verd warn">piena ma ok</span></div><div class="track"><span class="fill" style="width:96%"></span></div><div class="limitlbl">si esce 08:45 · si finisce <b>21:02</b> · traguardo 21:30 · con la cena prima</div></div>
+<div class="score bad" style="margin-top:14px"><div class="scoretop"><span class="pct">104%</span><span class="lbl">⭐ <b>come lo consiglio</b></span> <span class="verd bad">non ci sta</span></div><div class="track"><span class="fill" style="width:100%"></span></div><div class="limitlbl">si esce 08:45 · si finisce <b>21:59</b> · traguardo 21:30 · High Line 2h15</div></div>
+<div class="score bad" style="margin-top:14px"><div class="scoretop"><span class="pct">106%</span><span class="lbl">con il margine di oggi sul tramonto</span> <span class="verd bad">non ci sta</span></div><div class="track"><span class="fill" style="width:100%"></span></div><div class="limitlbl">si esce 08:45 · si finisce <b>22:14</b> · traguardo 21:30 · High Line 2h30</div></div>
+  </div>
+
+  <!-- ============ 5. L'ITINERARIO ============ -->
+  <h2 style="margin-top:34px">🧾 Il lunedì come verrebbe — e puoi cambiarlo</h2>
+  <p style="margin-top:0;font-size:.92rem">Questa è la <b>⭐ consigliata</b> (High Line 2h15).
+  Gli orari <b>li calcolo io</b> dai minuti qui sotto; <b>i minuti sono una scelta mia, non un
+  dato</b>. Tocca <b>✏️ cambia</b> su una tappa e scrivi il numero che vuoi.</p>
+  <div class="sc-card">
+    <div class="sc-it" data-name="Traghetto Staten Island (a/r, passa la Statua)" data-min="90"><div class="h">09:19-10:49</div><div class="b"><div class="nm">Traghetto Staten Island (a/r, passa la Statua)</div><div style="font-size:.85rem;color:var(--muted)">Gratis, e passa davanti alla Statua della Liberta'. Andata e ritorno senza scendere: circa 50 minuti di navigazione.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">90'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Wall St / Charging Bull" data-min="15"><div class="h">11:05-11:20</div><div class="b"><div class="nm">Wall St / Charging Bull</div><div style="font-size:.85rem;color:var(--muted)">Il toro di Wall Street e la Borsa. Si passa, si fotografa, si va.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">15'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="9/11 Memorial" data-min="45"><div class="h">11:39-12:24</div><div class="b"><div class="nm">9/11 Memorial</div><div style="font-size:.85rem;color:var(--muted)">Must-do di Coco' (Ground Zero). Le due vasche stanno esattamente dove stavano le torri, coi nomi incisi sul bordo.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">45'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Oculus" data-min="15"><div class="h">12:34-12:49</div><div class="b"><div class="nm">Oculus</div><div style="font-size:.85rem;color:var(--muted)">Spot foto di Fabrizio - la stazione bianca a forma di costole. Fresco, si passa dentro.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">15'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Katz's Delicatessen (LES)" data-min="60"><div class="h">13:15-14:15</div><div class="b"><div class="nm">Katz's Delicatessen (LES)</div><div style="font-size:.85rem;color:var(--muted)">Il pastrami di Tony: 'altrimenti non torno in Italia'. E' la gastronomia del 1888, quella della scena di Harry ti presento Sally.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">60'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Sanctum Sanctorum (177A Bleecker)" data-min="15"><div class="h">14:41-14:56</div><div class="b"><div class="nm">Sanctum Sanctorum (177A Bleecker)</div><div style="font-size:.85rem;color:var(--muted)">Must-do di Giulio: la casa di Doctor Strange, 177A Bleecker. Si guarda da fuori.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">15'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Joe's Pizza (Carmine St)" data-min="35"><div class="h">15:13-15:48</div><div class="b"><div class="nm">Joe's Pizza (Carmine St)</div><div style="font-size:.85rem;color:var(--muted)">La fetta must-do di Giulio: pizza al taglio, in piedi, come si fa qui.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">35'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Sex and the City (Magnolia + scalinata di Carrie)" data-min="15"><div class="h">16:05-16:20</div><div class="b"><div class="nm">Sex and the City (Magnolia + scalinata di Carrie)</div><div style="font-size:.85rem;color:var(--muted)">Per Barbara: la pasticceria Magnolia e la scalinata di Carrie, a due passi.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">15'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="High Line" data-min="135"><div class="h">16:29-18:44</div><div class="b"><div class="nm">High Line</div><div style="font-size:.85rem;color:var(--muted)">Tutta la High Line, dall'alto: si entra alla 34th e si esce a Gansevoort, che e' a due passi da Little Island.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">135'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Little Island (tramonto)" data-min="75"><div class="h">18:57-20:12</div><div class="b"><div class="nm">Little Island (tramonto)</div><div style="font-size:.85rem;color:var(--muted)">Per MariaPaola, ed e' l'ora giusta: il parco sospeso sull'acqua, con il tramonto verso le 19:55. Si arriva 40 minuti prima e si resta 35 dopo.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">75'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Chelsea Market" data-min="60"><div class="h">20:28-21:28</div><div class="b"><div class="nm">Chelsea Market</div><div style="font-size:.85rem;color:var(--muted)">Cena in food hall, dentro l'ex fabbrica dei biscotti Nabisco: mattoni e tubi a vista.</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">60'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+<div class="sc-it" data-name="Rientro hotel" data-min="5"><div class="h">21:54-21:59</div><div class="b"><div class="nm">Rientro hotel</div><div style="font-size:.83rem;margin-top:5px">si sta <span class="sc-pill">5'</span> <span class="sc-newwrap"></span> <button type="button" class="sc-eb" data-edit>✏️ cambia</button></div></div></div>
+  </div>
+
+  <!-- ============ 6. L'APPROVAZIONE ============ -->
+  <div class="sc-ask" id="lunok" data-prop="LUNOK" style="border-width:3px">
+    <div class="aq" style="font-size:1.05rem">✅ Lo metto nel piano?</div>
+    <p style="margin:.3em 0 0;font-size:.93rem">È <b>la</b> domanda: quella qui sopra sulla
+    High Line è un dettaglio dentro la giornata, questa è la giornata. <b>Finché non rispondi
+    qui non tocco niente</b>: il lunedì resta come lo vedi in tutte le altre pagine — cena
+    prima, mezza High Line, tramonto con 35 minuti di coda.</p>
+    <div class="sc-chips" data-group="LUNOK">
+      <div class="sc-chip" data-val="LUNEDI: APPROVA E SOSTITUISCI - metro al traghetto, tutta la High Line dalla 34th a Gansevoort, Little Island, cena al Chelsea Market dopo">✅ <b>Approva e sostituisci</b><br><small>mettilo nel piano al posto di quello di adesso</small></div>
+      <div class="sc-chip" data-val="LUNEDI: NON APPROVO - rifammelo, ti dico cosa non va nel testo libero">🔁 Rifammelo<br><small>non mi convince — ti dico cosa sotto</small></div>
+      <div class="sc-chip" data-val="LUNEDI: LASCIA COM'E' - tieni il lunedi attuale, ritiro la richiesta">❌ Lascia com'è<br><small>ritiro la richiesta, va bene quello di prima</small></div>
+    </div>
+  </div>
+
+  <div class="sc-card" style="border:2px solid var(--accent2)">
+    <b>💬 E scrivimi quello che vuoi, sempre</b>
+    <p style="margin:.3em 0 .6em;font-size:.9rem">Il motivo per entrare da Gansevoort, un
+    orario che non ti torna, una tappa da togliere. <b>Vale anche se hai già toccato un
+    pulsante qui sopra</b>: parte tutto insieme nello stesso messaggio.</p>
+    <textarea class="sc-free" id="scFree" placeholder="Scrivi qui…"></textarea>
+  </div>
+
+</div>
+
+
+
+<div class="mapwrap"><div class="wrap" style="padding-bottom:0">
+  <div id="map"></div>
+  <div class="keys">
+    <span><b>il colore</b> dice <b>quale tratta</b> — lo ritrovi sulla scheda</span>
+    <span>
+      <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3"/></svg>a piedi
+    </span>
+    <span>
+      <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="11,6"/></svg>Big Bus
+    </span>
+    <span>
+      <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="14,5,2,5"/></svg>taxi
+    </span>
+    <span>▸ senso di marcia</span>
+    <span>🚏 fermate del bus</span>
+  </div>
+  <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
+</div></div>
+
+<div class="wrap">
+  <div class="changelog">
+    <h3>🗺️ E qui sotto: il giro, sulla mappa</h3>
+    Questa è la parte che conosci — <b>il filo che unisce le tappe</b>, col nuovo ordine già
+    dentro. <b>Le domande stanno qui sopra</b>, questa serve solo a farti vedere la giornata
+    come verrebbe.<br><br>
+    ⭐ <b>La mappa disegna la consigliata</b> (High Line 2h15). Le altre tre cambiano
+    <b>un numero solo</b> — quanto ci state dentro — e <b>non il giro</b>: la mappa è la
+    stessa per tutte e quattro.
+  </div>
+
+  <!-- ============ CHIAVE DI LETTURA ============ -->
+  <div class="card">
+    <h3 style="margin:0 0 4px">📖 Come si legge</h3>
+    <p class="muted" style="margin:0 0 10px;font-size:.85rem">Sette cose, e poi la pagina si legge da sola.</p>
+
+    <div class="pr"><span class="pi">🎨</span><div><b>Il colore dice QUALE tratta è</b><br>
+      <small>La prima è blu, la seconda arancione, e così via. <b>Lo stesso colore torna sulla scheda</b> —
+      quindi la linea che vedi sulla mappa e il riquadro che stai leggendo sono la stessa cosa.</small></div></div>
+
+    <div class="pr"><span class="pi">〰️</span><div><b>La forma della linea dice COME ci si muove</b><br>
+      <small>Linea <b>piena</b> = a piedi &middot; <b>tratteggiata</b> = Big Bus &middot;
+      <b>tratto-punto</b> = taxi &middot; <b>punteggiata</b> = metro.</small></div></div>
+
+    <div class="pr"><span class="pi">➤</span><div><b>Le frecce dicono il senso di marcia</b><br>
+      <small>Sono del colore della tratta e puntano dove si va: non serve dedurlo dai numeri.</small></div></div>
+
+    <div class="pr"><span class="pi">📏</span><div><b>Una linea dritta NON è un errore</b><br>
+      <small>Vuol dire <b>«grosso modo di qui»</b>. Dove il percorso calcolato non era attendibile — faceva
+      girare il blocco per fare cento metri — ho preferito la linea dritta, che è onesta.
+      <b>A guidarti sul posto ci pensa Google Maps: il link è su ogni tappa.</b></small></div></div>
+
+    <div class="pr"><span class="pi">①</span><div><b>Se clicchi un numero, ti porta sulla mappa</b><br>
+      <small>Tocca il <b>numero</b> di una tappa e la mappa si sposta su quel pezzo di strada, col pallino
+      che si ingrandisce. Funziona anche al contrario: <b>tocca un pallino sulla mappa e torni alla sua
+      scheda</b>. La bandierina 🏁 è la partenza, e risponde come le altre.</small></div></div>
+
+    <div class="pr"><span class="pi">🚏</span><div><b>I quadratini sono le fermate del bus</b><br>
+      <small><b>Pieni</b>, con scritto SALI o SCENDI = lì si sale e si scende. <b>Vuoti e numerati</b> = il bus
+      ferma, ma noi restiamo seduti. Da vicino compare il nome; e nella scheda del bus c'è
+      <b>l'elenco scritto</b>, dove toccando una fermata la mappa ci va sopra.</small></div></div>
+
+    <div class="pr"><span class="pi">⏰</span><div><b>Gli orari del bus sono quelli che il piano si aspetta</b><br>
+      <small>Big Bus dichiara <b>solo ogni quanto passa</b>, non l'ora di ogni fermata. Quindi servono a
+      sapere <b>quando essere lì</b>, non a scendere al minuto.</small></div></div>
+  </div>
+
+  <div id="steps"></div>
+
+  <div class="say">
+    <h3>🗣️ C'è qualcosa che non ti piace, o che vuoi cambiare?</h3>
+    <p>Su <b>come è fatta</b> questa pagina non ti chiedo più niente: mi hai già risposto, e va bene così.
+    Questo serve a dirmi una cosa <b>su questa giornata</b> quando la guardi — un orario che non torna,
+    una tappa nell'ordine sbagliato, una che manca.</p>
+    <button type="button" id="sayBtn">💬 Dimmi qui</button>
+    <p class="tiny">Si apre WhatsApp con già scritto <b>di quale giornata</b> e <b>di quale versione</b> stai
+    parlando: così non devo indovinarlo — è quello che è mancato l'altra sera.</p>
+  </div>
+
+  <div class="footer">Lunedì 17 agosto · simulazione · New York 13-18 ago 2026<br>Percorso generato dai dati del giro — 12 tappe<br>
+    <a href="../" style="color:inherit">← torna all'itinerario</a></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var STEPS = [{"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.76104,-73.98702&destination=40.70130,-74.01340&travelmode=transit", "n": "Traghetto Staten Island (a/r, passa la Statua)", "i": "🚲", "arr": "09:19", "dep": "10:49", "dwell": 90, "mode": "metro", "leg": 34, "brk": null, "km": 9.81, "opt": false, "lat": 40.7013, "lon": -74.0134, "note": "Gratis, e passa davanti alla Statua della Liberta'. Andata e ritorno senza scendere: circa 50 minuti di navigazione.", "col": "#2a78d6", "clock": null, "transit": null, "segs": [{"kind": "metro", "line": [[40.76104, -73.98702], [40.7013, -74.0134]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.70130,-74.01340&destination=40.70556,-74.01345&travelmode=walking", "n": "Wall St / Charging Bull", "i": "📸", "arr": "11:05", "dep": "11:20", "dwell": 15, "mode": "walk", "leg": 16, "brk": null, "km": 0.66, "opt": false, "lat": 40.70556, "lon": -74.01345, "note": "Il toro di Wall Street e la Borsa. Si passa, si fotografa, si va.", "col": "#eb6834", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.701428, -74.013382], [40.701428, -74.013382], [40.701475, -74.013489], [40.701566, -74.013399], [40.701559, -74.013331], [40.701558, -74.013319], [40.701539, -74.013091], [40.701612, -74.013076], [40.701636, -74.013073], [40.70166, -74.013069], [40.701711, -74.013066], [40.701722, -74.013066], [40.701748, -74.013067], [40.701796, -74.013077], [40.701838, -74.013087], [40.701876, -74.013093], [40.701918, -74.013097], [40.701964, -74.013095], [40.702004, -74.013091], [40.702046, -74.013084], [40.702083, -74.013074], [40.702115, -74.013061], [40.702152, -74.013044], [40.702188, -74.013022], [40.702217, -74.013], [40.702239, -74.012982], [40.702256, -74.012969], [40.702267, -74.012959], [40.702287, -74.012938], [40.702297, -74.012926], [40.702302, -74.012917], [40.702342, -74.012924], [40.702417, -74.012934], [40.702479, -74.012942], [40.702511, -74.012947], [40.702563, -74.012955], [40.702611, -74.012965], [40.70273, -74.012998], [40.703073, -74.013091], [40.703089, -74.013095], [40.703117, -74.013106], [40.70315, -74.013119], [40.703182, -74.013133], [40.703222, -74.013152], [40.703257, -74.013168], [40.703301, -74.013179], [40.703408, -74.013194], [40.703536, -74.013211], [40.703558, -74.013214], [40.7036, -74.013219], [40.703626, -74.013222], [40.703631, -74.013223], [40.703639, -74.013224], [40.703657, -74.013225], [40.703817, -74.013247], [40.703978, -74.013271], [40.703984, -74.013272], [40.704099, -74.013291], [40.704162, -74.013302], [40.704297, -74.013324], [40.704446, -74.013349], [40.704544, -74.013366], [40.704573, -74.013373], [40.704609, -74.01339], [40.704633, -74.013395], [40.704664, -74.013399], [40.704791, -74.013403], [40.704834, -74.013404], [40.704861, -74.013417], [40.704869, -74.013421], [40.704941, -74.0134], [40.70499, -74.013393], [40.705003, -74.013393], [40.705076, -74.013389], [40.705146, -74.013393], [40.705195, -74.013404], [40.705251, -74.013425], [40.70529, -74.013446], [40.705314, -74.013468], [40.705331, -74.013498], [40.705337, -74.013516], [40.705342, -74.013534], [40.705349, -74.013533], [40.705558, -74.013443]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.70556,-74.01345&destination=40.71137,-74.01327&travelmode=walking", "n": "9/11 Memorial", "i": "📸", "arr": "11:39", "dep": "12:24", "dwell": 45, "mode": "walk", "leg": 19, "brk": null, "km": 0.9, "opt": false, "lat": 40.71137, "lon": -74.01327, "note": "Must-do di Coco' (Ground Zero). Le due vasche stanno esattamente dove stavano le torri, coi nomi incisi sul bordo.", "col": "#1baf7a", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.705558, -74.013443], [40.705653, -74.013402], [40.70567, -74.01339], [40.705725, -74.013345], [40.705762, -74.013315], [40.705789, -74.013311], [40.705802, -74.013304], [40.705827, -74.013283], [40.705848, -74.013319], [40.705869, -74.013352], [40.705876, -74.013363], [40.705906, -74.013351], [40.705925, -74.013343], [40.705934, -74.013335], [40.70616, -74.013985], [40.706764, -74.013529], [40.706783, -74.013571], [40.706824, -74.01361], [40.706865, -74.01365], [40.706874, -74.013657], [40.706888, -74.013667], [40.706903, -74.013673], [40.706911, -74.013677], [40.706922, -74.013684], [40.706934, -74.013698], [40.706992, -74.013851], [40.706994, -74.01387], [40.706995, -74.013891], [40.706992, -74.01391], [40.706999, -74.013911], [40.707008, -74.01391], [40.707061, -74.013895], [40.707127, -74.013876], [40.707151, -74.013869], [40.707166, -74.013863], [40.707173, -74.01388], [40.707205, -74.013921], [40.707245, -74.013971], [40.707256, -74.014001], [40.707621, -74.013847], [40.707961, -74.013693], [40.70798, -74.013685], [40.707995, -74.013678], [40.708007, -74.013673], [40.708029, -74.013663], [40.70804, -74.013658], [40.708243, -74.013577], [40.70873, -74.013358], [40.708737, -74.013355], [40.708752, -74.013348], [40.708774, -74.013337], [40.708793, -74.013328], [40.708805, -74.013322], [40.709112, -74.013201], [40.709135, -74.013197], [40.709152, -74.01319], [40.709196, -74.013171], [40.709235, -74.013154], [40.709252, -74.013144], [40.709264, -74.013137], [40.709408, -74.013055], [40.709439, -74.013037], [40.70948, -74.013016], [40.709505, -74.013005], [40.709527, -74.012996], [40.709675, -74.012935], [40.709774, -74.0129], [40.710092, -74.012786], [40.710107, -74.012835], [40.71014, -74.01282], [40.710157, -74.012813], [40.71023, -74.012781], [40.710272, -74.012763], [40.71029, -74.012756], [40.7103, -74.012752], [40.71032, -74.012745], [40.710337, -74.012738], [40.710353, -74.012732], [40.710377, -74.012723], [40.710402, -74.012713], [40.710424, -74.012705], [40.71043, -74.012703], [40.710446, -74.012697], [40.710505, -74.012676], [40.710548, -74.01266], [40.710565, -74.012653], [40.710587, -74.012645], [40.710601, -74.01264], [40.710604, -74.012639], [40.710617, -74.012634], [40.710638, -74.012627], [40.710653, -74.012621], [40.710656, -74.01262], [40.710669, -74.012615], [40.710691, -74.012607], [40.710714, -74.012599], [40.710717, -74.012598], [40.710737, -74.01259], [40.710759, -74.012582], [40.710775, -74.012576], [40.710778, -74.012575], [40.710787, -74.012572], [40.710795, -74.01257], [40.710803, -74.012569], [40.710806, -74.01257], [40.710813, -74.012573], [40.71082, -74.012578], [40.710826, -74.012584], [40.710837, -74.012595], [40.710849, -74.012604], [40.710859, -74.012605], [40.710869, -74.012602], [40.710877, -74.012599], [40.71088, -74.012597], [40.71092, -74.01258], [40.710941, -74.012571], [40.710956, -74.012564], [40.710964, -74.012561], [40.710967, -74.01256], [40.710991, -74.012549], [40.711012, -74.01254], [40.711032, -74.012532], [40.711034, -74.012531], [40.711059, -74.01252], [40.711068, -74.012516], [40.711078, -74.012508], [40.711107, -74.012578], [40.71112, -74.012569], [40.711122, -74.012567], [40.711134, -74.012558], [40.711139, -74.012571], [40.711397, -74.013184], [40.71142, -74.013238], [40.711407, -74.013248], [40.711404, -74.01325], [40.711393, -74.013258], [40.711373, -74.013273], [40.711372, -74.013274]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.71137,-74.01327&destination=40.71155,-74.01142&travelmode=walking", "n": "Oculus", "i": "📸", "arr": "12:34", "dep": "12:49", "dwell": 15, "mode": "walk", "leg": 10, "brk": null, "km": 0.22, "opt": false, "lat": 40.71155, "lon": -74.01142, "note": "Spot foto di Fabrizio - la stazione bianca a forma di costole. Fresco, si passa dentro.", "col": "#eda100", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.71137, -74.01327], [40.71155, -74.01142]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.71155,-74.01142&destination=40.72230,-73.98740&travelmode=transit", "n": "Katz's Delicatessen (LES)", "i": "🍽️", "arr": "13:15", "dep": "14:15", "dwell": 60, "mode": "metro", "leg": 26, "brk": null, "km": 3.29, "opt": false, "lat": 40.7223, "lon": -73.9874, "note": "Il pastrami di Tony: 'altrimenti non torno in Italia'. E' la gastronomia del 1888, quella della scena di Harry ti presento Sally.", "col": "#e87ba4", "clock": null, "transit": null, "segs": [{"kind": "metro", "line": [[40.71155, -74.01142], [40.7223, -73.9874]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.72230,-73.98740&destination=40.72751,-73.99783&travelmode=walking", "n": "Sanctum Sanctorum (177A Bleecker)", "i": "📸", "arr": "14:41", "dep": "14:56", "dwell": 15, "mode": "walk", "leg": 27, "brk": null, "km": 1.47, "opt": false, "lat": 40.72751, "lon": -73.99783, "note": "Must-do di Giulio: la casa di Doctor Strange, 177A Bleecker. Si guarda da fuori.", "col": "#008300", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.722273, -73.987308], [40.722349, -73.987269], [40.722374, -73.987272], [40.722437, -73.987245], [40.722482, -73.987226], [40.722523, -73.987203], [40.722564, -73.98718], [40.722608, -73.987155], [40.722641, -73.987141], [40.722654, -73.987142], [40.723172, -73.988386], [40.723178, -73.988401], [40.723215, -73.988482], [40.723261, -73.988585], [40.723268, -73.9886], [40.723571, -73.989306], [40.724024, -73.990379], [40.724169, -73.99073], [40.724182, -73.990764], [40.724227, -73.990874], [40.724263, -73.990966], [40.724271, -73.990986], [40.724778, -73.992192], [40.724787, -73.992214], [40.724825, -73.992311], [40.724865, -73.992416], [40.724893, -73.992492], [40.724904, -73.992519], [40.724974, -73.992492], [40.72522, -73.992403], [40.725242, -73.992395], [40.725284, -73.99238], [40.725327, -73.992365], [40.725341, -73.992361], [40.725771, -73.993978], [40.725889, -73.994398], [40.725951, -73.994511], [40.725964, -73.994537], [40.725991, -73.994596], [40.726008, -73.994632], [40.726017, -73.994652], [40.72603, -73.99468], [40.726044, -73.994708], [40.72654, -73.995711], [40.726565, -73.995762], [40.726582, -73.995802], [40.726612, -73.995871], [40.726627, -73.995902], [40.726832, -73.996311], [40.72696, -73.996551], [40.726966, -73.996561], [40.726991, -73.996612], [40.727021, -73.996671], [40.727029, -73.996686], [40.727359, -73.99735], [40.727296, -73.997402], [40.727511, -73.997829]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.72751,-73.99783&destination=40.73050,-74.00270&travelmode=walking", "n": "Joe's Pizza (Carmine St)", "i": "🍽️", "arr": "15:13", "dep": "15:48", "dwell": 35, "mode": "walk", "leg": 17, "brk": null, "km": 0.74, "opt": false, "lat": 40.7305, "lon": -74.0027, "note": "La fetta must-do di Giulio: pizza al taglio, in piedi, come si fa qui.", "col": "#4a3aa7", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.727511, -73.997829], [40.727684, -73.998175], [40.727743, -73.998124], [40.727766, -73.998168], [40.728095, -73.998825], [40.728133, -73.998901], [40.728177, -73.998992], [40.72845, -73.999583], [40.728475, -73.99963], [40.728508, -73.999693], [40.728823, -74.000338], [40.728849, -74.00039], [40.728879, -74.000448], [40.729193, -74.001092], [40.729207, -74.001119], [40.729222, -74.001144], [40.729251, -74.001194], [40.729261, -74.001212], [40.729629, -74.001996], [40.72966, -74.002045], [40.729692, -74.00203], [40.729713, -74.00202], [40.729747, -74.00201], [40.729776, -74.002029], [40.729874, -74.002107], [40.729956, -74.002174], [40.729974, -74.002189], [40.729979, -74.002201], [40.729992, -74.002211], [40.730288, -74.002375], [40.730314, -74.002385], [40.730357, -74.002414], [40.730396, -74.00244], [40.730416, -74.002451], [40.730409, -74.002471], [40.730399, -74.002514], [40.730388, -74.002561], [40.73038, -74.002585], [40.730513, -74.00266]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.73050,-74.00270&destination=40.73530,-74.00384&travelmode=walking", "n": "Sex and the City (Magnolia + scalinata di Carrie)", "i": "📸", "arr": "16:05", "dep": "16:20", "dwell": 15, "mode": "walk", "leg": 17, "brk": null, "km": 0.76, "opt": true, "lat": 40.7353, "lon": -74.00384, "note": "Per Barbara: la pasticceria Magnolia e la scalinata di Carrie, a due passi.", "col": "#e34948", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.730513, -74.00266], [40.730864, -74.002859], [40.730902, -74.002882], [40.730937, -74.002904], [40.731085, -74.002989], [40.731159, -74.003033], [40.731418, -74.003182], [40.731447, -74.003198], [40.731487, -74.003219], [40.731688, -74.003336], [40.732052, -74.003547], [40.732121, -74.003506], [40.732152, -74.003488], [40.732178, -74.003472], [40.732319, -74.003546], [40.732462, -74.003622], [40.733086, -74.003257], [40.733164, -74.003214], [40.733236, -74.003175], [40.73343, -74.003059], [40.733545, -74.002993], [40.733588, -74.002967], [40.733659, -74.002926], [40.733744, -74.002885], [40.734199, -74.003012], [40.734245, -74.003026], [40.734294, -74.003041], [40.734845, -74.003203], [40.734881, -74.003218], [40.734947, -74.003231], [40.73549, -74.003378], [40.735488, -74.003392], [40.735417, -74.00387]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.73530,-74.00384&destination=40.75640,-74.00430&travelmode=transit", "n": "High Line - TUTTA, dalla 34th a Gansevoort", "i": "🚶", "arr": "16:29", "dep": "18:44", "dwell": 135, "mode": "metro", "leg": 9, "brk": null, "km": 3.29, "opt": false, "lat": 40.7564, "lon": -74.0043, "note": "Tutta la High Line, dall'alto: si entra alla 34th e si esce a Gansevoort, che e' a due passi da Little Island.", "col": "#2a78d6", "clock": null, "transit": null, "segs": [{"kind": "metro", "line": [[40.7353, -74.00384], [40.7564, -74.0043]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.75640,-74.00430&destination=40.74200,-74.01061&travelmode=walking", "n": "Little Island (tramonto)", "i": "📸", "arr": "18:57", "dep": "20:12", "dwell": 75, "mode": "walk", "leg": 13, "brk": null, "km": 2.36, "opt": false, "lat": 40.742, "lon": -74.01061, "note": "Per MariaPaola, ed e' l'ora giusta: il parco sospeso sull'acqua, con il tramonto verso le 19:55. Si arriva 40 minuti prima e si resta 35 dopo.", "col": "#eb6834", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.756449, -74.004301], [40.756449, -74.00428], [40.756447, -74.004212], [40.756441, -74.004142], [40.756435, -74.004092], [40.756428, -74.004041], [40.756418, -74.003986], [40.756405, -74.003929], [40.75639, -74.003873], [40.756371, -74.003821], [40.756348, -74.003763], [40.756331, -74.003722], [40.756321, -74.003695], [40.756317, -74.003671], [40.756318, -74.003656], [40.756321, -74.003631], [40.756327, -74.003615], [40.756334, -74.003604], [40.756339, -74.003599], [40.75576, -74.002243], [40.755742, -74.002201], [40.755243, -74.002568], [40.755254, -74.002593], [40.755233, -74.002608], [40.755192, -74.002639], [40.755152, -74.00267], [40.755134, -74.002684], [40.755121, -74.002654], [40.753439, -74.00387], [40.753404, -74.003896], [40.753378, -74.003915], [40.753371, -74.003914], [40.75333, -74.003956], [40.75329, -74.003997], [40.75327, -74.004011], [40.752773, -74.004365], [40.752721, -74.004404], [40.75265, -74.004457], [40.752151, -74.004822], [40.752091, -74.004854], [40.752032, -74.004911], [40.751529, -74.005276], [40.751462, -74.00532], [40.751409, -74.005365], [40.750917, -74.005729], [40.750865, -74.005764], [40.750792, -74.005812], [40.750345, -74.006135], [40.750248, -74.006207], [40.750165, -74.006268], [40.749673, -74.006633], [40.749656, -74.006644], [40.749588, -74.00669], [40.749534, -74.006729], [40.749508, -74.006748], [40.749057, -74.007102], [40.748966, -74.007169], [40.748869, -74.007238], [40.748843, -74.007257], [40.748762, -74.007317], [40.748573, -74.007467], [40.748465, -74.007534], [40.748442, -74.0075], [40.748333, -74.007492], [40.748268, -74.007484], [40.748199, -74.007461], [40.748161, -74.007449], [40.748123, -74.007437], [40.748112, -74.007403], [40.747895, -74.007562], [40.747541, -74.007622], [40.747522, -74.007625], [40.747464, -74.007637], [40.747419, -74.007644], [40.747402, -74.007646], [40.746864, -74.007756], [40.746825, -74.007761], [40.746764, -74.007769], [40.746709, -74.007775], [40.746685, -74.007778], [40.746125, -74.007877], [40.746056, -74.007889], [40.745983, -74.007901], [40.745408, -74.008007], [40.745343, -74.008024], [40.745242, -74.008049], [40.744709, -74.008156], [40.744651, -74.008167], [40.744582, -74.008182], [40.743987, -74.008292], [40.743937, -74.008299], [40.743853, -74.00831], [40.743852, -74.008318], [40.743846, -74.00832], [40.743252, -74.008426], [40.743213, -74.008433], [40.743197, -74.008436], [40.743143, -74.008446], [40.743066, -74.00846], [40.74306, -74.008461], [40.743047, -74.008465], [40.743039, -74.008507], [40.743042, -74.008567], [40.743046, -74.00863], [40.743053, -74.008697], [40.743061, -74.008761], [40.743069, -74.008824], [40.743071, -74.00884], [40.743073, -74.008855], [40.743077, -74.008883], [40.743079, -74.008904], [40.74308, -74.008911], [40.743082, -74.008919], [40.743086, -74.008952], [40.743091, -74.008989], [40.743094, -74.009017], [40.7429, -74.00905], [40.742884, -74.009056], [40.742871, -74.009069], [40.74286, -74.009084], [40.742843, -74.009109], [40.74282, -74.009127], [40.742805, -74.009134], [40.742271, -74.009233], [40.742247, -74.009241], [40.74219, -74.009266], [40.742223, -74.009352], [40.742544, -74.01011], [40.742343, -74.010257], [40.742289, -74.010295], [40.742271, -74.010305], [40.742253, -74.010312], [40.742238, -74.010318], [40.74202, -74.010401], [40.741998, -74.010412], [40.742012, -74.01046], [40.742016, -74.010472], [40.742024, -74.01049], [40.742035, -74.010505], [40.742043, -74.010513], [40.742053, -74.010518], [40.742064, -74.01052], [40.742088, -74.010521], [40.742109, -74.010521], [40.742123, -74.010526], [40.742134, -74.010535], [40.742141, -74.010551], [40.742143, -74.010571], [40.742139, -74.01059], [40.74213, -74.010608], [40.742116, -74.01062], [40.742101, -74.010626], [40.742077, -74.010633], [40.742051, -74.010647], [40.742035, -74.010658]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.74200,-74.01061&destination=40.74205,-74.00490&travelmode=walking", "n": "Chelsea Market - CENA", "i": "🍽️", "arr": "20:28", "dep": "21:28", "dwell": 60, "mode": "walk", "leg": 16, "brk": null, "km": 0.67, "opt": false, "lat": 40.74205, "lon": -74.0049, "note": "Cena in food hall, dentro l'ex fabbrica dei biscotti Nabisco: mattoni e tubi a vista.", "col": "#1baf7a", "clock": null, "transit": null, "segs": [{"kind": "walk", "line": [[40.742035, -74.010658], [40.742051, -74.010647], [40.742077, -74.010633], [40.742101, -74.010626], [40.742116, -74.01062], [40.74213, -74.010608], [40.742139, -74.01059], [40.742143, -74.010571], [40.742141, -74.010551], [40.742134, -74.010535], [40.742123, -74.010526], [40.742109, -74.010521], [40.742088, -74.010521], [40.742064, -74.01052], [40.742053, -74.010518], [40.742043, -74.010513], [40.742035, -74.010505], [40.742024, -74.01049], [40.742016, -74.010472], [40.742012, -74.01046], [40.741998, -74.010412], [40.74202, -74.010401], [40.742238, -74.010318], [40.742253, -74.010312], [40.742271, -74.010305], [40.742289, -74.010295], [40.742343, -74.010257], [40.742544, -74.01011], [40.742223, -74.009352], [40.74219, -74.009266], [40.742247, -74.009241], [40.742271, -74.009233], [40.742251, -74.009095], [40.742248, -74.009071], [40.742243, -74.00904], [40.742237, -74.008995], [40.742228, -74.008932], [40.742219, -74.008867], [40.742212, -74.008816], [40.7422, -74.008727], [40.742185, -74.008616], [40.74218, -74.008589], [40.742111, -74.008418], [40.742065, -74.008272], [40.742027, -74.00814], [40.742104, -74.008081], [40.742195, -74.008009], [40.742228, -74.007986], [40.742235, -74.007982], [40.74273, -74.007623], [40.741647, -74.005038], [40.741711, -74.004992], [40.741761, -74.004956], [40.741999, -74.004779]], "label": ""}]}, {"gmaps": "https://www.google.com/maps/dir/?api=1&origin=40.74205,-74.00490&destination=40.76104,-73.98702&travelmode=driving", "n": "Rientro hotel", "i": "🚶", "arr": "21:54", "dep": "21:59", "dwell": 5, "mode": "taxi", "leg": 25, "brk": null, "km": 3.63, "opt": false, "lat": 40.76104, "lon": -73.98702, "note": "", "col": "#eda100", "clock": null, "transit": null, "segs": [{"kind": "taxi", "line": [[40.741972, -74.00471], [40.741731, -74.004883], [40.741681, -74.004919], [40.741711, -74.004992], [40.742783, -74.007584], [40.742834, -74.007705], [40.742899, -74.007658], [40.743103, -74.007507], [40.743159, -74.007467], [40.743421, -74.007274], [40.74347, -74.007238], [40.743536, -74.007191], [40.743862, -74.006955], [40.743983, -74.006868], [40.744, -74.006855], [40.744061, -74.006811], [40.744124, -74.006765], [40.744591, -74.006426], [40.744646, -74.006385], [40.744717, -74.006332], [40.745173, -74.006002], [40.745231, -74.00596], [40.745297, -74.005912], [40.745642, -74.005662], [40.745724, -74.005602], [40.745753, -74.005581], [40.745817, -74.005534], [40.74588, -74.005487], [40.746309, -74.00517], [40.746346, -74.005142], [40.74641, -74.005098], [40.746465, -74.005059], [40.746971, -74.004691], [40.747023, -74.004653], [40.747088, -74.004609], [40.747611, -74.004229], [40.747703, -74.004164], [40.747789, -74.004103], [40.748301, -74.003724], [40.748355, -74.003684], [40.748426, -74.003633], [40.748921, -74.003274], [40.748974, -74.003236], [40.749044, -74.003185], [40.749499, -74.002859], [40.749533, -74.002833], [40.749611, -74.002775], [40.749657, -74.002741], [40.749744, -74.002678], [40.750155, -74.002369], [40.750229, -74.002314], [40.750273, -74.002282], [40.750776, -74.001919], [40.750828, -74.001882], [40.750886, -74.001839], [40.751349, -74.001496], [40.751383, -74.001473], [40.751459, -74.001418], [40.751506, -74.001383], [40.751963, -74.001059], [40.752033, -74.00101], [40.752075, -74.00098], [40.752123, -74.000944], [40.752178, -74.000905], [40.752246, -74.000858], [40.752632, -74.000572], [40.75269, -74.000531], [40.752752, -74.000486], [40.752796, -74.000453], [40.753651, -73.999831], [40.753867, -73.999672], [40.753919, -73.999634], [40.753985, -73.999586], [40.754288, -73.999365], [40.754503, -73.999213], [40.754591, -73.999149], [40.754692, -73.999078], [40.754837, -73.998965], [40.755199, -73.998701], [40.755257, -73.998659], [40.755315, -73.998616], [40.755464, -73.998508], [40.755535, -73.998454], [40.755809, -73.998256], [40.755874, -73.998209], [40.755933, -73.998165], [40.75601, -73.99811], [40.756115, -73.998033], [40.756189, -73.997979], [40.75643, -73.997804], [40.75648, -73.997767], [40.756563, -73.997707], [40.757049, -73.997352], [40.757094, -73.997322], [40.757172, -73.997263], [40.757674, -73.996897], [40.757743, -73.996846], [40.757806, -73.996801], [40.757819, -73.996792], [40.757962, -73.996686], [40.758278, -73.996455], [40.758346, -73.996406], [40.758404, -73.996363], [40.758545, -73.996259], [40.758904, -73.995999], [40.758984, -73.995941], [40.759061, -73.995883], [40.759528, -73.995545], [40.759626, -73.995473], [40.759737, -73.995392], [40.760247, -73.99502], [40.760312, -73.994972], [40.760367, -73.994932], [40.76087, -73.994566], [40.760925, -73.994526], [40.760995, -73.994475], [40.761496, -73.994109], [40.761552, -73.994069], [40.76161, -73.994026], [40.762124, -73.993651], [40.762185, -73.993607], [40.762239, -73.993567], [40.762752, -73.993193], [40.762803, -73.993157], [40.762867, -73.99311], [40.763371, -73.992743], [40.763428, -73.992701], [40.763376, -73.992579], [40.762288, -73.989989], [40.762233, -73.989859], [40.762182, -73.989739], [40.761427, -73.987946], [40.761101, -73.98717], [40.761038, -73.987021]], "label": ""}]}];
+var START = {"name": "Hotel Kimpton (Times Sq)", "lat": 40.76104, "lon": -73.98702, "time": "08:45"};
+
+/* La FORMA della linea dice come ci si muove; il COLORE dice quale tratta e'.
+   Due domande diverse, due canali diversi - in v1 erano schiacciati su uno solo. */
+var DASH = {walk:null, bus:'13,9', taxi:'16,6,2,6', metro:'2,9'};
+var MV = {walk:['\uD83D\uDEB6','A PIEDI'], bus:['\uD83D\uDE8C','BIG BUS'],
+          taxi:['\uD83D\uDE95','TAXI'], metro:['\uD83D\uDE87','METRO']};
+
+var map = L.map('map', {zoomControl:true, scrollWheelZoom:false});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+  {maxZoom:19, attribution:'&copy; OpenStreetMap, &copy; CARTO'}).addTo(map);
+if (L.Browser.mobile) map.dragging.disable();   /* un dito scorre la pagina, due zoomano */
+
+function bearing(a, b){
+  var d = Math.atan2(b[1]-a[1], b[0]-a[0]) * 180/Math.PI;
+  return 90 - d;                                 /* 0 = nord, orario */
+}
+
+var all = [], lines = [], arrows = [], busstops = [], STOPMK = {};
+
+var startMarker = null;
+if(START){
+  startMarker = L.marker([START.lat, START.lon], {zIndexOffset:600, icon: L.divIcon({className:'pin',
+    html:'<span style="background:#22303c;width:31px;height:31px;font-size:.95rem">\uD83C\uDFC1</span>',
+    iconSize:[31,31], iconAnchor:[15,15]})}).addTo(map);
+  startMarker.bindTooltip('PARTENZA &middot; ' + START.name + ' &middot; ' + START.time, {direction:'top'});
+  all.push([START.lat, START.lon]);
+}
+
+STEPS.forEach(function(s, i){
+  s.segs.forEach(function(g){
+    /* bordo bianco sotto: senza, una linea colorata su mappa chiara sparisce */
+    L.polyline(g.line, {color:'#fff', weight:9, opacity:.9}).addTo(map);
+    var ln = L.polyline(g.line, {color:s.col, weight:5, opacity:.85,
+                                 dashArray: DASH[g.kind] || null, lineCap:'round'}).addTo(map);
+    ln._step = i;
+    ln.bindTooltip('Tratta ' + (i+1) + ' &middot; ' + (MV[g.kind]||MV.walk)[1].toLowerCase(), {sticky:true});
+    lines.push(ln);
+    g.line.forEach(function(p){ all.push(p); });
+
+    /* frecce: il senso di marcia va visto, non dedotto dai numeri */
+    [0.33, 0.72].forEach(function(f){
+      var k = Math.floor(g.line.length * f);
+      if(k < 1 || k >= g.line.length) return;
+      var a = g.line[k-1], b = g.line[k];
+      if(a[0] === b[0] && a[1] === b[1]) return;
+      var m = L.marker(b, {interactive:false, icon: L.divIcon({className:'arrow',
+        html:'<div style="transform:rotate(' + bearing(a,b) + 'deg);color:' + s.col + '">\u27A4</div>',
+        iconSize:[15,15], iconAnchor:[7,7]})}).addTo(map);
+      m._step = i;
+      arrows.push(m);
+    });
+  });
+
+  /* Le fermate del bus, TUTTE quelle della nostra corsa: dove si sale, dove si
+     scende, e quelle in mezzo dove il bus ferma ma noi restiamo seduti. Erano
+     nei dati dalla v1 e non arrivavano sulla mappa. */
+  if(s.transit){
+    var t0 = s.transit;
+    var mk = function(st, kind){
+      var isVia = (kind === 'via');
+      var html = isVia
+        ? '<div class="b"><span class="via" style="color:' + s.col + ';border:2px solid ' + s.col + '">' + st.n + '</span></div>'
+        : '<div class="b"><span class="ic" style="background:' + s.col + '">\uD83D\uDE8F</span>' +
+          '<span class="lb" style="color:' + s.col + '">' + (kind === 'board' ? 'SALI' : 'SCENDI') + '</span></div>';
+      var m = L.marker([st.lat, st.lon], {icon: L.divIcon({className:'bstop', html:html,
+        iconSize: isVia ? [17,17] : [70,23], iconAnchor: isVia ? [8,8] : [11,11]})}).addTo(map);
+      m.bindTooltip('\uD83D\uDE8F fermata ' + st.n + ' &middot; ' + st.stop +
+        (isVia ? ' &middot; <i>il bus ferma ma noi restiamo su</i>'
+               : ' &middot; <b>' + (kind === 'board' ? 'si sale' : 'si scende') + '</b>' +
+                 (st.where ? '<br>' + st.where : '')), {direction:'top'});
+      /* etichetta col NOME sempre in chiaro - ma solo da vicino, altrimenti a
+         mappa larga si accavallano e si legge peggio di prima */
+      m._label = L.tooltip({permanent:true, direction:'right', offset:[12,0],
+        className:'stoplab', opacity:1}).setContent(st.stop).setLatLng([st.lat, st.lon]);
+      m._step = i;
+      busstops.push(m);
+      STOPMK[i + '-' + st.n] = m;
+      all.push([st.lat, st.lon]);
+    };
+    mk(t0.board, 'board');
+    (t0.via || []).forEach(function(v){ mk(v, 'via'); });
+    mk(t0.alight, 'alight');
+  }
+
+  s._marker = L.marker([s.lat, s.lon], {icon: L.divIcon({className:'pin',
+    html:'<span style="background:' + s.col + '">' + (i+1) + '</span>',
+    iconSize:[25,25], iconAnchor:[12,12]})}).addTo(map);
+  s._marker.bindTooltip((i+1) + '. ' + s.n, {direction:'top'});
+  s._marker.setZIndexOffset(500);   /* le tappe stanno sopra le fermate */
+  all.push([s.lat, s.lon]);
+});
+map.fitBounds(L.latLngBounds(all), {padding:[30,30]});
+
+/* i nomi delle fermate compaiono quando c'e' spazio per leggerli */
+function labelsByZoom(){
+  var show = map.getZoom() >= 14;
+  busstops.forEach(function(m){
+    if(!m._label) return;
+    if(show && !map.hasLayer(m._label)) m._label.addTo(map);
+    else if(!show && map.hasLayer(m._label)) map.removeLayer(m._label);
+  });
+}
+map.on('zoomend', labelsByZoom);
+labelsByZoom();
+
+function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+var box = document.getElementById('steps');
+
+if(START){
+  box.insertAdjacentHTML('beforeend',
+    '<div class="startcard" id="sstart"><span class="p">\uD83C\uDFC1</span><span>' +
+    '<span class="t">SI PARTE DA QUI &middot; ' + START.time + '</span><br><b>' + esc(START.name) + '</b>' +
+    '<br><small style="opacity:.7">\uD83D\uDCCD toccami: te lo mostro sulla mappa</small>' +
+    '</span></div>');
+}
+
+STEPS.forEach(function(s, i){
+  var h = '';
+  var mv = MV[s.mode] || MV.walk;
+
+  if(s.transit){
+    var t = s.transit;
+    h += '<div class="legcard" style="border-left-color:' + s.col + '"><span class="em">' + mv[0] + '</span><span>' +
+         '<span class="mode"><span class="swatch" style="background:' + s.col + '"></span>' +
+         'CI SI ARRIVA IN BUS</span><br>' +
+         '<span class="det">in tutto ' + s.leg + ' minuti da quando si lascia la tappa ' + i + '</span></span>' +
+         '<span class="tag">TRATTA ' + (i+1) + '</span></div>';
+    h += '<div class="bus"><div class="bh">\uD83D\uDE8C ' + esc(t.line) + '</div><div class="bb">';
+    if(s.clock){
+      var c = s.clock;
+      h += '<div class="clock">' +
+           '<div class="cr"><span class="ct">' + c.leave + '</span><span>si lascia la tappa precedente</span></div>' +
+           '<div class="cr"><span class="ct">' + c.at_stop + '</span><span>si e' + "'" + ' <b>alla fermata</b></span></div>' +
+           '<div class="cr big"><span class="ct">' + c.catch + '</span><span>\uD83D\uDE8C <b>la corsa che vogliamo prendere</b>' +
+           '<br><small>ne passa una ogni ~' + c.every + ' minuti: questa e' + "'" + ' quella su cui e' + "'" +
+           ' costruita la giornata</small></span></div>' +
+           (c.walk_after
+             ? '<div class="cr"><span class="ct">' + c.off + '</span><span>si e' + "'" + ' <b>alla tappa</b>' +
+               '<br><small>\u26A0\uFE0F si <b>scende prima</b>: dalla fermata c' + "'" + 'e' + "'" +
+               ' ancora un pezzo a piedi, qui sotto</small></span></div>'
+             : '<div class="cr"><span class="ct">' + c.off + '</span><span>si <b>scende</b>, ed e' + "'" +
+               ' gia' + "'" + ' la tappa</span></div>') +
+           '<div class="cnote">\u26A0\uFE0F Big Bus <b>non pubblica gli orari delle singole fermate</b>: dichiara' +
+           ' solo ogni quanto passa. Questi sono <b>gli orari che il piano si aspetta</b>, non un orario ufficiale' +
+           ' — servono a sapere <b>quando essere li' + "'" + '</b>, non a scendere al minuto.</div>' +
+           '</div>';
+    }
+    h += '<div class="stopbox"><div class="k">SALI QUI</div>' +
+         '<div class="v">fermata ' + t.board.n + ' &middot; ' + esc(t.board.stop) + '</div>' +
+         '<div class="w">' + esc(t.board.where) + '</div></div>';
+    if(s.brk){
+      h += '<div class="ride">\u23F3 <b>' + s.brk.wait + " minuti di attesa</b> alla fermata" +
+           (s.brk.wait >= 25 ? " (questa linea passa di rado)" : "") + '</div>';
+      h += '<div class="ride">\u2193 <b>' + s.brk.ride + " minuti di corsa</b><br>" + esc(t.sees) + '</div>';
+    } else {
+      h += '<div class="ride">\u2193 <b>' + s.leg + " minuti</b><br>" + esc(t.sees) + '</div>';
+    }
+    /* Le fermate scritte, in ordine. A mappa larga i puntini non bastano: qui si
+       legge dove sono, e toccandone una la mappa ci va sopra. */
+    var chips = [];
+    chips.push([t.board, 'board']);
+    (t.via || []).forEach(function(v){ chips.push([v, 'via']); });
+    chips.push([t.alight, 'alight']);
+    h += '<div class="stoplist"><div class="h">\uD83D\uDE8F LE FERMATE, IN ORDINE — toccane una per vederla sulla mappa</div>';
+    chips.forEach(function(p){
+      var st = p[0], kind = p[1], isVia = (kind === 'via');
+      h += '<button type="button" class="sl-chip" data-stop="' + i + '-' + st.n + '">' +
+           '<span class="n" style="' + (isVia
+             ? 'background:#fff;color:' + s.col + ';border:2px solid ' + s.col
+             : 'background:' + s.col + ';color:#fff') + '">' + st.n + '</span>' +
+           '<span><b>' + esc(st.stop) + '</b>' + (st.where ? '<br><small>' + esc(st.where) + '</small>' : '') + '</span>' +
+           '<span class="r" style="color:' + (isVia ? '#6b7a88' : s.col) + '">' +
+           (isVia ? 'si passa' : (kind === 'board' ? 'SI SALE' : 'SI SCENDE')) + '</span></button>';
+    });
+    h += '</div>';
+    h += '<div class="stopbox" style="background:#f2f9f4;border-color:#b9dcc4">' +
+         '<div class="k" style="color:#2f7a46">SCENDI QUI</div>' +
+         '<div class="v">fermata ' + t.alight.n + ' &middot; ' + esc(t.alight.stop) + '</div>' +
+         '<div class="w">' + esc(t.alight.where) + '</div></div>';
+    if(t.then) h += '<div class="ride" style="border-left-color:#5c6873">\uD83D\uDEB6 ' + esc(t.then) + '</div>';
+    if(t.wait_note) h += '<div class="warnbox">\u23F1 ' + esc(t.wait_note) + '</div>';
+    h += '<div class="warnbox" style="border-style:dotted">\uD83D\uDDFA\uFE0F Il tratteggio sulla mappa e' + "'" +
+         ' <b>indicativo</b>: segue le fermate vere dell' + "'" + 'anello, ma il percorso esatto del Big Bus non e' + "'" +
+         ' pubblico. <b>I nomi e i numeri delle fermate invece sono verificati.</b></div>';
+    h += '</div></div>';
+  } else if(s.leg){
+    h += '<div class="legcard" style="border-left-color:' + s.col + '"><span class="em">' + mv[0] + '</span><span>' +
+         '<span class="mode"><span class="swatch" style="background:' + s.col + '"></span>' + mv[1] + '</span><br>' +
+         '<span class="det">' + s.leg + ' minuti' + (s.km ? ' &middot; ' + s.km.toFixed(1).replace('.', ',') + ' km' : '') +
+         ' &middot; dalla tappa ' + i + '</span></span>' +
+         '<span class="tag">TRATTA ' + (i+1) + '</span></div>';
+  }
+
+  h += '<div class="step" id="s' + i + '" style="border-left-color:' + s.col + '"><div class="hd">' +
+       '<span class="num" data-goto="' + i + '" title="portami sulla mappa" style="background:' + s.col + '">' + (i+1) + '</span>' +
+       '<span class="nm">' + s.i + ' ' + esc(s.n) + (s.opt ? '<span class="opt">se c\u2019e\u2019 tempo</span>' : '') + '</span>' +
+       '<span class="tm">' + s.arr + '</span></div>';
+  h += '<div class="dw">ci si sta <b>' + s.dwell + ' minuti</b> &middot; si riparte alle <b>' + s.dep + '</b></div>';
+  if(s.note) h += '<div class="nt">' + esc(s.note.split(' | ')[0]) + '</div>';
+  if(s.gmaps){
+    h += '<a class="gm" href="' + s.gmaps + '" target="_blank" rel="noopener">' +
+         '\uD83D\uDDFA\uFE0F il percorso vero su Google Maps</a>';
+  }
+  h += '</div>';
+
+  box.insertAdjacentHTML('beforeend', h);
+});
+
+/* lo step attivo accende il suo pezzo di strada - e' tutto qui il trucco.
+   i === -1 e' la PARTENZA: e' una scheda come le altre e va sulla mappa come
+   le altre, altrimenti l'unica tappa che non risponde e' quella da cui si parte. */
+var cards = [].slice.call(document.querySelectorAll('.step'));
+var startCard = document.getElementById('sstart');
+var active = -2;
+function activate(i){
+  if(i === active) return;
+  active = i;
+  cards.forEach(function(c, k){ c.classList.toggle('on', k === i); });
+  if(startCard) startCard.classList.toggle('on', i === -1);
+  if(startMarker){
+    var se = startMarker.getElement();
+    if(se){
+      se.classList.toggle('act', i === -1);
+      se.classList.toggle('dim', i !== -1);
+    }
+  }
+  if(i === -1){
+    lines.forEach(function(ln){ ln.setStyle({opacity:.3, weight:5}); });
+    arrows.forEach(function(m){ m.setOpacity(.3); });
+    busstops.forEach(function(m){ var e = m.getElement(); if(e) e.classList.add('dim'); });
+    STEPS.forEach(function(s){
+      var e = s._marker.getElement();
+      if(e){ e.classList.remove('act'); e.classList.add('dim'); }
+    });
+    map.flyTo([START.lat, START.lon], 16, {duration:.6});
+    return;
+  }
+  lines.forEach(function(ln){
+    var on = ln._step === i;
+    ln.setStyle({opacity: on ? 1 : .45, weight: on ? 7 : 5});
+    if(on) ln.bringToFront();
+  });
+  arrows.forEach(function(m){
+    m.setOpacity(m._step === i ? 1 : .35);
+  });
+  busstops.forEach(function(m){
+    var e = m.getElement();
+    if(e) e.classList.toggle('dim', m._step !== i);   /* .dim = 80%, restano leggibili */
+  });
+  /* il pallino sulla mappa segue la scheda selezionata */
+  STEPS.forEach(function(s, k){
+    var e = s._marker.getElement();
+    if(e){
+      e.classList.toggle('act', k === i);
+      e.classList.toggle('dim', i >= 0 && k !== i);
+    }
+    s._marker.setZIndexOffset(k === i ? 1000 : 0);
+  });
+  var pts = [];
+  STEPS[i].segs.forEach(function(g){ g.line.forEach(function(p){ pts.push(p); }); });
+  pts.push([STEPS[i].lat, STEPS[i].lon]);
+  if(i === 0 && START) pts.push([START.lat, START.lon]);
+  map.flyToBounds(L.latLngBounds(pts), {padding:[40,40], maxZoom:16, duration:.6});
+}
+
+/* una lista sola: la partenza e' l'indice -1, le tappe da 0 in su */
+var allCards = (startCard ? [startCard] : []).concat(cards);
+function idxOf(el){ return cards.indexOf(el) >= 0 ? cards.indexOf(el) : -1; }
+
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting) activate(idxOf(e.target));
+  });
+}, {rootMargin: '-48% 0px -48% 0px'});
+allCards.forEach(function(c){ io.observe(c); });
+
+/* click per il telefono, passaggio del mouse per chi legge da computer */
+allCards.forEach(function(c){
+  var i = idxOf(c);
+  c.addEventListener('click', function(){ activate(i); });
+  c.addEventListener('mouseenter', function(){ activate(i); });
+});
+
+/* ...e nell'altro senso: tocchi il pallino sulla mappa e ti porta alla sua scheda.
+   Serve perche' la domanda arriva in tutti e due i modi - "questa tappa dov'e'?"
+   ma anche "questo pallino cos'e'?" */
+function goTo(i, el){
+  activate(i);
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+}
+STEPS.forEach(function(s, i){
+  s._marker.on('click', function(){ goTo(i, cards[i]); });
+});
+if(startMarker && startCard){
+  startMarker.on('click', function(){ goTo(-1, startCard); });
+}
+
+/* tocchi il NUMERO di una tappa -> la mappa ci va sopra. E' scritto nella chiave
+   di lettura, quindi deve funzionare esattamente cosi'. */
+document.querySelectorAll('.num[data-goto]').forEach(function(b){
+  b.addEventListener('click', function(ev){
+    ev.stopPropagation();
+    activate(parseInt(b.getAttribute('data-goto'), 10));
+    document.getElementById('map').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+
+/* tocchi una fermata nell'elenco -> la mappa ci va sopra e la fermata si apre */
+var _say = document.getElementById('sayBtn');
+if(_say){
+  _say.addEventListener('click', function(){
+    var L = ["🗽 NEW YORK - «Come si gira»: una cosa da cambiare",
+             "",
+             "📅 giornata: Il lunedì come l'hai chiesto tu",
+             "",
+             "✍️ (scrivi qui cosa non va: un orario, una tappa fuori posto, una che manca)",
+             "",
+             "———",
+             "📋 pagina: lunedi-scenario · pacchetto v1 · 2 ago 2026",
+             "🗺️ piano mostrato: SIMULAZIONE lunedi 17 (NON applicata al piano) - riordino chiesto da Fabrizio il 2 ago: metro al traghetto (W da 49 St, 29' verificati, $3), tutta la High Line, Little Island al tramonto, cena al Chelsea Market DOPO. Sex and the City reso OPZIONALE su sua risposta. VERSO DELLA HIGH LINE INVERTITO rispetto alla sua lettera: ingresso 34th e uscita Gansevoort (350 m da Little Island) invece che il contrario, che avrebbe lasciato il gruppo a 1,7 km dal tramonto. Mappa = consigliata, High Line 2h15, fine 21:59. Le altre: 1h15 fine 20:59 (tramonto perso), 2h fine 21:44, 2h30 fine 22:14. Oggi il lunedi finisce 21:02 con la cena prima. Pacchetto di riferimento v30"];
+    window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
+  });
+}
+
+document.querySelectorAll('.sl-chip').forEach(function(b){
+  b.addEventListener('click', function(ev){
+    ev.stopPropagation();                       /* non deve valere come click sulla scheda */
+    var m = STOPMK[b.getAttribute('data-stop')];
+    if(!m) return;
+    map.flyTo(m.getLatLng(), 16, {duration:.6});
+    m.openTooltip();
+    document.getElementById('map').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+
+var SC = {};
+document.querySelectorAll('.sc-chips').forEach(function(box){
+  var g = box.getAttribute('data-group');
+  box.querySelectorAll('.sc-chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      var was = c.classList.contains('on');
+      box.querySelectorAll('.sc-chip').forEach(function(x){ x.classList.remove('on'); });
+      if(was){ delete SC[g]; } else { c.classList.add('on'); SC[g] = c.getAttribute('data-val'); }
+      scStatus();
+    });
+  });
+});
+
+var SCEDIT = {};
+document.querySelectorAll('.sc-it [data-edit]').forEach(function(b){
+  b.addEventListener('click', function(){
+    var it = b.closest('.sc-it');
+    if(it.querySelector('.sc-in')) return;
+    var nm = it.getAttribute('data-name');
+    var cur = parseInt(it.getAttribute('data-min'), 10);
+    var wrap = it.querySelector('.sc-newwrap');
+    var inp = document.createElement('input');
+    inp.type = 'number'; inp.className = 'sc-in'; inp.value = cur; inp.min = 0; inp.step = 5;
+    wrap.appendChild(inp);
+    inp.focus();
+    var commit = function(){
+      var v = parseInt(inp.value, 10);
+      wrap.innerHTML = '';
+      if(!isNaN(v) && v !== cur){
+        SCEDIT[nm] = {da: cur, a: v};
+        it.classList.add('edited');
+        wrap.innerHTML = '&rarr; <span class="sc-new">' + v + "'</span>";
+      } else {
+        delete SCEDIT[nm];
+        it.classList.remove('edited');
+      }
+      scStatus();
+    };
+    inp.addEventListener('blur', commit);
+    inp.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ inp.blur(); } });
+  });
+});
+
+function scStatus(){
+  var t = [];
+  if(SC['LUNOK']) t.push(SC['LUNOK'].indexOf('LUNEDI: APPROVA') === 0 ? "\u2705 approvato" : "verdetto \u2713");
+  if(SC['HLTEMPO']) t.push("High Line \u2713");
+  var n = Object.keys(SCEDIT).length;
+  if(n) t.push(n + (n === 1 ? ' minuto cambiato' : ' minuti cambiati'));
+  var el = document.getElementById('scStatus');
+  if(!el) return;
+  el.textContent = t.length ? (t.join(' \u00b7 ') + " \u2014 manda quando vuoi")
+    : "Una domanda sola: lo metto nel piano? \uD83D\uDC47";
+}
+
+/* Il testo italiano dentro le stringhe JS sta fra VIRGOLETTE DOPPIE, sempre. */
+document.addEventListener('click', function(ev){
+  var t = ev.target;
+  var scSend = (t && t.closest) ? t.closest('#scSend') : null;
+  if(scSend){
+    var L = ["\uD83D\uDDFD NEW YORK - LUNEDI riordinato: la mia risposta", ""];
+    if(SC['LUNOK']){ L.push("\u2705 " + SC['LUNOK']); L.push(""); }
+    if(SC['HLTEMPO']){ L.push("\u23F3 " + SC['HLTEMPO']); L.push(""); }
+    var ks = Object.keys(SCEDIT);
+    if(ks.length){
+      L.push("\u270F\uFE0F MINUTI CAMBIATI:");
+      ks.forEach(function(k){
+        L.push("   - " + k + ": da " + SCEDIT[k].da + "' a " + SCEDIT[k].a + "'");
+      });
+      L.push("");
+    }
+    var f = document.getElementById('scFree');
+    if(f && f.value.trim()){ L.push("\uD83D\uDCAC ALTRO:"); L.push("   " + f.value.trim()); L.push(""); }
+    if(L.length <= 2){ L.push("(non ho ancora scelto niente)"); L.push(""); }
+    L.push("\u2014\u2014\u2014");
+    L.push("\uD83D\uDCCB pagina: lunedi-scenario v1 \u00b7 2 ago 2026");
+    L.push("\uD83D\uDDFA\uFE0F piano mostrato: SIMULAZIONE lunedi 17 (NON applicata al piano) - riordino chiesto da Fabrizio il 2 ago: metro al traghetto (W da 49 St, 29' verificati, $3), tutta la High Line, Little Island al tramonto, cena al Chelsea Market DOPO. Sex and the City reso OPZIONALE su sua risposta. VERSO DELLA HIGH LINE INVERTITO rispetto alla sua lettera: ingresso 34th e uscita Gansevoort (350 m da Little Island) invece che il contrario, che avrebbe lasciato il gruppo a 1,7 km dal tramonto. Mappa = consigliata, High Line 2h15, fine 21:59. Le altre: 1h15 fine 20:59 (tramonto perso), 2h fine 21:44, 2h30 fine 22:14. Oggi il lunedi finisce 21:02 con la cena prima. Pacchetto di riferimento v30");
+    L.push("\uD83D\uDD52 inviato: " + new Date().toLocaleString('it-IT'));
+    window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
+  }
+});
+scStatus();
+
+</script>
+
+<div class="sc-bar">
+  <div class="st" id="scStatus">Una domanda sola: lo metto nel piano? 👇</div>
+  <button type="button" class="sc-send" id="scSend">💬 Mandami la risposta su WhatsApp</button>
+</div>
+
+</body>
+</html>
