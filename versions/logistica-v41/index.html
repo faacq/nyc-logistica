@@ -269,7 +269,7 @@
     <b>l'itinerario da portare in viaggio</b>. Questa pagina resta come <b>consultazione</b> —
     orari, tappe, spostamenti.<br>
     <span style="opacity:.85">Si parte fra <b>10 giorni</b>.</span></div>
-    <div class="ver">📌 versione v42 &middot; 3 ago 2026</div>
+    <div class="ver">📌 versione v41 &middot; 3 ago 2026</div>
   </div>
 </header>
 
@@ -294,12 +294,6 @@
       minuti in più non comprano <i>più parco</i>: comprano <b>l'ora giusta a Little Island</b>,
       cioè il tramonto. <b>Il piano non cambia di un minuto</b> — hai scelto il tramonto e il
       tramonto resta — ma la ragione che ti avevo dato era sbagliata, e te la dico.</li>
-      <li>🖨️ <b>E c'è una cosa nuova da guardare: la giornata su un
-      foglio solo, da stampare e portarsi dietro.</b> Per ora l'ho fatta <b>solo per il
-      lunedì</b>, ed è una <b>prima prova</b>: mappa con le tappe numerate, orari,
-      <b>indirizzi</b> e, in fondo, cosa si accorcia se si è in ritardo. La trovi
-      <a href="#scheda">qui sotto</a>. <b>Non c'è niente da decidere</b> — è la
-      stessa roba di questa pagina, impaginata per la carta.</li>
     </ul>
     <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
   </div>
@@ -452,34 +446,6 @@
   </div>
   <div id="days"></div>
 
-  <!-- ============ SCHEDA DA STAMPARE (v42) ============ -->
-  <!-- Sta QUI, dopo il giorno-per-giorno, perche' e' la stessa cosa in un'altra
-       forma: chi ha appena letto le sei giornate e' esattamente chi puo' dire se
-       su carta gli servirebbero. Nessun gruppo di risposta nuovo: il canale e'
-       lo spazio libero che c'e' gia' in fondo - la pagina non ha piu' domande
-       aperte e non deve ricominciare ad averne. -->
-  <h2 id="scheda">🖨️ La giornata su un foglio, da portarsi dietro</h2>
-  <div class="card">
-    <p style="margin-top:0"><b>Prima prova, e per ora c'è solo il lunedì.</b>
-    L'idea è avere <b>una scheda per giornata</b>, da stampare in <b>A3</b> e piegare in
-    tasca: la mappa con le tappe numerate, gli orari veri, <b>gli indirizzi</b> — quelli
-    da far vedere a un tassista o da ridigitare col telefono al 6% — e in fondo
-    <b>cosa si accorcia se siete in ritardo</b>.</p>
-    <p>Ho scelto il lunedì apposta, perché è <b>il giorno più cattivo</b>:
-    metro, taxi e piedi tutti insieme, il tramonto da prendere e l'unica giornata che
-    sfora. Se il foglio regge quello, gli altri cinque vengono da sé.</p>
-    <div class="storylnk">
-      <a class="btn now" href="scheda/lunedi/">🗺️ Guardala — si legge anche dal telefono</a>
-      <a class="btn" href="scheda/lunedi/sheet-g5.pdf">⬇️ Il PDF da stampare (A3 orizzontale)</a>
-    </div>
-    <p class="muted" style="margin:.7em 0 0; font-size:.88rem">📌 <b>Non c'è
-    niente da decidere e non si riapre nessuna giornata</b>: gli orari sono gli stessi che
-    leggi qui sopra, presi dallo stesso calcolo. Mi serve sapere solo <b>se ti serve</b> —
-    se sì la faccio per tutti e sei i giorni. E se manca qualcosa che <i>su carta</i>
-    useresti e sullo schermo no, scrivimelo
-    <a href="#openText">nello spazio libero in fondo</a>.</p>
-  </div>
-
   <!-- ============ BLOCCHI ============ -->
   <h2>⏱️ I blocchi di tempo — sono i tuoi</h2>
   <div class="card">
@@ -498,7 +464,7 @@
   </div>
 
   <div class="footer">
-    Itinerario e logistica v42 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
+    Itinerario e logistica v41 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1500,9 +1466,9 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v42',
+  ver:   'v41',
   built: '2026-08-03',
-  plan:  "itinerario v2.4, pacchetto v42. 🎉 LOCK-IN COMPLETO, 6 SU 6 (D139): tutte e sei le giornate sono BLOCCATE il 2026-08-03 - le quattro del pomeriggio (D136) piu' domenica e lunedi la sera (form v40, 18:41). Da qui NON SI CHIEDE PIU' NIENTE su nessuna giornata: si verifica soltanto, e si scrive l'ITINERARIO DOCUMENTO (#8, map-first). Questa pagina e' CONSULTAZIONE, non piu' uno strumento di decisione. La porta per riaprire resta in fondo a ogni giornata (locks.py --unlock N) e da adesso costa di piu': una modifica rientra anche nella guida. LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-20:09 - dom 10:00-20:47 - lun 08:45-22:17 - mar 08:30-16:20, cuscino JFK 70'. Il lunedi sfora il traguardo comodo (21:30) di 47' ed e' scelta consapevole: il prezzo e' il TRAMONTO a Little Island, NON il parco - la High Line si percorre tutta in tutte e quattro le durate simulate (75/120/135/150), sono 2,3 km cioe' mezz'ora di passo svelto, e il dwell di 135' serve a posizionare Little Island sul tramonto (D140: la frase 'tutta invece di mezza' era falsa contro i nostri stessi scenari, corretta). Corse in taxi di tutto il viaggio: 2 (gen_mix.py: 54 spostamenti, 43 a piedi, 2 taxi, 4 bus, 5 metro). High Line 07:00-22:00, verificato su thehighline.org il 3 ago. NESSUNA DOMANDA APERTA E NESSUN FLAG DA SPUNTARE: la pagina non chiede piu' niente. RESTA DIETRO, ed e' tutto mio: l'itinerario documento (#8), O44 a 5 zone, 7g trasporti freschi (finestra 8-10 ago), O47.",
+  plan:  "itinerario v2.4, pacchetto v41. 🎉 LOCK-IN COMPLETO, 6 SU 6 (D139): tutte e sei le giornate sono BLOCCATE il 2026-08-03 - le quattro del pomeriggio (D136) piu' domenica e lunedi la sera (form v40, 18:41). Da qui NON SI CHIEDE PIU' NIENTE su nessuna giornata: si verifica soltanto, e si scrive l'ITINERARIO DOCUMENTO (#8, map-first). Questa pagina e' CONSULTAZIONE, non piu' uno strumento di decisione. La porta per riaprire resta in fondo a ogni giornata (locks.py --unlock N) e da adesso costa di piu': una modifica rientra anche nella guida. LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-20:09 - dom 10:00-20:47 - lun 08:45-22:17 - mar 08:30-16:20, cuscino JFK 70'. Il lunedi sfora il traguardo comodo (21:30) di 47' ed e' scelta consapevole: il prezzo e' il TRAMONTO a Little Island, NON il parco - la High Line si percorre tutta in tutte e quattro le durate simulate (75/120/135/150), sono 2,3 km cioe' mezz'ora di passo svelto, e il dwell di 135' serve a posizionare Little Island sul tramonto (D140: la frase 'tutta invece di mezza' era falsa contro i nostri stessi scenari, corretta). Corse in taxi di tutto il viaggio: 2 (gen_mix.py: 54 spostamenti, 43 a piedi, 2 taxi, 4 bus, 5 metro). High Line 07:00-22:00, verificato su thehighline.org il 3 ago. NESSUNA DOMANDA APERTA E NESSUN FLAG DA SPUNTARE: la pagina non chiede piu' niente. RESTA DIETRO, ed e' tutto mio: l'itinerario documento (#8), O44 a 5 zone, 7g trasporti freschi (finestra 8-10 ago), O47.",
   stale: ''
 };
 
@@ -1520,7 +1486,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v42: messaggio di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v41: messaggio di Fabrizio');
 
   /* v28: qui NON c'e' piu' nessun gruppo di domande. ZONETEMPI e VAN hanno avuto
      risposta il 31 lug (D112, D113) e sono usciti dalla pagina insieme al JS che
