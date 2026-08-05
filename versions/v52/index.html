@@ -277,7 +277,7 @@
     (5 ago, 21:15), ed era l'ultima cosa aperta. Se ti viene in mente qualcosa,
     <a href="#openText" style="color:inherit"><b>scrivimela in fondo</b></a>.</span><br>
     <span style="opacity:.85">Si parte fra <b>8 giorni</b>.</span></div>
-    <div class="ver">📌 versione v53 &middot; 6 ago 2026</div>
+    <div class="ver">📌 versione v52 &middot; 6 ago 2026</div>
   </div>
 </header>
 
@@ -497,7 +497,7 @@
         <a href="scheda/domenica/sheet-g4b.pdf">⬇️ PDF (2,6 MB)</a></div>
       <div class="dayrow"><b>📆 Lunedì 17</b> <span class="muted">dal traghetto alla High Line</span>
         <a href="route/g5/">🗺️ mappa</a> <a href="scheda/lunedi-b/">📄 foglio</a>
-        <a href="scheda/lunedi-b/sheet-g5b.pdf">⬇️ PDF (2,4 MB)</a></div>
+        <a href="scheda/lunedi-b/sheet-g5b.pdf">⬇️ PDF (2,3 MB)</a></div>
       <div class="dayrow off"><b>📆 Sabato 15</b> <span class="muted">Central Park, Museum Mile</span>
         <a href="route/g3/">🗺️ mappa</a> <span class="muted">— foglio e PDF domani</span></div>
       <div class="dayrow off"><b>📆 Martedì 18</b> <span class="muted">Empire State, Hudson Yards</span>
@@ -569,7 +569,7 @@
   </div>
 
   <div class="footer">
-    Itinerario e logistica v53 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
+    Itinerario e logistica v52 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -1575,14 +1575,14 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v53',
+  ver:   'v52',
   /* ⚠️ La v43 e' andata online il 4 ago e questo campo diceva ancora 2026-08-03:
      il tag della sua risposta ha quindi dichiarato una data di pubblicazione
      sbagliata di un giorno. Non ha fatto danni perche' il NUMERO di versione era
      giusto ed e' quello che conta per capire cosa aveva davanti - ma e' un dato
      falso in un blocco che esiste apposta per essere creduto. */
   built: '2026-08-06',
-  plan:  "itinerario v2.4, pacchetto v53. 🎉 LOCK-IN COMPLETO, 6 SU 6 (D139): tutte e sei le giornate sono BLOCCATE il 2026-08-03 - le quattro del pomeriggio (D136) piu' domenica e lunedi la sera (form v40, 18:41). Da qui NON SI CHIEDE PIU' NIENTE su nessuna giornata: si verifica soltanto, e si scrive l'ITINERARIO DOCUMENTO (#8, map-first). Questa pagina e' CONSULTAZIONE, non piu' uno strumento di decisione. La porta per riaprire resta in fondo a ogni giornata (locks.py --unlock N) e da adesso costa di piu': una modifica rientra anche nella guida. LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-20:09 - dom 10:00-20:47 - lun 08:45-22:17 - mar 08:30-16:20, cuscino JFK 70'. Il lunedi sfora il traguardo comodo (21:30) di 47' ed e' scelta consapevole: il prezzo e' il TRAMONTO a Little Island, NON il parco - la High Line si percorre tutta in tutte e quattro le durate simulate (75/120/135/150), sono 2,3 km cioe' mezz'ora di passo svelto, e il dwell di 135' serve a posizionare Little Island sul tramonto (D140: la frase 'tutta invece di mezza' era falsa contro i nostri stessi scenari, corretta). Corse in taxi di tutto il viaggio: 2 (gen_mix.py: 54 spostamenti, 43 a piedi, 2 taxi, 4 bus, 5 metro). High Line 07:00-22:00, verificato su thehighline.org il 3 ago. SULLE GIORNATE NESSUNA DOMANDA E NESSUN FLAG: la pagina non ne chiede piu'. LE SCHEDE DA STAMPARE (D143): dal form v43 ha scelto 'la B (verticale) ma con le cose scritte della A', ed e' fatta - striscia da 74 a 78 mm, note/tratte/soste/i tre riquadri della A dentro, zoom 15 tenuto, 16 mm di margine misurati da check_sheets. LE SEI SCHEDE SONO APPROVATE (form v45, 5 ago 08:40) e generate, ma NON pubblicate: aspettano il livello POI sulle altre cinque giornate, cosi' si stampano una volta sola. IL VENERDI' INVECE E' CHIUSO: master di stampa a 540 DPI generato in locale (zoom 18, 8,8 MB, fuori dal repo) - online resta la copia leggera da guardare (3,6 MB), e l'alta definizione si consegna a mano. IL LIVELLO 'LUNGO LA STRADA' (D147), su richiesta di Fabrizio: 19 punti da vedere sulla mappa del venerdi' (route/g2), che NON sono tappe, non hanno orari e non spostano niente - cerchietti spegnibili. HA RISPOSTO il 5 ago alle 21:15 (form v48): 'vanno bene cosi', falli anche sulle altre giornate' - il gruppo POC e' uscito dalla pagina, diventato stato (v49). FATTO su QUATTRO giornate (v50): g1 4 punti, g2 19, g4 8, g5 9 = 40, tutti geocodificati a due maniglie e con fonte. Sabato e martedi' restano da fare. Schede rigenerate col livello dentro per g1/g4/g5 (il venerdi' era gia' fatto): online la copia leggera, in locale il master di stampa. IL LUNEDI' HA 4 PUNTI SUL FOGLIO E 9 SULLA MAPPA: con 12 tappe il riquadro disteso sbordava di 31 mm, quindi sul foglio si scrive in forma STRETTA (`carta_compatta` nei dati, niente indirizzi) e cinque punti restano solo sulla mappa (`carta: false`). Margine finale 2 mm: e' al limite, e il controllo lo dice. QUESTA PAGINA ADESSO NON CHIEDE PIU' NIENTE: zero gruppi di risposta. Restano DUE cose sue, non ancora in pagina: quale albergo e' prenotato (l'indirizzo e' stampato sulla scheda) e se il 177A Bleecker resta un must. RESTA DIETRO, ed e' tutto mio: l'itinerario documento (#8), O44 a 5 zone, 7g trasporti freschi (finestra 8-10 ago), O47.",
+  plan:  "itinerario v2.4, pacchetto v52. 🎉 LOCK-IN COMPLETO, 6 SU 6 (D139): tutte e sei le giornate sono BLOCCATE il 2026-08-03 - le quattro del pomeriggio (D136) piu' domenica e lunedi la sera (form v40, 18:41). Da qui NON SI CHIEDE PIU' NIENTE su nessuna giornata: si verifica soltanto, e si scrive l'ITINERARIO DOCUMENTO (#8, map-first). Questa pagina e' CONSULTAZIONE, non piu' uno strumento di decisione. La porta per riaprire resta in fondo a ogni giornata (locks.py --unlock N) e da adesso costa di piu': una modifica rientra anche nella guida. LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-20:09 - dom 10:00-20:47 - lun 08:45-22:17 - mar 08:30-16:20, cuscino JFK 70'. Il lunedi sfora il traguardo comodo (21:30) di 47' ed e' scelta consapevole: il prezzo e' il TRAMONTO a Little Island, NON il parco - la High Line si percorre tutta in tutte e quattro le durate simulate (75/120/135/150), sono 2,3 km cioe' mezz'ora di passo svelto, e il dwell di 135' serve a posizionare Little Island sul tramonto (D140: la frase 'tutta invece di mezza' era falsa contro i nostri stessi scenari, corretta). Corse in taxi di tutto il viaggio: 2 (gen_mix.py: 54 spostamenti, 43 a piedi, 2 taxi, 4 bus, 5 metro). High Line 07:00-22:00, verificato su thehighline.org il 3 ago. SULLE GIORNATE NESSUNA DOMANDA E NESSUN FLAG: la pagina non ne chiede piu'. LE SCHEDE DA STAMPARE (D143): dal form v43 ha scelto 'la B (verticale) ma con le cose scritte della A', ed e' fatta - striscia da 74 a 78 mm, note/tratte/soste/i tre riquadri della A dentro, zoom 15 tenuto, 16 mm di margine misurati da check_sheets. LE SEI SCHEDE SONO APPROVATE (form v45, 5 ago 08:40) e generate, ma NON pubblicate: aspettano il livello POI sulle altre cinque giornate, cosi' si stampano una volta sola. IL VENERDI' INVECE E' CHIUSO: master di stampa a 540 DPI generato in locale (zoom 18, 8,8 MB, fuori dal repo) - online resta la copia leggera da guardare (3,6 MB), e l'alta definizione si consegna a mano. IL LIVELLO 'LUNGO LA STRADA' (D147), su richiesta di Fabrizio: 19 punti da vedere sulla mappa del venerdi' (route/g2), che NON sono tappe, non hanno orari e non spostano niente - cerchietti spegnibili. HA RISPOSTO il 5 ago alle 21:15 (form v48): 'vanno bene cosi', falli anche sulle altre giornate' - il gruppo POC e' uscito dalla pagina, diventato stato (v49). FATTO su QUATTRO giornate (v50): g1 4 punti, g2 19, g4 8, g5 9 = 40, tutti geocodificati a due maniglie e con fonte. Sabato e martedi' restano da fare. Schede rigenerate col livello dentro per g1/g4/g5 (il venerdi' era gia' fatto): online la copia leggera, in locale il master di stampa. IL LUNEDI' HA 4 PUNTI SUL FOGLIO E 9 SULLA MAPPA: con 12 tappe il riquadro disteso sbordava di 31 mm, quindi sul foglio si scrive in forma STRETTA (`carta_compatta` nei dati, niente indirizzi) e cinque punti restano solo sulla mappa (`carta: false`). Margine finale 2 mm: e' al limite, e il controllo lo dice. QUESTA PAGINA ADESSO NON CHIEDE PIU' NIENTE: zero gruppi di risposta. Restano DUE cose sue, non ancora in pagina: quale albergo e' prenotato (l'indirizzo e' stampato sulla scheda) e se il 177A Bleecker resta un must. RESTA DIETRO, ed e' tutto mio: l'itinerario documento (#8), O44 a 5 zone, 7g trasporti freschi (finestra 8-10 ago), O47.",
   stale: ''
 };
 
@@ -1600,7 +1600,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v53: messaggio di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v52: messaggio di Fabrizio');
 
   /* v28: qui NON c'e' piu' nessun gruppo di domande. ZONETEMPI e VAN hanno avuto
      risposta il 31 lug (D112, D113) e sono usciti dalla pagina insieme al JS che
