@@ -28,6 +28,21 @@
   .keys b{color:var(--ink)}
   .keys svg{vertical-align:middle;margin-right:3px}
   .maphint{font-size:.74rem;color:var(--muted);text-align:center;margin:4px 2px 0}
+  /* ---- il livello "lungo la strada" (D147). Tutto dimensionato per il
+     telefono: e' li' che questa pagina si apre davvero. */
+  .poico{display:inline-block;width:11px;height:11px;border-radius:50%%;
+         border:2px solid #6b7a88;background:#fff;vertical-align:middle;margin-right:4px}
+  .poibox{background:#f4f7f9;border:1px solid var(--line);border-left:5px solid #6b7a88;
+          border-radius:12px;padding:12px 14px;margin:12px 0 0;font-size:.9rem;
+          line-height:1.5}
+  .poibox h3{margin:0 0 5px;font-size:.98rem}
+  .poibox .no{color:#0f766e;font-weight:700}
+  .poisw{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:.86rem;
+         background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 11px}
+  .poisw input{width:18px;height:18px;flex:none}
+  .poiask{display:inline-block;margin-top:10px;background:#0f766e;color:#fff;
+          font-weight:800;text-decoration:none;padding:10px 15px;border-radius:9px;
+          font-size:.9rem}
   .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
              padding:11px 13px;margin:13px 0;font-size:.87rem}
   .changelog h3{margin:0 0 6px;font-size:.93rem}
@@ -169,7 +184,7 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il gio 13</h1>
   <div class="sub">Arrivo / Midtown (sera) — si esce alle <b>19:00</b>, si rientra verso le <b>21:48</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v49 &middot; 5 ago 2026</div>
+  <div class="ver">🧭 percorso v50 &middot; 5 ago 2026</div>
   <a class="backlnk" href="../../">← torna all'itinerario e alle domande</a>
 </div></header>
 
@@ -188,10 +203,25 @@
       <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="14,5,2,5"/></svg>taxi
     </span>
     <span>▸ senso di marcia</span>
-    <span>🚏 fermate del bus</span>
+    <span>🚏 fermate del bus</span><span><span class="poico"></span><b>A-S</b> da vedere <b>passando</b> (non sono tappe)</span>
   </div>
   <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
 </div></div>
+<div class="wrap" style="padding-bottom:0">
+  <div class="poibox">
+    <h3>🔎 I cerchietti grigi non sono tappe</h3>
+    Sono <b>4 cose che si vedono passandoci davanti</b> e che nel programma non ci sono:
+    palazzi, statue, dettagli, e due posti dove hanno girato dei film che vi piacciono.
+    <br><b class="no">Non è cambiato niente del vostro giro</b>: nessun orario si è mosso,
+    nessuna sosta si è allungata, non ho aggiunto nemmeno una tappa.
+    <br><span style="opacity:.85">Se ne notate uno mentre siete lì, alzate gli occhi.
+    Se non vi interessano, si spengono con l'interruttore qui sotto e la giornata torna
+    identica a quella che avete approvato.</span>
+    <label class="poisw"><input type="checkbox" id="poisw" checked>
+      <span>Mostrali sulla mappa &middot; <b>toccane uno</b> per sapere cos'è</span></label>
+    <a class="poiask" href="../../#poc">✅ Ti vanno bene così — me l'hai detto tu, e li metto su tutte e sei le giornate</a>
+  </div>
+</div>
 
 <div class="wrap">
   <div class="changelog">
@@ -364,6 +394,51 @@ STEPS.forEach(function(s, i){
   s._marker.setZIndexOffset(500);   /* le tappe stanno sopra le fermate */
   all.push([s.lat, s.lon]);
 });
+var POI = [{"id": "p37", "name": "Duffy Square", "address": "Broadway & West 47th Street", "lat": 40.75906, "lon": -73.98517, "coords_src": "tre maniglie concordi (nome + due civici, Nominatim) entro 23 m", "cat": "classic", "why": "Le scale rosse di vetro sopra il chiosco dei biglietti: di sera si illuminano da sotto e diventano la gradinata da cui si guarda Times Square.", "source": "https://en.wikipedia.org/wiki/Duffy_Square", "where": "a 20 m da Times Square di notte", "day": 1, "ref": "A", "zone": "Midtown"}, {"id": "p38", "name": "Paramount Building", "address": "1501 Broadway", "lat": 40.75727, "lon": -73.98666, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m - stesso punto del venerdi', riquadro condiviso", "cat": "perla", "why": "Di notte l'orologio con le ore fatte di stelle e il globo in cima sono illuminati: si vedono da Broadway.", "source": "https://www.paramountbuilding.com/history", "where": "a 250 m da Times Square di notte", "day": 1, "zone": "Midtown", "ref": "D"}, {"id": "p39", "name": "Shubert Alley", "address": "225 West 44th Street", "lat": 40.75815, "lon": -73.98696, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 25 m - stesso punto del venerdi', riquadro condiviso", "cat": "classic", "why": "Il vicolo dei teatri con le locandine accese: alle 21 e' l'ora in cui si riempie di gente che esce dagli spettacoli.", "source": "https://shubert.nyc/theatres/shubert/", "where": "a 200 m da Times Square di notte", "day": 1, "zone": "Midtown", "ref": "C"}, {"id": "p40", "name": "I. Miller Building", "address": "1552 Broadway", "lat": 40.75855, "lon": -73.98525, "coords_src": "civico qualificato 'Manhattan' (senza, '1552 Broadway, New York' risolve a SCHENECTADY: 'New York' e' anche lo Stato) - stesso punto del venerdi', riquadro condiviso", "cat": "perla", "why": "Quattro attrici dorate nelle nicchie, illuminate di sera: Ethel Barrymore, Marilyn Miller, Mary Pickford e Rosa Ponselle.", "source": "https://s-media.nyc.gov/agencies/lpc/lp/2023.pdf", "where": "a 70 m da Times Square di notte", "day": 1, "zone": "Midtown", "ref": "B"}];
+/* ============================ IL LIVELLO "LUNGO LA STRADA" (D147) ==========
+   Cose da vedere che NON sono tappe. Tre regole nel disegno:
+   1. SUBORDINATI: cerchietto vuoto, non pin pieno numerato. I numeri restano
+      dell'itinerario - se un segno compete con una tappa, la mappa ha smesso
+      di dire qual e' il programma.
+   2. NON entrano in `all`, quindi NON spostano l'inquadratura: la mappa
+      continua a incorniciare la giornata, non i punti che le abbiamo messo
+      intorno. (Se li includessimo, aggiungere un punto lontano rimpicciolirebbe
+      il percorso vero.)
+   3. Si spengono. E' l'unico modo onesto di aggiungere roba su un itinerario
+      gia' approvato: chi non la vuole la toglie e rivede esattamente quello
+      che aveva prima.                                                        */
+var poiLayer = L.layerGroup();
+POI.forEach(function(p){
+  /* `className` non e' cosmetica: Leaflet disegna i circleMarker come <path>,
+     non come <circle>, quindi senza una classe non c'e' modo di contarli - ne'
+     per me ne' per un controllo. Un livello che non si sa contare non si sa
+     verificare. */
+  /* Stessa forma della carta: goccia vuota grigia con la lettera. Carta e
+     schermo devono dare al punto la STESSA identita', o "guarda la F" non
+     vuol dire niente fra chi ha il telefono e chi ha il foglio. */
+  var m = L.marker([p.lat, p.lon], {icon: L.divIcon({className:'poidot',
+    html:'<svg width="22" height="30" viewBox="0 0 22 30">' +
+         '<path d="M11,29 L5,17 L17,17 Z" fill="#fff" stroke="#6b7a88" stroke-width="2"/>' +
+         '<circle cx="11" cy="11" r="9" fill="#fff" stroke="#6b7a88" stroke-width="2"/>' +
+         '<text x="11" y="15.5" text-anchor="middle" font-size="11" font-weight="800"' +
+         ' fill="#5b6b78">' + (p.ref || '') + '</text></svg>',
+    iconSize:[22,30], iconAnchor:[11,29]})});
+  var tag = {classic:'\uD83D\uDDFD classico', film:'\uD83C\uDFAC film',
+             perla:'\u2728 perla'}[p.cat] || '\uD83D\uDCCD';
+  m.bindPopup('<b>' + (p.ref ? p.ref + ' &middot; ' : '') + esc(p.name) + '</b><br><small style="color:#5b6b78">' + tag +
+              ' &middot; ' + esc(p.where) + '</small><br>' + esc(p.why) +
+              '<br><small style="color:#8494a1">' + esc(p.address) + '</small>');
+  m.addTo(poiLayer);
+});
+poiLayer.addTo(map);          /* acceso all'apertura: spento non si vedrebbe */
+
+var poiSw = document.getElementById('poisw');
+if(poiSw){
+  poiSw.addEventListener('change', function(){
+    if(this.checked) poiLayer.addTo(map); else map.removeLayer(poiLayer);
+  });
+}
+
 map.fitBounds(L.latLngBounds(all), {padding:[30,30]});
 
 /* i nomi delle fermate compaiono quando c'e' spazio per leggerli */
@@ -596,7 +671,7 @@ if(_say){
              "✍️ (scrivi qui cosa non va: un orario, una tappa fuori posto, una che manca)",
              "",
              "———",
-             "📋 pagina: route-g1 · pacchetto v49 · 5 ago 2026",
+             "📋 pagina: route-g1 · pacchetto v50 · 5 ago 2026",
              "🗺️ piano mostrato: Giorno 1 - Gio 13 - Arrivo / Midtown (sera) - 3 tappe, si esce 19:00, si rientra 21:48"];
     window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
   });

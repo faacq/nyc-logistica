@@ -28,6 +28,21 @@
   .keys b{color:var(--ink)}
   .keys svg{vertical-align:middle;margin-right:3px}
   .maphint{font-size:.74rem;color:var(--muted);text-align:center;margin:4px 2px 0}
+  /* ---- il livello "lungo la strada" (D147). Tutto dimensionato per il
+     telefono: e' li' che questa pagina si apre davvero. */
+  .poico{display:inline-block;width:11px;height:11px;border-radius:50%%;
+         border:2px solid #6b7a88;background:#fff;vertical-align:middle;margin-right:4px}
+  .poibox{background:#f4f7f9;border:1px solid var(--line);border-left:5px solid #6b7a88;
+          border-radius:12px;padding:12px 14px;margin:12px 0 0;font-size:.9rem;
+          line-height:1.5}
+  .poibox h3{margin:0 0 5px;font-size:.98rem}
+  .poibox .no{color:#0f766e;font-weight:700}
+  .poisw{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:.86rem;
+         background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 11px}
+  .poisw input{width:18px;height:18px;flex:none}
+  .poiask{display:inline-block;margin-top:10px;background:#0f766e;color:#fff;
+          font-weight:800;text-decoration:none;padding:10px 15px;border-radius:9px;
+          font-size:.9rem}
   .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
              padding:11px 13px;margin:13px 0;font-size:.87rem}
   .changelog h3{margin:0 0 6px;font-size:.93rem}
@@ -169,7 +184,7 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il dom 16</h1>
   <div class="sub">Downtown & Brooklyn (Big Bus g.2, linea ROSSA) — si esce alle <b>10:00</b>, si rientra verso le <b>20:47</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v49 &middot; 5 ago 2026</div>
+  <div class="ver">🧭 percorso v50 &middot; 5 ago 2026</div>
   <a class="backlnk" href="../../">← torna all'itinerario e alle domande</a>
 </div></header>
 
@@ -188,10 +203,25 @@
       <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="14,5,2,5"/></svg>taxi
     </span>
     <span>▸ senso di marcia</span>
-    <span>🚏 fermate del bus</span>
+    <span>🚏 fermate del bus</span><span><span class="poico"></span><b>A-S</b> da vedere <b>passando</b> (non sono tappe)</span>
   </div>
   <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
 </div></div>
+<div class="wrap" style="padding-bottom:0">
+  <div class="poibox">
+    <h3>🔎 I cerchietti grigi non sono tappe</h3>
+    Sono <b>8 cose che si vedono passandoci davanti</b> e che nel programma non ci sono:
+    palazzi, statue, dettagli, e due posti dove hanno girato dei film che vi piacciono.
+    <br><b class="no">Non è cambiato niente del vostro giro</b>: nessun orario si è mosso,
+    nessuna sosta si è allungata, non ho aggiunto nemmeno una tappa.
+    <br><span style="opacity:.85">Se ne notate uno mentre siete lì, alzate gli occhi.
+    Se non vi interessano, si spengono con l'interruttore qui sotto e la giornata torna
+    identica a quella che avete approvato.</span>
+    <label class="poisw"><input type="checkbox" id="poisw" checked>
+      <span>Mostrali sulla mappa &middot; <b>toccane uno</b> per sapere cos'è</span></label>
+    <a class="poiask" href="../../#poc">✅ Ti vanno bene così — me l'hai detto tu, e li metto su tutte e sei le giornate</a>
+  </div>
+</div>
 
 <div class="wrap">
   <div class="changelog">
@@ -364,6 +394,51 @@ STEPS.forEach(function(s, i){
   s._marker.setZIndexOffset(500);   /* le tappe stanno sopra le fermate */
   all.push([s.lat, s.lon]);
 });
+var POI = [{"id": "p20", "name": "Manhattan Municipal Building", "address": "1 Centre Street", "lat": 40.71303, "lon": -74.00347, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m", "cat": "classic+film", "why": "Il palazzo municipale del 1914 con la torre a colonne e la statua dorata Civic Fame in cima: qui i Ghostbusters escono scortati.", "source": "https://nycinfilm.com/2021/11/18/ghostbusters-1984/", "where": "a 120 m da Ponte di Brooklyn a piedi", "day": 4, "ref": "D", "zone": "Downtown+Brooklyn"}, {"id": "p21", "name": "Tweed Courthouse", "address": "52 Chambers Street", "lat": 40.7134, "lon": -74.00554, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m", "cat": "classic", "why": "Il tribunale che costo' piu' del Campidoglio di Washington perche' Boss Tweed ci rubo' sopra: si guardano scalinata e colonne.", "source": "https://en.wikipedia.org/wiki/Tweed_Courthouse", "where": "a 230 m da Ponte di Brooklyn a piedi", "day": 4, "ref": "E", "zone": "Downtown+Brooklyn"}, {"id": "p22", "name": "African Burial Ground", "address": "290 Broadway", "lat": 40.71472, "lon": -74.00514, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 61 m", "cat": "classic", "why": "Il cimitero africano del Seicento ritrovato scavando nel 1991: il memoriale di granito nero sta all'aperto.", "source": "https://www.nps.gov/afbg/", "where": "a 330 m da Ponte di Brooklyn a piedi", "day": 4, "ref": "F", "zone": "Downtown+Brooklyn"}, {"id": "p23", "name": "359 Broadway", "address": "359 Broadway", "lat": 40.71741, "lon": -74.00407, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m", "cat": "perla", "why": "Sul fianco si legge ancora l'insegna dipinta dello studio di Mathew Brady, il fotografo che ritrasse Lincoln.", "source": "https://en.wikipedia.org/wiki/359_Broadway", "where": "a 260 m da Big Bus ROSSA: Chinatown -> imbocco del ponte", "day": 4, "ref": "C", "zone": "Downtown+Brooklyn"}, {"id": "p24", "name": "E. V. Haughwout Building", "address": "488 Broadway", "lat": 40.72185, "lon": -73.99967, "coords_src": "civico 488 Broadway (Nominatim); la maniglia per nome cade a 138 m, quella per solo nome finisce ad HARLEM - 12,7 km fuori", "cat": "perla", "why": "Il palazzo in ghisa del 1857 dove Elisha Otis installo' il primo ascensore passeggeri della storia.", "source": "https://en.wikipedia.org/wiki/E._V._Haughwout_Building", "where": "a 230 m da Shopping SoHo", "day": 4, "ref": "B", "zone": "Downtown+Brooklyn"}, {"id": "p25", "name": "Gay Activists Alliance Firehouse", "address": "99 Wooster Street", "lat": 40.72457, "lon": -74.00104, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m", "cat": "perla", "why": "L'ex caserma dei pompieri che dal 1971 al 1974 fu il centro del movimento gay di New York: c'e' la targa.", "source": "https://www.nyclgbtsites.org/site/gay-activists-alliance-firehouse/", "where": "a 170 m da SoHo / Tribeca", "day": 4, "ref": "A", "zone": "Downtown+Brooklyn"}, {"id": "p26", "name": "Jane's Carousel", "address": "Old Dock Street, Brooklyn", "lat": 40.70338, "lon": -73.99257, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 118 m", "cat": "classic", "why": "Una giostra del 1922 restaurata dentro una scatola di vetro sotto il ponte: si vede girare da fuori.", "source": "https://en.wikipedia.org/wiki/Jane's_Carousel", "where": "a 60 m da Time Out Market Dumbo", "day": 4, "ref": "G", "zone": "Downtown+Brooklyn"}, {"id": "p27", "name": "St. Ann's Warehouse", "address": "45 Water Street, Brooklyn", "lat": 40.70364, "lon": -73.99281, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m", "cat": "perla", "why": "L'ex magazzino del tabacco del 1860 diventato teatro: il giardino dentro il guscio di mattoni e' aperto a tutti.", "source": "https://en.wikipedia.org/wiki/St._Ann's_Warehouse", "where": "a 80 m da Time Out Market Dumbo", "day": 4, "ref": "H", "zone": "Downtown+Brooklyn"}];
+/* ============================ IL LIVELLO "LUNGO LA STRADA" (D147) ==========
+   Cose da vedere che NON sono tappe. Tre regole nel disegno:
+   1. SUBORDINATI: cerchietto vuoto, non pin pieno numerato. I numeri restano
+      dell'itinerario - se un segno compete con una tappa, la mappa ha smesso
+      di dire qual e' il programma.
+   2. NON entrano in `all`, quindi NON spostano l'inquadratura: la mappa
+      continua a incorniciare la giornata, non i punti che le abbiamo messo
+      intorno. (Se li includessimo, aggiungere un punto lontano rimpicciolirebbe
+      il percorso vero.)
+   3. Si spengono. E' l'unico modo onesto di aggiungere roba su un itinerario
+      gia' approvato: chi non la vuole la toglie e rivede esattamente quello
+      che aveva prima.                                                        */
+var poiLayer = L.layerGroup();
+POI.forEach(function(p){
+  /* `className` non e' cosmetica: Leaflet disegna i circleMarker come <path>,
+     non come <circle>, quindi senza una classe non c'e' modo di contarli - ne'
+     per me ne' per un controllo. Un livello che non si sa contare non si sa
+     verificare. */
+  /* Stessa forma della carta: goccia vuota grigia con la lettera. Carta e
+     schermo devono dare al punto la STESSA identita', o "guarda la F" non
+     vuol dire niente fra chi ha il telefono e chi ha il foglio. */
+  var m = L.marker([p.lat, p.lon], {icon: L.divIcon({className:'poidot',
+    html:'<svg width="22" height="30" viewBox="0 0 22 30">' +
+         '<path d="M11,29 L5,17 L17,17 Z" fill="#fff" stroke="#6b7a88" stroke-width="2"/>' +
+         '<circle cx="11" cy="11" r="9" fill="#fff" stroke="#6b7a88" stroke-width="2"/>' +
+         '<text x="11" y="15.5" text-anchor="middle" font-size="11" font-weight="800"' +
+         ' fill="#5b6b78">' + (p.ref || '') + '</text></svg>',
+    iconSize:[22,30], iconAnchor:[11,29]})});
+  var tag = {classic:'\uD83D\uDDFD classico', film:'\uD83C\uDFAC film',
+             perla:'\u2728 perla'}[p.cat] || '\uD83D\uDCCD';
+  m.bindPopup('<b>' + (p.ref ? p.ref + ' &middot; ' : '') + esc(p.name) + '</b><br><small style="color:#5b6b78">' + tag +
+              ' &middot; ' + esc(p.where) + '</small><br>' + esc(p.why) +
+              '<br><small style="color:#8494a1">' + esc(p.address) + '</small>');
+  m.addTo(poiLayer);
+});
+poiLayer.addTo(map);          /* acceso all'apertura: spento non si vedrebbe */
+
+var poiSw = document.getElementById('poisw');
+if(poiSw){
+  poiSw.addEventListener('change', function(){
+    if(this.checked) poiLayer.addTo(map); else map.removeLayer(poiLayer);
+  });
+}
+
 map.fitBounds(L.latLngBounds(all), {padding:[30,30]});
 
 /* i nomi delle fermate compaiono quando c'e' spazio per leggerli */
@@ -596,7 +671,7 @@ if(_say){
              "✍️ (scrivi qui cosa non va: un orario, una tappa fuori posto, una che manca)",
              "",
              "———",
-             "📋 pagina: route-g4 · pacchetto v49 · 5 ago 2026",
+             "📋 pagina: route-g4 · pacchetto v50 · 5 ago 2026",
              "🗺️ piano mostrato: Giorno 4 - Dom 16 - Downtown & Brooklyn (Big Bus g.2, linea ROSSA) - 11 tappe, si esce 10:00, si rientra 20:47"];
     window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
   });
