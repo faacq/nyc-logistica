@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New York — Ci siamo</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --card:#fff; --ink:#22303c; --muted:#6b7a88; --line:#e7ddcd;
+    --accent:#1f3b73; --accent2:#e0912f; --g5:#3f9d5a; --red:#d1495b; --amber:#e0912f;
+    --shadow:0 6px 22px rgba(30,40,60,.10); --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--ink); padding-bottom:98px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:660px; margin:0 auto; padding:0 18px}
+  h1,h2,h3{line-height:1.2; margin:.2em 0}
+  h2{font-size:1.4rem; margin-top:1.6em}
+  h3{font-size:1.02rem}
+  p{margin:.5em 0}
+  small{color:var(--muted)} .muted{color:var(--muted)}
+
+  .hero{background:linear-gradient(160deg,#1f3b73 0%,#16294f 100%); color:#fff; padding:34px 0 26px; text-align:center}
+  .hero .flag{font-size:2.3rem}
+  .hero h1{font-size:1.5rem; margin:.15em 0}
+  .hero .sub{opacity:.95; font-size:.95rem}
+  .hero .ver{display:inline-block; margin-top:11px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.55); color:#fff; font-size:.78rem; font-weight:800; padding:4px 13px; border-radius:999px}
+
+  .changelog{background:#fff; border:1px solid var(--line); border-left:5px solid var(--g5); border-radius:12px; padding:12px 15px; margin:14px 0; font-size:.88rem}
+  .changelog h3{margin:0 0 5px; font-size:.98rem}
+  .changelog .cd{color:var(--muted); font-size:.8rem; font-weight:700}
+  .changelog ul{margin:.3em 0 0; padding-left:1.2em}
+  .changelog li{margin:.18em 0}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:15px 17px; margin:13px 0}
+
+  .princ{display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px dashed var(--line); font-size:.9rem}
+  .princ:last-child{border-bottom:none}
+  .princ .ic{font-size:1.2rem; flex:0 0 auto}
+
+  /* editable rows (slot sizes + day times) */
+  .er{display:flex; align-items:center; gap:9px; padding:8px 0; border-bottom:1px dashed var(--line); font-size:.89rem; flex-wrap:wrap}
+  .er:last-child{border-bottom:none}
+  .er .ic{font-size:1.05rem; flex:0 0 auto}
+  .er .nm{flex:1; min-width:130px}
+  .er .nm small{display:block; color:var(--muted)}
+  .er .sugg{font-weight:800; color:var(--accent); white-space:nowrap; background:#eef4fb; border:1px solid #cfe0f2; border-radius:8px; padding:3px 9px; font-size:.84rem}
+  .er .sugg.changed{background:#fff7ec; border-color:var(--accent2); color:#b46f1a; text-decoration:line-through; opacity:.6}
+  .er .newv{display:none; font-weight:800; color:#b46f1a; font-size:.84rem}
+  .er.edited .newv{display:inline}
+  .eb{border:1.5px solid var(--line); background:#fff; color:var(--accent); border-radius:999px; padding:4px 10px; font-size:.78rem; font-weight:700; cursor:pointer; white-space:nowrap}
+  .eb:hover{border-color:var(--accent)}
+  .erow{display:none; width:100%; gap:7px; align-items:center; margin-top:6px; flex-wrap:wrap}
+  .er.editing .erow{display:flex}
+  .erow input{border:1.5px solid var(--accent2); border-radius:9px; padding:7px 9px; font-family:inherit; font-size:.9rem; width:92px; background:#fff; color:var(--ink)}
+  .erow .u{font-size:.82rem; color:var(--muted)}
+
+  .recalc{background:linear-gradient(135deg,#fff7ec,#fff); border:1px dashed var(--accent2); border-radius:12px; padding:11px 14px; margin:12px 0; font-size:.88rem}
+  .recalc b{color:#b46f1a}
+
+  /* research box */
+  .res{background:linear-gradient(135deg,#eef4fb,#fff); border:1px solid #cfe0f2; border-left:5px solid var(--accent); border-radius:12px; padding:13px 15px; margin:12px 0; font-size:.89rem}
+  .res h3{margin-top:0; color:var(--accent)}
+  .res ul{margin:.4em 0; padding-left:1.15em}
+  .res li{margin:.3em 0}
+  .src{font-size:.78rem; color:var(--muted); margin-top:8px; border-top:1px dashed var(--line); padding-top:7px}
+
+  /* bookings */
+  .book{background:linear-gradient(135deg,#fdf1f3,#fff); border:2px solid var(--red); border-radius:14px; padding:14px 16px; margin:13px 0}
+  .book h3{margin-top:0; color:#b23a5b}
+  .bkitem{background:#fff; border:1px solid #f3d3da; border-radius:11px; padding:11px 13px; margin:9px 0; font-size:.89rem}
+  .bkitem .bt{font-weight:800}
+  .bkitem .bw{color:#4a5a68; margin:.35em 0}
+  .bkrow{display:flex; gap:7px; flex-wrap:wrap; align-items:center; margin-top:8px}
+  .bkrow input{border:1.5px solid var(--line); border-radius:9px; padding:7px 9px; font-family:inherit; font-size:.87rem; background:#fff; color:var(--ink); width:130px}
+
+  /* day card + score */
+  .day{border:1px solid var(--line); border-radius:14px; padding:13px 14px; margin:13px 0; background:#fff; box-shadow:var(--shadow)}
+  .day .dh{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:2px}
+  .day .dd{font-weight:800; font-size:1rem}
+  .day .dsub{font-size:.84rem; color:var(--muted); width:100%; margin-top:-2px}
+
+  .score{margin:11px 0 4px}
+  .scoretop{display:flex; align-items:baseline; gap:7px; font-size:.85rem; margin-bottom:4px}
+  .scoretop .pct{font-weight:800; font-size:1.15rem}
+  .scoretop .lbl{font-weight:700}
+  .track{position:relative; height:16px; background:#f0ece3; border-radius:999px; overflow:hidden; border:1px solid var(--line)}
+  .fill{position:absolute; left:0; top:0; bottom:0; border-radius:999px}
+  .limitlbl{font-size:.72rem; color:var(--muted); text-align:right; margin-top:2px}
+  .ok .fill{background:linear-gradient(90deg,#5cb874,#3f9d5a)}
+  .warn .fill{background:linear-gradient(90deg,#f0b657,#e0912f)}
+  .bad .fill{background:linear-gradient(90deg,#e2707f,#d1495b)}
+  .verd{display:inline-block; font-size:.7rem; font-weight:800; padding:3px 10px; border-radius:999px; color:#fff}
+  .verd.ok{background:var(--g5)} .verd.warn{background:var(--amber)} .verd.bad{background:var(--red)}
+
+  .prob{background:#fdf1f3; border:1px solid #f3d3da; border-left:5px solid var(--red); border-radius:11px; padding:11px 13px; margin:10px 0; font-size:.89rem}
+  .prob h4{margin:0 0 5px; font-size:.94rem; color:#b23a5b}
+  .prob ul{margin:.3em 0; padding-left:1.15em} .prob li{margin:.25em 0}
+  .sol{background:#f0f9f2; border:1px solid #bfe6cb; border-left:5px solid var(--g5); border-radius:11px; padding:11px 13px; margin:10px 0; font-size:.89rem}
+  .sol h4{margin:0 0 5px; font-size:.94rem; color:#2f7a46}
+  .sol .res2{margin-top:7px; font-weight:700; color:#2f7a46}
+
+  /* RISPOSTO E APPLICATO (D83/D67, v25). Una cosa decisa si mostra come STATO, non si
+     richiede: percio' questo blocco e' verde e pieno - non giallo e tratteggiato come
+     .ask, che significa "manca qualcosa da te". Il colore e' il primo a dire che qui
+     non c'e' niente da fare, prima ancora che si legga la frase. */
+  .done{margin-top:10px; background:#f0f9f2; border:1px solid #bfe6cb; border-left:5px solid var(--g5);
+        border-radius:11px; padding:11px 13px; font-size:.89rem}
+  .done .dh{font-size:.94rem; color:#2f7a46; margin-bottom:2px}
+  .done .res2{margin-top:7px; font-weight:700; color:#2f7a46}
+  .done table td{vertical-align:top}
+
+  /* approval buttons */
+  .ask{margin-top:10px; background:#fffdf6; border:1px dashed var(--accent2); border-radius:11px; padding:10px 12px}
+  .ask .aq{font-size:.87rem; font-weight:700; color:#8a6d12; margin-bottom:7px}
+  /* la via d'uscita da una cosa gia' decisa: NON e' una domanda nuova, quindi
+     e' volutamente piu' spenta di .ask - si nota solo se la si sta cercando */
+  .ask .chips{gap:7px}
+  .ask .chip{padding:7px 13px; font-size:.86rem}
+  .appr{display:flex; flex-direction:column; gap:7px; margin-top:10px}
+  .ab{border:1.5px solid var(--line); background:#fff; border-radius:11px; padding:10px 13px; font-size:.88rem; font-weight:700; cursor:pointer; text-align:left; color:var(--ink); font-family:inherit}
+  .ab small{display:block; font-weight:600; color:var(--muted); margin-top:2px}
+  .ab.yes.sel{background:#f0f9f2; border-color:var(--g5); color:#2f7a46}
+  .ab.again.sel{background:#eef4fb; border-color:var(--accent); color:var(--accent)}
+  .ab.edit.sel{background:#fff7ec; border-color:var(--accent2); color:#b46f1a}
+
+  /* taxi / metro */
+  .taxi{background:#fffdf6; border:1px solid var(--line); border-left:5px solid #c9a227; border-radius:11px; padding:11px 13px; margin:10px 0; font-size:.87rem}
+  .taxi h4{margin:0 0 6px; font-size:.92rem; color:#8a6d12}
+  .tleg{padding:7px 0; border-bottom:1px dashed var(--line)}
+  .tleg:last-child{border-bottom:none}
+  .tleg .tr{font-weight:700}
+  .tleg .td{color:var(--muted); font-size:.84rem}
+  .tleg .tc{font-weight:800; color:#8a6d12}
+  .tleg .tm{display:block; margin-top:4px; background:#eef4fb; border:1px solid #cfe0f2; border-radius:8px; padding:6px 9px; font-size:.84rem; color:#2b3a4a}
+
+  /* stop list / edit mode */
+  .editbtn{margin-left:auto; border:1.5px solid var(--accent); background:#fff; color:var(--accent); border-radius:999px; padding:5px 12px; font-size:.8rem; font-weight:700; cursor:pointer; white-space:nowrap}
+  .day.editing .editbtn{background:var(--accent); color:#fff}
+  .seq{position:relative; margin-top:10px; padding-left:15px}
+  .seq::before{content:""; position:absolute; left:4px; top:9px; bottom:9px; width:2px; background:var(--line); border-radius:2px}
+  .it{position:relative; display:flex; gap:8px; align-items:baseline; background:#fff; border:1px solid transparent; border-radius:9px; padding:6px 9px; margin:4px 0; font-size:.87rem; transition:all .12s}
+  .it::before{content:""; position:absolute; left:-11.5px; top:12px; width:8px; height:8px; border-radius:50%; background:#cbb892; border:2px solid #fff}
+  .it.opt::before{background:var(--accent2)}
+  .it .nm{flex:1}
+  .it .sl{flex:0 0 auto; font-size:.75rem; font-weight:800; color:var(--muted); white-space:nowrap}
+  .it .mv{display:inline-block; font-size:.68rem; font-weight:800; padding:2px 7px; border-radius:999px; margin-right:6px; white-space:nowrap}
+  .it .mv.walk{background:#f1f0ec; color:#5c6873; border:1px solid #e0dad0}
+  .it .mv.bus{background:#e8f1fb; color:#1f3b73; border:1px solid #cfe0f2}
+  .it .mv.taxi{background:#fff6e2; color:#8a6d12; border:1px solid #f0dfae}
+  .mv.metro{background:#efeaf8; color:#4b3a86; border:1px solid #d9cff0}
+  .it .fx{display:inline-block; background:#eef4fb; color:var(--accent); font-size:.64rem; font-weight:800; padding:1px 6px; border-radius:999px; margin-left:5px}
+  .it .fx.todo{background:#fdecc8; color:#8a5a12}
+  .day.editing .it{cursor:pointer; border-color:var(--line)}
+  .day.editing .it:hover{border-color:var(--red)}
+  .it.off{background:#fbe9ec; border-color:var(--red)!important; color:#b23a5b; text-decoration:line-through; opacity:.85}
+  .chg{margin-top:12px; border-top:1px solid var(--line); padding-top:9px}
+  .chg summary{cursor:pointer; font-size:.83rem; color:var(--muted); font-weight:600;
+               list-style:none; padding:3px 0}
+  .chg summary::-webkit-details-marker{display:none}
+  .chg summary:hover{color:var(--accent)}
+  .chg[open] summary{color:var(--accent); margin-bottom:6px}
+  .chgin{padding-top:2px}
+  .edithint{display:none; font-size:.8rem; color:#b23a5b; margin:9px 0 0; font-weight:600}
+  .day.editing .edithint{display:block}
+  .recov{display:none; margin-top:9px; background:#fff7ec; border:1px dashed var(--accent2); border-radius:10px; padding:9px 11px; font-size:.85rem}
+  .day.editing .recov{display:block}
+  .recov b{color:#b46f1a}
+  .recov.done{background:#f0f9f2; border-color:var(--g5)}
+  .recov.done b{color:#2f7a46}
+  .daycomment{display:none; width:100%; margin-top:9px; border:1.5px solid var(--accent2); border-radius:10px; padding:9px; font-family:inherit; font-size:.88rem; min-height:52px; resize:vertical; background:#fff; color:var(--ink)}
+  .day.editing .daycomment, .day.wantedit .daycomment{display:block}
+  .day.wantedit{border-color:var(--accent2); border-width:2px}
+
+  /* proposals */
+  .prop{background:#fff; border:1px solid var(--line); border-radius:13px; padding:13px 15px; margin:11px 0; box-shadow:var(--shadow)}
+  .prop .pt{font-weight:800; font-size:.98rem}
+  .prop .pid{display:inline-block; background:var(--accent); color:#fff; font-size:.7rem; font-weight:800; padding:2px 9px; border-radius:999px; margin-right:6px}
+  .prop .why{font-size:.87rem; color:#4a5a68; margin:.45em 0}
+  .prop .gain{font-size:.85rem; font-weight:700; color:#2f7a46; margin:.3em 0 .1em}
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:9px}
+  .chip{border:1.5px solid var(--line); background:#fff; color:var(--ink); padding:9px 15px; border-radius:999px; font-size:.9rem; cursor:pointer; transition:all .15s; user-select:none}
+  .chip:hover{border-color:var(--accent)}
+  /* v21: i sei link alle story map. La pagina non aveva una classe per un link-bottone
+     (i .chip sono controlli, non collegamenti), e senza questa regola uscivano come
+     testo semplice - col rosso della domenica appiccicato addosso a un elemento inline. */
+  .btn{display:inline-block; text-decoration:none; border:1.5px solid var(--line); background:#fff;
+       color:var(--ink); padding:9px 15px; border-radius:999px; font-size:.9rem; transition:all .15s}
+  .btn:hover{border-color:var(--accent); background:#fff8ee}
+  .storylnk{margin:10px 0 2px}
+  .storylnk .btn{display:block; text-align:center; border-style:dashed; font-size:.86rem}
+  /* IL FLAG DEL BLOCCO (D131). Sta dentro la giornata, subito sotto la story map:
+     e' il punto in cui uno ha appena guardato le tappe. */
+  .lockrow{margin:11px 0 2px;background:#f7fbf8;border:2px solid #cfe8d6;border-radius:12px;
+           padding:11px 13px;font-size:.89rem;transition:background .15s,border-color .15s}
+  .lockrow.picked{background:#eaf7ee;border-color:var(--g5)}
+  .lockrow.done{background:#f2faf4;border-color:var(--g5)}
+  .lockrow label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+  .lockrow input{flex:none;width:22px;height:22px;margin-top:1px;accent-color:var(--g5)}
+  .btn.now{background:var(--red); border-color:var(--red); color:#fff}
+  .btn.now:hover{background:#b93d4e; border-color:#b93d4e}
+  .chip.sel{background:var(--accent); border-color:var(--accent); color:#fff}
+  .chip.no.sel{background:var(--red); border-color:var(--red)}
+  .chip.maybe.sel{background:var(--amber); border-color:var(--amber)}
+
+  .airport{background:linear-gradient(135deg,#eef4fb,#fff); border:2px solid var(--accent); border-radius:14px; padding:15px 16px; margin:13px 0}
+  .airport h3{margin-top:0; color:var(--accent)}
+  .airport .row{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:9px}
+  .airport input{border:1.5px solid var(--accent); border-radius:10px; padding:9px 11px; font-family:inherit; font-size:.95rem; width:120px; background:#fff; color:var(--ink); font-weight:700}
+  .airport .lock{background:#fff7ec; border:1px dashed var(--accent2); border-radius:10px; padding:9px 11px; margin-top:10px; font-size:.85rem}
+
+  textarea.free{width:100%; border:1.5px solid var(--line); border-radius:12px; padding:11px; font-family:inherit; font-size:.94rem; background:#fff; color:var(--ink); resize:vertical; min-height:60px}
+  .note{background:linear-gradient(135deg,#fff7ec,#fff); border:1px solid var(--line); border-left:5px solid var(--accent2); border-radius:12px; padding:12px 15px; margin:13px 0; font-size:.9rem}
+  .note b{color:#b46f1a}
+  .proc{display:flex; gap:11px; align-items:flex-start; padding:6px 0; font-size:.9rem}
+  .proc .pn{flex:0 0 auto; width:23px; height:23px; border-radius:50%; background:var(--line); color:#5a5a5a; font-weight:800; font-size:.8rem; display:flex; align-items:center; justify-content:center}
+  .proc.now .pn{background:var(--accent2); color:#fff}
+  .youare{display:inline-block; background:var(--accent2); color:#fff; font-size:.68rem; font-weight:800; padding:2px 8px; border-radius:999px; margin-left:5px}
+
+  .summ{display:flex; flex-direction:column; gap:7px; margin-top:4px}
+  .srow{display:flex; align-items:center; gap:9px; font-size:.87rem; text-decoration:none; color:inherit}
+  .srow .sd{flex:0 0 74px; font-weight:700}
+  .srow .st{flex:1; position:relative; height:11px; background:#f0ece3; border-radius:999px; overflow:hidden; border:1px solid var(--line)}
+  .srow .sf{position:absolute; left:0; top:0; bottom:0; border-radius:999px}
+  .srow .sp{flex:0 0 42px; text-align:right; font-weight:800; font-size:.82rem}
+
+  .bar{position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); box-shadow:0 -6px 20px rgba(30,40,60,.10); padding:10px 14px; z-index:50}
+  .bar .in{max-width:660px; margin:0 auto; display:flex; align-items:center; gap:12px}
+  .bar .status{flex:1; font-size:.84rem}
+  .send{background:#25D366; color:#fff; border:none; border-radius:12px; padding:12px 16px; font-weight:800; font-size:.95rem; cursor:pointer; white-space:nowrap}
+  .send:active{transform:translateY(1px)}
+  .footer{text-align:center; padding:22px 0 6px; font-size:.82rem; color:var(--muted)}
+
+  /* v3 additions */
+  .applied{background:#f0f9f2; border:1px solid #bfe6cb; border-left:5px solid var(--g5); border-radius:12px; padding:13px 15px; margin:12px 0; font-size:.89rem}
+  .applied h3{margin:0 0 7px; color:#2f7a46; font-size:.98rem}
+  .arow{display:flex; gap:9px; align-items:flex-start; padding:7px 0; border-bottom:1px dashed #cfe7d6}
+  .arow:last-child{border-bottom:none}
+  .arow .ai{flex:0 0 auto; font-size:1.05rem}
+  .arow .an{flex:1}
+  .arow .an b{display:block}
+  .arow .an small{color:#4a5a68}
+  .flip{background:linear-gradient(135deg,#eef4fb,#fff); border:2px solid var(--accent); border-radius:14px; padding:14px 16px; margin:13px 0}
+  .flip h3{margin-top:0; color:var(--accent)}
+  .knot{background:#fff; border:2px solid var(--accent2); border-radius:13px; padding:13px 15px; margin:12px 0; box-shadow:var(--shadow)}
+  .knot .kt{font-weight:800; font-size:1rem}
+  .knot .kid{display:inline-block; background:var(--accent2); color:#fff; font-size:.7rem; font-weight:800; padding:2px 9px; border-radius:999px; margin-right:6px}
+  .locked{background:#f0f9f2; border:1px solid #bfe6cb; border-left:5px solid var(--g5); border-radius:12px; padding:12px 15px; margin:12px 0; font-size:.9rem}
+  .locked b{color:#2f7a46}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="flag">🗽📍</div>
+    <h1>L'itinerario è chiuso. Adesso scrivo la guida</h1>
+    <!-- L'intestazione dice DOVE SIAMO nel percorso, non cosa e' cambiato: il changelog
+         sta due centimetri sotto e le giornate piu' giu'. Prima ripeteva tutti e due.
+         La roadmap per esteso e' in fondo; qui ne sta solo la posizione.
+         ⚠️ v39: qui c'era "tocca all'approvazione dell'itinerario intero", che D131 ha
+         sostituito col blocco giornata per giornata - e lui ha appena risposto. Una
+         frase di stato sopravvissuta al proprio stato: e' la classe di errore piu'
+         frequente di questa pagina. -->
+    <div class="sub"><b>Passo 5 di 7.</b> Hai bloccato <b>tutte e sei le giornate</b>: da qui
+    non ti chiedo più niente su nessuna: <b>le verifico e basta</b>, e comincio a scrivere
+    <b>l'itinerario da portare in viaggio</b>. Questa pagina resta come <b>consultazione</b> —
+    orari, tappe, spostamenti.<br>
+    <span style="opacity:.85">🖨️ Una cosa sola ti chiedo, ed è sul <b>foglio da stampare</b>,
+    non sul viaggio: <a href="#scheda" style="color:inherit"><b>è qui</b></a>.</span><br>
+    <span style="opacity:.85">Si parte fra <b>8 giorni</b>.</span></div>
+    <div class="ver">📌 versione v45 &middot; 5 ago 2026</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- CHANGELOG v44. Scritto contro la v43, che e' la versione che il tag della sua
+       risposta dichiara ("form: analisi-logistica v43", 5 ago 04:01) - non contro
+       l'ultima pubblicata. Le due voci della v43 (la scheda verticale, il perche'
+       geometrico) le ha gia' viste li' dentro: escono. Resta una voce sola, che e'
+       l'unica notizia: ha chiesto una cosa, e c'e'. -->
+  <div class="changelog">
+    <h3>🆕 Cosa è cambiato <span class="cd">(5 ago, rispetto alla v43 che hai aperto stanotte)</span></h3>
+    <ul>
+      <li>🔀 <b>Sulla scheda verticale sono tornate le cose scritte della A</b>, come hai
+      chiesto. La pagina resta la <b>B</b> — mappa a tutta pagina, stesso ingrandimento —
+      e nella striscia di lato ci sono di nuovo <b>la nota di ogni tappa</b>, <b>come ci si
+      arriva</b>, <b>quanto si sta</b>, e in fondo <b>trasporti</b> / <b>cosa si accorcia</b> /
+      <b>i conti del giorno</b>. È <a href="#scheda">qui sotto</a>.</li>
+      <li>🖨️ <b>L'ho fatta solo sul lunedì, apposta.</b> È il giorno di prova: se va bene
+      così, gli altri cinque vengono uguali con un comando. Se cambio adesso, cambio un
+      foglio invece di sei.</li>
+      <li>🔴 <b>E ho corretto un'ora sbagliata sull'ultimo giorno.</b> Qui c'era scritto
+      che martedì <i>«si esce dall'hotel alle 17:30»</i>, con la giornata chiusa alle
+      <i>16:27</i>: erano i numeri di prima che tu prenotassi il van. <b>Il van passa alle
+      16:20</b>, ed è quello che dicevano il riquadro delle prenotazioni e il calcolo —
+      la pagina si contraddiceva da sola. Le <b>17:30</b> restano solo come <b>limite</b>
+      per essere fuori con i bagagli, e il volo è alle <b>22:00</b>. Niente cambia nel
+      piano: cambiava solo quello che leggevi.</li>
+      <li>👉 <b>E sulla scheda mancava il modo di rispondere.</b> Aprendola — cioè
+      facendo esattamente la cosa che ti chiedo — non c'era nessun pulsante e nessuna via
+      per tornare qui: da telefono si vedeva solo il tasto del PDF, da computer <b>solo il
+      foglio</b>. Adesso in cima alla scheda c'è una fascia verde che porta alla domanda.
+      <b>Il foglio da stampare non è cambiato</b> (è sempre <i>B · v2</i>): quella fascia
+      <b>non si stampa</b>.</li>
+    </ul>
+    <p class="muted" style="margin:.5em 0 0">Non vedi le novità? È la cache: ricarica la pagina (Ctrl+F5 / tira giù per aggiornare).</p>
+  </div>
+
+  <!-- v40: QUI c'erano i due riquadri di stato del sabato e del lunedi', ~2.900
+       caratteri, e sono usciti tutti e due. Non erano falsi: erano una SECONDA COPIA.
+       La card di ogni giornata dice gia' esattamente le stesse cose - g3 ha il rientro
+       in metro, la pausa, Junior's, le 20:09 e "niente taxi"; g5 ha il 22:17, i 47' di
+       sforo e le tre posizioni per accorciare la High Line - e sta venti righe piu'
+       sotto. Il sabato per giunta lui l'ha BLOCCATO: raccontargli ancora "hai approvato
+       e l'ho sostituito" e' cronaca di una cosa chiusa.
+       📐 La regola che ne esce: potare il changelog non basta se la stessa storia resta
+       scritta piu' in basso, piu' lunga. Il changelog era gia' stato potato nella v39, e
+       questi due riquadri dicevano ancora tutto.
+       🚪 Con loro escono i link a /sabato/ /venerdi/ /lunedi/: le pagine restano online
+       per chi ha il link, non piu' pubblicizzate - stessa scelta gia' fatta per le due
+       pagine dello studio del bus. E /lunedi/ contiene gli orari sbagliati di 19'. -->
+
+  <!-- ============ COSA SUCCEDE ADESSO ============ -->
+  <h2>🔒 Come si chiude, da qui alla guida</h2>
+  <div class="card">
+    <div class="proc"><span class="pn">1-2</span><div><b>Commenti del gruppo e revisione del piano</b> ✅ — fatti.</div></div>
+    <div class="proc"><span class="pn">3</span><div><b>Controllo posti e tempi</b> — le 47 posizioni ✅, le zone <b>10 su 15</b>. <span class="muted">In corso, ma è roba mia: non aspetta te.</span></div></div>
+    <div class="proc"><span class="pn">4</span><div><b>Blocchi le giornate</b> ✅ — <b>tutte e sei</b>, il 3 agosto.</div></div>
+    <div class="proc now"><span class="pn">5</span><div><span class="youare">siamo qui</span> <b>Io scrivo l'itinerario da portare in viaggio.</b> Non aspetta niente e non chiede niente: è il lavoro che si sblocca proprio perché le giornate sono chiuse.</div></div>
+    <div class="proc"><span class="pn">6</span><div><b>Ultimo giro sui trasporti</b>, pochi giorni prima: gli orari veri di agosto.</div></div>
+    <div class="proc"><span class="pn">7</span><div><b>La guida</b>, costruita sulla mappa.</div></div>
+    <!-- ⚠️ v39: qui c'era "Il pulsante e' in fondo alla mappa di ogni giornata" - falso da
+         D131, che i flag li ha messi dentro le card della pagina principale. Un puntatore a
+         un controllo che sta altrove e' la stessa famiglia della regola 12 dello standard:
+         testo e controlli che dicono due cose diverse. Ed era passato indenne per la v38.
+         Il riquadro sotto NON conta piu' quante giornate sono bloccate: quel numero lo dice
+         il quadro generato, in un posto solo. -->
+    <div class="res2" style="margin-top:11px">➜ <b>Il 4 è chiuso: da qui il lavoro è mio.</b> Il 3 (le zone) e il 6 (i trasporti) corrono in parallelo e non aspettano te.</div>
+  </div>
+
+  <!-- ============ TUTTO PRENOTATO ============ -->
+  <div class="sol" style="margin:13px 0">
+    <h4>📋 Prenotazioni: una da <b>annullare</b>, nessuna da comprare</h4>
+    <div style="font-size:.89rem">
+      🔒 <b>Summit One Vanderbilt</b> — ven 14, ore 19:00 · pagato<br>
+      🔒 <b>Empire State Building</b> — mar 18, ore <b>9:30</b> · nel pass Go City · <b>prenotato da te</b><br>
+      🔴 <b>Top of the Rock</b> — mar 18, ore 9:30 · <b>DA ANNULLARE</b>: è ancora prenotato nello stesso identico slot<br>
+      🔒 <b>MoMA</b> — ven 14 · comprato a parte, ragazzi gratis<br>
+      🔒 <b>Bici — Unlimited Biking, 56 W 56th St</b> — sab 15, ritiro alle <b>9:08</b> · nel pass Go City<br>
+      🚌 <b>Big Bus 2 giorni</b> — sab + dom · nel pass Go City<br>
+      🚐 <b>Van per JFK</b> — mar 18, uscita dall'hotel alle <b>16:20</b> · 8 persone + bagagli · <b>prenotato da te</b>
+    </div>
+    <div class="res2">➜ <b>Resta solo il Top of the Rock da annullare. Non c'è più niente da comprare.</b></div>
+    <!-- v30, PULIZIA: qui c'era il paragrafo "il van l'hai preso, e non te lo chiedo piu'"
+         (D113). Consegnato il 1 ago con la v29, e il van sta gia' due righe piu' su
+         nell'elenco, con scritto "prenotato da te". Ripetuto in prosa non aggiungeva un
+         dato: aggiungeva rumore addosso all'unica notizia di questo giro. -->
+  </div>
+
+  <!-- ============ COSE CHE VERIFICO IO ============ -->
+  <h2>🔎 Le tre cose che verifico io prima di partire</h2>
+  <p class="muted" style="margin-top:0">Non ti chiedono niente: sono il <b>passo 6</b> qui sopra, e li faccio fra l'8 e il 10 agosto. Te le scrivo perché sono <b>le cose che possono cambiare da qui ad agosto</b>.</p>
+  <div class="card">
+    <div class="princ"><span class="ic">🚲</span><div><b>Il noleggio bici del pass chiede un orario?</b><br><small class="muted">Il Go City dice solo «incluso». Se invece vuole uno slot prenotato, il sabato mattina va fissato.</small></div></div>
+    <div class="princ"><span class="ic">🚌</span><div><b>Il giro di Brooklyn del Big Bus è sospeso fino al 31 agosto</b><br><small class="muted">Per questo a Dumbo si va <b>a piedi sul ponte</b> e si torna in taxi. Se lo riattivano, la domenica si semplifica.</small></div></div>
+    <div class="princ"><span class="ic">🌇</span><div><b>L'ora esatta del tramonto</b><br><small class="muted">Ho usato <b>19:55</b> per il 17 agosto: è il numero attorno a cui gira tutto il lunedì.</small></div></div>
+  </div>
+
+  <!-- ============ AEROPORTO ============ -->
+  <div class="locked">
+    <!-- v44: questa riga aveva TRE numeri veri di un mondo che non c'e' piu'. Diceva
+         "si esce alle 17:30" (era il vincolo D37, prima che D113 prenotasse il van),
+         "chiude alle 16:27" (il dataset dice 16:20) e "1h03" (il conto fra quei due).
+         Il riquadro delle prenotazioni, venti righe sopra, diceva gia' 16:20: la
+         pagina si contraddiceva da sola sull'ora in cui si parte per l'aeroporto. -->
+    🔒 <b>Partenza agli atti:</b> martedì 18, <b>il van passa all'hotel alle 16:20</b> per <b>JFK</b> (volo 22:00). Con Midtown Comics dentro, l'ultimo giorno chiude alle <b>16:20</b> — e restano <b>1h10</b> sul limite delle 17:30 per essere fuori con i bagagli.
+  </div>
+
+  <!-- ============ IL QUADRO ============ -->
+  <h2>🚦 Il quadro dei 6 giorni</h2>
+  <div class="card">
+    <div class="summ" id="summary"></div>
+    <p class="muted" style="margin:12px 0 0">Il numero è quanto la giornata riempie la <i>sua</i>
+    finestra, fra l'uscita e il traguardo comodo.<br>
+    <!-- v41: il lunedi' adesso e' BLOCCATO. Il numero resta perche' e' un fatto che si
+         vive in viaggio - si torna in hotel alle 22:17 e il giorno dopo si esce alle 8:30
+         - ma smette di essere una domanda travestita: "dimmelo e lo cambio" e' uscito.
+         La porta per riaprire sta nella card della giornata, dove sta per tutte e sei. -->
+    🟠 <b>L'unica che sfora è il lunedì</b>: finisce alle <b>22:17</b> contro un traguardo
+    delle <b>21:30</b>, col martedì che parte alle <b>08:30</b>. L'hai scelto tu sapendolo,
+    ed è il prezzo del <b>tramonto</b> a Little Island — non del parco, che si percorre
+    tutto in ogni caso.</p>
+  </div>
+
+  <!-- ============ COME CI SI MUOVE ============ -->
+  <h2>🚌 Come ci si sposta</h2>
+  <div class="card">
+    <!-- v40: tolto "me l'hai chiesto e avevi ragione: il mezzo non si vedeva da nessuna
+         parte". Era la cronaca di una correzione consegnata con la v35, e il titolo
+         prometteva "una cosa sul Big Bus" che non c'e' piu' da due versioni. Resta la
+         legenda, che serve a leggere le tappe. -->
+    <p style="margin-top:0"><b>Ogni tappa dice come ci si arriva</b>, con quanto dura la tratta:</p>
+    <div class="princ"><span class="ic">🚶</span><div><span style="background:#f1f0ec;color:#5c6873;border:1px solid #e0dad0;border-radius:999px;padding:1px 7px;font-size:.72rem;font-weight:800">🚶 a piedi</span> &nbsp;È il caso normale: l'itinerario è fatto per zone proprio perché dentro una zona ci si cammina.</div></div>
+    <div class="princ"><span class="ic">🚌</span><div><span style="background:#e8f1fb;color:#1f3b73;border:1px solid #cfe0f2;border-radius:999px;padding:1px 7px;font-size:.72rem;font-weight:800">🚌 Big Bus</span> &nbsp;Solo sabato e domenica: il pass copre due giorni consecutivi.</div></div>
+    <div class="princ"><span class="ic">🚕</span><div><span style="background:#fff6e2;color:#8a6d12;border:1px solid #f0dfae;border-radius:999px;padding:1px 7px;font-size:.72rem;font-weight:800">🚕 taxi/Uber</span> &nbsp;Ricorda che <b>in 8 sono sempre 2 macchine</b>, che devono partire insieme.</div></div>
+  </div>
+
+  <div class="note">
+<!-- MIX:START - generato da gen_mix.py, non scrivere a mano -->
+    <b>🚌 Come ci si sposta, in tutto il viaggio.</b> Su <b>54 spostamenti</b>:
+    <b>43 a piedi</b>, <b>5 in metro</b>, <b>4 col Big Bus</b> (2 sabato e 2 domenica) e
+    <b>2 in taxi</b>.<br><br>
+    <b>Più il giro panoramico del sabato</b>, che il calcolo non conta come spostamento: non è una
+    tratta fra due tappe ma <b>50 minuti di corsa fatti apposta</b>, col piano di sopra scoperto.
+    <!-- MIX:END -->
+  </div>
+
+  <!-- ============ IL BLOCCO DELLE GIORNATE (D131) ============
+       Qui c'e' lo STATO, non la domanda. Il flag per bloccare sta DENTRO LA CARD di ogni
+       giornata piu' sotto (non sulle story map: sei pulsanti su sei pagine avrebbero
+       voluto dire sei messaggi per dire una cosa sola). Lo stato lo legge da `lock`
+       dentro DAYS, che viene da locks.json - la stessa fonte del quadro dentro STATUS.
+       ⚠️ v39: questa prosa NON contiene piu' numeri. Diceva "segna quelle che ti vanno
+       bene" quando quattro erano gia' bloccate. Il conteggio vive solo nel quadro
+       generato qui sotto, cosi' non puo' invecchiare mentre il testo resta fermo. -->
+  <h2 id="blocco" style="margin-top:34px">🔒 Il blocco delle giornate</h2>
+  <div class="card">
+    <!-- v41: qui c'era l'invito a spuntare le caselle. Non c'e' piu' NESSUNA casella su
+         tutta la pagina: sei giornate su sei sono bloccate, e un invito a fare una cosa
+         gia' fatta e' la definizione di ri-chiedere cio' che e' deciso (D67/D83). -->
+    <!-- v44: qui c'erano DUE paragrafi che dicevano la stessa identica cosa uno sotto
+         l'altro - "bloccata vuol dire che non ti chiedo piu' niente, io continuo a
+         verificarla, non te la rimetto davanti" - il primo scritto quando si sono
+         chiuse tutte e sei, il secondo rimasto da prima. E' D138 in piccolo: non era
+         falso, era una SECONDA COPIA. Fusi in uno. -->
+    <p style="margin-top:0"><b>Sono chiuse tutte e sei.</b> Bloccata vuol dire una cosa
+    sola: <b>su quella giornata non ti chiedo più niente</b>. Io continuo a
+    <b>verificarla</b> — che i posti siano aperti, che gli orari del bus reggano — ma non
+    te la rimetto davanti, e comincio a scriverne <b>l'itinerario da portare in
+    viaggio</b>.</p>
+    <div id="lockboard" style="margin-top:14px"></div>
+    <div id="lockact" style="margin-top:13px"></div>
+    <p class="muted" style="margin:.7em 0 0; font-size:.88rem">🚪 <b>Non è per sempre.</b>
+    Se dopo ti viene in mente una cosa, si riapre — bloccare significa <i>«smetti di
+    chiedermelo»</i>, non <i>«non si tocca più»</i>. ⚠️ Riaprirne una adesso costa poco;
+    a guida scritta, parecchio di più.</p>
+  </div>
+
+  <!-- ============ GIORNI ============ -->
+  <h2>📅 Giorno per giorno</h2>
+  <div class="card">
+    <p style="margin-top:0">Le tappe vere, nell'ordine e con gli orari veri — <b>presi dal calcolo,
+    non riscritti a mano</b>. Qui sotto <b>non c'è niente da rispondere</b>: sono chiuse tutte
+    e sei, e questa è la <b>consultazione</b>.</p>
+    <!-- v41: via "e per decidere quali bloccare" e la nota che spiegava la differenza fra
+         "ferma" e "bloccata". Serviva finche' le due cose potevano divergere: adesso sono
+         bloccate tutte, e la distinzione non descrive piu' niente. -->
+    <p class="muted" style="margin:.5em 0 0; font-size:.88rem">📌 Se una cosa va cambiata la
+    porta c'è, in fondo a ogni giornata — <b>e adesso costa</b>: da qui in poi ogni modifica
+    rientra anche nella guida.</p>
+  </div>
+  <div id="days"></div>
+
+  <!-- ============ SCHEDA DA STAMPARE (v42) ============ -->
+  <!-- Sta QUI, dopo il giorno-per-giorno, perche' e' la stessa cosa in un'altra
+       forma: chi ha appena letto le sei giornate e' esattamente chi puo' dire se
+       su carta gli servirebbero. Nessun gruppo di risposta nuovo: il canale e'
+       lo spazio libero che c'e' gia' in fondo - la pagina non ha piu' domande
+       aperte e non deve ricominciare ad averne. -->
+  <h2 id="scheda">🖨️ La scheda da stampare: è come l'hai chiesta</h2>
+  <div class="card">
+    <!-- v44: la domanda "quale dei due?" NON e' piu' qui. Ha risposto (form v43),
+         quindi si mostra come STATO (D67/D83) - e i due link a confronto sono
+         diventati uno solo: rimettere accanto la A vorrebbe dire riaprire una
+         scelta gia' fatta. La domanda nuova, e sola, e' l'altra: si fanno gli
+         altri cinque? -->
+    <p style="margin-top:0">✅ <b>Hai scelto: la B (verticale), ma con le cose scritte
+    della A.</b> Fatta — <b>solo sul lunedì</b>, che è il giorno di prova.</p>
+
+    <div class="storylnk">
+      <a class="btn now" href="scheda/lunedi-b/">📐 <b>La scheda del lunedì</b> — verticale, con dentro i testi <span style="opacity:.82">(v2)</span></a>
+    </div>
+
+    <p style="margin:.8em 0 0"><b>Cos'è tornato dentro.</b> La pagina resta quella che
+    hai scelto — A3 verticale, <b>mappa a tutta pagina</b>, nomi delle strade leggibili — e
+    nella striscia di lato adesso c'è anche quello che stava scritto sulla A: <b>la nota di
+    ogni tappa</b> (di chi era il must-do, cosa si vede), <b>come ci si arriva</b> col mezzo
+    e la sua linea, <b>quanto si sta</b> in ogni posto, e in fondo i tre riquadri —
+    <b>i trasporti</b>, <b>cosa si accorcia se siete in ritardo</b>, <b>i conti del
+    giorno</b>.</p>
+
+    <p style="margin:.8em 0 0"><span class="muted">Sta tutto nello stesso foglio con
+    <b>16 mm di margine</b>: nessuna tappa tagliata, nessun pin coperto — misurato, non
+    guardato a occhio. Per farcelo stare è cresciuta la striscia di 4 mm, e la mappa è
+    rimasta <b>allo stesso ingrandimento</b>.</span></p>
+
+    <p style="margin:.9em 0 0"><b>Va bene così? Faccio gli altri cinque giorni?</b>
+    <span class="muted">Non si riapre niente: è solo il foglio.</span></p>
+    <div class="chips" data-group="SEIG" data-prop="SEIG">
+      <div class="chip" data-val="TUTTI">✅ <b>Sì, falle tutte e sei</b> così</div>
+      <div class="chip maybe" data-val="RITOCCO">✏️ <b>Quasi</b>: prima cambia una cosa</div>
+      <div class="chip no" data-val="SOLO5">🛑 <b>Basta il lunedì</b>, le altre non servono</div>
+    </div>
+    <p class="muted" style="margin:.6em 0 0; font-size:.88rem">📌 Basta un click.
+    Se scegli <b>✏️ quasi</b>, dimmi cosa cambiare
+    <a href="#openText">nello spazio libero in fondo</a>.</p>
+
+  </div>
+
+  <!-- ============ BLOCCHI ============ -->
+  <h2>⏱️ I blocchi di tempo — sono i tuoi</h2>
+  <div class="card">
+    <p style="margin-top:0">I valori con cui è fatto il calcolo, <b>quelli che hai scelto tu</b>. Se uno ti sembra ancora sbagliato, si cambia — tocca ✏️.</p>
+    <div id="slotlist"></div>
+    <div class="recalc" style="margin-bottom:0">
+      ⚙️ <b>Ogni blocco che cambi fa rigirare tutto il calcolo</b> e sposta gli orari di ogni giornata che contiene quel tipo di attività. Mandamelo e ti rimando la versione aggiornata.
+    </div>
+  </div>
+
+  <!-- ===================== FREE ===================== -->
+  <h2>💬 Altro da dirmi?</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">Qualsiasi cosa: una tappa che manca, un ordine da girare, una richiesta di uno degli altri sette che ti è arrivata a voce.</p>
+    <textarea class="free" id="openText" placeholder="Spazio libero..."></textarea>
+  </div>
+
+  <div class="footer">
+    Itinerario e logistica v45 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
+    Il feedback arriva su WhatsApp 💚
+  </div>
+</div>
+
+<div class="bar">
+  <div class="in">
+    <div class="status" id="statusLine">Segna le giornate che ti vanno bene 🔒 e mandamele tutte insieme</div>
+    <button class="send" id="sendBtn">📲 Invia su WhatsApp</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATI — generati da compute.py (feasibility/data/*.computed.json).
+   m = quanto si accorcia la giornata togliendo quella tappa
+   (sosta + deviazione), arrotondato a blocchi di 5 minuti.
+   ============================================================ */
+
+var SLOTS = [
+  {k:'foto',    i:'📸', n:'Foto / tappa veloce',  ex:'Ghostbusters, Sanctum, Dumbo — l\'hai portato da 25 a 15', v:15},
+  {k:'giro',    i:'🚶', n:'Giro di quartiere',    ex:'SoHo, Little Italy, High Line — da 40 min a 1h', v:60},
+  {k:'negozio', i:'🛍️', n:'Un negozio',            ex:'Lego, NBA, Nike — da 35 a 20 min', v:20},
+  {k:'veloce',  i:'🍕', n:'Pasto veloce',         ex:'Joe\'s Pizza, Raising Cane\'s — invariato', v:40},
+  {k:'pasto',   i:'🍽️', n:'Pranzo o cena seduti',  ex:'Katz\'s, Time Out, cena — invariato', v:75},
+  {k:'museo',   i:'🖼️', n:'Museo',                 ex:'MoMA — da 1h45 a 2h', v:120},
+  {k:'deck',    i:'🏙️', n:'Terrazza panoramica',   ex:'Summit, Top of the Rock — da 1h20 a 2h', v:120},
+  {k:'attivita',i:'🚲', n:'Attività',              ex:'bici, traghetto, funivia — da 1h15 a 2h', v:120}
+];
+
+var STOPFIX = [
+  {k:'shop5th',  i:'🛍️', n:'Shopping sulla 5th',      ex:'venerdì — LEGO, NBA, Nike, Sephora', v:60},
+  {k:'chinatown',i:'🥟', n:'Chinatown / Little Italy', ex:'domenica — è il pranzo', v:75},
+  {k:'soho',     i:'🚶', n:'SoHo / Tribeca',           ex:'domenica — la passeggiata', v:60},
+  {k:'shopsoho', i:'👟', n:'Shopping a SoHo',          ex:'domenica — Marc Jacobs, Alo, sneakers', v:20}
+];
+
+var DAYS = [
+ {
+  "id": "g1",
+  "name": "Giorno 1 · Gio 13",
+  "zone": "Midtown - arrivo",
+  "pct": 70,
+  "verd": "ok",
+  "out": "19:00",
+  "back": "23:00",
+  "end": "21:48",
+  "bus": 0,
+  "taxi": 0,
+  "lock": true,
+  "lockon": "2026-08-03",
+  "stops": [
+   {
+    "n": "Ellen's Stardust Diner (cena di benvenuto)",
+    "i": "✨",
+    "s": "esperienza ~1h30",
+    "m": 104,
+    "mv": "walk",
+    "lg": 13
+   },
+   {
+    "n": "Times Square di notte",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 28,
+    "mv": "walk",
+    "lg": 13
+   },
+   {
+    "n": "Gelato (rientro hotel)",
+    "i": "🍽️",
+    "s": "pasto ~25 min",
+    "m": 37,
+    "mv": "walk",
+    "lg": 12,
+    "opt": true
+   }
+  ]
+ },
+ {
+  "id": "g2",
+  "name": "Giorno 2 · Ven 14",
+  "zone": "Midtown + Summit",
+  "pct": 97,
+  "verd": "warn",
+  "out": "10:00",
+  "back": "22:30",
+  "end": "22:07",
+  "bus": 0,
+  "taxi": 0,
+  "lock": true,
+  "lockon": "2026-08-03",
+  "stops": [
+   {
+    "n": "Bryant Park",
+    "i": "🚶",
+    "s": "giro ~1h",
+    "m": 70,
+    "mv": "walk",
+    "lg": 24
+   },
+   {
+    "n": "Grand Central",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 30,
+    "mv": "walk",
+    "lg": 17
+   },
+   {
+    "n": "5th Avenue (passeggiata 42nd-57th)",
+    "i": "🚶",
+    "s": "giro ~1h",
+    "m": 76,
+    "mv": "walk",
+    "lg": 16
+   },
+   {
+    "n": "St. Patrick's Cathedral",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 21,
+    "mv": "walk",
+    "lg": 9
+   },
+   {
+    "n": "Five Guys (43 W 55th) - PRANZO",
+    "i": "🍽️",
+    "s": "pasto ~45 min",
+    "m": 57,
+    "mv": "walk",
+    "lg": 15
+   },
+   {
+    "n": "MoMA",
+    "i": "🖼️",
+    "s": "museo ~2h",
+    "m": 127,
+    "mv": "walk",
+    "lg": 10
+   },
+   {
+    "n": "Shopping 5th Ave (Lego + NBA + Nike + Sephora)",
+    "i": "🛍️",
+    "s": "negozio ~1h40",
+    "m": 107,
+    "mv": "walk",
+    "lg": 12,
+    "opt": true
+   },
+   {
+    "n": "SUMMIT One Vanderbilt",
+    "i": "🏙️",
+    "s": "terrazza ~2h",
+    "m": 141,
+    "mv": "walk",
+    "lg": 20,
+    "fixed": "19:00"
+   },
+   {
+    "n": "Raising Cane's (1501 Broadway) - CENA",
+    "i": "🍽️",
+    "s": "pasto ~45 min",
+    "m": 67,
+    "mv": "walk",
+    "lg": 22
+   }
+  ]
+ },
+ {
+  "id": "g3",
+  "name": "Giorno 3 · Sab 15",
+  "zone": "Central Park & Uptown",
+  "pct": 89,
+  "verd": "ok",
+  "out": "08:45",
+  "back": "21:30",
+  "end": "20:09",
+  "bus": 0,
+  "taxi": 0,
+  "lock": true,
+  "lockon": "2026-08-03",
+  "stops": [
+   {
+    "n": "Bici - Unlimited Biking (56 W 56th St)",
+    "i": "🚲",
+    "s": "attivita ~2h",
+    "m": 131,
+    "mv": "walk",
+    "lg": 23
+   },
+   {
+    "n": "Bethesda Terrace + Bow Bridge",
+    "i": "📸",
+    "s": "foto ~20 min",
+    "m": 60,
+    "mv": "walk",
+    "lg": 32,
+    "opt": true
+   },
+   {
+    "n": "Pranzo veloce (Columbus Circle) - fino al passaggio del bus",
+    "i": "🍽️",
+    "s": "pasto ~27 min",
+    "m": 34,
+    "mv": "walk",
+    "lg": 28
+   },
+   {
+    "n": "Big Bus: giro panoramico verso il Met (Midtown + 5th Ave)",
+    "i": "🚌",
+    "s": "attivita ~58 min",
+    "m": 65,
+    "mv": "walk",
+    "lg": 7,
+    "fixed": "13:02"
+   },
+   {
+    "n": "Met steps (Gossip Girl) + Museum Mile",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": -17,
+    "mv": "walk",
+    "lg": 5
+   },
+   {
+    "n": "Guggenheim (solo esterno)",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 38,
+    "mv": "walk",
+    "lg": 17,
+    "opt": true
+   },
+   {
+    "n": "Big Bus BLU: dal Met alla 59th (corsa delle 15:45)",
+    "i": "🚌",
+    "s": "attivita ~10 min",
+    "m": 25,
+    "mv": "walk",
+    "lg": 15,
+    "fixed": "15:45"
+   },
+   {
+    "n": "Pausa AC + shopping (Bloomingdale's / Apple UES)",
+    "i": "🛍️",
+    "s": "negozio ~20 min",
+    "m": 8,
+    "mv": "walk",
+    "lg": 21,
+    "opt": true
+   },
+   {
+    "n": "Roosevelt Island Tramway (andata/ritorno)",
+    "i": "🚡",
+    "s": "attivita ~45 min",
+    "m": 57,
+    "mv": "walk",
+    "lg": 12,
+    "opt": true
+   },
+   {
+    "n": "Hotel - pausa prima di cena",
+    "i": "🏨",
+    "s": "attivita ~25 min",
+    "m": 15,
+    "mv": "metro",
+    "lg": 20,
+    "opt": true
+   },
+   {
+    "n": "Junior's (1515 Broadway) - CENA + cheesecake",
+    "i": "🍽️",
+    "s": "pasto ~1h20",
+    "m": 99,
+    "mv": "walk",
+    "lg": 13
+   },
+   {
+    "n": "Rientro hotel",
+    "i": "🚶",
+    "s": "rientro",
+    "m": 18,
+    "mv": "walk",
+    "lg": 13
+   }
+  ]
+ },
+ {
+  "id": "g4",
+  "name": "Giorno 4 · Dom 16",
+  "zone": "Downtown & Brooklyn",
+  "pct": 94,
+  "verd": "warn",
+  "out": "10:00",
+  "back": "21:30",
+  "end": "20:47",
+  "bus": 0,
+  "taxi": 1,
+  "lock": true,
+  "lockon": "2026-08-03",
+  "stops": [
+   {
+    "n": "Big Bus ROSSA: M&M's World -> World Trade Center (corsa agganciata all'orario)",
+    "i": "🚌",
+    "s": "attivita ~57 min",
+    "m": 69,
+    "mv": "walk",
+    "lg": 12,
+    "fixed": "10:30"
+   },
+   {
+    "n": "Ghostbusters HQ (14 N Moore, Tribeca)",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": -17,
+    "mv": "walk",
+    "lg": 29
+   },
+   {
+    "n": "SoHo / Tribeca (passeggiata)",
+    "i": "🚶",
+    "s": "giro ~1h",
+    "m": 69,
+    "mv": "walk",
+    "lg": 23
+   },
+   {
+    "n": "Shopping SoHo (Marc Jacobs, Alo, sneakers)",
+    "i": "🛍️",
+    "s": "negozio ~20 min",
+    "m": 27,
+    "mv": "walk",
+    "lg": 9,
+    "opt": true
+   },
+   {
+    "n": "Chinatown / Little Italy - PRANZO",
+    "i": "🍽️",
+    "s": "pasto ~1h15",
+    "m": 87,
+    "mv": "walk",
+    "lg": 19
+   },
+   {
+    "n": "Big Bus ROSSA: Chinatown -> imbocco del ponte (corsa agganciata)",
+    "i": "🚌",
+    "s": "attivita ~5 min",
+    "m": 17,
+    "mv": "walk",
+    "lg": 12,
+    "fixed": "16:10"
+   },
+   {
+    "n": "Ponte di Brooklyn a piedi (da City Hall)",
+    "i": "🚶",
+    "s": "giro ~1h",
+    "m": 69,
+    "mv": "walk",
+    "lg": 9
+   },
+   {
+    "n": "Dumbo (Washington St + Manhattan Bridge)",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 14,
+    "mv": "walk",
+    "lg": 9
+   },
+   {
+    "n": "Foto al molo (Brooklyn Bridge Park, Pier 1)",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 40,
+    "mv": "walk",
+    "lg": 20,
+    "opt": true
+   },
+   {
+    "n": "Time Out Market Dumbo - CENA",
+    "i": "🍽️",
+    "s": "pasto ~1h20",
+    "m": 95,
+    "mv": "walk",
+    "lg": 16
+   },
+   {
+    "n": "Rientro hotel",
+    "i": "🚕",
+    "s": "rientro",
+    "m": 48,
+    "mv": "taxi",
+    "lg": 43
+   }
+  ]
+ },
+ {
+  "id": "g5",
+  "name": "Giorno 5 · Lun 17",
+  "zone": "FiDi → Village → West Side",
+  "pct": 106,
+  "verd": "bad",
+  "out": "08:45",
+  "back": "21:30",
+  "end": "22:17",
+  "bus": 0,
+  "taxi": 1,
+  "lock": true,
+  "lockon": "2026-08-03",
+  "stops": [
+   {
+    "n": "Traghetto Staten Island (a/r, passa la Statua)",
+    "i": "⛴️",
+    "s": "attivita ~1h30",
+    "m": 10,
+    "mv": "metro",
+    "lg": 34
+   },
+   {
+    "n": "Wall St / Charging Bull",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 22,
+    "mv": "walk",
+    "lg": 16
+   },
+   {
+    "n": "9/11 Memorial",
+    "i": "📸",
+    "s": "foto ~45 min",
+    "m": 54,
+    "mv": "walk",
+    "lg": 19
+   },
+   {
+    "n": "Oculus",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 25,
+    "mv": "walk",
+    "lg": 10
+   },
+   {
+    "n": "Katz's Delicatessen (LES)",
+    "i": "🍽️",
+    "s": "pasto ~1h",
+    "m": 66,
+    "mv": "metro",
+    "lg": 26
+   },
+   {
+    "n": "Sanctum Sanctorum (177A Bleecker)",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 22,
+    "mv": "walk",
+    "lg": 27
+   },
+   {
+    "n": "Joe's Pizza (Carmine St)",
+    "i": "🍽️",
+    "s": "pasto ~35 min",
+    "m": 43,
+    "mv": "walk",
+    "lg": 17
+   },
+   {
+    "n": "Sex and the City (Magnolia + scalinata di Carrie)",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 30,
+    "mv": "walk",
+    "lg": 17,
+    "opt": true
+   },
+   {
+    "n": "High Line - TUTTA, dalla 34th a Gansevoort",
+    "i": "🚶",
+    "s": "giro ~2h15",
+    "m": 163,
+    "mv": "metro",
+    "lg": 28
+   },
+   {
+    "n": "Little Island (tramonto)",
+    "i": "📸",
+    "s": "foto ~1h15",
+    "m": 67,
+    "mv": "walk",
+    "lg": 13
+   },
+   {
+    "n": "Chelsea Market - CENA",
+    "i": "🍽️",
+    "s": "pasto ~1h",
+    "m": 75,
+    "mv": "walk",
+    "lg": 16
+   },
+   {
+    "n": "Rientro hotel",
+    "i": "🚕",
+    "s": "rientro",
+    "m": 30,
+    "mv": "taxi",
+    "lg": 25
+   }
+  ]
+ },
+ {
+  "id": "g6",
+  "name": "Giorno 6 · Mar 18",
+  "zone": "Midtown / West Side + partenza",
+  "pct": 87,
+  "verd": "ok",
+  "out": "08:30",
+  "back": "17:30",
+  "end": "16:20",
+  "bus": 0,
+  "taxi": 0,
+  "lock": true,
+  "lockon": "2026-08-03",
+  "stops": [
+   {
+    "n": "Empire State Building (mattina)",
+    "i": "🏙️",
+    "s": "terrazza ~2h",
+    "m": 153,
+    "mv": "walk",
+    "lg": 33,
+    "fixed": "09:30"
+   },
+   {
+    "n": "Vessel + Hudson Yards",
+    "i": "📸",
+    "s": "foto ~15 min",
+    "m": 39,
+    "mv": "metro",
+    "lg": 22
+   },
+   {
+    "n": "All'Antico Vinaio (schiacciata) - PRANZO",
+    "i": "🍽️",
+    "s": "pasto ~45 min",
+    "m": 55,
+    "mv": "walk",
+    "lg": 32
+   },
+   {
+    "n": "Ultimi acquisti 5th Ave + souvenir",
+    "i": "🛍️",
+    "s": "negozio ~20 min",
+    "m": 45,
+    "mv": "walk",
+    "lg": 25,
+    "opt": true
+   },
+   {
+    "n": "Nathan's Famous (Times Square)",
+    "i": "🍽️",
+    "s": "pasto ~20 min",
+    "m": 19,
+    "mv": "walk",
+    "lg": 13,
+    "opt": true
+   },
+   {
+    "n": "Midtown Comics (200 W 40th) - RECUPERO per Giulio",
+    "i": "🛍️",
+    "s": "negozio ~20 min",
+    "m": 37,
+    "mv": "walk",
+    "lg": 13,
+    "opt": true
+   },
+   {
+    "n": "Rientro hotel + bagagli",
+    "i": "🚶",
+    "s": "rientro",
+    "m": 65,
+    "mv": "walk",
+    "lg": 20
+   }
+  ]
+ }
+];
+
+/* prosa per giornata (scritta a mano, i numeri vengono dal motore) */
+var TEXT = {
+  /* Riscritti il 31 lug: prima raccontavano le revisioni passate, con numeri
+     fermi a due versioni fa e un negozio chiuso dal 2021 dentro. Qui c'e' cosa
+     serve sapere della giornata, e basta. Gli orari vengono dai dataset. */
+  g1: {
+    sub: "Serata di arrivo, presa con calma.",
+    sol: "Cena da <b>Ellen's Stardust</b>, poi <b>Times Square col buio</b> — che è l'unico modo per vederla — e gelato rientrando. Midtown Comics è al martedì: il giovedì sera chiude alle 21:00.",
+    solres: "➜ 19:00 → 21:48."
+  },
+  g2: {
+    sub: "Il giorno del Summit.",
+    sol: "Si esce alle <b>10:00</b> e non prima: la giornata è ancorata al <b>Summit delle 19:00</b>, quindi alzarsi presto aggiungerebbe solo attesa. <b>Nell'ordine che hai chiesto tu</b>: Bryant Park per primo, quindi <b>fuori dal sole di mezzogiorno</b> (10:24 invece delle 12), poi Grand Central. MoMA nel pomeriggio, che è anche il rifugio con aria condizionata nell'ora peggiore. <b>Lo shopping sulla 5th assorbe l'attesa prima del Summit</b>: 100 minuti nei negozi invece di 43 in piedi sul marciapiede.",
+    solres: "➜ 10:00 → 22:07. Pranzo da Five Guys vicino al MoMA, cena da Raising Cane's dopo il Summit. Nessun taxi."
+  },
+  g3: {
+    sub: "Central Park in bici, poi il giro panoramico verso l'Alta città.",
+    sol: "Bici alle <b>9:08</b>, Central Park quando è ancora fresco. Pranzo d'asporto a <b>Columbus Circle</b> mangiato alla fermata, perché il bus passa alle <b>13:02</b> e quella corsa non si perde. Poi Met, Guggenheim da fuori e la funivia di Roosevelt Island. <b>Dalla funivia si rientra in metro</b> (treno N, 15 minuti), <b>pausa in albergo</b> e cena da <b>Junior's</b>.",
+    solres: "➜ 08:45 → 20:09. Niente taxi.",
+    warn: "🥵 <b>Il prezzo di questa giornata è il sole.</b> Il giro panoramico cade fra l'una e le tre, col piano di sopra scoperto: <b>circa 50 minuti al sole pieno</b>. Cappelli, acqua e crema non sono un dettaglio. Se quel giorno il caldo è insopportabile, il giro si salta sul posto e si va al Met in taxi: 16 dollari."
+  },
+  g4: {
+    sub: "Downtown e Brooklyn, col bus e col ponte.",
+    sol: "Corsa panoramica lunga fino al <b>World Trade Center</b>, poi Ghostbusters, SoHo e pranzo a Little Italy. Nel pomeriggio <b>il ponte di Brooklyn a piedi</b> — il sogno di MariaPaola e Peppe — e cena a Dumbo coi ponti davanti.",
+    solres: "➜ 10:00 → 20:47.",
+    warn: "🥵 <b>Il ponte si attraversa nel pomeriggio pieno: un'ora senza un filo d'ombra.</b> Mi avevi detto di non spostarlo e non l'ho spostato — l'ora fresca costerebbe rifare tutta la domenica attorno agli orari del bus. Acqua prima di salire."
+  },
+  g5: {
+    sub: "Dalla punta sud al West Side, in metro, a piedi e in traghetto.",
+    sol: "Traghetto gratis davanti alla <b>Statua della Libertà</b> (ci si arriva <b>in metro</b>, come hai chiesto), Wall Street, il <b>9/11 Memorial</b>, poi Katz's per il pastrami di Tony e il Village. Si sale in metro all'ingresso nord della High Line e <b>si percorre tutta, dalla 34th a Gansevoort</b> — le <b>2h15</b> che hai scelto — poi <b>Little Island col tramonto</b> verso le 19:55 e <b>la cena al Chelsea Market dopo</b>. <i>Sex and the City</i> si fa <b>se c'è tempo</b>: è la prima a saltare.",
+    solres: "➜ 08:45 → 22:17. Little Island 19:16-20:31, cioè 39' prima del tramonto e 36' dopo.",
+    warn: "🌇 <b>È di gran lunga la giornata più lunga delle sei, e sfora il suo traguardo di 47 minuti</b> — il giorno dopo si esce alle 08:30. <b>Ma il prezzo è il tramonto, non il parco</b>: la High Line la percorrete <b>tutta</b> in ogni caso — sono 2,3 km, <b>mezz'ora</b> di passo svelto — e i minuti in più servono a essere a Little Island <b>quando il sole cala</b>. Si rientra accorciando solo quella: 2 ore → 22:02, 1h15 → 21:17 ma senza tramonto."
+  },
+  g6: {
+    sub: "Ultima mattina, poi l'aeroporto.",
+    sol: "<b>Empire State alle 9:30</b>, che è l'ora con meno coda e meno foschia. Poi il Vessel, la schiacciata di All'Antico Vinaio, gli ultimi souvenir scendendo la 5th e il fumetto di Giulio da Midtown Comics.",
+    solres: "➜ 08:30 → 16:20, e restano <b>1 ora e 10</b> sul limite delle 17:30 per uscire dall'hotel.",
+    warn: "🚐 <b>Il van per JFK è prenotato</b> — in otto coi bagagli è l'unico spostamento che non regge in taxi. Passa all'hotel alle <b>16:20</b>; il volo è alle <b>22:00</b>."
+  }
+};
+</script>
+<script>
+/* ---------- helpers ---------- */
+function tint(v){ return v==='bad' ? '#d1495b' : (v==='warn' ? '#b46f1a' : '#2f7a46'); }
+function hm(m){
+  m = Math.round(m/5)*5;
+  var h = Math.floor(m/60), r = m%60;
+  if(h && r) return h + 'h' + (r<10?'0':'') + r;
+  if(h) return h + 'h';
+  return r + ' min';
+}
+function mins(t){ var p = t.split(':'); return parseInt(p[0],10)*60 + parseInt(p[1],10); }
+function recovText(got, need){
+  if(!need) return got ? ('Recuperi <b>' + hm(got) + '</b> di margine in più su questa giornata.')
+                       : 'Questa giornata ci sta già. Se togli qualcosa, guadagni margine.';
+  if(got >= need) return '✅ <b>Fatto:</b> hai recuperato <b>' + hm(got) + '</b> — la giornata adesso ci sta (ne servivano ' + hm(need) + ').';
+  return 'Recuperati <b>' + hm(got) + '</b> su <b>' + hm(need) + '</b> che ne servono per far tornare la giornata.';
+}
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* come ci si arriva. Il mezzo era nei dati fin dall'inizio ma non arrivava
+   in pagina: il Big Bus e' comprato e non si vedeva quando lo si usa. */
+var MOVE = {
+  walk: { e:'🚶', t:'a piedi' },
+  bus:  { e:'🚌', t:'Big Bus' },
+  taxi: { e:'🚕', t:'taxi/Uber' },
+  metro:{ e:'🚇', t:'metro' }
+};
+function moveTag(s){
+  var m = MOVE[s.mv] || MOVE.walk;
+  return '<span class="mv ' + s.mv + '">' + m.e + ' ' + m.t + (s.lg ? ' ' + s.lg + "'" : '') + '</span>';
+}
+
+/* ---------- righe editabili generiche (slot + singole tappe) ---------- */
+var slotOverride = {};
+var stopOverride = {};
+
+function renderValueRows(list, container, attr){
+  var box = document.getElementById(container);
+  if(!box) return;               /* la sezione puo' non esistere piu' in questa versione */
+  list.forEach(function(s){
+    var d = document.createElement('div');
+    d.className = 'er'; d.setAttribute(attr, s.k);
+    d.innerHTML =
+      '<span class="ic">' + s.i + '</span>' +
+      '<span class="nm">' + s.n + '<small>' + s.ex + '</small></span>' +
+      '<span class="sugg">' + hm(s.v) + '</span>' +
+      '<span class="newv"></span>' +
+      '<button class="eb" type="button">✏️</button>' +
+      '<span class="erow"><span class="u">nuovo valore:</span>' +
+      '<input type="number" min="5" step="5" value="' + s.v + '"><span class="u">minuti</span></span>';
+    box.appendChild(d);
+  });
+}
+renderValueRows(SLOTS, 'slotlist', 'data-slot');
+renderValueRows(STOPFIX, 'stopfix', 'data-stopfix');
+
+/* ---------- riepilogo ---------- */
+var COL = { ok:'linear-gradient(90deg,#5cb874,#3f9d5a)', warn:'linear-gradient(90deg,#f0b657,#e0912f)', bad:'linear-gradient(90deg,#e2707f,#d1495b)' };
+var sum = document.getElementById('summary');
+DAYS.forEach(function(d){
+  var a = document.createElement('a');
+  a.className = 'srow'; a.href = '#' + d.id;
+  a.innerHTML = '<span class="sd">' + d.name.split('·')[1].trim() + '</span>' +
+    '<span class="st"><span class="sf" style="width:' + Math.min(d.pct,100) + '%; background:' + COL[d.verd] + '"></span></span>' +
+    '<span class="sp" style="color:' + tint(d.verd) + '">' + d.pct + '%</span>';
+  sum.appendChild(a);
+});
+
+/* ---------- il quadro del blocco (D131) ----------
+   Legge `lock` dentro DAYS, che viene da locks.json: la pagina non sa niente da sola,
+   e non puo' dire "bloccata" una giornata che il registro non ha bloccato.
+   Qui c'e' SOLO il riepilogo: i flag stanno dentro le card delle giornate, dove uno
+   li incontra dopo aver guardato le tappe e la story map. */
+/* ⚠️ `lockPick` si dichiara QUI e non piu' giu' insieme a `dayDecision`. Stava dopo la
+   chiamata a renderLockboard(): `var` viene issato ma vale `undefined`, quindi
+   `lockPick[d.id]` lanciava un TypeError e **tutto il resto dello script moriva** -
+   comprese le card delle giornate, che si costruiscono venti righe piu' sotto. La
+   pagina e' andata online senza l'itinerario. E' la stessa famiglia di D123: JS
+   sintatticamente perfetto, semantica morta, e `check_pages.py` verde. */
+var lockPick = {};        /* id giornata -> true se l'ha spuntata adesso (D131) */
+
+function renderLockboard(){
+  var box = document.getElementById('lockboard');
+  if(!box) return;                       /* la guardia serve: la sezione puo' non esserci */
+  var gia = 0, ora = 0, righe = '';
+  DAYS.forEach(function(d){
+    var bloccata = !!d.lock, scelta = !!lockPick[d.id];
+    if(bloccata) gia++; else if(scelta) ora++;
+    var ic = bloccata ? '🔒' : (scelta ? '✅' : '⬜');
+    var st = bloccata
+      ? ('bloccata' + (d.lockon ? ' il ' + d.lockon : '') + ' — non ti chiedo più niente')
+      : (scelta ? '<b>la blocchi con questo invio</b>'
+                : 'ancora aperta — il flag è dentro la giornata, qui sotto');
+    righe += '<div style="display:flex;gap:9px;align-items:center;padding:8px 0;' +
+             'border-bottom:1px solid var(--line)">' +
+             '<span style="font-size:1.05rem">' + ic + '</span>' +
+             '<div style="flex:1;min-width:0"><b>' + d.name + '</b> ' +
+               '<span class="muted">· ' + d.zone + '</span><br>' +
+               '<small class="muted">' + st + '</small></div>' +
+             '<a href="#' + d.id + '" style="flex:none;color:var(--accent);font-weight:800;' +
+               'text-decoration:none;font-size:.85rem">vai →</a></div>';
+  });
+  var n = gia + ora, tot = DAYS.length, testa;
+  if(n === 0){
+    testa = '<div style="font-weight:800;color:var(--accent2)">⬜ Nessuna giornata bloccata — 0 su ' + tot +
+            '</div><div class="muted" style="font-size:.88rem">Scorri le giornate qui sotto e segna quelle ' +
+            'che ti vanno bene: <b>partono tutte in un messaggio solo</b>.</div>';
+  } else if(n === tot){
+    testa = '<div style="font-weight:800;color:var(--g5)">🎉 Tutte e ' + tot + ' bloccate</div>' +
+            '<div class="muted" style="font-size:.88rem">Da qui non ti chiedo più niente su nessuna giornata: ' +
+            'scrivo l\'itinerario da portare in viaggio.</div>';
+  } else {
+    testa = '<div style="font-weight:800;color:var(--g5)">🔒 ' + n + ' giornate su ' + tot + '</div>' +
+            '<div class="muted" style="font-size:.88rem">Sulle altre ' + (tot - n) + ' posso ancora farti domande. ' +
+            '<b>L\'itinerario lo comincio dalle bloccate</b>, senza aspettare le altre.</div>';
+  }
+  box.innerHTML = testa + '<div style="margin-top:10px">' + righe + '</div>';
+
+  var act = document.getElementById('lockact');
+  if(act){
+    act.innerHTML = ora
+      ? ('<div style="background:#f2faf4;border:2px solid var(--g5);border-radius:12px;padding:11px 13px;' +
+         'font-size:.9rem">✅ <b>Stai per bloccare ' + ora + (ora === 1 ? ' giornata' : ' giornate') +
+         '.</b> Sono già nel messaggio: premi <b>Invia su WhatsApp</b> in fondo alla pagina e ' +
+         'partono <b>tutte insieme</b>, con le altre cose che hai segnato.</div>')
+      : '';
+  }
+}
+renderLockboard();
+
+/* ---------- giorni ---------- */
+var wrapDays = document.getElementById('days');
+DAYS.forEach(function(d){
+  var T = TEXT[d.id] || {};
+  d.need = Math.max(0, mins(d.end) - mins(d.back));
+
+  var el = document.createElement('div');
+  el.className = 'day'; el.id = d.id;
+  el.setAttribute('data-dayname', d.name + ' (' + d.zone + ')');
+
+  var vlabel = d.verd === 'ok' ? 'regge' : (d.verd === 'warn' ? 'piena ma ok' : 'non ci sta');
+
+  var h = '<div class="dh"><span class="dd">' + d.name + '</span>' +
+          '<span class="verd ' + d.verd + '">' + vlabel + '</span>' +
+          '<button class="editbtn" type="button">✏️ Modifica</button></div>' +
+          '<div class="dsub">' + d.zone + ' — ' + (T.sub || '') + '</div>';
+
+  h += '<div class="score ' + d.verd + '">' +
+       '<div class="scoretop"><span class="pct" style="color:' + tint(d.verd) + '">' + d.pct + '%</span>' +
+       '<span class="lbl">carico della giornata</span></div>' +
+       '<div class="track"><span class="fill" style="width:' + Math.min(d.pct,100) + '%"></span></div>' +
+       '<div class="limitlbl">esci ' + d.out + ' · si finisce ' + d.end + ' · traguardo ' + d.back + '</div></div>';
+
+  /* v15: il blocco "cosa ho trovato rifacendo i conti" NON si rende piu'.
+     Erano i problemi trovati mentre la giornata si negoziava: adesso sono tutti
+     risolti e la giornata e' approvata, quindi raccontarli in cima a ogni
+     giornata significa presentare come aperta una discussione chiusa.
+     Il testo resta in TEXT[].probs: se una giornata si riapre torna utile. */
+
+  /* UN SOLO collegamento per giornata: la story map.
+     Storia breve, e vale come regola. Le due pagine sullo studio del bus stavano
+     prima in una sezione a parte in cima, dentro un blocco di roba gia' risposta;
+     le ho spostate qui dentro perche' almeno fossero raggiungibili. Poi il doc
+     owner ha tagliato il nodo: *"non serve piu', e' approvato ed integrato"*.
+     Ha ragione, ed e' la stessa regola di tutto il resto - un rimando a una cosa
+     CHIUSA e' peso morto, e spostarlo in un posto migliore non lo rende utile.
+     Le due pagine restano online con il loro pulsante di ritorno, per chi ha
+     ancora il link: non sono cancellate, solo non piu' pubblicizzate. */
+  h += '<div class="storylnk"><a class="btn" href="route/' + d.id + '/">🧭 vai alla <b>story map</b> di questa giornata — il giro sulla mappa, pezzo per pezzo</a></div>';
+
+  /* IL FLAG DEL BLOCCO (D131), e sta DENTRO la giornata per un motivo preciso: e' il
+     punto del giro di lettura in cui uno ha appena visto le tappe ed e' tornato dalla
+     story map. Un pulsante per giornata su sei pagine diverse avrebbe prodotto SEI
+     messaggi per dire una cosa sola; qui si spuntano quelle che vanno bene e partono
+     insieme, nello stesso messaggio che porta gia' le modifiche e i commenti. */
+  if(d.lock){
+    h += '<div class="lockrow done">🔒 <b>Bloccata</b>' + (d.lockon ? ' il ' + d.lockon : '') +
+         ' — su questa giornata non ti chiedo più niente.' +
+         ' <span class="muted">Se cambi idea si riapre qui sotto.</span></div>';
+  } else {
+    h += '<div class="lockrow"><label><input type="checkbox" data-lockday="' + d.id + '">' +
+         '<span><b>🔒 Questa giornata mi va bene — bloccala.</b> ' +
+         'Da qui in poi non ti chiedo più niente su di lei: la verifico e basta, e ' +
+         'comincio a scriverne l\'itinerario da portare in viaggio.</span></label></div>';
+  }
+
+  h += '<div class="sol"><h4>💡 Com\'è questa giornata, e perché</h4><div>' + (T.sol || '') + '</div>' +
+       '<div class="res2">' + (T.solres || '') + '</div>' +
+       '</div>';
+
+  if(T.warn){ h += '<div class="note">' + T.warn + '</div>'; }
+
+  h += '<div class="seq">';
+  d.stops.forEach(function(s){
+    h += '<div class="it' + (s.opt?' opt':'') + '" data-name="' + esc(s.n) + '" data-min="' + s.m + '">' +
+         '<span class="nm">' + s.i + ' ' + esc(s.n) +
+         (s.fixed ? '<span class="fx">🔒 ' + s.fixed + '</span>' : '') +
+         (s.todo ? '<span class="fx todo">📋 ' + s.todo + '</span>' : '') + '</span>' +
+         '<span class="sl">' + moveTag(s) + s.s + '</span></div>';
+  });
+  h += '</div>';
+
+  /* v15: la via per riaprire la giornata esiste ancora - D52 la pretende - ma sta
+     dietro un dettaglio chiuso. Prima erano 2 pulsanti e una casella SEMPRE aperti
+     su sei giornate gia' approvate: dodici inviti a cambiare idea su cose decise. */
+  h += '<details class="chg"><summary>⋯ voglio cambiare questa giornata</summary>' +
+       '<div class="chgin">' +
+       '<p class="muted" style="margin:.1em 0 .7em; font-size:.86rem">Questa giornata l\'hai già approvata. Si può riaprire — ma il costo te lo dico prima, e il ricalcolo tocca tutto quello che viene dopo.</p>' +
+       '<div class="appr">' +
+       '<button class="ab again" type="button" data-val="RIFAI PROPOSTA">🔄 Ho cambiato idea — rifammela<small>solo se questa giornata non ti convince più</small></button>' +
+       '<button class="ab edit" type="button" data-val="SBLOCCA EDIT">✏️ Riapro e tolgo qualcosa<small>tocca le tappe da togliere e spiegami sotto il perché</small></button>' +
+       '</div>' +
+       '<div class="edithint">👆 Tocca un\'attività qui sopra per toglierla — ti dico subito quanto recuperi</div>' +
+       '<div class="recov" data-need="' + d.need + '">' + recovText(0, d.need) + '</div>' +
+       '<textarea class="daycomment" placeholder="💬 Cosa cambieresti in questa giornata, e perché..."></textarea>' +
+       '</div></details>';
+
+  el.innerHTML = h;
+  wrapDays.appendChild(el);
+});
+
+/* ---------- il flag del blocco (D131) ----------
+   DELEGAZIONE SUL DOCUMENT e non getElementById: le card delle giornate sono costruite
+   in JS, quindi quando questo codice gira gli elementi non esistono ancora. E' la regola
+   nata da D123, dove un listener agganciato a un elemento non ancora nel documento non e'
+   mai nato - e nessuno se n'e' accorto per giorni, perche' il JS era sintatticamente
+   perfetto. */
+document.addEventListener('change', function(ev){
+  var c = ev.target;
+  if(!c || !c.getAttribute || !c.getAttribute('data-lockday')) return;
+  lockPick[c.getAttribute('data-lockday')] = c.checked;
+  var row = c.closest('.lockrow');
+  if(row) row.classList.toggle('picked', c.checked);
+  renderLockboard();
+  updateStatus();
+});
+
+/* ---------- editing righe ---------- */
+document.querySelectorAll('.er .eb').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var row = btn.closest('.er');
+    var on = row.classList.toggle('editing');
+    btn.textContent = on ? '✓' : '✏️';
+    if(!on) commitRow(row);
+  });
+});
+document.querySelectorAll('.er input').forEach(function(inp){
+  inp.addEventListener('change', function(){ commitRow(inp.closest('.er')); });
+});
+function commitRow(row){
+  var isSlot = row.hasAttribute('data-slot');
+  var k = isSlot ? row.getAttribute('data-slot') : row.getAttribute('data-stopfix');
+  var list = isSlot ? SLOTS : STOPFIX;
+  var store = isSlot ? slotOverride : stopOverride;
+  var v = parseInt(row.querySelector('input').value, 10);
+  var base = 0;
+  list.forEach(function(s){ if(s.k===k) base = s.v; });
+  if(v && v !== base){
+    store[k] = v;
+    row.classList.add('edited');
+    row.querySelector('.sugg').classList.add('changed');
+    row.querySelector('.newv').textContent = '→ ' + hm(v);
+  } else {
+    delete store[k];
+    row.classList.remove('edited');
+    row.querySelector('.sugg').classList.remove('changed');
+    row.querySelector('.newv').textContent = '';
+  }
+  updateStatus();
+}
+
+/* ---------- edit mode giornata ---------- */
+document.querySelectorAll('.editbtn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var day = btn.closest('.day');
+    var on = day.classList.toggle('editing');
+    btn.textContent = on ? '✓ Fine' : '✏️ Modifica';
+  });
+});
+document.querySelectorAll('.it').forEach(function(el){
+  el.addEventListener('click', function(){
+    var day = el.closest('.day');
+    if(!day || !day.classList.contains('editing')) return;
+    el.classList.toggle('off');
+    var got = 0;
+    day.querySelectorAll('.it.off').forEach(function(x){ got += parseInt(x.getAttribute('data-min'),10)||0; });
+    var box = day.querySelector('.recov');
+    var need = parseInt(box.getAttribute('data-need'),10)||0;
+    box.innerHTML = recovText(got, need);
+    box.classList.toggle('done', need>0 && got>=need);
+  });
+});
+
+/* ---------- approva / rifai / sblocca ---------- */
+var dayDecision = {};
+document.querySelectorAll('.appr').forEach(function(group){
+  group.querySelectorAll('.ab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var day = btn.closest('.day');
+      var already = btn.classList.contains('sel');
+      group.querySelectorAll('.ab').forEach(function(x){ x.classList.remove('sel'); });
+      var val = already ? '' : btn.getAttribute('data-val');
+      dayDecision[day.id] = val ? { name: day.getAttribute('data-dayname'), val: val } : null;
+      if(!already) btn.classList.add('sel');
+      var unlock = (val === 'SBLOCCA EDIT');
+      day.classList.toggle('wantedit', unlock);
+      if(unlock){
+        day.classList.add('editing');
+        day.querySelector('.editbtn').textContent = '✓ Fine';
+        var c = day.querySelector('.daycomment');
+        c.setAttribute('placeholder', '💬 Spiegami cosa togli e perché — così capisco la priorità e ricalcolo');
+        c.focus();
+      }
+      updateStatus();
+    });
+  });
+});
+
+/* ---------- chips ---------- */
+var sel = {};
+document.querySelectorAll('.chips[data-group]').forEach(function(group){
+  var g = group.getAttribute('data-group');
+  group.querySelectorAll('.chip').forEach(function(el){
+    el.addEventListener('click', function(){
+      var already = el.classList.contains('sel');
+      group.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('sel'); });
+      sel[g] = already ? '' : el.getAttribute('data-val');
+      if(!already) el.classList.add('sel');
+      updateStatus();
+    });
+  });
+});
+
+/* Il campo libero della cena del venerdi conta come risposta: la barra deve
+   accorgersene mentre lui scrive, altrimenti scrive un posto e la pagina continua
+   a dire che manca. (In v23 questo listener era sparito insieme al campo dell'ora
+   dell'Empire, ed e' tornato necessario con `cenaTxt`.) */
+/* v25: `cenaTxt` non esiste piu' - la cena del venerdi ha un posto (Junior's, D103).
+   Il listener e' rimosso insieme al campo, non lasciato "difensivo": un ascoltatore
+   su un elemento che non c'e' e' un pezzo di codice che dichiara una domanda morta. */
+
+/* v23: le quattro domande della v22 sono RISPOSTE e applicate, quindi non hanno piu'
+   un pulsante - si mostrano come stato (D83/D67). Con loro sono spariti i quattro
+   gruppi corrispondenti e il campo di testo dell'ora Empire: lasciarli qui avrebbe
+   significato un JS che legge gruppi non piu' presenti nel DOM, ed e' esattamente il
+   caso che `check_pages.py` intercetta. Resta una domanda sola: il pranzo del sabato. */
+function updateStatus(){
+  var rev = 0;
+  Object.keys(dayDecision).forEach(function(k){ if(dayDecision[k]) rev++; });
+  var edits = Object.keys(slotOverride).length;
+  var t = [];
+  /* v28: i due gruppi della v27 (ZONETEMPI e VAN) NON esistono piu' nel DOM - ha
+     risposto a tutt'e due e sono diventati stato. Tolti anche di qui: un JS che
+     legge gruppi non piu' presenti e' esattamente il caso che check_pages.py
+     intercetta, ed e' come si accumulano domande gia' risposte. */
+  if(sel['SEIG']) t.push('\uD83D\uDDA8\uFE0F schede');
+  var lk = 0;
+  Object.keys(lockPick).forEach(function(k){ if(lockPick[k]) lk++; });
+  if(lk) t.push('🔒 ' + lk + (lk === 1 ? ' giornata da bloccare' : ' giornate da bloccare'));
+  if(rev) t.push(rev + (rev === 1 ? ' giornata da riaprire' : ' giornate da riaprire'));
+  if(edits) t.push(edits + ' blocchi cambiati');
+  document.getElementById('statusLine').textContent =
+    t.length ? (t.join(' · ') + ' — invia quando vuoi')
+             : "Segna le giornate che ti vanno bene 🔒 e mandamele tutte insieme";
+}
+
+/* ============================================================
+   TAG DI ORIGINE — lega ogni risposta alla pagina ESATTA che l'ha
+   prodotta, e al piano che quella pagina stava mostrando.
+   Serve perche' piu' pagine restano vive insieme: senza questo, una
+   risposta scritta su una pagina vecchia sembra una richiesta nuova.
+   ⚠️ Da aggiornare a OGNI pubblicazione, insieme al badge di versione.
+   ============================================================ */
+var FORM = {
+  id:    'analisi-logistica',
+  ver:   'v45',
+  /* ⚠️ La v43 e' andata online il 4 ago e questo campo diceva ancora 2026-08-03:
+     il tag della sua risposta ha quindi dichiarato una data di pubblicazione
+     sbagliata di un giorno. Non ha fatto danni perche' il NUMERO di versione era
+     giusto ed e' quello che conta per capire cosa aveva davanti - ma e' un dato
+     falso in un blocco che esiste apposta per essere creduto. */
+  built: '2026-08-05',
+  plan:  "itinerario v2.4, pacchetto v45. 🎉 LOCK-IN COMPLETO, 6 SU 6 (D139): tutte e sei le giornate sono BLOCCATE il 2026-08-03 - le quattro del pomeriggio (D136) piu' domenica e lunedi la sera (form v40, 18:41). Da qui NON SI CHIEDE PIU' NIENTE su nessuna giornata: si verifica soltanto, e si scrive l'ITINERARIO DOCUMENTO (#8, map-first). Questa pagina e' CONSULTAZIONE, non piu' uno strumento di decisione. La porta per riaprire resta in fondo a ogni giornata (locks.py --unlock N) e da adesso costa di piu': una modifica rientra anche nella guida. LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-20:09 - dom 10:00-20:47 - lun 08:45-22:17 - mar 08:30-16:20, cuscino JFK 70'. Il lunedi sfora il traguardo comodo (21:30) di 47' ed e' scelta consapevole: il prezzo e' il TRAMONTO a Little Island, NON il parco - la High Line si percorre tutta in tutte e quattro le durate simulate (75/120/135/150), sono 2,3 km cioe' mezz'ora di passo svelto, e il dwell di 135' serve a posizionare Little Island sul tramonto (D140: la frase 'tutta invece di mezza' era falsa contro i nostri stessi scenari, corretta). Corse in taxi di tutto il viaggio: 2 (gen_mix.py: 54 spostamenti, 43 a piedi, 2 taxi, 4 bus, 5 metro). High Line 07:00-22:00, verificato su thehighline.org il 3 ago. SULLE GIORNATE NESSUNA DOMANDA E NESSUN FLAG: la pagina non ne chiede piu'. LE SCHEDE DA STAMPARE (D143): dal form v43 ha scelto 'la B (verticale) ma con le cose scritte della A', ed e' fatta - striscia da 74 a 78 mm, note/tratte/soste/i tre riquadri della A dentro, zoom 15 tenuto, 16 mm di margine misurati da check_sheets. FATTA SOLO SUL GIORNO 5, apposta: l'unica domanda aperta di questa pagina e' se generare gli altri cinque (gruppo SEIG). RESTA DIETRO, ed e' tutto mio: l'itinerario documento (#8), O44 a 5 zone, 7g trasporti freschi (finestra 8-10 ago), O47.",
+  stale: ''
+};
+
+function formTag(){
+  var d = new Date(), p = function(n){ return (n<10?'0':'') + n; };
+  var L = ['', '———',
+    '📋 form: ' + FORM.id + ' ' + FORM.ver + ' · pubblicata ' + FORM.built,
+    '🗺️ piano mostrato: ' + FORM.plan,
+    '🕘 inviato: ' + p(d.getDate()) + '/' + p(d.getMonth()+1) + '/' + d.getFullYear() +
+      ' ' + p(d.getHours()) + ':' + p(d.getMinutes())];
+  if(FORM.stale) L.push('⚠️ ' + FORM.stale);
+  return L;
+}
+
+/* ---------- messaggio WhatsApp ---------- */
+function buildMessage(){
+  var L = [];
+  L.push('🗽 NEW YORK — Analisi logistica v45: messaggio di Fabrizio');
+
+  /* v28: qui NON c'e' piu' nessun gruppo di domande. ZONETEMPI e VAN hanno avuto
+     risposta il 31 lug (D112, D113) e sono usciti dalla pagina insieme al JS che
+     li leggeva. L'unica cosa aperta e' il venerdi, e vive sulla SUA pagina con il
+     suo messaggio: due pagine che chiedono la stessa cosa sono il difetto che ha
+     prodotto D81. Questo messaggio resta per le riaperture e i blocchi cambiati. */
+
+  /* v14: i due pulsanti "torna indietro" su sabato e Comics NON esistono piu'.
+     Si confermavano col silenzio - e il silenzio non fa sparire un pulsante,
+     quindi restavano appesi in pagina giro dopo giro. Il silenzio del 30 lug e'
+     stato letto come conferma e messo agli atti nel resoconto; da qui in avanti,
+     dove serve una conferma, si mette un pulsante "confermo" esplicito. */
+
+  /* Le giornate sono gia' bloccate: non si chiede di riconfermarle.
+     Nel messaggio finiscono SOLO quelle che vuole riaprire. */
+  /* I BLOCCHI (D131) stanno in cima al messaggio, prima delle riaperture e delle
+     modifiche: sono la cosa che chiude, e vanno lette per prime. Un messaggio solo
+     per tutte le giornate - il pulsante per giornata ne avrebbe prodotti sei. */
+  /* LA SCHEDA DA STAMPARE (D142). Sta PRIMA delle giornate perche' e' l'unica
+     domanda aperta: sulle giornate non si chiede piu' niente, sono bloccate.
+     ⚠️ Questa riga e' la ragione per cui il gruppo esiste: senza, i pulsanti
+     raccoglierebbero una risposta che il messaggio non porta - e' D123, ed e'
+     il difetto che `check_pages.py` intercetta (gruppo orfano). */
+  if(sel['SEIG']){
+    var SCH = {
+      'TUTTI':   '\u2705 LE SCHEDE: va bene cosi\', falle per tutti e sei i giorni.',
+      'RITOCCO': '\u270F\uFE0F LE SCHEDE: ci siamo quasi, ma prima cambia una cosa (scritta qui sotto).',
+      'SOLO5':   '\uD83D\uDED1 LE SCHEDE: mi basta il lunedi\', le altre cinque non farle.'
+    };
+    L.push('');
+    L.push(SCH[sel['SEIG']]);
+  }
+
+  var lock = [];
+  DAYS.forEach(function(d){
+    if(lockPick[d.id]) lock.push('   - ' + d.name + ' (' + d.zone + ')');
+  });
+  if(lock.length){
+    L.push('');
+    L.push('🔒 BLOCCO QUESTE GIORNATE — su queste non chiedermi più niente:');
+    lock.forEach(function(x){ L.push(x); });
+    /* ⚠️ D141: `manca` contava le giornate NON spuntate ADESSO, comprese quelle gia'
+       bloccate in un giro precedente. Il 3 ago Fabrizio ha chiuso le ultime due e il
+       messaggio ha detto "(le altre 4 le guardo con calma)" su giornate che aveva chiuso
+       lui il giorno prima - e soprattutto il ramo "sono tutte e sei" NON POTEVA MAI
+       SCATTARE, perche' bastava che una fosse stata bloccata prima. Il messaggio che
+       doveva annunciare la CHIUSURA dell'itinerario era l'unico che non poteva farlo.
+       📐 Un contatore che ignora lo stato gia' raggiunto misura solo l'ultimo giro. */
+    var manca = 0;
+    DAYS.forEach(function(d){ if(!d.lock && !lockPick[d.id]) manca++; });
+    L.push('');
+    L.push(manca ? ('   (ne restano ' + manca + ' da guardare con calma)')
+                 : '   (sono tutte e sei: l\'itinerario per me è chiuso)');
+  }
+
+  var rev = [];
+  DAYS.forEach(function(d){
+    var x = dayDecision[d.id];
+    if(x) rev.push('   - ' + x.name + ': ' + x.val);
+  });
+  if(rev.length){ L.push(''); L.push('🔓 GIORNATE DA RIAPRIRE (erano bloccate):'); rev.forEach(function(x){ L.push(x); }); }
+
+  /* I minuti per singola tappa. NON venivano riportati: `stopOverride` era
+     scritto e mai letto, e il contenitore era sparito con una sezione tolta -
+     chi avesse modificato un valore l'avrebbe visto cambiare in pagina senza
+     che arrivasse niente. Difetto trovato e chiuso il 31 lug. */
+  var zo = [];
+  STOPFIX.forEach(function(s){
+    if(stopOverride[s.k] !== undefined)
+      zo.push('   - ' + s.n + ': da ' + hm(s.v) + ' a ' + hm(stopOverride[s.k]));
+  });
+  if(zo.length){ L.push(''); L.push('\u23f1 MINUTI CAMBIATI SU UNA TAPPA (rifare il calcolo):'); zo.forEach(function(x){ L.push(x); }); }
+
+  var so = [];
+  SLOTS.forEach(function(s){
+    if(slotOverride[s.k] !== undefined)
+      so.push('   - ' + s.n + ': da ' + hm(s.v) + ' a ' + hm(slotOverride[s.k]));
+  });
+  if(so.length){ L.push(''); L.push('⏱ BLOCCHI DI TEMPO CAMBIATI (rifare il calcolo):'); so.forEach(function(x){ L.push(x); }); }
+
+  var any = false;
+  document.querySelectorAll('.day').forEach(function(day){
+    var dn = day.getAttribute('data-dayname');
+    var removed = [].slice.call(day.querySelectorAll('.it.off')).map(function(x){ return x.getAttribute('data-name'); });
+    var c = day.querySelector('.daycomment');
+    var comment = c ? c.value.trim() : '';
+    if(removed.length || comment){
+      if(!any){ L.push(''); L.push("✏️ MODIFICHE ALL'ITINERARIO:"); any = true; }
+      L.push('');
+      L.push('📅 ' + dn + ':');
+      if(removed.length){
+        var got = 0;
+        day.querySelectorAll('.it.off').forEach(function(x){ got += parseInt(x.getAttribute('data-min'),10)||0; });
+        L.push('   ✖ togli: ' + removed.join(', '));
+        L.push('   ⏱ recupera circa ' + hm(got));
+      }
+      if(comment) L.push('   💬 ' + comment);
+    }
+  });
+
+  var open = document.getElementById('openText').value.trim();
+  if(open){ L.push(''); L.push('💬 ALTRO: ' + open); }
+  formTag().forEach(function(x){ L.push(x); });
+  return L.join('\n');
+}
+
+document.getElementById('sendBtn').addEventListener('click', function(){
+  window.open('https://wa.me/?text=' + encodeURIComponent(buildMessage()), '_blank');
+});
+updateStatus();
+
+</script>
+</body>
+</html>
