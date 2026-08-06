@@ -28,6 +28,21 @@
   .keys b{color:var(--ink)}
   .keys svg{vertical-align:middle;margin-right:3px}
   .maphint{font-size:.74rem;color:var(--muted);text-align:center;margin:4px 2px 0}
+  /* ---- il livello "lungo la strada" (D147). Tutto dimensionato per il
+     telefono: e' li' che questa pagina si apre davvero. */
+  .poico{display:inline-block;width:11px;height:11px;border-radius:50%%;
+         border:2px solid #6b7a88;background:#fff;vertical-align:middle;margin-right:4px}
+  .poibox{background:#f4f7f9;border:1px solid var(--line);border-left:5px solid #6b7a88;
+          border-radius:12px;padding:12px 14px;margin:12px 0 0;font-size:.9rem;
+          line-height:1.5}
+  .poibox h3{margin:0 0 5px;font-size:.98rem}
+  .poibox .no{color:#0f766e;font-weight:700}
+  .poisw{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:.86rem;
+         background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 11px}
+  .poisw input{width:18px;height:18px;flex:none}
+  .poiask{display:inline-block;margin-top:10px;background:#0f766e;color:#fff;
+          font-weight:800;text-decoration:none;padding:10px 15px;border-radius:9px;
+          font-size:.9rem}
   .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
              padding:11px 13px;margin:13px 0;font-size:.87rem}
   .changelog h3{margin:0 0 6px;font-size:.93rem}
@@ -169,7 +184,7 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il mar 18</h1>
   <div class="sub">Midtown / West Side + partenza (volo 22:00) — si esce alle <b>08:30</b>, si rientra verso le <b>16:20</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v54 &middot; 6 ago 2026</div>
+  <div class="ver">🧭 percorso v55 &middot; 6 ago 2026</div>
   <a class="backlnk" href="../../">← torna all'itinerario e alle domande</a>
 </div></header>
 
@@ -188,10 +203,25 @@
       <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="14,5,2,5"/></svg>taxi
     </span>
     <span>▸ senso di marcia</span>
-    <span>🚏 fermate del bus</span>
+    <span>🚏 fermate del bus</span><span><span class="poico"></span><b>A-S</b> da vedere <b>passando</b> (non sono tappe)</span>
   </div>
   <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
 </div></div>
+<div class="wrap" style="padding-bottom:0">
+  <div class="poibox">
+    <h3>🔎 I cerchietti grigi non sono tappe</h3>
+    Sono <b>10 cose che si vedono passandoci davanti</b> e che nel programma non ci sono:
+    palazzi, statue, dettagli, e due posti dove hanno girato dei film che vi piacciono.
+    <br><b class="no">Non è cambiato niente del vostro giro</b>: nessun orario si è mosso,
+    nessuna sosta si è allungata, non ho aggiunto nemmeno una tappa.
+    <br><span style="opacity:.85">Se ne notate uno mentre siete lì, alzate gli occhi.
+    Se non vi interessano, si spengono con l'interruttore qui sotto e la giornata torna
+    identica a quella che avete approvato.</span>
+    <label class="poisw"><input type="checkbox" id="poisw" checked>
+      <span>Mostrali sulla mappa &middot; <b>toccane uno</b> per sapere cos'è</span></label>
+    <a class="poiask" href="../../#poc">✅ Ti vanno bene così — me l'hai detto tu, e li metto su tutte e sei le giornate</a>
+  </div>
+</div>
 
 <div class="wrap">
   <div class="changelog">
@@ -364,6 +394,77 @@ STEPS.forEach(function(s, i){
   s._marker.setZIndexOffset(500);   /* le tappe stanno sopra le fermate */
   all.push([s.lat, s.lon]);
 });
+var POI = [{"name": "Statua di Ralph Kramden", "address": "625 8th Avenue (angolo sud-ovest del Port Authority)", "lat": 40.75609, "lon": -73.99003, "coords_src": "OSM non ha la statua sotto nessun nome (tre query, zero risultati): coordinata RICAVATA dall'angolo sud-est dell'impronta OSM del Port Authority Bus Terminal (bbox S=40.7560875 E=-73.9900333), che e' l'angolo 8th Ave / W 40th indicato dalla fonte. E' una SCELTA dichiarata, non una verifica a due maniglie.", "cat": "perla", "why": "Un autista di autobus in bronzo a grandezza naturale, col cestino del pranzo in mano. La targa lo presenta cosi': \"Bus Driver - Raccoon Lodge Treasurer - Dreamer\".", "source": "https://portfolio.panynj.gov/2015/08/20/the-port-authority-bus-terminals-ralphie-an-ode-to-the-the-great-one/", "where": "sul vostro marciapiede, scendendo l'8th Avenue", "day": 6, "zone": "Midtown", "id": "p46", "ref": "B"}, {"name": "New Yorker Hotel", "address": "481 8th Avenue", "lat": 40.75279, "lon": -73.99363, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m; reverse: 481 8th Avenue", "cat": "perla", "why": "L'insegna rossa sul tetto e' del 1929 ed e' ancora accesa: si vede da tutta la discesa dell'8th Avenue.", "source": "https://en.wikipedia.org/wiki/New_Yorker_Hotel", "where": "in fondo alla discesa, all'angolo con la 34th", "day": 6, "zone": "Midtown", "id": "p47", "ref": "D"}, {"name": "Il fregio \"Neither snow nor rain\"", "address": "421 8th Avenue (James A. Farley Building)", "lat": 40.75153, "lon": -73.99585, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m; reverse: West 33rd Street", "cat": "perla", "why": "Sopra il colonnato corrono 85 metri di frase incisa: \"Neither snow nor rain nor heat nor gloom of night...\". Tutti la credono il motto delle poste americane: e' Erodoto, scelto dall'architetto.", "source": "https://www.nyctourism.com/attractions-tours/james-a-farley-post-office-midtown-west/", "where": "due isolati sotto la 34th, sull'8th Avenue", "day": 6, "zone": "Midtown", "id": "p48", "ref": "E", "carta": false}, {"name": "I campanari di Herald Square", "address": "Herald Square, Broadway & West 34th Street", "lat": 40.7504, "lon": -73.9876, "coords_src": "due maniglie concordi (James Gordon Bennett Monument + Herald Square Park, Nominatim) entro 8 m", "cat": "perla", "why": "Due fabbri di bronzo alti due metri alzano i martelli e sembrano battere la campana allo scoccare dell'ora; sopra di loro Minerva e due gufi a cui si accendono gli occhi. Sono quel che resta del palazzo dell'Herald, demolito nel 1921.", "source": "https://www.mas.org/news/monument-of-the-month-the-bellringers/", "where": "in mezzo alla 34th, dove incrocia Broadway", "day": 6, "zone": "Midtown", "id": "p49", "ref": "H"}, {"name": "Fontana Josephine Shaw Lowell", "address": "Bryant Park, lato ovest verso la 6th Avenue", "lat": 40.75398, "lon": -73.98409, "coords_src": "due maniglie concordi (nome proprio + Bryant Park, Nominatim) entro 78 m: la fontana sta sul bordo ovest del parco, il secondo pin e' il centro del parco", "cat": "perla", "why": "Il primo monumento di New York dedicato a una donna, 1912. E la donna non era una regina ne' una santa: si occupava di poveri.", "source": "https://en.wikipedia.org/wiki/Josephine_Shaw_Lowell_Memorial_Fountain", "where": "all'estremita' ovest di Bryant Park", "day": 6, "zone": "Midtown", "id": "p50", "ref": "J"}, {"name": "Macy's Herald Square", "address": "151 West 34th Street", "lat": 40.75089, "lon": -73.98926, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m; reverse: 151 West 34th Street", "cat": "classic", "carta": false, "why": "Le insegne storiche e la scritta \"The World's Largest Store\" sull'angolo arrotondato.", "source": "https://en.wikipedia.org/wiki/Macy%27s_Herald_Square", "where": "sul lato nord della 34th", "day": 6, "zone": "Midtown", "id": "p51", "ref": "G"}, {"name": "McGraw-Hill Building", "address": "330 West 42nd Street", "lat": 40.7575, "lon": -73.99161, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m; reverse: 330 West 42nd Street", "cat": "classic", "carta": false, "why": "Terracotta verde-azzurra che schiarisce salendo, per sciogliersi nel colore del cielo. Stesso architetto della torre nera e oro sulla 40th: le due si guardano.", "source": "https://en.wikipedia.org/wiki/330_West_42nd_Street", "where": "guardando a ovest dall'incrocio 8th Ave / 42nd", "day": 6, "zone": "Midtown", "id": "p52", "ref": "A"}, {"name": "Bryant Park Studios", "address": "80 West 40th Street", "lat": 40.75328, "lon": -73.98484, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 38 m", "cat": "classic", "carta": false, "why": "Costruito nel 1901 apposta per i pittori: le finestre enormi guardano a nord perche' quella e' la luce che serve per dipingere. Sono ancora li'.", "source": "https://en.wikipedia.org/wiki/Bryant_Park_Studios", "where": "angolo 40th / 6th Avenue", "day": 6, "zone": "Midtown", "id": "p53", "ref": "I"}, {"name": "New York Times Building", "address": "620 8th Avenue", "lat": 40.75589, "lon": -73.98967, "coords_src": "due maniglie concordi (nome + civico, Nominatim) entro 0 m; reverse: 620 8th Avenue", "cat": "classic", "carta": false, "why": "La torre di Renzo Piano, schermata da listelli di ceramica bianca: si guarda alzando gli occhi dall'8th Avenue.", "source": "https://en.wikipedia.org/wiki/The_New_York_Times_Building", "where": "sul lato est dell'8th, fra la 40th e la 41st", "day": 6, "zone": "Midtown", "id": "p54", "ref": "C"}, {"id": "p55", "name": "Moynihan Train Hall", "address": "421 8th Avenue (ingressi di meta' isolato su W 31st e W 33rd)", "lat": 40.75131, "lon": -73.99533, "coords_src": "due maniglie concordi (nome proprio + civico del Farley Building, Nominatim) entro 50 m: il civico e' l'edificio, il nome e' la sala dentro", "cat": "perla", "why": "Sotto un lucernario di 28 metri ci sono tre opere permanenti e gratuite: una citta' capovolta fatta di grattacieli illuminati appesa al soffitto, un soffitto di vetro dipinto con ragazzi che ballano breakdance, e le fotografie della vecchia Penn Station.", "source": "https://www.publicartfund.org/exhibitions/view/mth/", "where": "dentro il Farley Building, lo stesso del fregio", "day": 6, "zone": "Midtown", "ref": "F"}];
+/* ============================ IL LIVELLO "LUNGO LA STRADA" (D147) ==========
+   Cose da vedere che NON sono tappe. Tre regole nel disegno:
+   1. SUBORDINATI: cerchietto vuoto, non pin pieno numerato. I numeri restano
+      dell'itinerario - se un segno compete con una tappa, la mappa ha smesso
+      di dire qual e' il programma.
+   2. ENTRANO nell'inquadratura (`poiAll`), ma con un TETTO.
+      🔄 D154 (6 ago) ribalta la regola scritta qui il 5: prima non entravano,
+      per non far rimpicciolire il percorso vero a causa di un punto lontano.
+      Il timore era giusto in astratto e sbagliato sui dati: i punti sono
+      scelti "lungo la strada", quindi stanno addosso al percorso - e intanto
+      il giovedi' apriva la mappa con QUATTRO punti su quattro fuori campo.
+      🔑 Un punto che esiste ma non si vede all'apertura, per chi legge non
+      esiste: nessuno trascina una mappa cercando quello che non sa esserci.
+      🚧 Il tetto tiene in piedi il timore originale: un punto oltre `MAXPAD`
+      dal riquadro della giornata NON allarga l'inquadratura (resta sulla
+      mappa, si trova spegnendo e riaccendendo il livello), cosi' un candidato
+      sbagliato non puo' rimpicciolire l'itinerario.
+   3. Si spengono. E' l'unico modo onesto di aggiungere roba su un itinerario
+      gia' approvato: chi non la vuole la toglie e rivede esattamente quello
+      che aveva prima.                                                        */
+var poiLayer = L.layerGroup();
+POI.forEach(function(p){
+  /* `className` non e' cosmetica: Leaflet disegna i circleMarker come <path>,
+     non come <circle>, quindi senza una classe non c'e' modo di contarli - ne'
+     per me ne' per un controllo. Un livello che non si sa contare non si sa
+     verificare. */
+  /* Stessa forma della carta: goccia vuota grigia con la lettera. Carta e
+     schermo devono dare al punto la STESSA identita', o "guarda la F" non
+     vuol dire niente fra chi ha il telefono e chi ha il foglio. */
+  var m = L.marker([p.lat, p.lon], {icon: L.divIcon({className:'poidot',
+    html:'<svg width="22" height="30" viewBox="0 0 22 30">' +
+         '<path d="M11,29 L5,17 L17,17 Z" fill="#fff" stroke="#6b7a88" stroke-width="2"/>' +
+         '<circle cx="11" cy="11" r="9" fill="#fff" stroke="#6b7a88" stroke-width="2"/>' +
+         '<text x="11" y="15.5" text-anchor="middle" font-size="11" font-weight="800"' +
+         ' fill="#5b6b78">' + (p.ref || '') + '</text></svg>',
+    iconSize:[22,30], iconAnchor:[11,29]})});
+  var tag = {classic:'\uD83D\uDDFD classico', film:'\uD83C\uDFAC film',
+             perla:'\u2728 perla'}[p.cat] || '\uD83D\uDCCD';
+  m.bindPopup('<b>' + (p.ref ? p.ref + ' &middot; ' : '') + esc(p.name) + '</b><br><small style="color:#5b6b78">' + tag +
+              ' &middot; ' + esc(p.where) + '</small><br>' + esc(p.why) +
+              '<br><small style="color:#8494a1">' + esc(p.address) + '</small>');
+  m.addTo(poiLayer);
+});
+poiLayer.addTo(map);          /* acceso all'apertura: spento non si vedrebbe */
+
+var poiSw = document.getElementById('poisw');
+if(poiSw){
+  poiSw.addEventListener('change', function(){
+    if(this.checked) poiLayer.addTo(map); else map.removeLayer(poiLayer);
+  });
+}
+
+/* D154 - i punti entrano nell'inquadratura, ma solo se stanno ADDOSSO alla
+   giornata. Il tetto e' in METRI e non in frazione del riquadro: una giornata
+   piccola (il giovedi' sta in tre isolati) con un tetto proporzionale
+   accetterebbe scarti di poche decine di metri, cioe' nessun punto. */
+var MAXPAD = 500;
+(function(){
+  if(!POI.length || !all.length) return;
+  var b = L.latLngBounds(all),
+      sw = b.getSouthWest(), ne = b.getNorthEast(),
+      dLat = MAXPAD / 111320,
+      dLon = MAXPAD / (111320 * Math.cos(b.getCenter().lat * Math.PI / 180)),
+      lim = L.latLngBounds([sw.lat - dLat, sw.lng - dLon],
+                           [ne.lat + dLat, ne.lng + dLon]);
+  POI.forEach(function(p){
+    if(lim.contains(L.latLng(p.lat, p.lon))) all.push([p.lat, p.lon]);
+  });
+})();
+
 map.fitBounds(L.latLngBounds(all), {padding:[30,30]});
 
 /* i nomi delle fermate compaiono quando c'e' spazio per leggerli */
@@ -596,7 +697,7 @@ if(_say){
              "✍️ (scrivi qui cosa non va: un orario, una tappa fuori posto, una che manca)",
              "",
              "———",
-             "📋 pagina: route-g6 · pacchetto v54 · 6 ago 2026",
+             "📋 pagina: route-g6 · pacchetto v55 · 6 ago 2026",
              "🗺️ piano mostrato: Giorno 6 - Mar 18 - Midtown / West Side + partenza (volo 22:00) - 7 tappe, si esce 08:30, si rientra 16:20"];
     window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
   });
