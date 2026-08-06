@@ -184,7 +184,7 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il ven 14</h1>
   <div class="sub">Midtown (Summit 19:00) — si esce alle <b>10:00</b>, si rientra verso le <b>22:07</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v53 &middot; 6 ago 2026</div>
+  <div class="ver">🧭 percorso v54 &middot; 6 ago 2026</div>
   <a class="backlnk" href="../../">← torna all'itinerario e alle domande</a>
 </div></header>
 
@@ -416,10 +416,18 @@ var POI = [{"id": "p01", "name": "New York Public Library", "address": "476 5th 
    1. SUBORDINATI: cerchietto vuoto, non pin pieno numerato. I numeri restano
       dell'itinerario - se un segno compete con una tappa, la mappa ha smesso
       di dire qual e' il programma.
-   2. NON entrano in `all`, quindi NON spostano l'inquadratura: la mappa
-      continua a incorniciare la giornata, non i punti che le abbiamo messo
-      intorno. (Se li includessimo, aggiungere un punto lontano rimpicciolirebbe
-      il percorso vero.)
+   2. ENTRANO nell'inquadratura (`poiAll`), ma con un TETTO.
+      🔄 D154 (6 ago) ribalta la regola scritta qui il 5: prima non entravano,
+      per non far rimpicciolire il percorso vero a causa di un punto lontano.
+      Il timore era giusto in astratto e sbagliato sui dati: i punti sono
+      scelti "lungo la strada", quindi stanno addosso al percorso - e intanto
+      il giovedi' apriva la mappa con QUATTRO punti su quattro fuori campo.
+      🔑 Un punto che esiste ma non si vede all'apertura, per chi legge non
+      esiste: nessuno trascina una mappa cercando quello che non sa esserci.
+      🚧 Il tetto tiene in piedi il timore originale: un punto oltre `MAXPAD`
+      dal riquadro della giornata NON allarga l'inquadratura (resta sulla
+      mappa, si trova spegnendo e riaccendendo il livello), cosi' un candidato
+      sbagliato non puo' rimpicciolire l'itinerario.
    3. Si spengono. E' l'unico modo onesto di aggiungere roba su un itinerario
       gia' approvato: chi non la vuole la toglie e rivede esattamente quello
       che aveva prima.                                                        */
@@ -454,6 +462,24 @@ if(poiSw){
     if(this.checked) poiLayer.addTo(map); else map.removeLayer(poiLayer);
   });
 }
+
+/* D154 - i punti entrano nell'inquadratura, ma solo se stanno ADDOSSO alla
+   giornata. Il tetto e' in METRI e non in frazione del riquadro: una giornata
+   piccola (il giovedi' sta in tre isolati) con un tetto proporzionale
+   accetterebbe scarti di poche decine di metri, cioe' nessun punto. */
+var MAXPAD = 500;
+(function(){
+  if(!POI.length || !all.length) return;
+  var b = L.latLngBounds(all),
+      sw = b.getSouthWest(), ne = b.getNorthEast(),
+      dLat = MAXPAD / 111320,
+      dLon = MAXPAD / (111320 * Math.cos(b.getCenter().lat * Math.PI / 180)),
+      lim = L.latLngBounds([sw.lat - dLat, sw.lng - dLon],
+                           [ne.lat + dLat, ne.lng + dLon]);
+  POI.forEach(function(p){
+    if(lim.contains(L.latLng(p.lat, p.lon))) all.push([p.lat, p.lon]);
+  });
+})();
 
 map.fitBounds(L.latLngBounds(all), {padding:[30,30]});
 
@@ -687,7 +713,7 @@ if(_say){
              "✍️ (scrivi qui cosa non va: un orario, una tappa fuori posto, una che manca)",
              "",
              "———",
-             "📋 pagina: route-g2 · pacchetto v53 · 6 ago 2026",
+             "📋 pagina: route-g2 · pacchetto v54 · 6 ago 2026",
              "🗺️ piano mostrato: Giorno 2 - Ven 14 - Midtown (Summit 19:00) - 9 tappe, si esce 10:00, si rientra 22:07"];
     window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
   });
