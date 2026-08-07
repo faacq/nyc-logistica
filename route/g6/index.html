@@ -15,14 +15,10 @@
        padding-bottom:76px}
   .wrap{max-width:660px;margin:0 auto;padding:0 14px 60px}
 
-  /* ---- LA CHIAVE DI LETTURA CHE SI RICHIUDE (rilievo 6) ---- */
-  .kl summary{list-style:none;cursor:pointer;display:flex;align-items:center;
-              gap:9px;flex-wrap:wrap;min-height:44px}
-  .kl summary::-webkit-details-marker{display:none}
-  .kl summary::after{content:"";width:8px;height:8px;margin-left:auto;flex:none;
-              border-right:2.2px solid var(--accent);border-bottom:2.2px solid var(--accent);
-              transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s}
-  .kl[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+  /* ---- LA CHIAVE DI LETTURA (rilievo 6) ----
+     Veste come gli altri due riquadri richiudibili: prima aveva uno stile suo e,
+     messa in fila con loro, sembrava una riga di testo invece di una cosa da
+     aprire. Tre righe che si aprono devono somigliarsi, o si aprono in due. */
   .klt{font-weight:800;font-size:.98rem}
   .klm{color:var(--muted);font-size:.82rem}
 
@@ -49,7 +45,10 @@
        border-radius:999px;padding:3px 11px;font-size:.74rem;font-weight:700}
   .mapwrap{position:sticky;top:0;z-index:400;background:var(--bg);padding:8px 0 6px;
            box-shadow:0 6px 14px -8px rgba(30,40,60,.35)}
-  #map{height:44vh;min-height:250px;border-radius:13px;border:1px solid var(--line);
+  /* 38vh e non 44: la parte appiccicata era il 60% dello schermo (mappa + legenda +
+     suggerimento), e l'itinerario viveva nel terzo che avanzava. Sotto i 38vh pero'
+     non si capisce piu' dove si e', quindi si scende fin li' e non oltre. */
+  #map{height:38vh;min-height:210px;max-height:340px;border-radius:13px;border:1px solid var(--line);
        box-shadow:var(--shadow)}
   .keys{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:6px;
         font-size:.71rem;color:var(--muted)}
@@ -198,10 +197,25 @@
      tu", che raccontavano a Fabrizio la storia della SUA approvazione su pagine che
      adesso aprono in otto. Il contenuto utile resta (perche' Bryant Park per primo,
      dov'e' la pausa, quando cala il sole); sparisce chi l'ha deciso e quando. */
-  .shape{background:#f7f9fc;border:1px solid var(--line);border-left:5px solid var(--accent);
-         border-radius:13px;padding:13px 15px;margin:14px 0}
-  .sht{font-weight:800;color:var(--accent);margin-bottom:5px;font-size:.98rem}
   .shape p{margin:.35em 0 0;font-size:.93rem}
+
+  /* ---- I RIQUADRI CHE SI CHIUDONO, fra la mappa e l'itinerario ----
+     Chiusi valgono ~46 px l'uno invece di 250-420. La regola che li rende
+     onesti: il TITOLO di un riquadro chiuso deve dire da solo la cosa utile
+     ("4 cerchietti grigi - non sono tappe, toccane uno"), altrimenti chiuderlo
+     non e' compattare, e' nascondere. */
+  .fold{background:#f7f9fc;border:1px solid var(--line);border-left:5px solid var(--accent);
+        border-radius:13px;padding:11px 14px;margin:9px 0;font-size:.93rem}
+  .fold > summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+        gap:9px;min-height:44px;font-size:.95rem;color:var(--ink)}
+  .fold > summary::-webkit-details-marker{display:none}
+  .fold > summary::after{content:"";flex:none;margin-left:auto;width:8px;height:8px;
+        border-right:2.2px solid var(--accent);border-bottom:2.2px solid var(--accent);
+        transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s}
+  .fold[open] > summary{margin-bottom:6px}
+  .fold[open] > summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+  /* La legenda non e' piu' appiccicata: si guarda una volta e scorre via. */
+  .keys{margin:9px 0 2px}
   /* Qui stava lo stile del riquadro di lock-in (D131), tolto col riquadro il
      7 ago: uno stile che non veste piu' niente e' peso morto che il prossimo
      legge come se fosse in uso. */
@@ -213,7 +227,7 @@
 
 <header class="hero"><div class="wrap">
   <h1>Come si gira il mar 18</h1>
-  <div class="sub">Midtown / West Side + partenza (volo 22:00) — si esce alle <b>08:30</b>, si rientra verso le <b>16:20</b>. Qui sotto il giro, pezzo per pezzo.</div>
+  <div class="sub">Midtown / West Side + partenza (volo 22:00) — si esce alle <b>08:30</b>, si rientra verso le <b>16:20</b>.</div>
   <div class="ver">🧭 percorso v56 &middot; 7 ago 2026</div>
   <!-- "torna all'itinerario e alle domande" e' sparito il 7 ago: le domande non
        ci sono piu', e chi legge questa pagina adesso arriva dal tour, non dalla
@@ -221,11 +235,28 @@
        VENUTO invece di indovinarlo. -->
 </div></header>
 
-
+<!-- ============ IL BILANCIO FRA MAPPA E ITINERARIO (rilievo dell'8 ago) ============
+     Misurato prima di toccare niente, su uno schermo da 844 px: la parte
+     APPICCICATA in alto era 503 px, cioe' il 60% dello schermo per sempre (mappa
+     371 + legenda 71 + suggerimento 37), e prima dell'itinerario c'erano 2.580 px,
+     cioe' TRE schermi di prosa. Tre cure, in ordine di resa:
+       1. resta appiccicata la MAPPA e basta - la legenda scorre via dopo il primo
+          sguardo, invece di occupare 71 px per sempre;
+       2. la mappa passa da 44vh a 38vh: sotto i 38 non si capisce piu' dove si e';
+       3. tutto quello che sta fra mappa e itinerario si CHIUDE, e il titolo di
+          ogni riquadro chiuso dice gia' la cosa che serve sapere.
+     🔑 Il riquadro "Com'e' fatta questa giornata" stava SOPRA la mappa: era la
+     prima cosa da scavalcare per arrivare a qualunque cosa. -->
 <div class="mapwrap"><div class="wrap" style="padding-bottom:0">
   <div id="map"></div>
+  <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
+</div></div>
+
+<div class="wrap" style="padding-bottom:0">
   <div class="keys">
-    <span><b>il colore</b> dice <b>quale tratta</b> — lo ritrovi sulla scheda</span>
+    <!-- Era una legenda su due righe (71 px) e ripeteva parola per parola i primi
+         punti di "Come si legge". Ridotta a UNA riga di simboli: quello che serve
+         guardando la mappa e' cosa vuol dire una linea, non la frase che lo spiega. -->
     <span>
       <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3"/></svg>a piedi
     </span>
@@ -236,14 +267,15 @@
       <svg width="34" height="8"><line x1="1" y1="4" x2="33" y2="4" stroke="#22303c" stroke-width="3" stroke-dasharray="14,5,2,5"/></svg>taxi
     </span>
     <span>▸ senso di marcia</span>
-    <span>🚏 fermate del bus</span><span><span class="poico"></span><b>A-S</b> da vedere <b>passando</b> (non sono tappe)</span>
+    <span>🚏 fermate</span>
   </div>
-  <div class="maphint">👆 scorri gli step: la mappa segue il pezzo di strada di cui stai leggendo</div>
-</div></div>
-<div class="wrap" style="padding-bottom:0">
-  <div class="poibox">
-    <h3>🔎 I cerchietti grigi non sono tappe</h3>
-    Sono <b>10 cose che si vedono passandoci davanti</b> e che nel programma non ci sono:
+</div>
+
+<div class="wrap">
+
+<details class="fold poibox">
+    <summary><b>🔎 10 cerchietti grigi</b> &mdash; non sono tappe: <b>toccane uno</b></summary>
+    Sono <b>cose che si vedono passandoci davanti</b> e che nel programma non ci sono:
     palazzi, statue, dettagli, e due posti dove hanno girato dei film che vi piacciono.
     <br><b class="no">Non spostano niente</b>: nessun orario, nessuna sosta, nessuna tappa
     in più. Non chiedono di andarci — se ci passate davanti, sapete cosa state guardando.
@@ -253,29 +285,23 @@
       <span>Mostrali sulla mappa</span></label>
     <p class="tiny" style="margin:8px 0 0">Se non vi interessano, l'interruttore li spegne e
     la giornata torna identica a prima.</p>
-  </div>
-</div>
-
-<div class="wrap">
-  <div class="changelog">
-    <!-- Riscritto il 7 ago: diceva "quello lo conosci" e "non devi rispondere niente",
-         cioe' parlava a UNA persona che aveva appena approvato la giornata. Adesso
-         queste pagine le aprono in otto, fra i 10 e i 50 anni, in piedi per strada. -->
-    <h3>🧭 A cosa serve questa pagina</h3>
-    Non è l'elenco delle tappe: quello sta sul foglio. <b>Questo è il filo che le unisce</b> —
-    dove si cammina, in che direzione, quanto dura, dove si sale sul bus, cosa si vede dal
-    finestrino e dove si scende. Si legge <b>mentre si va</b>, un pezzo alla volta.
-  </div>
-
+</details>
   <!-- ============ CHIAVE DI LETTURA ============
        Si richiude (rilievo 6 del 7 ago). Il motivo e' che questa pagina si
        riapre sei volte: letta una volta la chiave di lettura, la seconda volta
        sette riquadri stanno solo fra te e l'itinerario. Resta APERTA la prima
        volta in assoluto - chi non l'ha mai vista non deve indovinare che c'e' -
        e da lì in poi ricorda la scelta. -->
-  <details class="card kl" id="kl">
+  <details class="fold kl" id="kl">
     <summary><span class="klt">📖 Come si legge</span>
       <span class="klm">sette cose, e poi la pagina si legge da sola</span></summary>
+
+    <!-- "A cosa serve questa pagina" stava in un riquadro suo, 159 px fra la mappa
+         e l'itinerario. E' la stessa domanda di questa: e' finito qui dentro. -->
+    <p class="muted" style="margin:0 0 12px;font-size:.87rem">Non è l'elenco delle tappe:
+      quello sta sul foglio. <b>Questa è la pagina che le unisce</b> — dove si cammina, in
+      che direzione, quanto dura, dove si sale sul bus e dove si scende. Si legge
+      <b>mentre si va</b>, un pezzo alla volta.</p>
 
     <div class="pr"><span class="pi">🎨</span><div><b>Il colore dice QUALE tratta è</b><br>
       <small>La prima è blu, la seconda arancione, e così via. <b>Lo stesso colore torna sulla scheda</b> —
@@ -718,20 +744,15 @@ document.querySelectorAll('.num[data-goto]').forEach(function(b){
    cioe' sei messaggi per dire una cosa sola. Su questa pagina c'e' solo il rimando. */
 
 /* tocchi una fermata nell'elenco -> la mappa ci va sopra e la fermata si apre */
-/* LA CHIAVE DI LETTURA (rilievo 6): aperta la PRIMA volta in assoluto, chiusa
-   da li' in poi. La memoria e' una sola per tutte e sei le giornate: la chiave
-   di lettura e' la stessa, e riaprirla su ogni giornata sarebbe come rispiegare
-   le regole del gioco a ogni mano. Se localStorage non c'e' (navigazione
-   privata) si resta aperti: meglio ripetersi che nascondere le istruzioni. */
-(function(){
-  var kl = document.getElementById('kl'); if(!kl) return;
-  var vista = false;
-  try{ vista = localStorage.getItem('nyc_chiave_letta') === '1'; }catch(e){}
-  kl.open = !vista;
-  kl.addEventListener('toggle', function(){
-    if(!kl.open){ try{ localStorage.setItem('nyc_chiave_letta','1'); }catch(e){} }
-  });
-})();
+/* LA CHIAVE DI LETTURA: chiusa, sempre.
+   L'8 ago apriva alla prima visita e ricordava la scelta - una memoria sola per
+   tutte e sei le giornate. Misurato: aperta vale **1.099 px**, cioe' un intero
+   schermo e un quarto fra la mappa e l'itinerario, proprio nel momento in cui la
+   pagina si apre. E il rilievo che ha fatto nascere quel riquadro chiedeva
+   l'opposto: arrivare all'itinerario il prima possibile.
+   🔑 A far scoprire che c'e' basta la RIGA DEL TITOLO, che si vede sempre e dice
+   gia' cosa contiene: nascondere e' non dirlo, non e' chiuderlo. Via anche il
+   localStorage - una cosa in meno che puo' sbagliarsi. */
 
 var _say = document.getElementById('sayBtn');
 if(_say){
