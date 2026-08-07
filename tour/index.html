@@ -16,20 +16,31 @@ padding-bottom:96px;-webkit-text-size-adjust:100%}
 /* ---- L'INTESTAZIONE (rilievo 2): dice dove si va e quando, prima di ogni
    altra cosa. Il degrade' e la skyline non sono decoro: sono il modo piu'
    corto per far capire in mezzo secondo che pagina si e' aperta. */
-header{position:relative;color:#fff;padding:26px 0 0;overflow:hidden;
+/* ---- L'INTESTAZIONE STA IN UN TERZO DI SCHERMO ----
+   Misurata l'8 ago: 307 px, e con la riga delle pastiglie 366 - cioe' il 51%
+   di una finestra alta 720, che e' un portatile. Tre cure:
+   1. la skyline e' legata all'ALTEZZA dello schermo (`clamp` su vh), non a un
+      numero fisso: su una finestra bassa si accorcia da sola, invece di
+      prendersi mezza pagina come faceva a 112 px fissi;
+   2. titolo, spazi e riga della versione stretti;
+   3. la versione va ACCANTO alla pastiglia del giorno, non sotto: era una riga
+      da 20 px per sei caratteri.
+   📐 Il bersaglio non e' "piccola", e' UN TERZO: sopra, l'intestazione diventa
+   la pagina; sotto, non si capisce piu' che pagina si e' aperta. */
+header{position:relative;color:#fff;padding:16px 0 0;overflow:hidden;
 background:linear-gradient(150deg,#0b1f45 0%,#16337a 45%,#1d4ed8 100%)}
 header .wrap{position:relative;z-index:2}
-header h1{margin:0;font-size:2.05rem;font-weight:800;letter-spacing:-.02em;
+header h1{margin:0;font-size:1.72rem;font-weight:800;letter-spacing:-.02em;
 line-height:1.05}
-header h1 small{display:block;font-size:.92rem;font-weight:600;opacity:.9;
-letter-spacing:.04em;text-transform:uppercase;margin-bottom:5px}
-.sub{margin-top:6px;font-size:1rem;opacity:.95}
-.hdrday{display:inline-block;margin-top:10px;background:rgba(255,255,255,.16);
-border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:4px 13px;
-font-size:.88rem;font-weight:700}
-.sky{display:block;width:100%;height:112px;margin-top:14px}
-@media (max-width:400px){ .sky{height:92px} }
-.ver{font-size:.8rem;opacity:.8;margin-top:8px}
+header h1 small{display:block;font-size:.78rem;font-weight:600;opacity:.9;
+letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px}
+.sub{margin-top:4px;font-size:.94rem;opacity:.95}
+.hrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+.hdrday{display:inline-block;background:rgba(255,255,255,.16);
+border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:3px 12px;
+font-size:.84rem;font-weight:700}
+.sky{display:block;width:100%;height:clamp(48px,8.5vh,84px);margin-top:8px}
+.ver{font-size:.76rem;opacity:.78}
 
 /* ---- LE PASTIGLIE (rilievo 9): la navigazione alla giornata, sempre a
    portata. Restano attaccate in alto perche' servono DOPO aver scorso, non
@@ -178,8 +189,10 @@ a{color:var(--acc)}
   <div class="wrap">
     <h1><small>Il viaggio</small>🗽 New York</h1>
     <div class="sub">13-18 agosto 2026 &middot; in otto</div>
-    <div class="hdrday" id="hdrDay">&nbsp;</div>
-    <div class="ver">📌 v2 &middot; 7 ago 2026</div>
+    <div class="hrow">
+      <span class="hdrday" id="hdrDay">13-18 agosto</span>
+      <span class="ver">📌 v2 &middot; 7 ago 2026</span>
+    </div>
   </div>
   <svg class="sky" viewBox="0 0 660 120" preserveAspectRatio="none" aria-hidden="true"><path d="M10.0 120 L10.0 58.0 L44.0 58.0 L44.0 120 Z M60.0 120 L60.0 42.0 L88.0 42.0 L88.0 120 Z M110.0 120 L110.0 66.0 L150.0 66.0 L150.0 120 Z M200.0 120 L200.0 50.0 L232.0 50.0 L232.0 120 Z M250.0 120 L250.0 62.0 L286.0 62.0 L286.0 120 Z M310.0 120 L310.0 38.0 L340.0 38.0 L340.0 120 Z M370.0 120 L370.0 60.0 L412.0 60.0 L412.0 120 Z M430.0 120 L430.0 46.0 L460.0 46.0 L460.0 120 Z M500.0 120 L500.0 64.0 L538.0 64.0 L538.0 120 Z M556.0 120 L556.0 44.0 L588.0 44.0 L588.0 120 Z M610.0 120 L610.0 58.0 L650.0 58.0 L650.0 120 Z" fill="rgba(255,255,255,.13)"/><path d="M0.0 120 L0.0 90.0 L26.0 90.0 L26.0 120 Z M24.0 120 L24.0 74.0 L28.5 74.0 L28.5 67.0 L42.0 67.0 L42.0 120 Z M40.0 120 L40.0 86.0 L62.0 86.0 L62.0 120 Z M150.0 120 L150.0 80.0 L162.0 71.0 L174.0 80.0 L174.0 120 Z M172.0 120 L172.0 92.0 L202.0 92.0 L202.0 120 Z M198.0 120 L198.0 68.0 L203.0 68.0 L203.0 61.0 L218.0 61.0 L218.0 120 Z M300.0 120 L300.0 84.0 L326.0 84.0 L326.0 120 Z M324.0 120 L324.0 70.0 L335.0 61.0 L346.0 70.0 L346.0 120 Z M344.0 120 L344.0 90.0 L374.0 90.0 L374.0 120 Z M430.0 120 L430.0 76.0 L436.0 76.0 L436.0 69.0 L454.0 69.0 L454.0 120 Z M452.0 120 L452.0 88.0 L480.0 88.0 L480.0 120 Z M478.0 120 L478.0 64.0 L498.0 64.0 L498.0 120 Z M560.0 120 L560.0 82.0 L573.0 73.0 L586.0 82.0 L586.0 120 Z M584.0 120 L584.0 92.0 L614.0 92.0 L614.0 120 Z M612.0 120 L612.0 72.0 L618.5 72.0 L618.5 65.0 L638.0 65.0 L638.0 120 Z M636.0 120 L636.0 86.0 L660.0 86.0 L660.0 120 Z M 70.0 120.0 L 70.0 120.0 L 73.6 28.0 L 78.4 28.0 L 78.7 20.0 L 78.9 2.0 L 78.9 2.0 L 79.1 20.0 L 79.4 28.0 L 84.2 28.0 L 87.8 120.0 L 87.8 120.0 Z M 230.0 120.0 L 230.0 120.0 L 230.0 74.0 L 236.0 74.0 L 236.0 58.0 L 242.0 58.0 L 242.0 32.0 L 246.0 32.0 L 246.4 24.0 L 246.9 16.0 L 246.9 16.0 L 247.4 24.0 L 247.8 32.0 L 251.8 32.0 L 251.8 58.0 L 257.8 58.0 L 257.8 74.0 L 263.8 74.0 L 263.8 120.0 L 263.8 120.0 Z M 392.0 120.0 L 392.0 120.0 L 392.0 64.0 L 393.5 64.0 L 393.5 56.0 L 395.5 56.0 L 395.5 48.0 L 397.5 48.0 L 397.5 41.0 L 399.5 41.0 L 399.5 35.0 L 401.2 35.0 L 401.6 24.0 L 401.9 10.0 L 401.9 10.0 L 402.2 24.0 L 402.6 35.0 L 404.3 35.0 L 404.3 41.0 L 406.3 41.0 L 406.3 48.0 L 408.3 48.0 L 408.3 56.0 L 410.3 56.0 L 410.3 64.0 L 411.8 64.0 L 411.8 120.0 L 411.8 120.0 Z M 516.0 120.0 L 516.0 120.0 L 517.6 80.0 L 521.0 74.0 L 522.5 72.0 L 522.5 72.0 L 524.0 74.0 L 527.4 80.0 L 529.0 120.0 L 529.0 120.0 Z" fill="rgba(255,255,255,.38)"/></svg>
 </header>
@@ -188,8 +201,22 @@ a{color:var(--acc)}
 
 <div class="wrap">
 
+  <!-- 🔴 8 ago: qui c'era `<div id="oggiIn"></div>`, VUOTO, e lo riempiva il
+       JavaScript. Sul telefono di Fabrizio il JS non e' arrivato in fondo e si
+       vedeva una BARRA BIANCA VUOTA in cima alla pagina - la prima cosa che si
+       vede, e non voleva dire niente. Stessa cosa per la pastiglia del giorno,
+       che era un cerchietto vuoto.
+       📐 La regola che ne esce: **un contenitore che il JavaScript riempie non
+       si lascia vuoto nell'HTML.** Ci si mette dentro la versione statica -
+       vera, solo meno precisa - e il JavaScript la SOSTITUISCE. Se parte, si
+       guadagna "oggi"; se non parte, si legge comunque qualcosa di sensato.
+       Prima era: se non parte, la pagina si apre con un buco. -->
   <div class="card today" id="oggiBox">
-    <div id="oggiIn"></div>
+    <div id="oggiIn">
+      <div class="dayline"><b>New York, 13-18 agosto.</b></div>
+      <p class="mut">Qui sotto ci sono tutte e sei le giornate, complete: mappa,
+        foglio e PDF.</p>
+    </div>
   </div>
 
   <details class="card" id="introBox">
