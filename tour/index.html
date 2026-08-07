@@ -63,7 +63,12 @@ h2{font-size:1.16rem;margin:26px 0 10px}
 padding:14px 15px;margin:12px 0;box-shadow:var(--sh)}
 .mut{color:var(--mut);font-size:.9rem}
 .qd{color:var(--mut);font-size:.86rem;white-space:nowrap}
-.today{border-left:5px solid var(--acc2)}
+/* Il riquadro "oggi" e' il primo che si legge, quindi e' anche il primo che
+   ruba spazio: stretto di suo, e senza margini che si sommano dentro. Prima,
+   col solo ripiego statico dentro, erano 150 px per dire due righe. */
+.today{border-left:5px solid var(--acc2);padding:11px 14px;margin:10px 0}
+.today p{margin:5px 0 0}
+.today .hint{margin-top:8px}
 
 /* ---- LO SCHEMA DELLE ZONE (rilievo 3) */
 .zmap{display:block;width:100%;max-width:330px;height:auto;margin:6px auto 2px}
@@ -212,11 +217,8 @@ a{color:var(--acc)}
        guadagna "oggi"; se non parte, si legge comunque qualcosa di sensato.
        Prima era: se non parte, la pagina si apre con un buco. -->
   <div class="card today" id="oggiBox">
-    <div id="oggiIn">
-      <div class="dayline"><b>New York, 13-18 agosto.</b></div>
-      <p class="mut">Qui sotto ci sono tutte e sei le giornate, complete: mappa,
-        foglio e PDF.</p>
-    </div>
+    <div id="oggiIn"><div class="dayline"><b>Tutte e sei le giornate</b>
+      <span class="mut">&mdash; mappa, foglio e PDF</span></div></div>
   </div>
 
   <details class="card" id="introBox">
