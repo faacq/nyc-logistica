@@ -191,11 +191,20 @@ font-size:1rem;cursor:pointer}
 justify-content:center;gap:7px;border-radius:12px;background:#fff5e8;
 border:1.5px solid #f0c68a;color:#8a4b06;font-weight:700;font-size:.95rem;
 text-decoration:none;padding:0 12px;text-align:center}
-/* IL PANNELLO: non c'e' finche' non lo chiami. `:target` e' CSS puro, quindi
-   il pulsante funziona anche dove il JavaScript non parte. */
-.pannello{display:none;scroll-margin-top:64px}
-.pannello:target{display:block;border-color:var(--acc2);
-box-shadow:0 0 0 3px rgba(224,145,47,.30),var(--sh)}
+/* IL PANNELLO: non c'e' finche' non lo chiami, e quando lo chiami compare
+   SOPRA la pagina, dal basso - senza spostare niente e senza scorrere.
+   🔴 Prima era un riquadro in fondo alla pagina, nascosto con `display:none`:
+   premendo il pulsante il browser calcolava la posizione QUANDO ERA ALTO ZERO,
+   quindi scorreva in un punto dove non c'era niente e si vedeva una schermata
+   VUOTA. La mia prova non l'aveva visto perche' guardava `display`, non se la
+   cosa si vedesse davvero - lo stesso errore di D151, un'altra volta.
+   📐 Da fisso, il problema non esiste: non c'e' niente da calcolare. */
+.pannello{display:none}
+.pannello:target{display:block;position:fixed;left:0;right:0;bottom:0;z-index:1000;
+max-height:82vh;overflow:auto;margin:0;border-radius:16px 16px 0 0;
+border:0;border-top:4px solid var(--acc2);
+padding:14px 15px calc(16px + env(safe-area-inset-bottom));
+box-shadow:0 -10px 40px rgba(24,39,64,.30)}
 .pth{display:flex;align-items:center;justify-content:space-between;
 font-size:1.05rem;margin-bottom:8px}
 .chiudi{text-decoration:none;color:var(--mut);font-size:1.25rem;line-height:1;
