@@ -11,8 +11,36 @@
         --radius:16px;--shadow:0 6px 22px rgba(30,40,60,.10)}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55;
-       font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+       font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       padding-bottom:76px}
   .wrap{max-width:660px;margin:0 auto;padding:0 14px 60px}
+
+  /* ---- LA CHIAVE DI LETTURA CHE SI RICHIUDE (rilievo 6) ---- */
+  .kl summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+              gap:9px;flex-wrap:wrap;min-height:44px}
+  .kl summary::-webkit-details-marker{display:none}
+  .kl summary::after{content:"";width:8px;height:8px;margin-left:auto;flex:none;
+              border-right:2.2px solid var(--accent);border-bottom:2.2px solid var(--accent);
+              transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s}
+  .kl[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+  .klt{font-weight:800;font-size:.98rem}
+  .klm{color:var(--muted);font-size:.82rem}
+
+  /* ---- LA BARRA DI NAVIGAZIONE (rilievo 9) ----
+     Sta in basso perche' e' li' che arriva il pollice, e perche' si usa DOPO
+     aver letto la giornata, non prima. Bersagli da 48 px con 8 di distanza:
+     sotto quelle misure si tocca il pulsante sbagliato. */
+  .snav{position:fixed;left:0;right:0;bottom:0;z-index:900;background:rgba(255,255,255,.97);
+        backdrop-filter:blur(10px);border-top:1px solid var(--line);
+        box-shadow:0 -4px 18px rgba(30,40,60,.10);
+        padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
+  .snav .in{max-width:660px;margin:0 auto;display:flex;gap:8px;align-items:stretch}
+  .snav a,.snav span{flex:1 1 0;min-height:48px;display:flex;align-items:center;
+        justify-content:center;gap:6px;border-radius:12px;text-decoration:none;
+        font-size:.85rem;font-weight:700;padding:0 8px;text-align:center;line-height:1.2}
+  .snav .side{background:#eef2f8;color:var(--accent);border:1px solid var(--line)}
+  .snav .side.off{background:#f4f6f9;color:#aab6c4;border-style:dashed}
+  .snav .home{flex:0 0 auto;min-width:56px;background:var(--accent);color:#fff}
   header.hero{background:linear-gradient(160deg,#1f3b73,#2d5296);color:#fff;padding:18px 0 16px}
   header .wrap{padding-bottom:0}
   h1{margin:.1em 0 .15em;font-size:1.32rem;letter-spacing:-.2px}
@@ -40,9 +68,9 @@
   .poisw{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:.86rem;
          background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 11px}
   .poisw input{width:18px;height:18px;flex:none}
-  .poiask{display:inline-block;margin-top:10px;background:#0f766e;color:#fff;
-          font-weight:800;text-decoration:none;padding:10px 15px;border-radius:9px;
-          font-size:.9rem}
+  .poitip{display:flex;gap:8px;align-items:flex-start;margin-top:10px;
+          background:#fff;border:1px dashed #9fb3bf;border-radius:10px;
+          padding:9px 11px;font-size:.86rem;line-height:1.45}
   .changelog{background:#f2f9f4;border-left:4px solid var(--g5);border-radius:11px;
              padding:11px 13px;margin:13px 0;font-size:.87rem}
   .changelog h3{margin:0 0 6px;font-size:.93rem}
@@ -153,6 +181,7 @@
       background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;
       font-size:.78rem;font-weight:700;color:var(--accent)}
   .gm:hover{border-color:var(--accent)}
+  /* .backlnk non e' piu' usata dal 7 ago (il ritorno lo fa la barra in fondo). */
   .backlnk{display:inline-block;margin-top:9px;color:#dbe6ff;text-decoration:none;font-size:.82rem;
            border-bottom:1px solid rgba(219,230,255,.4)}
   .backlnk:hover{color:#fff;border-bottom-color:#fff}
@@ -164,17 +193,9 @@
   .say button{margin-top:11px;border:none;background:var(--accent);color:#fff;padding:11px 20px;
               border-radius:999px;font:inherit;font-size:.92rem;font-weight:600;cursor:pointer}
   .say button:hover{background:#16294f}
-  /* ---- LOCK-IN (D131). Sta PRIMA del "dimmi qui" perche' e' la domanda principale
-     della pagina: quella secondaria e' la modifica, non il blocco. ---- */
-  .lock{background:#f2faf4;border:2px solid var(--g5);border-radius:14px;
-        padding:15px 16px;margin:18px 0 0}
-  .lock h3{margin:0 0 6px;font-size:1rem;color:var(--g5)}
-  .lock p{margin:.3em 0 0;font-size:.9rem}
-  .lock .tiny{font-size:.79rem;color:var(--muted);margin-top:.7em}
-  .lock button{margin-top:12px;border:none;background:var(--g5);color:#fff;
-               padding:13px 20px;border-radius:12px;font-weight:800;font-size:1rem;
-               width:100%;cursor:pointer}
-  .lock button:hover{background:#34814a}
+  /* Qui stava lo stile del riquadro di lock-in (D131), tolto col riquadro il
+     7 ago: uno stile che non veste piu' niente e' peso morto che il prossimo
+     legge come se fosse in uso. */
   .arrow{border:none;background:none;color:#22303c;font-size:15px;line-height:1;
          text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
 </style>
@@ -184,8 +205,11 @@
 <header class="hero"><div class="wrap">
   <h1>Come si gira il dom 16</h1>
   <div class="sub">Downtown & Brooklyn (Big Bus g.2, linea ROSSA) — si esce alle <b>10:00</b>, si rientra verso le <b>20:47</b>. Qui sotto il giro, pezzo per pezzo.</div>
-  <div class="ver">🧭 percorso v55 &middot; 6 ago 2026</div>
-  <a class="backlnk" href="../../">← torna all'itinerario e alle domande</a>
+  <div class="ver">🧭 percorso v56 &middot; 7 ago 2026</div>
+  <!-- "torna all'itinerario e alle domande" e' sparito il 7 ago: le domande non
+       ci sono piu', e chi legge questa pagina adesso arriva dal tour, non dalla
+       logistica. Il ritorno lo fa la barra in fondo, che torna DA DOVE SEI
+       VENUTO invece di indovinarlo. -->
 </div></header>
 
 
@@ -212,14 +236,14 @@
     <h3>🔎 I cerchietti grigi non sono tappe</h3>
     Sono <b>8 cose che si vedono passandoci davanti</b> e che nel programma non ci sono:
     palazzi, statue, dettagli, e due posti dove hanno girato dei film che vi piacciono.
-    <br><b class="no">Non è cambiato niente del vostro giro</b>: nessun orario si è mosso,
-    nessuna sosta si è allungata, non ho aggiunto nemmeno una tappa.
-    <br><span style="opacity:.85">Se ne notate uno mentre siete lì, alzate gli occhi.
-    Se non vi interessano, si spengono con l'interruttore qui sotto e la giornata torna
-    identica a quella che avete approvato.</span>
+    <br><b class="no">Non spostano niente</b>: nessun orario, nessuna sosta, nessuna tappa
+    in più. Non chiedono di andarci — se ci passate davanti, sapete cosa state guardando.
+    <div class="poitip">👆 <span><b>Toccane uno sulla mappa</b> e ti dice cos'è: il nome per
+      esteso e la riga che spiega perché vale un'occhiata.</span></div>
     <label class="poisw"><input type="checkbox" id="poisw" checked>
-      <span>Mostrali sulla mappa &middot; <b>toccane uno</b> per sapere cos'è</span></label>
-    <a class="poiask" href="../../#poc">✅ Ti vanno bene così — me l'hai detto tu, e li metto su tutte e sei le giornate</a>
+      <span>Mostrali sulla mappa</span></label>
+    <p class="tiny" style="margin:8px 0 0">Se non vi interessano, l'interruttore li spegne e
+    la giornata torna identica a prima.</p>
   </div>
 </div>
 
@@ -231,10 +255,15 @@
     <b>Non devi rispondere niente</b>: si legge e basta. Se qualcosa non torna, dimmelo e lo cambio.
   </div>
 
-  <!-- ============ CHIAVE DI LETTURA ============ -->
-  <div class="card">
-    <h3 style="margin:0 0 4px">📖 Come si legge</h3>
-    <p class="muted" style="margin:0 0 10px;font-size:.85rem">Sette cose, e poi la pagina si legge da sola.</p>
+  <!-- ============ CHIAVE DI LETTURA ============
+       Si richiude (rilievo 6 del 7 ago). Il motivo e' che questa pagina si
+       riapre sei volte: letta una volta la chiave di lettura, la seconda volta
+       sette riquadri stanno solo fra te e l'itinerario. Resta APERTA la prima
+       volta in assoluto - chi non l'ha mai vista non deve indovinare che c'e' -
+       e da lì in poi ricorda la scelta. -->
+  <details class="card kl" id="kl">
+    <summary><span class="klt">📖 Come si legge</span>
+      <span class="klm">sette cose, e poi la pagina si legge da sola</span></summary>
 
     <div class="pr"><span class="pi">🎨</span><div><b>Il colore dice QUALE tratta è</b><br>
       <small>La prima è blu, la seconda arancione, e così via. <b>Lo stesso colore torna sulla scheda</b> —
@@ -265,39 +294,29 @@
     <div class="pr"><span class="pi">⏰</span><div><b>Gli orari del bus sono quelli che il piano si aspetta</b><br>
       <small>Big Bus dichiara <b>solo ogni quanto passa</b>, non l'ora di ogni fermata. Quindi servono a
       sapere <b>quando essere lì</b>, non a scendere al minuto.</small></div></div>
-  </div>
+  </details>
 
   <div id="steps"></div>
 
-  <div class="lock">
-    <h3>🔒 Questa giornata ti va bene? Si blocca dall'itinerario</h3>
-    <p><b>Bloccare vuol dire una cosa sola: su questa giornata non ti chiedo più niente.</b>
-    Da lì in poi io la <b>verifico</b> — che i posti siano aperti, che gli orari del bus
-    reggano — ma non la <b>rimetto in discussione</b>, e comincio a scriverne l'itinerario
-    da portare in viaggio.</p>
-    <a class="btn" href="../../#blocco"
-       style="display:block;background:var(--g5);color:#fff;text-decoration:none;
-              border-radius:12px;padding:13px;text-align:center;font-weight:800;
-              margin-top:12px">🔒 Vai a bloccare le giornate</a>
-    <p class="tiny">📌 <b>Il pulsante sta là e non qui apposta</b>: da lì le blocchi
-    <b>tutte insieme con un messaggio solo</b>, invece di mandarmene uno per giornata.
-    ⚠️ E non è per sempre — se dopo ti viene in mente una cosa, si riapre: bloccare significa
-    <i>«smetti di chiedermelo»</i>, non <i>«non si tocca più»</i>.</p>
-  </div>
-
+  <!-- Qui stava il riquadro "Questa giornata ti va bene? Si blocca dall'itinerario".
+       Tolto il 7 ago (rilievo 7): il giro e' chiuso, le sei giornate sono bloccate
+       6/6 in locks.json, e quel riquadro chiedeva una cosa gia' data. Era comunque
+       solo un RIMANDO al pulsante sulla pagina principale (D131) - quindi toglierlo
+       da qui non toglie niente alla logistica, che continua a poter confermare.
+       Al suo posto c'e' l'unica domanda che ha ancora senso: qualcosa non va? -->
   <div class="say">
-    <h3>🗣️ Oppure: c'è qualcosa che non ti piace, o che vuoi cambiare?</h3>
-    <p>Su <b>come è fatta</b> questa pagina non ti chiedo più niente: mi hai già risposto, e va bene così.
-    Questo serve a dirmi una cosa <b>su questa giornata</b> quando la guardi — un orario che non torna,
-    una tappa nell'ordine sbagliato, una che manca.</p>
+    <h3>🗣️ C'è qualcosa che non va? Dimmelo qui</h3>
+    <p>Un orario che non torna, una tappa nell'ordine sbagliato, una che manca, un posto
+    che risulta chiuso. Qualsiasi cosa, anche piccola.</p>
     <button type="button" id="sayBtn">💬 Dimmi qui</button>
     <p class="tiny">Si apre WhatsApp con già scritto <b>di quale giornata</b> e <b>di quale versione</b> stai
     parlando: così non devo indovinarlo — è quello che è mancato l'altra sera.</p>
   </div>
 
-  <div class="footer">Giorno 4 · Dom 16 · la compagnia · New York 13-18 ago 2026<br>Percorso generato dai dati del giro — 11 tappe<br>
-    <a href="../../" style="color:inherit">← torna all'itinerario</a></div>
+  <div class="footer">Giorno 4 · Dom 16 · la compagnia · New York 13-18 ago 2026<br>Percorso generato dai dati del giro — 11 tappe</div>
 </div>
+
+<nav class="snav"><div class="in"><a class="side" href="../g3/">‹ sab 15</a><a class="home" id="navHome" href="../../tour/" title="Tutte le giornate">⌂ tutte</a><a class="side" href="../g5/">lun 17 ›</a></div></nav><script>(function(){var h=document.getElementById("navHome");if(!h)return;h.addEventListener("click",function(e){if(document.referrer && history.length>1){e.preventDefault();history.back();}});})();</script>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -687,6 +706,21 @@ document.querySelectorAll('.num[data-goto]').forEach(function(b){
    cioe' sei messaggi per dire una cosa sola. Su questa pagina c'e' solo il rimando. */
 
 /* tocchi una fermata nell'elenco -> la mappa ci va sopra e la fermata si apre */
+/* LA CHIAVE DI LETTURA (rilievo 6): aperta la PRIMA volta in assoluto, chiusa
+   da li' in poi. La memoria e' una sola per tutte e sei le giornate: la chiave
+   di lettura e' la stessa, e riaprirla su ogni giornata sarebbe come rispiegare
+   le regole del gioco a ogni mano. Se localStorage non c'e' (navigazione
+   privata) si resta aperti: meglio ripetersi che nascondere le istruzioni. */
+(function(){
+  var kl = document.getElementById('kl'); if(!kl) return;
+  var vista = false;
+  try{ vista = localStorage.getItem('nyc_chiave_letta') === '1'; }catch(e){}
+  kl.open = !vista;
+  kl.addEventListener('toggle', function(){
+    if(!kl.open){ try{ localStorage.setItem('nyc_chiave_letta','1'); }catch(e){} }
+  });
+})();
+
 var _say = document.getElementById('sayBtn');
 if(_say){
   _say.addEventListener('click', function(){
@@ -697,7 +731,7 @@ if(_say){
              "✍️ (scrivi qui cosa non va: un orario, una tappa fuori posto, una che manca)",
              "",
              "———",
-             "📋 pagina: route-g4 · pacchetto v55 · 6 ago 2026",
+             "📋 pagina: route-g4 · pacchetto v56 · 7 ago 2026",
              "🗺️ piano mostrato: Giorno 4 - Dom 16 - Downtown & Brooklyn (Big Bus g.2, linea ROSSA) - 11 tappe, si esce 10:00, si rientra 20:47"];
     window.open('https://wa.me/?text=' + encodeURIComponent(L.join(String.fromCharCode(10))), '_blank');
   });
