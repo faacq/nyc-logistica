@@ -193,6 +193,15 @@
   .say button{margin-top:11px;border:none;background:var(--accent);color:#fff;padding:11px 20px;
               border-radius:999px;font:inherit;font-size:.92rem;font-weight:600;cursor:pointer}
   .say button:hover{background:#16294f}
+  /* ---- "COM'E' FATTA QUESTA GIORNATA" ----
+     Prende il posto dei riquadri verdi "questo e' il venerdi' come l'hai approvato
+     tu", che raccontavano a Fabrizio la storia della SUA approvazione su pagine che
+     adesso aprono in otto. Il contenuto utile resta (perche' Bryant Park per primo,
+     dov'e' la pausa, quando cala il sole); sparisce chi l'ha deciso e quando. */
+  .shape{background:#f7f9fc;border:1px solid var(--line);border-left:5px solid var(--accent);
+         border-radius:13px;padding:13px 15px;margin:14px 0}
+  .sht{font-weight:800;color:var(--accent);margin-bottom:5px;font-size:.98rem}
+  .shape p{margin:.35em 0 0;font-size:.93rem}
   /* Qui stava lo stile del riquadro di lock-in (D131), tolto col riquadro il
      7 ago: uno stile che non veste piu' niente e' peso morto che il prossimo
      legge come se fosse in uso. */
@@ -213,18 +222,14 @@
 </div></header>
 
 <div class="wrap" style="padding-bottom:0">
-  <div style="background:#f2faf4;border:2px solid #3f9d5a;border-radius:14px;
-       padding:14px 15px;margin:14px 0">
-    <div style="font-weight:800;color:#3f9d5a;margin-bottom:5px">
-      ✅ Questo è il venerdì come l'hai approvato tu</div>
-    <p style="margin:.2em 0 0;font-size:.93rem">Il <b>2 agosto</b> mi hai scritto
-      <b>«approva e sostituisci»</b>, e l'ho fatto: quello che vedi qui sotto è già il
-      giro nuovo. Bryant Park per primo e <b>fuori dal sole di mezzogiorno</b>, il pranzo
-      da <b>Five Guys</b> a due passi dal MoMA, <b>niente taxi</b>, cena da <b>Raising
-      Cane’s</b>. Si rientra alle <b>22:07</b> invece che alle 22:35 — e il venerdì, che era
-      la giornata più lunga del viaggio, adesso sta dentro il suo orario comodo.</p>
-    <p class="muted" style="margin:.5em 0 0;font-size:.87rem">La pagina dove l'abbiamo
-      deciso <a href="../../venerdi/">resta qui</a>, ma non chiede più niente.</p>
+  <div class="shape">
+    <div class="sht">🧩 Com'è fatta questa giornata</div>
+    <p><b>Bryant Park per primo</b>, così il pezzo all'aperto sta <b>fuori dal sole di
+      mezzogiorno</b>. Pranzo da <b>Five Guys</b>, a due passi dal MoMA — e il museo cade
+      nelle ore calde, che è quando conviene stare dentro. <b>Niente taxi</b> in tutta la
+      giornata, cena da <b>Raising Cane’s</b>, e in cima al Summit la sera, quando si
+      accendono le luci.</p>
+    <p>È la <b>giornata più lunga del viaggio</b>: si rientra verso le <b>22:07</b>.</p>
   </div>
 </div>
 
@@ -265,10 +270,13 @@
 
 <div class="wrap">
   <div class="changelog">
+    <!-- Riscritto il 7 ago: diceva "quello lo conosci" e "non devi rispondere niente",
+         cioe' parlava a UNA persona che aveva appena approvato la giornata. Adesso
+         queste pagine le aprono in otto, fra i 10 e i 50 anni, in piedi per strada. -->
     <h3>🧭 A cosa serve questa pagina</h3>
-    Non e' l'itinerario: quello lo conosci. <b>E' il filo che unisce le tappe</b> — dove si cammina,
-    in che direzione, quanto dura, dove si sale sul bus, cosa si vede dal bus e dove si scende.
-    <b>Non devi rispondere niente</b>: si legge e basta. Se qualcosa non torna, dimmelo e lo cambio.
+    Non è l'elenco delle tappe: quello sta sul foglio. <b>Questo è il filo che le unisce</b> —
+    dove si cammina, in che direzione, quanto dura, dove si sale sul bus, cosa si vede dal
+    finestrino e dove si scende. Si legge <b>mentre si va</b>, un pezzo alla volta.
   </div>
 
   <!-- ============ CHIAVE DI LETTURA ============
