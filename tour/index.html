@@ -184,16 +184,24 @@ textarea:focus{outline:2px solid var(--acc);outline-offset:1px}
 .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
 padding:9px 14px;box-shadow:0 -4px 18px rgba(30,40,60,.10)}
 .bar .in{max-width:660px;margin:0 auto;display:flex;gap:10px;align-items:stretch}
-.send{flex:0 0 auto;min-height:48px;padding:0 18px;border:0;border-radius:12px;
-background:#25d366;color:#0b3d20;font:inherit;font-weight:700;cursor:pointer}
-.segnala{flex:1 1 auto;min-height:48px;display:flex;align-items:center;
+.send{width:100%;min-height:50px;margin-top:12px;padding:0 18px;border:0;
+border-radius:12px;background:#25d366;color:#0b3d20;font:inherit;font-weight:800;
+font-size:1rem;cursor:pointer}
+.segnala{flex:1 1 auto;min-height:50px;display:flex;align-items:center;
 justify-content:center;gap:7px;border-radius:12px;background:#fff5e8;
-border:1.5px solid #f0c68a;color:#8a4b06;font-weight:700;font-size:.93rem;
+border:1.5px solid #f0c68a;color:#8a4b06;font-weight:700;font-size:.95rem;
 text-decoration:none;padding:0 12px;text-align:center}
-/* Il riquadro si accende quando ci arrivi dal pulsante. CSS puro: niente
-   JavaScript, quindi funziona anche dove il JavaScript non parte. */
-#fb{scroll-margin-top:64px;transition:box-shadow .3s,border-color .3s}
-#fb:target{border-color:var(--acc2);box-shadow:0 0 0 3px rgba(224,145,47,.35),var(--sh)}
+/* IL PANNELLO: non c'e' finche' non lo chiami. `:target` e' CSS puro, quindi
+   il pulsante funziona anche dove il JavaScript non parte. */
+.pannello{display:none;scroll-margin-top:64px}
+.pannello:target{display:block;border-color:var(--acc2);
+box-shadow:0 0 0 3px rgba(224,145,47,.30),var(--sh)}
+.pth{display:flex;align-items:center;justify-content:space-between;
+font-size:1.05rem;margin-bottom:8px}
+.chiudi{text-decoration:none;color:var(--mut);font-size:1.25rem;line-height:1;
+padding:6px 10px;margin:-6px -8px -6px 0}
+#fbPiu{margin-top:14px;border-top:1px solid var(--line);padding-top:4px}
+#fbPiu summary{font-size:.92rem;font-weight:600;color:var(--mut)}
 .st{flex:1 1 auto;font-size:.85rem;color:var(--mut)}
 .hint{background:#fff8ea;border:1px solid #f0dcae;border-radius:12px;padding:10px 12px;
 font-size:.92rem}
@@ -229,9 +237,22 @@ a{color:var(--acc)}
        vera, solo meno precisa - e il JavaScript la SOSTITUISCE. Se parte, si
        guadagna "oggi"; se non parte, si legge comunque qualcosa di sensato.
        Prima era: se non parte, la pagina si apre con un buco. -->
+  <!-- IL RIQUADRO "OGGI". Durante il viaggio e' la scorciatoia della giornata:
+       "OGGI - sabato 15 - Central Park", la riga che dice com'e' fatta, i tre
+       link (mappa/foglio/PDF), cosa c'e' domani, e il modo di correggere il
+       giorno se la pagina sbaglia. E' la ragione per cui questa pagina si apre
+       la mattina invece di cercare la giornata a mano.
+       ⚠️ Quello che si legge qui sotto e' il RIPIEGO, e si vede in due casi:
+       prima della partenza (non c'e' un "oggi"), e dove il JavaScript non parte
+       (D164). Quindi non e' un segnaposto: e' la cosa piu' utile che si possa
+       dire finche' il viaggio non comincia - scaricare i PDF ORA, che poi la
+       rete di New York potrebbe non esserci. -->
   <div class="card today" id="oggiBox">
-    <div id="oggiIn"><div class="dayline"><b>Tutte e sei le giornate</b>
-      <span class="mut">&mdash; mappa, foglio e PDF</span></div></div>
+    <div id="oggiIn">
+      <div class="dayline"><b>📴 Scarica i PDF adesso che c'e' il wifi</b></div>
+      <p class="mut">A New York la rete pu&ograve; non esserci: il foglio scaricato si
+        apre lo stesso. Da qui, una riga per giornata.</p>
+    </div>
   </div>
 
   <details class="card" id="introBox">
@@ -262,12 +283,17 @@ a{color:var(--acc)}
     <details class="pers"><summary>👨 <b>Fabrizio</b></summary><ul><li>Lo skyline di notte dal Summit <span class="qd">venerdi 14</span></li><li>La caserma dei Ghostbusters <span class="qd">domenica 16</span></li><li>La foto all'Oculus <span class="qd">lunedi 17</span></li><li>La vista di giorno, che avevi chiesto tu <span class="qd">martedi 18</span></li></ul></details><details class="pers"><summary>👩 <b>MariaPaola</b></summary><ul><li>Il Ponte di Brooklyn a piedi - il tuo sogno n.1 <span class="qd">domenica 16</span></li><li>L'Upper East Side di Gossip Girl <span class="qd">sabato 15</span></li><li>La funivia di Roosevelt Island <span class="qd">sabato 15</span></li><li>Il Vessel e la High Line, che avevi chiesto &quot;fuori dai soliti itinerari&quot; <span class="qd">martedi 18</span></li></ul></details><details class="pers"><summary>🧔 <b>Tony</b></summary><ul><li>Il pastrami da Katz's <span class="qd">lunedi 17</span></li><li>Bryant Park, il tuo sogno n.1 <span class="qd">venerdi 14</span></li><li>La foto al molo, che avevi nominato <span class="qd">domenica 16</span></li><li>Central Park in bici <span class="qd">sabato 15</span></li></ul></details><details class="pers"><summary>👧 <b>Cocò</b></summary><ul><li>La 5th Avenue <span class="qd">venerdi 14</span></li><li>Il 9/11 Memorial <span class="qd">lunedi 17</span></li><li>Grand Central <span class="qd">venerdi 14</span></li><li>E due tramonti: il Summit e Little Island <span class="qd">lunedi 17</span></li></ul></details><details class="pers"><summary>👩‍🦰 <b>Barbara</b></summary><ul><li>Il MoMA - era il tuo interesse n.1 <span class="qd">venerdi 14</span></li><li>I posti di Sex and the City al West Village <span class="qd">lunedi 17</span></li><li>Le sneakers a SoHo <span class="qd">domenica 16</span></li><li>Il Ponte di Brooklyn, che volevi fotografare <span class="qd">domenica 16</span></li></ul></details><details class="pers"><summary>👦 <b>Peppe</b></summary><ul><li>Il Ponte di Brooklyn a piedi - il tuo sogno, &quot;per fare foto&quot; <span class="qd">domenica 16</span></li><li>Il Summit, che avevi nominato tu <span class="qd">venerdi 14</span></li><li>NBA Store, Nike e Lego sulla 5th <span class="qd">venerdi 14</span></li><li>Il Vessel, da fotografare <span class="qd">martedi 18</span></li></ul></details><details class="pers"><summary>🧑 <b>Giulio</b></summary><ul><li>Times Square la prima sera - il tuo sogno n.1 <span class="qd">giovedi 13</span></li><li>Il Sanctum Sanctorum di Doctor Strange <span class="qd">lunedi 17</span></li><li>Joe's Pizza <span class="qd">lunedi 17</span></li><li>I fumetti da Midtown Comics <span class="qd">martedi 18</span></li></ul></details><details class="pers"><summary>👧🏻 <b>Carol</b></summary><ul><li>Il Summit - lo spot fotografico l'hai nominato tu <span class="qd">venerdi 14</span></li><li>Le luci e la musica di Times Square <span class="qd">giovedi 13</span></li><li>Il Vessel, uno dei posti piu' fotografati della citta' <span class="qd">martedi 18</span></li><li>Little Island al tramonto <span class="qd">lunedi 17</span></li></ul></details>
   </div>
 
-  <h2>💬 La sera, se ti va</h2>
-  <!-- Riordinata l'8 ago. Prima veniva: testo lungo, "chi sei", tre tocchi, e
-       SOLO IN FONDO lo spazio per scrivere - cioe' la cosa che serve davvero
-       (una segnalazione) stava dietro a tre cose facoltative. Adesso si scrive
-       subito, e i tre tocchi sono il di piu'. -->
-  <div class="card" id="fb">
+  <!-- ============ LA SEGNALAZIONE: NON E' PIU' UNA SEZIONE DELLA PAGINA ======
+       Era in fondo, sotto il titolo "La sera, se ti va": una sezione che tutti
+       si scorrevano e nessuno cercava. Adesso **non esiste finche' non la
+       chiami**: sta nascosta, e compare solo quando premi il pulsante in basso.
+       🔑 Nascosta e mostrata con `:target`, cioe' CSS puro. Con un pannello in
+       JavaScript, sul telefono dove il JS non parte (D164) il pulsante sarebbe
+       morto - e sarebbe morto per l'unica cosa che deve funzionare sempre:
+       dire che qualcosa non va. -->
+  <div class="card pannello" id="fb">
+    <div class="pth"><b>⚠️ Qualcosa non va?</b>
+      <a class="chiudi" href="#giorni" title="chiudi">✕</a></div>
     <p class="fbi"><b>Se qualcosa non ha funzionato, scrivimelo qui.</b> Un orario sbagliato, un posto chiuso, un indirizzo che non torna: quello lo sistemo stanotte.<br>⚠️ <b>Cambiare il giro</b>, invece, adesso è difficile: è tutto incastrato e i fogli sono stampati. Ma dimmelo lo stesso.</p>
     <textarea id="free" placeholder="Scrivi qui cosa non ha funzionato..."></textarea>
     <p class="mut" style="margin:10px 0 4px">Chi sei? <span class="req">serve per
@@ -278,12 +304,13 @@ a{color:var(--acc)}
          null avrebbe ucciso lo script alla prima riga - lo stesso genere di
          difetto che questo controllo cerca da D123. -->
     <p class="st" id="stat">Tocca il tuo nome per poter inviare</p>
-  </div>
+    <button class="send" id="send">📤 Invia</button>
 
-  <details class="card" id="fbPiu">
-    <summary>🌟 Tre tocchi sulla giornata di oggi, se ti va</summary>
-    <div id="fbBody"></div>
-  </details>
+    <details id="fbPiu">
+      <summary>🌟 Tre tocchi sulla giornata di oggi, se ti va</summary>
+      <div id="fbBody"></div>
+    </details>
+  </div>
 
 </div>
 
@@ -298,8 +325,7 @@ a{color:var(--acc)}
      riquadro, che c'e' comunque, e il riquadro si accende da solo (`:target`,
      CSS puro). Funziona anche a JavaScript spento. -->
 <div class="bar"><div class="in">
-  <a class="segnala" href="#fb">⚠️ Qualcosa non va?</a>
-  <button class="send" id="send">Invia</button>
+  <a class="segnala" href="#fb">⚠️ Qualcosa non va? &middot; <b>dimmelo</b></a>
 </div></div>
 
 <script>
@@ -400,7 +426,22 @@ var scelta = { who:null, bella:null, ritmo:null, rot:null };
 
 function disegnaFeedback(n){
   var b = document.getElementById('fbBody');
-  if(n === 0){ b.innerHTML = '<p class="mut">Da qui si parte il 13.</p>'; return; }
+  /* PRIMA DELLA PARTENZA il riquadro dei tre tocchi non ha niente da chiedere:
+     le domande sono sulla giornata di OGGI, e oggi non c'e' ancora. Restava
+     aperto su "Da qui si parte il 13", cioe' un riquadro che occupa spazio per
+     dire che non serve - ed e' esattamente quello che si e' notato guardandolo
+     ("immagino non serva piu'").
+     📐 Non si toglie: si NASCONDE finche' non ha qualcosa da chiedere. Durante
+     il viaggio quei tre tocchi sono l'unica misura che abbiamo di cosa ha
+     funzionato davvero, e il questionario di partenza (8 risposte su 8) e' la
+     riga di partenza con cui si confrontano. */
+  var piu = document.getElementById('fbPiu');
+  if(n === 0){
+    if(piu) piu.style.display = 'none';
+    b.innerHTML = '';
+    return;
+  }
+  if(piu) piu.style.display = '';
   var h = '';
   if(n === 7){
     h += '<p><b>La tua cosa</b> - quella che avevi detto prima di partire - com'+String.fromCharCode(39)+'e'+String.fromCharCode(39)+' andata?</p>'
