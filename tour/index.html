@@ -187,10 +187,13 @@ padding:9px 14px;box-shadow:0 -4px 18px rgba(30,40,60,.10)}
 .send{width:100%;min-height:50px;margin-top:12px;padding:0 18px;border:0;
 border-radius:12px;background:#25d366;color:#0b3d20;font:inherit;font-weight:800;
 font-size:1rem;cursor:pointer}
-.segnala{flex:1 1 auto;min-height:50px;display:flex;align-items:center;
-justify-content:center;gap:7px;border-radius:12px;background:#fff5e8;
-border:1.5px solid #f0c68a;color:#8a4b06;font-weight:700;font-size:.95rem;
-text-decoration:none;padding:0 12px;text-align:center}
+.segnala{flex:1 1 0;min-width:0;min-height:50px;display:flex;align-items:center;
+justify-content:center;gap:6px;border-radius:12px;background:#fff5e8;
+border:1.5px solid #f0c68a;color:#8a4b06;font-weight:700;font-size:.9rem;
+text-decoration:none;padding:0 10px;text-align:center;white-space:nowrap}
+/* La seconda entrata e' piu' quieta: per cinque giorni su sei non e' la cosa
+   da fare, e due pulsanti che gridano uguale non sono una scelta, sono rumore. */
+.segnala.fine{background:#eef2f8;border-color:var(--line);color:var(--acc)}
 /* IL PANNELLO: non c'e' finche' non lo chiami, e quando lo chiami compare
    SOPRA la pagina, dal basso - senza spostare niente e senza scorrere.
    🔴 Prima era un riquadro in fondo alla pagina, nascosto con `display:none`:
@@ -321,6 +324,26 @@ a{color:var(--acc)}
     </details>
   </div>
 
+  <!-- ============ IL BILANCIO, A VIAGGIO FINITO ============
+       Il posto c'e' e l'entrata funziona; le domande si decidono dopo. E' scritto
+       IN PAGINA che e' cosi': un pannello che si apre su una cosa incompleta
+       senza dirlo sembra rotto, e chi lo apre chiude e non torna piu'.
+       📐 Le due cose che ci andranno sono gia' scelte nel piano (§9) e oggi sono
+       il pezzo dichiaratamente mancante della misura:
+         1. la COSA DI OGNUNO - "Giulio, il Sanctum Sanctorum: com'e' andata?",
+            personalizzata sul questionario di luglio (8 risposte su 8);
+         2. il MOMENTO DI ATTRIBUZIONE - "c'e' stata una volta in cui la pagina o
+            il foglio ti ha fatto fare una cosa che non avresti fatto?". -->
+  <div class="card pannello" id="fine">
+    <div class="pth"><b>🧳 Dimmi come e' andata</b>
+      <a class="chiudi" href="#giorni" title="chiudi">✕</a></div>
+    <p class="fbi">Quando il viaggio &egrave; finito, qui ci sono <b>poche domande brevi</b>
+      su com'&egrave; andata davvero: la <b>tua</b> cosa - quella che avevi detto prima di
+      partire - e se questa pagina &egrave; servita a qualcosa oppure no.</p>
+    <p class="hint">🚧 <b>Le domande non ci sono ancora.</b> Il posto s&igrave;: quando
+      sono pronte compaiono qui, e il pulsante resta questo.</p>
+  </div>
+
 </div>
 
 <!-- ============ LA SEGNALAZIONE, SEMPRE A PORTATA (rilievo dell'8 ago) ============
@@ -333,8 +356,16 @@ a{color:var(--acc)}
      col JS sarebbe stato un pulsante morto proprio per lui. Cosi' porta al
      riquadro, che c'e' comunque, e il riquadro si accende da solo (`:target`,
      CSS puro). Funziona anche a JavaScript spento. -->
+<!-- DUE ENTRATE, e sono due cose diverse:
+       💬 "Cosa ne pensi"  -> qualcosa non funziona, ADESSO. Serve tutti i giorni.
+       🧳 "Com'e' andata"   -> il bilancio, a viaggio finito. Serve una volta sola.
+     Stanno tutte e due nella barra fissa perche' e' la sola superficie sempre
+     visibile: in fondo alla pagina, dopo sei giornate e quarantanove tappe, non
+     le trova nessuno - rilievo gia' fatto due volte. La seconda e' piu' quieta:
+     per cinque giorni su sei non e' la cosa da fare. -->
 <div class="bar"><div class="in">
-  <a class="segnala" href="#fb">💬 <b>Dimmi cosa ne pensi</b></a>
+  <a class="segnala" href="#fb">💬 <b>Cosa ne pensi</b></a>
+  <a class="segnala fine" href="#fine">🧳 <b>Com'e' andata</b></a>
 </div></div>
 
 <script>
