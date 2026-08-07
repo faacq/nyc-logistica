@@ -3,6 +3,22 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>New York 13-18 agosto</title>
+<!-- ============ QUANDO LA SI METTE SULLA SCHERMATA HOME ============
+     Un sito NON puo' aggiungersi alla Home da solo: su iOS quell'API non esiste,
+     c'e' solo il tasto Condividi. Quello che si puo' fare e' che, una volta
+     aggiunta, sembri un'app - e senza queste righe iOS ci mette una MINIATURA
+     DELLA PAGINA come icona: un francobollo blu illeggibile fra le altre app.
+     ⚠️ `apple-mobile-web-app-capable` NON c'e' apposta: aprirebbe la pagina
+     senza la barra di Safari, quindi senza il pulsante indietro - e chi tocca
+     un PDF camminando resterebbe dentro il PDF. Con otto persone per strada
+     l'uscita di sicurezza vale piu' dello schermo pieno. Si aggiunge in una
+     riga il giorno che si decide il contrario. -->
+<link rel="apple-touch-icon" href="icona-180.png">
+<link rel="icon" href="icona-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="New York">
+<meta name="application-name" content="New York">
+<meta name="theme-color" content="#0b1f45">
 <style>
 :root{--bg:#f6f8fc;--card:#fff;--ink:#1b2733;--mut:#63748a;--line:#e2e8f2;
 --acc:#1d4ed8;--acc2:#e0912f;--g5:#3f9d5a;--red:#d1495b;--r:16px;--d:#1d4ed8;
@@ -208,6 +224,17 @@ max-height:82vh;overflow:auto;margin:0;border-radius:16px 16px 0 0;
 border:0;border-top:4px solid var(--acc2);
 padding:14px 15px calc(16px + env(safe-area-inset-bottom));
 box-shadow:0 -10px 40px rgba(24,39,64,.30)}
+/* La riga che porta all'istruzione: piccola, una volta sola, e non e' un
+   pulsante - non installa niente, spiega come si fa. */
+.installa{display:flex;align-items:center;gap:8px;min-height:40px;margin:10px 0 0;
+padding:7px 12px;border-radius:11px;background:#fff;border:1px dashed var(--line);
+color:var(--acc);text-decoration:none;font-size:.86rem}
+.passi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.pa{background:#f6f8fc;border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+font-size:.9rem}
+.pa ol{margin:6px 0 0;padding-left:18px}
+.pa li{margin:3px 0}
+@media (max-width:420px){ .passi{grid-template-columns:1fr} }
 .pth{display:flex;align-items:center;justify-content:space-between;
 font-size:1.05rem;margin-bottom:8px}
 .chiudi{text-decoration:none;color:var(--mut);font-size:1.25rem;line-height:1;
@@ -238,6 +265,9 @@ a{color:var(--acc)}
 <nav class="pgw" id="pgw"><a class="pg" href="#g1" data-pg="1" style="--d:#1d4ed8">gio <b>13</b></a><a class="pg" href="#g2" data-pg="2" style="--d:#6d28d9">ven <b>14</b></a><a class="pg" href="#g3" data-pg="3" style="--d:#0f766e">sab <b>15</b></a><a class="pg" href="#g4" data-pg="4" style="--d:#c2410c">dom <b>16</b></a><a class="pg" href="#g5" data-pg="5" style="--d:#be185d">lun <b>17</b></a><a class="pg" href="#g6" data-pg="6" style="--d:#a16207">mar <b>18</b></a></nav>
 
 <div class="wrap">
+
+  <a class="installa" href="#home">📲 <span>Mettila sulla schermata Home &mdash;
+    si apre come un'app</span></a>
 
   <!-- 🔴 8 ago: qui c'era `<div id="oggiIn"></div>`, VUOTO, e lo riempiva il
        JavaScript. Sul telefono di Fabrizio il JS non e' arrivato in fondo e si
@@ -334,6 +364,30 @@ a{color:var(--acc)}
             personalizzata sul questionario di luglio (8 risposte su 8);
          2. il MOMENTO DI ATTRIBUZIONE - "c'e' stata una volta in cui la pagina o
             il foglio ti ha fatto fare una cosa che non avresti fatto?". -->
+  <!-- ============ COME SI METTE SULLA HOME ============
+       Non e' un pulsante che installa: quel pulsante non esiste su iPhone. E'
+       la spiegazione, e vale la pena scriverla bene perche' il gesto e' lo
+       stesso per tutti e otto e nessuno lo indovina. -->
+  <div class="card pannello" id="home">
+    <div class="pth"><b>📲 Mettila sulla schermata Home</b>
+      <a class="chiudi" href="#giorni" title="chiudi">✕</a></div>
+    <p class="fbi">Diventa un'icona come le altre app: si apre con un tocco, senza
+      cercare il link nella chat.</p>
+    <div class="passi">
+      <div class="pa"><b>iPhone</b> <span class="mut">(Safari)</span>
+        <ol><li>tocca <b>Condividi</b> &#x2934; in basso</li>
+            <li>scorri e tocca <b>Aggiungi a Home</b></li>
+            <li>tocca <b>Aggiungi</b></li></ol></div>
+      <div class="pa"><b>Android</b> <span class="mut">(Chrome)</span>
+        <ol><li>tocca i <b>tre puntini</b> in alto</li>
+            <li>tocca <b>Aggiungi a schermata Home</b></li>
+            <li>tocca <b>Aggiungi</b></li></ol></div>
+    </div>
+    <p class="hint">📴 <b>Non funziona senza rete</b>: e&#39; una scorciatoia, non
+      una copia. I <b>PDF</b> invece si aprono anche senza - per questo conviene
+      scaricarli adesso.</p>
+  </div>
+
   <div class="card pannello" id="fine">
     <div class="pth"><b>🧳 Dimmi come e' andata</b>
       <a class="chiudi" href="#giorni" title="chiudi">✕</a></div>
