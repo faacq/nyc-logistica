@@ -174,13 +174,26 @@ background:#fff;color:var(--ink);font:inherit;font-size:.95rem;cursor:pointer}
 .faces{min-height:44px}
 .face{font-size:1.7rem;background:none;border:0;padding:4px 10px;cursor:pointer;opacity:.4}
 .face.on{opacity:1}
-textarea{width:100%;min-height:74px;border:1.5px solid var(--line);border-radius:12px;
-padding:10px;font:inherit;background:#fff}
+/* Lo spazio per scrivere e' il vero oggetto di questa sezione: sta in alto,
+   ed e' grande abbastanza da dire "qui ci si scrive davvero". */
+textarea{width:100%;min-height:96px;border:1.5px solid var(--acc);border-radius:12px;
+padding:11px;font:inherit;background:#fff}
+textarea:focus{outline:2px solid var(--acc);outline-offset:1px}
+.fbi{margin:0 0 10px;font-size:.95rem}
+.req{font-size:.82rem;color:var(--mut);font-weight:400}
 .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
 padding:9px 14px;box-shadow:0 -4px 18px rgba(30,40,60,.10)}
-.bar .in{max-width:660px;margin:0 auto;display:flex;gap:10px;align-items:center}
-.send{flex:0 0 auto;min-height:46px;padding:0 18px;border:0;border-radius:12px;
+.bar .in{max-width:660px;margin:0 auto;display:flex;gap:10px;align-items:stretch}
+.send{flex:0 0 auto;min-height:48px;padding:0 18px;border:0;border-radius:12px;
 background:#25d366;color:#0b3d20;font:inherit;font-weight:700;cursor:pointer}
+.segnala{flex:1 1 auto;min-height:48px;display:flex;align-items:center;
+justify-content:center;gap:7px;border-radius:12px;background:#fff5e8;
+border:1.5px solid #f0c68a;color:#8a4b06;font-weight:700;font-size:.93rem;
+text-decoration:none;padding:0 12px;text-align:center}
+/* Il riquadro si accende quando ci arrivi dal pulsante. CSS puro: niente
+   JavaScript, quindi funziona anche dove il JavaScript non parte. */
+#fb{scroll-margin-top:64px;transition:box-shadow .3s,border-color .3s}
+#fb:target{border-color:var(--acc2);box-shadow:0 0 0 3px rgba(224,145,47,.35),var(--sh)}
 .st{flex:1 1 auto;font-size:.85rem;color:var(--mut)}
 .hint{background:#fff8ea;border:1px solid #f0dcae;border-radius:12px;padding:10px 12px;
 font-size:.92rem}
@@ -250,19 +263,42 @@ a{color:var(--acc)}
   </div>
 
   <h2>💬 La sera, se ti va</h2>
+  <!-- Riordinata l'8 ago. Prima veniva: testo lungo, "chi sei", tre tocchi, e
+       SOLO IN FONDO lo spazio per scrivere - cioe' la cosa che serve davvero
+       (una segnalazione) stava dietro a tre cose facoltative. Adesso si scrive
+       subito, e i tre tocchi sono il di piu'. -->
   <div class="card" id="fb">
-    <p>Tre tocchi, il tempo di un gelato. 👉 <b>Il giro di domani non cambia</b>: queste risposte servono a me, per capire cosa ha funzionato davvero. 🔧 <b>L'unica cosa che cambia subito</b> è se qualcosa era proprio sbagliato - un orario, un indirizzo, un posto chiuso: scrivimelo qui sotto e lo sistemo stanotte.</p>
-    <p class="mut">Chi sei?</p>
+    <p class="fbi"><b>Se qualcosa non ha funzionato, scrivimelo qui.</b> Un orario sbagliato, un posto chiuso, un indirizzo che non torna: quello lo sistemo stanotte.<br>⚠️ <b>Cambiare il giro</b>, invece, adesso è difficile: è tutto incastrato e i fogli sono stampati. Ma dimmelo lo stesso.</p>
+    <textarea id="free" placeholder="Scrivi qui cosa non ha funzionato..."></textarea>
+    <p class="mut" style="margin:10px 0 4px">Chi sei? <span class="req">serve per
+      inviare</span></p>
     <div class="chips" id="who"><button class="chip" data-who="Fabrizio">Fabrizio</button><button class="chip" data-who="MariaPaola">MariaPaola</button><button class="chip" data-who="Tony">Tony</button><button class="chip" data-who="Cocò">Cocò</button><button class="chip" data-who="Barbara">Barbara</button><button class="chip" data-who="Peppe">Peppe</button><button class="chip" data-who="Giulio">Giulio</button><button class="chip" data-who="Carol">Carol</button></div>
-    <div id="fbBody"></div>
-    <p class="mut">Qualcosa non tornava? (un indirizzo, un orario, un posto chiuso)</p>
-    <textarea id="free" placeholder="Scrivi qui..."></textarea>
+    <!-- `#stat` e' uscito dalla barra in basso ed e' finito qui. Deve continuare
+         a ESISTERE: `stato()` ci scrive dentro, e un getElementById che torna
+         null avrebbe ucciso lo script alla prima riga - lo stesso genere di
+         difetto che questo controllo cerca da D123. -->
+    <p class="st" id="stat">Tocca il tuo nome per poter inviare</p>
   </div>
+
+  <details class="card" id="fbPiu">
+    <summary>🌟 Tre tocchi sulla giornata di oggi, se ti va</summary>
+    <div id="fbBody"></div>
+  </details>
 
 </div>
 
+<!-- ============ LA SEGNALAZIONE, SEMPRE A PORTATA (rilievo dell'8 ago) ============
+     Stava in fondo alla pagina, dopo sei giornate e quarantanove tappe: per
+     dirmi che un posto era chiuso bisognava prima scorrere tutto il viaggio.
+     Adesso il pulsante sta nella barra fissa in basso - la zona del pollice - ed
+     e' sempre visibile.
+     🔑 E' un LINK, non un pulsante che apre un pannello col JavaScript: sul
+     telefono di Fabrizio il JS non parte (D164), e un pannello che si apre solo
+     col JS sarebbe stato un pulsante morto proprio per lui. Cosi' porta al
+     riquadro, che c'e' comunque, e il riquadro si accende da solo (`:target`,
+     CSS puro). Funziona anche a JavaScript spento. -->
 <div class="bar"><div class="in">
-  <span class="st" id="stat">Tocca il tuo nome per poter inviare</span>
+  <a class="segnala" href="#fb">⚠️ Qualcosa non va?</a>
   <button class="send" id="send">Invia</button>
 </div></div>
 
@@ -422,9 +458,13 @@ function preso(id, attr){
 }
 
 function stato(){
+  /* Difensiva apposta: se un giorno `#stat` cambia posto o sparisce, questa
+     riga non deve portarsi dietro tutto il resto dello script - "oggi", il
+     fuso, il feedback. Un elemento che manca e' un dettaglio; uno script morto
+     e' una pagina morta. */
+  var el = document.getElementById('stat'); if(!el) return;
   var w = preso('who','data-who');
-  document.getElementById('stat').textContent = w
-    ? ('Invii come ' + w) : 'Tocca il tuo nome per poter inviare';
+  el.textContent = w ? ('Invii come ' + w) : 'Tocca il tuo nome per poter inviare';
 }
 
 function messaggio(){
