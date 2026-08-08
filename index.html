@@ -277,7 +277,7 @@
     (5 ago, 21:15), ed era l'ultima cosa aperta. Se ti viene in mente qualcosa,
     <a href="#openText" style="color:inherit"><b>scrivimela in fondo</b></a>.</span><br>
     <span style="opacity:.85">Si parte fra <b>7 giorni</b>.</span></div>
-    <div class="ver">📌 versione v56 &middot; 7 ago 2026</div>
+    <div class="ver">📌 versione v57 &middot; 8 ago 2026</div>
   </div>
 </header>
 
@@ -297,6 +297,10 @@
   <div class="changelog">
     <h3>🆕 Cosa è cambiato <span class="cd">(rispetto alla v54 — l'ultima di cui ti ho scritto)</span></h3>
     <ul>
+      <li>✅ <b>Il Top of the Rock è annullato</b>, come mi hai detto l'8 agosto. Era l'ultima
+      riga rossa di questa pagina, ed è la prima volta che quella prenotazione ha uno stato
+      <b>dichiarato da te</b> e non dedotto da me. Adesso non resta niente da annullare né da
+      comprare.</li>
       <li>🗽 <b>C'è una pagina nuova, per tutti e otto</b>: le sei giornate in un posto solo,
       che si apre su <i>oggi</i> e dove <b>ogni tappa si tocca e dice cos'è</b>. Dentro c'è
       anche uno <b>schema di come il giro è diviso a zone</b>, e un blocco «cosa c'è per te»
@@ -362,17 +366,22 @@
 
   <!-- ============ TUTTO PRENOTATO ============ -->
   <div class="sol" style="margin:13px 0">
-    <h4>📋 Prenotazioni: una da <b>annullare</b>, nessuna da comprare</h4>
+    <h4>📋 Prenotazioni: <b>niente da annullare, niente da comprare</b></h4>
     <div style="font-size:.89rem">
       🔒 <b>Summit One Vanderbilt</b> — ven 14, ore 19:00 · pagato<br>
       🔒 <b>Empire State Building</b> — mar 18, ore <b>9:30</b> · nel pass Go City · <b>prenotato da te</b><br>
-      🔴 <b>Top of the Rock</b> — mar 18, ore 9:30 · <b>DA ANNULLARE</b>: è ancora prenotato nello stesso identico slot<br>
+      ✅ <b>Top of the Rock</b> — mar 18, ore 9:30 · <b>ANNULLATO</b>, come mi hai detto l'8 agosto: la doppia prenotazione del martedì non c'è più<br>
       🔒 <b>MoMA</b> — ven 14 · comprato a parte, ragazzi gratis<br>
       🔒 <b>Bici — Unlimited Biking, 56 W 56th St</b> — sab 15, ritiro alle <b>9:08</b> · nel pass Go City<br>
       🚌 <b>Big Bus 2 giorni</b> — sab + dom · nel pass Go City<br>
       🚐 <b>Van per JFK</b> — mar 18, uscita dall'hotel alle <b>16:20</b> · 8 persone + bagagli · <b>prenotato da te</b>
     </div>
-    <div class="res2">➜ <b>Resta solo il Top of the Rock da annullare. Non c'è più niente da comprare.</b></div>
+    <div class="res2">➜ <b>Le prenotazioni sono a posto tutte e sei. Non resta niente da annullare né da comprare.</b></div>
+    <!-- v57, 8 ago: qui c'era la riga rossa "Top of the Rock DA ANNULLARE, e' ancora
+         prenotato". Fabrizio ha dichiarato la disdetta l'8 agosto (D171) e O37b si chiude
+         DAVVERO, cioe' su una dichiarazione e non su un'inferenza come in D93 (vedi D170).
+         La riga resta visibile una versione, marcata ANNULLATO, perche' e' una notizia:
+         sparira' col giro dopo. -->
     <!-- v30, PULIZIA: qui c'era il paragrafo "il van l'hai preso, e non te lo chiedo piu'"
          (D113). Consegnato il 1 ago con la v29, e il van sta gia' due righe piu' su
          nell'elenco, con scritto "prenotato da te". Ripetuto in prosa non aggiungeva un
@@ -586,7 +595,7 @@
   </div>
 
   <div class="footer">
-    Itinerario e logistica v56 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
+    Itinerario e logistica v57 · pacchetto · la compagnia · New York 13–18 ago 2026<br>
     Il feedback arriva su WhatsApp 💚
   </div>
 </div>
@@ -612,7 +621,7 @@ var SLOTS = [
   {k:'veloce',  i:'🍕', n:'Pasto veloce',         ex:'Joe\'s Pizza, Raising Cane\'s — invariato', v:40},
   {k:'pasto',   i:'🍽️', n:'Pranzo o cena seduti',  ex:'Katz\'s, Time Out, cena — invariato', v:75},
   {k:'museo',   i:'🖼️', n:'Museo',                 ex:'MoMA — da 1h45 a 2h', v:120},
-  {k:'deck',    i:'🏙️', n:'Terrazza panoramica',   ex:'Summit, Top of the Rock — da 1h20 a 2h', v:120},
+  {k:'deck',    i:'🏙️', n:'Terrazza panoramica',   ex:'Summit, Empire State — da 1h20 a 2h', v:120},
   {k:'attivita',i:'🚲', n:'Attività',              ex:'bici, traghetto, funivia — da 1h15 a 2h', v:120}
 ];
 
@@ -1592,14 +1601,14 @@ function updateStatus(){
    ============================================================ */
 var FORM = {
   id:    'analisi-logistica',
-  ver:   'v56',
+  ver:   'v57',
   /* ⚠️ La v43 e' andata online il 4 ago e questo campo diceva ancora 2026-08-03:
      il tag della sua risposta ha quindi dichiarato una data di pubblicazione
      sbagliata di un giorno. Non ha fatto danni perche' il NUMERO di versione era
      giusto ed e' quello che conta per capire cosa aveva davanti - ma e' un dato
      falso in un blocco che esiste apposta per essere creduto. */
   built: '2026-08-06',
-  plan:  "itinerario v2.4, pacchetto v56. 🎉 LOCK-IN COMPLETO, 6 SU 6 (D139): tutte e sei le giornate sono BLOCCATE il 2026-08-03 - le quattro del pomeriggio (D136) piu' domenica e lunedi la sera (form v40, 18:41). Da qui NON SI CHIEDE PIU' NIENTE su nessuna giornata: si verifica soltanto, e si scrive l'ITINERARIO DOCUMENTO (#8, map-first). Questa pagina e' CONSULTAZIONE, non piu' uno strumento di decisione. La porta per riaprire resta in fondo a ogni giornata (locks.py --unlock N) e da adesso costa di piu': una modifica rientra anche nella guida. LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-20:09 - dom 10:00-20:47 - lun 08:45-22:17 - mar 08:30-16:20, cuscino JFK 70'. Il lunedi sfora il traguardo comodo (21:30) di 47' ed e' scelta consapevole: il prezzo e' il TRAMONTO a Little Island, NON il parco - la High Line si percorre tutta in tutte e quattro le durate simulate (75/120/135/150), sono 2,3 km cioe' mezz'ora di passo svelto, e il dwell di 135' serve a posizionare Little Island sul tramonto (D140: la frase 'tutta invece di mezza' era falsa contro i nostri stessi scenari, corretta). Corse in taxi di tutto il viaggio: 2 (gen_mix.py: 54 spostamenti, 43 a piedi, 2 taxi, 4 bus, 5 metro). High Line 07:00-22:00, verificato su thehighline.org il 3 ago. SULLE GIORNATE NESSUNA DOMANDA E NESSUN FLAG: la pagina non ne chiede piu'. LE SCHEDE DA STAMPARE (D143): dal form v43 ha scelto 'la B (verticale) ma con le cose scritte della A', ed e' fatta - striscia da 74 a 78 mm, note/tratte/soste/i tre riquadri della A dentro, zoom 15 tenuto, 16 mm di margine misurati da check_sheets. LE SEI SCHEDE SONO APPROVATE (form v45, 5 ago 08:40), generate E PUBBLICATE tutte e sei (v55): sono state stampate una volta sola, col livello POI gia' dentro. IL VENERDI' INVECE E' CHIUSO: master di stampa a 346 DPI generato in locale (zoom 17, fuori dal repo; era 540 a zoom 18, ma D154 allarga la cornice per far entrare i punti) - online resta la copia leggera da guardare (3,6 MB), e l'alta definizione si consegna a mano. IL LIVELLO 'LUNGO LA STRADA' (D147), su richiesta di Fabrizio: 19 punti da vedere sulla mappa del venerdi' (route/g2), che NON sono tappe, non hanno orari e non spostano niente - cerchietti spegnibili. HA RISPOSTO il 5 ago alle 21:15 (form v48): 'vanno bene cosi', falli anche sulle altre giornate' - il gruppo POC e' uscito dalla pagina, diventato stato (v49). FATTO su TUTTE E SEI le giornate (v55): g1 4 punti, g2 19, g3 5, g4 8, g5 9, g6 10 = 55, tutti geocodificati a due maniglie e con fonte provata con una chiamata HTTP. Schede rigenerate col livello dentro per g1/g4/g5 (il venerdi' era gia' fatto): online la copia leggera, in locale il master di stampa. IL LUNEDI' HA 9 PUNTI SUL FOGLIO E 9 SULLA MAPPA: con 12 tappe il riquadro disteso sbordava di 31 mm, quindi sul foglio si scrive in forma STRETTA (`carta_compatta` nei dati, niente indirizzi) e cosi' ci stanno tutti e nove. Margine finale 12 mm (D154: la didascalia e' stata compattata nelle PAROLE, non nel corpo). QUESTA PAGINA ADESSO NON CHIEDE PIU' NIENTE: zero gruppi di risposta. RESTA UNA cosa sua, non in pagina: se il 177A Bleecker resta un must. L'ALBERGO E' CHIUSO (D153, 6 ago): ha risposto con la fonte ufficiale, e' il Kimpton Theta 790 8th Ave - cioe' quello che il nodo diceva dal 30 lug, quindi non cambia niente ne' sul pin ne' sulla scheda. LA PAGINA DEL TOUR E' ONLINE (7 ago, D157): /tour/, per tutti e otto, generata da gen_tour.py - apre su OGGI calcolato in America/New_York, ogni tappa si apre e dice COSA E' (mai chi l'ha voluta), schema delle sei zone disegnato in SVG, e blocco 'cosa c'e' per te' coi nomi. NON e' collegata da questa pagina e le mancano ancora albergo/prenotazioni in cima, il cibo e i consigli pratici. LA v56 E' TUTTA DISEGNO, NESSUN DATO TOCCATO (9 rilievi suoi del 7 ago): sul tour un colore per giornata, intestazione con skyline, schema delle zone, e le tappe che si aprono con un bersaglio da 44 px invece di una freccetta da 8; sulle sei story map il 'come si legge' si richiude e ricorda (una memoria sola per tutte e sei), i cerchietti si SPIEGANO invece di chiedere l'ok, via il riquadro 'questa giornata ti va bene?' (era solo un rimando a #blocco, e le giornate sono bloccate 6/6), il 'dimmi qui' e' diventato generico, e in fondo c'e' una barra fissa giornata prima/dopo + ritorno a DA DOVE SEI VENUTO (history.back, con /tour/ come ripiego). TAPPE, ORARI, SOSTE E DATASET: INTATTI - i sei fogli A3 e i PDF gia' stampati non sono toccati. RESTA DIETRO, ed e' tutto mio: l'itinerario documento (#8), O44 a 5 zone, 7g trasporti freschi (finestra 8-10 ago), O47.",
+  plan:  "itinerario v2.4, pacchetto v57. 🎉 LOCK-IN COMPLETO, 6 SU 6 (D139): tutte e sei le giornate sono BLOCCATE il 2026-08-03 - le quattro del pomeriggio (D136) piu' domenica e lunedi la sera (form v40, 18:41). Da qui NON SI CHIEDE PIU' NIENTE su nessuna giornata: si verifica soltanto, e si scrive l'ITINERARIO DOCUMENTO (#8, map-first). Questa pagina e' CONSULTAZIONE, non piu' uno strumento di decisione. La porta per riaprire resta in fondo a ogni giornata (locks.py --unlock N) e da adesso costa di piu': una modifica rientra anche nella guida. LE SEI FINI: gio 21:48 - ven 22:07 - sab 08:45-20:09 - dom 10:00-20:47 - lun 08:45-22:17 - mar 08:30-16:20, cuscino JFK 70'. Il lunedi sfora il traguardo comodo (21:30) di 47' ed e' scelta consapevole: il prezzo e' il TRAMONTO a Little Island, NON il parco - la High Line si percorre tutta in tutte e quattro le durate simulate (75/120/135/150), sono 2,3 km cioe' mezz'ora di passo svelto, e il dwell di 135' serve a posizionare Little Island sul tramonto (D140: la frase 'tutta invece di mezza' era falsa contro i nostri stessi scenari, corretta). Corse in taxi di tutto il viaggio: 2 (gen_mix.py: 54 spostamenti, 43 a piedi, 2 taxi, 4 bus, 5 metro). High Line 07:00-22:00, verificato su thehighline.org il 3 ago. SULLE GIORNATE NESSUNA DOMANDA E NESSUN FLAG: la pagina non ne chiede piu'. LE SCHEDE DA STAMPARE (D143): dal form v43 ha scelto 'la B (verticale) ma con le cose scritte della A', ed e' fatta - striscia da 74 a 78 mm, note/tratte/soste/i tre riquadri della A dentro, zoom 15 tenuto, 16 mm di margine misurati da check_sheets. LE SEI SCHEDE SONO APPROVATE (form v45, 5 ago 08:40), generate E PUBBLICATE tutte e sei (v55): sono state stampate una volta sola, col livello POI gia' dentro. IL VENERDI' INVECE E' CHIUSO: master di stampa a 346 DPI generato in locale (zoom 17, fuori dal repo; era 540 a zoom 18, ma D154 allarga la cornice per far entrare i punti) - online resta la copia leggera da guardare (3,6 MB), e l'alta definizione si consegna a mano. IL LIVELLO 'LUNGO LA STRADA' (D147), su richiesta di Fabrizio: 19 punti da vedere sulla mappa del venerdi' (route/g2), che NON sono tappe, non hanno orari e non spostano niente - cerchietti spegnibili. HA RISPOSTO il 5 ago alle 21:15 (form v48): 'vanno bene cosi', falli anche sulle altre giornate' - il gruppo POC e' uscito dalla pagina, diventato stato (v49). FATTO su TUTTE E SEI le giornate (v55): g1 4 punti, g2 19, g3 5, g4 8, g5 9, g6 10 = 55, tutti geocodificati a due maniglie e con fonte provata con una chiamata HTTP. Schede rigenerate col livello dentro per g1/g4/g5 (il venerdi' era gia' fatto): online la copia leggera, in locale il master di stampa. IL LUNEDI' HA 9 PUNTI SUL FOGLIO E 9 SULLA MAPPA: con 12 tappe il riquadro disteso sbordava di 31 mm, quindi sul foglio si scrive in forma STRETTA (`carta_compatta` nei dati, niente indirizzi) e cosi' ci stanno tutti e nove. Margine finale 12 mm (D154: la didascalia e' stata compattata nelle PAROLE, non nel corpo). QUESTA PAGINA ADESSO NON CHIEDE PIU' NIENTE: zero gruppi di risposta. RESTA UNA cosa sua, non in pagina: se il 177A Bleecker resta un must. L'ALBERGO E' CHIUSO (D153, 6 ago): ha risposto con la fonte ufficiale, e' il Kimpton Theta 790 8th Ave - cioe' quello che il nodo diceva dal 30 lug, quindi non cambia niente ne' sul pin ne' sulla scheda. LA PAGINA DEL TOUR E' ONLINE (7 ago, D157): /tour/, per tutti e otto, generata da gen_tour.py - apre su OGGI calcolato in America/New_York, ogni tappa si apre e dice COSA E' (mai chi l'ha voluta), schema delle sei zone disegnato in SVG, e blocco 'cosa c'e' per te' coi nomi. NON e' collegata da questa pagina e le mancano ancora albergo/prenotazioni in cima, il cibo e i consigli pratici. LA v56 E' TUTTA DISEGNO, NESSUN DATO TOCCATO (9 rilievi suoi del 7 ago): sul tour un colore per giornata, intestazione con skyline, schema delle zone, e le tappe che si aprono con un bersaglio da 44 px invece di una freccetta da 8; sulle sei story map il 'come si legge' si richiude e ricorda (una memoria sola per tutte e sei), i cerchietti si SPIEGANO invece di chiedere l'ok, via il riquadro 'questa giornata ti va bene?' (era solo un rimando a #blocco, e le giornate sono bloccate 6/6), il 'dimmi qui' e' diventato generico, e in fondo c'e' una barra fissa giornata prima/dopo + ritorno a DA DOVE SEI VENUTO (history.back, con /tour/ come ripiego). TAPPE, ORARI, SOSTE E DATASET: INTATTI - i sei fogli A3 e i PDF gia' stampati non sono toccati. IL TOP OF THE ROCK E' ANNULLATO (v57, 8 ago, D171): l'ha DICHIARATO Fabrizio, e chiude O37b davvero - fino al 7 ago lo stato era ignoto perche' D93 lo dava per annullato avendolo DEDOTTO da un'approvazione dello scambio (D170). Sulla pagina la riga rossa e' diventata verde e resta visibile una versione sola, perche' e' una notizia. Non c'e' piu' NESSUNA prenotazione da annullare ne' da comprare. RESTA DIETRO, ed e' tutto mio: l'itinerario documento (#8), O44 a 5 zone, 7g trasporti freschi (finestra 8-10 ago), O47.",
   stale: ''
 };
 
@@ -1617,7 +1626,7 @@ function formTag(){
 /* ---------- messaggio WhatsApp ---------- */
 function buildMessage(){
   var L = [];
-  L.push('🗽 NEW YORK — Analisi logistica v56: messaggio di Fabrizio');
+  L.push('🗽 NEW YORK — Analisi logistica v57: messaggio di Fabrizio');
 
   /* v28: qui NON c'e' piu' nessun gruppo di domande. ZONETEMPI e VAN hanno avuto
      risposta il 31 lug (D112, D113) e sono usciti dalla pagina insieme al JS che
